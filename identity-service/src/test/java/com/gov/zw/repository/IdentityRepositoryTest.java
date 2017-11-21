@@ -2,6 +2,7 @@ package com.gov.zw.repository;
 
 import com.gov.zw.domain.Identity;
 import org.assertj.core.api.Assertions;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,11 @@ public class IdentityRepositoryTest {
 
     @Autowired
     IdentityRepository repository;
+
+//    @After
+//    public void delete(){
+//        this.repository.delete
+//    }
 
 
     @Test
@@ -52,9 +58,8 @@ public class IdentityRepositoryTest {
 
         this.repository.findAll().forEach(identityList :: add);
         System.out.println(identityList.get(0).getBirthDate());
-        Assertions.assertThat(identityList.size()).isEqualTo(4);
+        Assertions.assertThat(identityList.size()).isEqualTo(5);
         Assertions.assertThat(identityList.get(0).getSurname()).isEqualTo("Muzanenhamo");
-        Assertions.assertThat(identityList.get(3).getSurname()).isEqualTo("Ncube");
     }
 
 }
