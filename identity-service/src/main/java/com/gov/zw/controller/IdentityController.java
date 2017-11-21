@@ -2,7 +2,6 @@ package com.gov.zw.controller;
 
 import com.gov.zw.domain.Identity;
 import com.gov.zw.repository.IdentityRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +19,14 @@ public class IdentityController {
         this.identityRepository = identityRepository;
     }
 
-    @GetMapping(value = "/getId/{name}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/id/{name}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Identity> getIdentitiesByName(String name){
         return identityRepository.findIdentitiesByName(name);
+    }
+
+    @GetMapping(value = "/id", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<Identity> getIdentities(){
+        return identityRepository.findAll();
     }
 
 }
