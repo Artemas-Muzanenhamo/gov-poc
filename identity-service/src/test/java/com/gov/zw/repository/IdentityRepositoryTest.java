@@ -37,32 +37,20 @@ public class IdentityRepositoryTest {
     public void findAllIdentities(){
         List<Identity> identityList = new ArrayList<>();
 
-//        List<Identity> identities = new ArrayList<>(Arrays.asList(
-//                new Identity("", "Artemas", "Muzanenhamo", "28/03/1990",
-//                        "Mashayamombe", "Harare", "17/11/2017"),
-//                new Identity("", "Terrence", "Munhengu", "15/04/1980",
-//                        "Murehwa", "Mutare", "17/11/2017"),
-//                new Identity("", "Tichaona", "Chimuchero", "07/12/1960",
-//                        "Gutu", "Goromhonzi", "17/11/2017"),
-//                new Identity("", "Zindoga", "Ncube", "08/01/1976",
-//                        "Mhondoro", "Harare", "17/11/2017")
-//        ));
-//
-//        identities.forEach(t -> this.repository.save(t));
+        List<Identity> identities = new ArrayList<>(Arrays.asList(
+                new Identity("1", "Artemas", "Muzanenhamo", "28/03/1990",
+                        "Mashayamombe", "Harare", "17/11/2017"),
+                new Identity("2", "Terrence", "Munhengu", "15/04/1980",
+                        "Murehwa", "Mutare", "17/11/2017"),
+                new Identity("3", "Tichaona", "Chimuchero", "07/12/1960",
+                        "Gutu", "Goromhonzi", "17/11/2017"),
+                new Identity("4", "Zindoga", "Ncube", "08/01/1976",
+                        "Mhondoro", "Harare", "17/11/2017")
+        ));
 
-        this.repository.save(
-                new Identity("", "Artemas", "Muzanenhamo", "28/03/1990",
-                        "Mashayamombe", "Harare", "17/11/2017"));
-        this.repository.save(
-                new Identity("", "Terrence", "Munhengu", "15/04/1980",
-                        "Murehwa", "Mutare", "17/11/2017"));
-        this.repository.save(
-                new Identity("", "Tichaona", "Chimuchero", "07/12/1960",
-                        "Gutu", "Goromhonzi", "17/11/2017"));
-        this.repository.save(
-                new Identity("", "Zindoga", "Ncube", "08/01/1976",
-                        "Mhondoro", "Harare", "17/11/2017"));
-        identityList.addAll(this.repository.findAll());
+        identities.forEach(t -> this.repository.save(t));
+
+        this.repository.findAll().forEach(identityList :: add);
         System.out.println(identityList.get(0).getBirthDate());
         Assertions.assertThat(identityList.size()).isEqualTo(4);
         Assertions.assertThat(identityList.get(0).getSurname()).isEqualTo("Muzanenhamo");
