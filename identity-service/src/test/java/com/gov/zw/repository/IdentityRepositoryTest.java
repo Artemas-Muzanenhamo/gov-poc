@@ -21,7 +21,7 @@ public class IdentityRepositoryTest {
     IdentityRepository repository;
 
     @After
-    public void delete(){
+    public void purgeRepository(){
         this.repository.deleteAll();
     }
 
