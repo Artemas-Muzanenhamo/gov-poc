@@ -20,10 +20,10 @@ public class IdentityRepositoryTest {
     @Autowired
     IdentityRepository repository;
 
-//    @After
-//    public void delete(){
-//        this.repository.delete
-//    }
+    @After
+    public void delete(){
+        this.repository.deleteAll();
+    }
 
 
     @Test
@@ -57,8 +57,7 @@ public class IdentityRepositoryTest {
         identities.forEach(t -> this.repository.save(t));
 
         this.repository.findAll().forEach(identityList :: add);
-        System.out.println(identityList.get(0).getBirthDate());
-        Assertions.assertThat(identityList.size()).isEqualTo(5);
+        Assertions.assertThat(identityList.size()).isEqualTo(4);
         Assertions.assertThat(identityList.get(0).getSurname()).isEqualTo("Muzanenhamo");
     }
 
