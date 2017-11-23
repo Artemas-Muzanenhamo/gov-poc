@@ -1,10 +1,13 @@
 package com.gov.zw.domain;
 
-/**
- * Created by Artemas on 23/11/2017.
- */
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "Licenses")
 public class License {
 
+    @Id
+    private String id;
     private String surname;
     private String firstNames;
     private String dateOfBirth;
@@ -27,6 +30,10 @@ public class License {
         this.licenseNumber = licenseNumber;
         this.signatureImage = signatureImage;
         this.address = address;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getSurname() {
