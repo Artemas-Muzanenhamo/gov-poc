@@ -20,8 +20,7 @@ public class Identity {
     private String placeOfBirth;
     private String dateOfIssue;
 
-    public Identity(String idNumber, String name, String surname, String birthDate, String villageOfOrigin, String placeOfBirth, String dateOfIssue) {
-        this.idNumber = idNumber;
+    public Identity(String name, String surname, String birthDate, String villageOfOrigin, String placeOfBirth, String dateOfIssue) {
         this.name = name;
         this.surname = surname;
         this.birthDate = birthDate;
@@ -32,10 +31,6 @@ public class Identity {
 
     public String getIdNumber() {
         return idNumber;
-    }
-
-    public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
     }
 
     public String getName() {
