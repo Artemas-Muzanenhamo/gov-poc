@@ -40,10 +40,10 @@ public class LicenseRepositoryTest {
         this.licenseRepository.save(licenseList);
     }
 
-//    @After
-//    public void purgeRepository(){
-//        this.licenseRepository.deleteAll();
-//    }
+    @After
+    public void purgeRepository(){
+        this.licenseRepository.deleteAll();
+    }
 
     @Test
     public void findAllLicenses(){
