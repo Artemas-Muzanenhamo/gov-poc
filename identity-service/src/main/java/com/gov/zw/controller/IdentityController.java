@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/db")
 public class IdentityController {
 
     private final IdentityRepository identityRepository;

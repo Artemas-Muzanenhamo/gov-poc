@@ -21,13 +21,13 @@ public class IdentityControllerTest {
 
     @Test
     public void getIdentitiesByName() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/rest/db/id/Artemas"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/id/Artemas"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void getIdentities() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/rest/db/id"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/id"))
                 .andExpect(status().isOk());
     }
 
