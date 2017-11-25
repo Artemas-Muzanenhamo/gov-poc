@@ -5,3 +5,9 @@ spring:
       host: localhost
       port: 27017
       database: identity-service-db
+  application:
+      name: identity-service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
