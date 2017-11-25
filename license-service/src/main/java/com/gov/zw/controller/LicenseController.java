@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/licenses")
 public class LicenseController {
 
     private final LicenseRepository licenseRepository;
@@ -19,7 +18,7 @@ public class LicenseController {
         this.licenseRepository = licenseRepository;
     }
 
-    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/licenses", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<License> getAllLicenses(){
         return this.licenseRepository.findAll();
     }

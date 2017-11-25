@@ -21,7 +21,7 @@ public class LicenseControllerTest {
 
     @Test
     public void getAllLicenses() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/rest/licenses/all"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/licenses"))
                 .andExpect(status().isOk());
     }
 
