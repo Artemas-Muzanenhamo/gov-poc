@@ -12,6 +12,7 @@
     <modules>
         <module>identity-service</module>
 	<module>license-service</module>
+	<module>discovery-server</module>
     </modules>
 
 
