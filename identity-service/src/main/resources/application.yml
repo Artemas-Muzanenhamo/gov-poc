@@ -7,9 +7,11 @@ spring:
       database: identity-service-db
   application:
       name: identity-service
+  cloud:
+      config:
+        uri: http://localhost:8888
+        fail-fast: true
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
-server:
-  port: 8080
