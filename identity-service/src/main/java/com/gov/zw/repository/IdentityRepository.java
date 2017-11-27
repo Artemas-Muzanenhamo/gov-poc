@@ -11,7 +11,6 @@ import java.util.List;
 @RepositoryRestResource
 public interface IdentityRepository extends MongoRepository<Identity, String> {
 
-    @RestResource(path = "by-name")
-    List<Identity> findIdentitiesByName(@Param("rn") String name);
+    List<Identity> findIdentitiesByName(String name);
 
 }

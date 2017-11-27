@@ -1,17 +1,7 @@
 spring:
-  profiles: prod
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
-      database: identity-service-db
   application:
       name: identity-service
   cloud:
       config:
         uri: http://localhost:8888
         fail-fast: true
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
