@@ -27,7 +27,7 @@ So when a user without an ID attempts to apply for a License, the
 system itself should not allow the user to achieve this as that 
 would be illegal :smirk:
 
-## Discovery-Server
+## Discovery-Server (Eureka)
 
 This is a [Service Registry(Eureka)](https://github.com/spring-cloud/spring-cloud-netflix) which will allow our Services to be 
 able to register and de-register themselves to the Service Registry. Instead of all traffic making requests to the 
@@ -39,3 +39,11 @@ URL. For example, if you wanted to access the License-Service via the Service Re
 `http://license-service:9999/licenses`. The Service Registry will take care of translating the `license-server` to match 
 the relevant IP address/addresses if we had scaled up our Services. So it kinda handles some load balancing for us behind 
 the scenes. :smirk:
+
+## API Gateway (Zuul)
+
+The API Gateway is a fully managed service that makes it easy for developers to create, publish, maintain, monitor, and 
+secure APIs at any scale. We will be using the Zuul proxy as our API Gateway.
+[Zuul](https://github.com/Netflix/zuul) is the front door for all requests from devices and web sites to the backend of the Netflix streaming application. 
+As an edge service application, Zuul is built to enable dynamic routing, monitoring, resiliency and security. It also 
+has the ability to route requests to multiple Amazon Auto Scaling Groups as appropriate.
