@@ -12,5 +12,7 @@ import java.util.List;
 public interface IdentityRepository extends MongoRepository<Identity, String> {
 
     List<Identity> findIdentitiesByName(String name);
-
+    List<Identity> findIdentitiesBySurname(String surname);
+    List<Identity> findIdentitiesByVillageOfOrigin(String villageOfOrigin);
+    List<Identity> findIdentitiesByNameAndSurnameAndVillageOfOrigin(String name, String surname, String villageOfOrigin);
 }
