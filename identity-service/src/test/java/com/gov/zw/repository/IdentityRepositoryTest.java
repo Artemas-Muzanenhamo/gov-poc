@@ -27,7 +27,7 @@ public class IdentityRepositoryTest {
 
 
     @Test
-    public void findIdentityByName(){
+    public void findIdentitiesByName(){
         this.repository.save(
                 new Identity("Artemas", "Muzanenhamo", "28/03/1990",
                         "Mashayamombe", "Harare", "17/11/2017"));
