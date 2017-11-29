@@ -8,7 +8,7 @@ This is a proof of concept to demo government services using the microservice ar
 
 # Architecture
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/29547780/33339079-e155e812-d46f-11e7-8777-0d2ceb6b5c26.png">
+  <img src="https://user-images.githubusercontent.com/29547780/33390496-ef763280-d52d-11e7-80c3-8aaf41c3d5b0.png">
 </p>
 
 ## Identity-Service
