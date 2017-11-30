@@ -20,6 +20,10 @@ public class Identity {
     private String placeOfBirth;
     private String dateOfIssue;
 
+    Identity(){
+        // Why JPA Why ?!!!
+    }
+
     public Identity(String name, String surname, String birthDate, String villageOfOrigin, String placeOfBirth, String dateOfIssue) {
         this.name = name;
         this.surname = surname;
@@ -37,47 +41,24 @@ public class Identity {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getSurname() {
         return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
-
     public String getVillageOfOrigin() {
         return villageOfOrigin;
-    }
-
-    public void setVillageOfOrigin(String villageOfOrigin) {
-        this.villageOfOrigin = villageOfOrigin;
     }
 
     public String getPlaceOfBirth() {
         return placeOfBirth;
     }
 
-    public void setPlaceOfBirth(String placeOfBirth) {
-        this.placeOfBirth = placeOfBirth;
-    }
-
     public String getDateOfIssue() {
         return dateOfIssue;
     }
 
-    public void setDateOfIssue(String dateOfIssue) {
-        this.dateOfIssue = dateOfIssue;
-    }
 }
