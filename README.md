@@ -3,13 +3,17 @@
 [![CircleCI](https://circleci.com/gh/Artemas-Muzanenhamo/gov-poc/tree/develop.svg?style=svg)](https://circleci.com/gh/Artemas-Muzanenhamo/gov-poc/tree/develop)
 
 # About
-This is a proof of concept to demo government services using the microservice architecture with spring boot and spring cloud.
+This is a proof of concept to demo government services using the Microservice Architecture with spring boot and spring cloud. We will not really dive into the Authentication aspect at first but we will look at how data should flow within a Microservice Architecture.
 
 
 # Architecture
 <p align="center">
   <img src="https://user-images.githubusercontent.com/29547780/33390496-ef763280-d52d-11e7-80c3-8aaf41c3d5b0.png">
 </p>
+
+# Services
+
+The idea here is that we can have as many services as we want behind our Registry Server(Discover-Server) which will allow our Services to register and de-register themselves to the Registry Server. Also Services can still communicate between themselves behind the Registry Server without any issues. 
 
 ## Identity-Service
 
