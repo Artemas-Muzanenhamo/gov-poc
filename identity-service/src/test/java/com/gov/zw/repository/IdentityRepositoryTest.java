@@ -33,6 +33,14 @@ public class IdentityRepositoryTest {
         this.repository.deleteAll();
     }
 
+    @Test
+    public void saveId(){
+        this.repository.save(new Identity("Takudzwa", "Mutongi", "27/01/1987",
+                "Mashayamombe", "Harare", "17/11/2017"));
+
+        Assertions.assertThat(this.repository.findAll().size()).isEqualTo(2);
+    }
+
 
     @Test
     public void findIdentitiesByName(){
