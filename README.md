@@ -31,6 +31,8 @@ So when a user without an ID attempts to apply for a License, the
 system itself should not allow the user to achieve this as that 
 would be illegal :smirk:
 
+# Infrastructure
+
 ## Discovery-Server (Eureka)
 
 This is a [Service Registry(Eureka)](https://github.com/spring-cloud/spring-cloud-netflix) which will allow our Services to be 
