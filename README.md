@@ -47,3 +47,7 @@ secure APIs at any scale. We will be using the Zuul proxy as our API Gateway.
 [Zuul](https://github.com/Netflix/zuul) is the front door for all requests from devices and web sites to the backend of the Netflix streaming application. 
 As an edge service application, Zuul is built to enable dynamic routing, monitoring, resiliency and security. It also 
 has the ability to route requests to multiple Amazon Auto Scaling Groups as appropriate.
+
+## Configuration Server
+
+The Configuration Server will use `Spring-Cloud-Config` to support externalised (externalized :smirk: American..) configuration in a distributed system. With the Configuration Server we will have a central place to manage external properties for applications across all environments. Why all this Whyyyyy??!!!! Well if you think about scalability of your services. Suppose we now have 10 more `License-Service` services scaled up and we want to change some properties within those services. How can we make one change and have that update all the other services??? :thinking: .... The Configuration Server can handle this for us simply by us externalizing our configuration.
