@@ -24,7 +24,7 @@ public class IdentityRepositoryTest {
     @Before
     public void saveIdentity(){
         this.repository.save(
-                new Identity("Artemas", "Muzanenhamo", "28/03/1990",
+                new Identity("1","Artemas", "Muzanenhamo", "28/03/1990",
                         "Mashayamombe", "Harare", "17/11/2017"));
     }
 
@@ -35,7 +35,7 @@ public class IdentityRepositoryTest {
 
     @Test
     public void saveId(){
-        this.repository.save(new Identity("Takudzwa", "Mutongi", "27/01/1987",
+        this.repository.save(new Identity("2","Takudzwa", "Mutongi", "27/01/1987",
                 "Mashayamombe", "Harare", "17/11/2017"));
 
         Assertions.assertThat(this.repository.findAll().size()).isEqualTo(2);
@@ -43,7 +43,7 @@ public class IdentityRepositoryTest {
 
     @Test
     public void deleteId() throws Exception {
-        Identity identity = new Identity("Takudzwa", "Mutongi", "27/01/1987",
+        Identity identity = new Identity("2","Takudzwa", "Mutongi", "27/01/1987",
                 "Mashayamombe", "Harare", "17/11/2017");
         this.repository.save(identity);
         this.repository.delete(identity);
@@ -93,11 +93,11 @@ public class IdentityRepositoryTest {
         List<Identity> identityList = new ArrayList<>();
 
         List<Identity> identities = new ArrayList<>(Arrays.asList(
-                new Identity("Terrence", "Munhengu", "15/04/1980",
+                new Identity("2","Terrence", "Munhengu", "15/04/1980",
                         "Murehwa", "Mutare", "17/11/2017"),
-                new Identity("Tichaona", "Chimuchero", "07/12/1960",
+                new Identity("3","Tichaona", "Chimuchero", "07/12/1960",
                         "Gutu", "Goromhonzi", "17/11/2017"),
-                new Identity("Zindoga", "Ncube", "08/01/1976",
+                new Identity("4","Zindoga", "Ncube", "08/01/1976",
                         "Mhondoro", "Harare", "17/11/2017")
         ));
 

@@ -26,6 +26,11 @@ public class IdentityController {
         this.identityRepository.save(identity);
     }
 
+    @DeleteMapping(value = "/remove", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public void deleteIdentity(@RequestBody Identity identity){
+        this.identityRepository.delete(identity);
+    }
+
     @PostMapping(value = "/name", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
     public List<Identity> getIdentitiesByName(@RequestBody(required = true) String name){

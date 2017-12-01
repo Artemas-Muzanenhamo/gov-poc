@@ -24,7 +24,8 @@ public class Identity {
         // Why JPA Why ?!!!
     }
 
-    public Identity(String name, String surname, String birthDate, String villageOfOrigin, String placeOfBirth, String dateOfIssue) {
+    public Identity(String idNumber, String name, String surname, String birthDate, String villageOfOrigin, String placeOfBirth, String dateOfIssue) {
+        this.idNumber = idNumber;
         this.name = name;
         this.surname = surname;
         this.birthDate = birthDate;
