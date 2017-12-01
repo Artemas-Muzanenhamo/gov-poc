@@ -58,6 +58,19 @@ public class IdentityControllerTest {
     }
 
     @Test
+    public void updateIdentity() throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Identity identity = new Identity("1","Takudzwa", "Muzanenhamo", "28/03/1990",
+                "Mashayamombe", "Harare", "17/11/2017");
+        Map<String, String> id = objectMapper.convertValue(identity, Map.class);
+        JSONObject jsonObject = new JSONObject(id);
+        mockMvc.perform(MockMvcRequestBuilders.put("/id/update")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(jsonObject.toJSONString()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     public void deleteIdentity() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         Identity identity = new Identity("1","Artemas", "Muzanenhamo", "28/03/1990",
