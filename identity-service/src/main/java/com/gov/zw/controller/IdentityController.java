@@ -20,17 +20,14 @@ public class IdentityController {
         this.identityRepository = identityRepository;
     }
 
+    // Create
     @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
     public void saveIdentity(@RequestBody(required = true) Identity identity) {
         this.identityRepository.save(identity);
     }
 
-    @DeleteMapping(value = "/remove", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public void deleteIdentity(@RequestBody Identity identity){
-        this.identityRepository.delete(identity);
-    }
-
+    // Retrieve
     @PostMapping(value = "/name", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
     public List<Identity> getIdentitiesByName(@RequestBody(required = true) String name){
@@ -40,6 +37,12 @@ public class IdentityController {
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Identity> getIdentities(){
         return identityRepository.findAll();
+    }
+
+    // Delete
+    @DeleteMapping(value = "/remove", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public void deleteIdentity(@RequestBody Identity identity){
+        this.identityRepository.delete(identity);
     }
 
 }

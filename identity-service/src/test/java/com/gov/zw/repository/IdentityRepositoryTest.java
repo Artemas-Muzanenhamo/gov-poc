@@ -22,7 +22,7 @@ public class IdentityRepositoryTest {
     IdentityRepository repository;
 
     @Before
-    public void saveIdentity(){
+    public void saveId(){
         this.repository.save(
                 new Identity("1","Artemas", "Muzanenhamo", "28/03/1990",
                         "Mashayamombe", "Harare", "17/11/2017"));
@@ -34,7 +34,7 @@ public class IdentityRepositoryTest {
     }
 
     @Test
-    public void saveId(){
+    public void addIdentity(){
         this.repository.save(new Identity("2","Takudzwa", "Mutongi", "27/01/1987",
                 "Mashayamombe", "Harare", "17/11/2017"));
 
@@ -42,14 +42,13 @@ public class IdentityRepositoryTest {
     }
 
     @Test
-    public void deleteId() throws Exception {
+    public void deleteIdentity() throws Exception {
         Identity identity = new Identity("2","Takudzwa", "Mutongi", "27/01/1987",
                 "Mashayamombe", "Harare", "17/11/2017");
         this.repository.save(identity);
         this.repository.delete(identity);
         Assertions.assertThat(this.repository.findAll().size()).isEqualTo(1);
     }
-
 
     @Test
     public void findIdentitiesByName(){
