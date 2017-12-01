@@ -41,6 +41,15 @@ public class IdentityRepositoryTest {
         Assertions.assertThat(this.repository.findAll().size()).isEqualTo(2);
     }
 
+    @Test
+    public void deleteId() throws Exception {
+        Identity identity = new Identity("Takudzwa", "Mutongi", "27/01/1987",
+                "Mashayamombe", "Harare", "17/11/2017");
+        this.repository.save(identity);
+        this.repository.delete(identity);
+        Assertions.assertThat(this.repository.findAll().size()).isEqualTo(1);
+    }
+
 
     @Test
     public void findIdentitiesByName(){
