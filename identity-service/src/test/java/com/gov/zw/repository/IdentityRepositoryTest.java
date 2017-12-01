@@ -42,15 +42,6 @@ public class IdentityRepositoryTest {
     }
 
     @Test
-    public void deleteIdentity() throws Exception {
-        Identity identity = new Identity("2","Takudzwa", "Mutongi", "27/01/1987",
-                "Mashayamombe", "Harare", "17/11/2017");
-        this.repository.save(identity);
-        this.repository.delete(identity);
-        Assertions.assertThat(this.repository.findAll().size()).isEqualTo(1);
-    }
-
-    @Test
     public void findIdentitiesByName(){
 
         List<Identity> identities = this.repository.findIdentitiesByName("Artemas");
@@ -106,5 +97,24 @@ public class IdentityRepositoryTest {
         Assertions.assertThat(identityList.size()).isEqualTo(4);
         Assertions.assertThat(identityList.get(0).getSurname()).isEqualTo("Muzanenhamo");
     }
+
+    @Test
+    public void updateIdentity(){
+        Identity identity = new Identity("1","Takudzwa", "Muzanenhamo", "28/03/1990",
+                "Mashayamombe", "Harare", "17/11/2017");
+        this.repository.save(identity);
+        Assertions.assertThat(this.repository.findAll().size()).isEqualTo(1);
+        Assertions.assertThat(this.repository.findAll().get(0).getName()).isEqualTo("Takudzwa");
+    }
+
+    @Test
+    public void deleteIdentity() throws Exception {
+        Identity identity = new Identity("2","Takudzwa", "Mutongi", "27/01/1987",
+                "Mashayamombe", "Harare", "17/11/2017");
+        this.repository.save(identity);
+        this.repository.delete(identity);
+        Assertions.assertThat(this.repository.findAll().size()).isEqualTo(1);
+    }
+
 
 }
