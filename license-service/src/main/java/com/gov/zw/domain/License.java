@@ -33,6 +33,10 @@ public class License {
         this.address = address;
     }
 
+    License() {
+        //JPA Why?...
+    }
+
     public String getId() {
         return id;
     }
