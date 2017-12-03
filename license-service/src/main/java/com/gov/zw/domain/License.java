@@ -19,7 +19,8 @@ public class License {
     private String signatureImage;
     private String address;
 
-    public License(String surname, String firstNames, String dateOfBirth, String country, String dateOfIssue, String expiryDate, String agency, String licenseNumber, String signatureImage, String address) {
+    public License(String id, String surname, String firstNames, String dateOfBirth, String country, String dateOfIssue, String expiryDate, String agency, String licenseNumber, String signatureImage, String address) {
+        this.id = id;
         this.surname = surname;
         this.firstNames = firstNames;
         this.dateOfBirth = dateOfBirth;

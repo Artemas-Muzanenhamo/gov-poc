@@ -11,9 +11,10 @@ public class LicenseTest {
     @Test
     public void creation(){
         License license = new License(
-                "Muzanenhamo", "Artemas Takudzwa", "28/03/1990", "ZIM", "20/11/2017", "19/11/2027", "ZDVLA",
+                "1", "Muzanenhamo", "Artemas Takudzwa", "28/03/1990", "ZIM", "20/11/2017", "19/11/2027", "ZDVLA",
                 "MUZANEN123456ABCDEF", "signature.jpg", "768 Sunningdale 3, Harare, Zimbabwe");
 
+        Assertions.assertThat(license.getId()).isEqualTo("1");
         Assertions.assertThat(license.getSurname()).isEqualTo("Muzanenhamo");
         Assertions.assertThat(license.getFirstNames()).isEqualTo("Artemas Takudzwa");
         Assertions.assertThat(license.getDateOfBirth()).isEqualTo("28/03/1990");

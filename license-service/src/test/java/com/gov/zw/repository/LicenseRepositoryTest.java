@@ -23,16 +23,16 @@ public class LicenseRepositoryTest {
     @Before
     public void addToRepository(){
         List<License> licenseList = Arrays.asList(
-                new License("Muzanenhamo", "Artemas Takudzwa", "28/03/1990", "ZIM",
+                new License("1","Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
                         "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                         "01.jpg", "123 Glendale, Harare, Zimbabwe"),
-                new License("Muzanenhamo", "Artemas Takudzwa", "28/03/1990", "ZIM",
+                new License("2","Juliet", "Bravo Zulu", "28/03/1990", "ZIM",
                         "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                         "01.jpg", "123 Glendale, Harare, Zimbabwe"),
-                new License("Muzanenhamo", "Artemas Takudzwa", "28/03/1990", "ZIM",
+                new License("3","Foxtrot", "Juliet Papa", "28/03/1990", "ZIM",
                         "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                         "01.jpg", "123 Glendale, Harare, Zimbabwe"),
-                new License("Muzanenhamo", "Artemas Takudzwa", "28/03/1990", "ZIM",
+                new License("4","Yankee", "Xray Whiskey", "28/03/1990", "ZIM",
                         "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                         "01.jpg", "123 Glendale, Harare, Zimbabwe")
         );
@@ -51,6 +51,15 @@ public class LicenseRepositoryTest {
         Assertions.assertThat(licenses.size()).isEqualTo(4);
         Assertions.assertThat(licenses.get(0).getAgency()).isEqualTo("ZDVLA");
         Assertions.assertThat(licenses.get(0).getDateOfBirth()).isEqualTo("28/03/1990");
+    }
+
+    @Test
+    public void deleteLicense(){
+        this.licenseRepository.delete("1");
+        List<License> licenses = this.licenseRepository.findAll();
+
+        Assertions.assertThat(licenses.get(0).getFirstNames()).isEqualTo("Bravo Zulu");
+        Assertions.assertThat(licenses.size()).isEqualTo(3);
     }
 
 }

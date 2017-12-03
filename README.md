@@ -29,7 +29,7 @@ fail to present an ID. :thinking:
 
 So when a user without an ID attempts to apply for a License, the 
 system itself should not allow the user to achieve this as that 
-would be illegal :smirk: .....
+would be illegal :smirk: .
 
 # Infrastructure
 
