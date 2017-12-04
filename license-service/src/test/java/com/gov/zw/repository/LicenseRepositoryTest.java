@@ -46,6 +46,17 @@ public class LicenseRepositoryTest {
     }
 
     @Test
+    public void addLicense(){
+        License license = new License("5","James", "Lebron", "28/03/1990", "ZIM",
+                "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
+                "01.jpg", "123 Glendale, Harare, Zimbabwe");
+        this.licenseRepository.save(license);
+        List<License> licenses = this.licenseRepository.findAll();
+        Assertions.assertThat(licenses.get(4).getFirstNames()).isEqualTo("Lebron");
+        Assertions.assertThat(licenses.size()).isEqualTo(5);
+    }
+
+    @Test
     public void findAllLicenses(){
         List<License> licenses = this.licenseRepository.findAll();
         Assertions.assertThat(licenses.size()).isEqualTo(4);
