@@ -30,6 +30,10 @@ public class LicenseController {
     }
 
     // Update
+    @PutMapping(value = "/amend", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public void updateLicense(@RequestBody License license) {
+        this.licenseRepository.save(license);
+    }
 
     // Delete
     @DeleteMapping(value = "/remove", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
