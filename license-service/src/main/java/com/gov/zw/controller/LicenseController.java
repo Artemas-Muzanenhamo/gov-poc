@@ -18,6 +18,10 @@ public class LicenseController {
     }
 
     // Create
+    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public void addLicense(@RequestBody License license){
+        this.licenseRepository.save(license);
+    }
 
     // Read
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
