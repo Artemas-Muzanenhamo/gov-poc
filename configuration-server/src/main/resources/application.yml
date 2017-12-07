@@ -1,11 +1,18 @@
 spring:
+  profiles:
+       active: native
   cloud:
     config:
       server:
         native:
           search-locations: classpath:/shared
-  profiles:
-     active: native
-
 server:
   port: 8888
+
+---
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://ArtemasMuzanenhamo@bitbucket.org/ArtemasMuzanenhamo/gov-poc-config-server.git
