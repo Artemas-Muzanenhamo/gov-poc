@@ -15,7 +15,6 @@
 	    <module>discovery-server</module>
         <module>gateway</module>
         <module>configuration-server</module>
-        <module>identity</module>
     </modules>
 
 

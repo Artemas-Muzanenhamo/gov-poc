@@ -6,9 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/id")
@@ -29,9 +28,8 @@ public class IdentityController {
 
     // Retrieve
     @PostMapping(value = "/name", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseStatus(value = HttpStatus.OK)
-    public List<Identity> getIdentitiesByName(@RequestBody String name){
-        return identityRepository.findIdentitiesByName(name);
+    public List<Identity> getIdentitiesByName(@RequestBody Map<String, String> name){
+        return identityRepository.findIdentitiesByName(name.get("name"));
     }
 
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -51,6 +49,13 @@ public class IdentityController {
     @ResponseStatus(HttpStatus.OK)
     public void deleteIdentity(@RequestBody Identity identity){
         this.identityRepository.delete(identity);
+    }
+
+    @GetMapping(value = "/saveTest")
+    public void saveDummyData(){
+        Identity identity = new Identity("1","1","Artemas", "Muzanenhamo", "28/03/1990",
+                "Mashayamombe", "Harare", "17/11/2017");
+        this.identityRepository.save(identity);
     }
 
 }
