@@ -8,10 +8,10 @@ public class IdentityTest {
     @Test
     public void creation(){
         Identity identity = new Identity(
-                "1", "Artemas", "Muzanenhamo", "28/03/1990", "Mashayamombe",
+                "1234AM1", "Artemas", "Muzanenhamo", "28/03/1990", "Mashayamombe",
                 "Harare", "22/11/2017");
 
-        Assertions.assertThat("1");
+        Assertions.assertThat(identity.getIdentityRef()).isEqualTo("1234AM1");
         Assertions.assertThat(identity.getName()).isEqualTo("Artemas");
         Assertions.assertThat(identity.getSurname()).isEqualTo("Muzanenhamo");
         Assertions.assertThat(identity.getBirthDate()).isEqualTo("28/03/1990");

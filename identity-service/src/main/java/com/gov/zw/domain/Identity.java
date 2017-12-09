@@ -3,8 +3,6 @@ package com.gov.zw.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
-
 /**
  * Created by Artemas on 18/11/2017.
  */
@@ -12,7 +10,8 @@ import java.util.Date;
 public class Identity {
 
     @Id
-    private String idNumber;
+    private String id;
+    private String identityRef;
     private String name;
     private String surname;
     private String birthDate;
@@ -24,8 +23,8 @@ public class Identity {
         // Why JPA Why ?!!!
     }
 
-    public Identity(String idNumber, String name, String surname, String birthDate, String villageOfOrigin, String placeOfBirth, String dateOfIssue) {
-        this.idNumber = idNumber;
+    public Identity(String identityRef, String name, String surname, String birthDate, String villageOfOrigin, String placeOfBirth, String dateOfIssue) {
+        this.identityRef = identityRef;
         this.name = name;
         this.surname = surname;
         this.birthDate = birthDate;
@@ -34,8 +33,12 @@ public class Identity {
         this.dateOfIssue = dateOfIssue;
     }
 
-    public String getIdNumber() {
-        return idNumber;
+    public String getId() {
+        return id;
+    }
+
+    public String getIdentityRef() {
+        return identityRef;
     }
 
     public String getName() {
