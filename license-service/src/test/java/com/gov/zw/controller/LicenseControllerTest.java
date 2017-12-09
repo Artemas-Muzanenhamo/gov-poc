@@ -28,7 +28,7 @@ public class LicenseControllerTest {
     @Test
     public void addLicense() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        License license = new License("1","Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
+        License license = new License("1", "1","Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                 "01.jpg", "123 Glendale, Harare, Zimbabwe");
         Map<String, String> licenseObject = objectMapper.convertValue(license, Map.class);
@@ -49,7 +49,7 @@ public class LicenseControllerTest {
     @Test
     public void updateLicense() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        License license = new License("1","Delta", "Charlie Foxtrot", "28/03/1990", "ZIM",
+        License license = new License("1", "1","Delta", "Charlie Foxtrot", "28/03/1990", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                 "01.jpg", "123 Glendale, Harare, Zimbabwe");
         Map<String, String> licenseObject = objectMapper.convertValue(license, Map.class);
@@ -64,7 +64,7 @@ public class LicenseControllerTest {
     @Test
     public void deleteLicense() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        License license = new License("1","Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
+        License license = new License("1", "1","Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                 "01.jpg", "123 Glendale, Harare, Zimbabwe");
         Map<String, String> id = objectMapper.convertValue(license, Map.class);

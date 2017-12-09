@@ -23,16 +23,16 @@ public class LicenseRepositoryTest {
     @Before
     public void addToRepository(){
         List<License> licenseList = Arrays.asList(
-                new License("1","Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
+                new License("1", "1","Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
                         "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                         "01.jpg", "123 Glendale, Harare, Zimbabwe"),
-                new License("2","Juliet", "Bravo Zulu", "28/03/1990", "ZIM",
+                new License("2", "2","Juliet", "Bravo Zulu", "28/03/1990", "ZIM",
                         "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                         "01.jpg", "123 Glendale, Harare, Zimbabwe"),
-                new License("3","Foxtrot", "Juliet Papa", "28/03/1990", "ZIM",
+                new License("3", "3","Foxtrot", "Juliet Papa", "28/03/1990", "ZIM",
                         "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                         "01.jpg", "123 Glendale, Harare, Zimbabwe"),
-                new License("4","Yankee", "Xray Whiskey", "28/03/1990", "ZIM",
+                new License("4", "4","Yankee", "Xray Whiskey", "28/03/1990", "ZIM",
                         "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                         "01.jpg", "123 Glendale, Harare, Zimbabwe")
         );
@@ -47,7 +47,7 @@ public class LicenseRepositoryTest {
 
     @Test
     public void addLicense(){
-        License license = new License("5","James", "Lebron", "28/03/1990", "ZIM",
+        License license = new License("5", "5","James", "Lebron", "28/03/1990", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                 "01.jpg", "123 Glendale, Harare, Zimbabwe");
         this.licenseRepository.save(license);
@@ -66,7 +66,7 @@ public class LicenseRepositoryTest {
 
     @Test
     public void updateLicense(){
-        License license = new License("4","Charlie", "Delta Golf", "28/03/1990", "ZIM",
+        License license = new License("4", "4","Charlie", "Delta Golf", "28/03/1990", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                 "01.jpg", "123 Glendale, Harare, Zimbabwe");
         this.licenseRepository.save(license);
