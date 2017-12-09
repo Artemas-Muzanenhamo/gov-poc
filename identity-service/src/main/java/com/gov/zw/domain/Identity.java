@@ -1,6 +1,7 @@
 package com.gov.zw.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -23,7 +24,8 @@ public class Identity {
         // Why JPA Why ?!!!
     }
 
-    public Identity(String identityRef, String name, String surname, String birthDate, String villageOfOrigin, String placeOfBirth, String dateOfIssue) {
+    public Identity(String id, String identityRef, String name, String surname, String birthDate, String villageOfOrigin, String placeOfBirth, String dateOfIssue) {
+        this.id = id;
         this.identityRef = identityRef;
         this.name = name;
         this.surname = surname;
