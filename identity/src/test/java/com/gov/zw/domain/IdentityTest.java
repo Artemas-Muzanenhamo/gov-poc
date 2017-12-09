@@ -19,5 +19,4 @@ public class IdentityTest {
         Assertions.assertThat(identity.getPlaceOfBirth()).isEqualTo("Harare");
         Assertions.assertThat(identity.getDateOfIssue()).isEqualTo("22/11/2017");
     }
-
 }
