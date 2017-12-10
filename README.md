@@ -24,7 +24,7 @@ country.
 URL|Request Method|Request Body| Description
 :---:|:---:|:---:|:---:
 `identity-service:8080/identities`|**POST**|**Identity**|Adds an Identity to the Identity Service.
-`identity-service:8080/identities/name`|**POST**|**{"name": ${name}}**|Retrieves a List Identities given a name.
+`identity-service:8080/identities/name`|**POST**|**{"name": ${name}}**|Retrieves a List of Identities given a name.
 `identity-service:8080/identities`|**GET**||Retrieves all Identities from the Identity Service.
 `identity-service:8080/identities`|**PUT**|**Identity**|Updates an Identity in the Identity Service.
 `identity-service:8080/identities`|**DELETE**|**Identity**|Removes an Identity from the Identity Service.
