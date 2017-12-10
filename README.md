@@ -1,4 +1,4 @@
-# gov-poc
+# Gov-POC
 
 [![CircleCI](https://circleci.com/gh/Artemas-Muzanenhamo/gov-poc/tree/develop.svg?style=svg)](https://circleci.com/gh/Artemas-Muzanenhamo/gov-poc/tree/develop)
 
@@ -19,6 +19,15 @@ The idea here is that we can have as many services as we want behind our Registr
 
 This Service will hold all National ID details for every citizen of the
 country.
+
+### Identity-Service API
+URL|Request Method|Request Body| Description
+:---:|:---:|:---:
+`identity-service:8080/identities`|**POST**|**Identity**|Adds an Identity to the Identity Service.
+`identity-service:8080/identities/name`|**POST**|**{"name": ${name}}**|Retrieves a List Identities given a name.
+`identity-service:8080/identities`|**GET**||Retrieves all Identities from the Identity Service.
+`identity-service:8080/identities`|**PUT**|**Identity**|Updates an Identity in the Identity Service.
+`identity-service:8080/identities`|**DELETE**|**Identity**|Removes an Identity from the Identity Service.
 
 ## License-Service
 

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/id")
+@RequestMapping("/identities")
 public class IdentityController {
 
     private final IdentityRepository identityRepository;
@@ -20,7 +20,7 @@ public class IdentityController {
     }
 
     // Create
-    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
     public void saveIdentity(@RequestBody Identity identity) {
         this.identityRepository.save(identity);
@@ -32,20 +32,20 @@ public class IdentityController {
         return identityRepository.findIdentitiesByName(name.get("name"));
     }
 
-    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Identity> getIdentities(){
         return identityRepository.findAll();
     }
 
     //Update
-    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PutMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public void updateIdentity(@RequestBody Identity identity){
         this.identityRepository.save(identity);
     }
 
     // Delete
-    @DeleteMapping(value = "/remove", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @DeleteMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public void deleteIdentity(@RequestBody Identity identity){
         this.identityRepository.delete(identity);

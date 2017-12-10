@@ -35,7 +35,7 @@ public class IdentityControllerTest {
         Map<String, String> id = objectMapper.convertValue(identity, Map.class);
         JSONObject jsonObject = new JSONObject(id);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/id/register")
+        mockMvc.perform(MockMvcRequestBuilders.post("/identities")
                 .content(jsonObject.toJSONString())
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isOk());
@@ -46,7 +46,7 @@ public class IdentityControllerTest {
         Map<String, String> name = new HashMap<>();
         name.put("name", "Artemas");
         JSONObject jsonObject = new JSONObject(name);
-        mockMvc.perform(MockMvcRequestBuilders.post("/id/name")
+        mockMvc.perform(MockMvcRequestBuilders.post("/identities/name")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
@@ -54,7 +54,7 @@ public class IdentityControllerTest {
 
     @Test
     public void getAllIdentities() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/id/all"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/identities"))
                 .andExpect(status().isOk());
     }
 
@@ -65,7 +65,7 @@ public class IdentityControllerTest {
                 "Mashayamombe", "Harare", "17/11/2017");
         Map<String, String> id = objectMapper.convertValue(identity, Map.class);
         JSONObject jsonObject = new JSONObject(id);
-        mockMvc.perform(MockMvcRequestBuilders.put("/id/update")
+        mockMvc.perform(MockMvcRequestBuilders.put("/identities")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
@@ -79,7 +79,7 @@ public class IdentityControllerTest {
         Map<String, String> id = objectMapper.convertValue(identity, Map.class);
         JSONObject jsonObject = new JSONObject(id);
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/id/remove")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/identities")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
