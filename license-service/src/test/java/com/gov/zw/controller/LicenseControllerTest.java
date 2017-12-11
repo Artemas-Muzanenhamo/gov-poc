@@ -34,7 +34,7 @@ public class LicenseControllerTest {
         Map<String, String> licenseObject = objectMapper.convertValue(license, Map.class);
         JSONObject jsonObject = new JSONObject(licenseObject);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/license/register")
+        mockMvc.perform(MockMvcRequestBuilders.post("/licenses")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
@@ -42,7 +42,7 @@ public class LicenseControllerTest {
 
     @Test
     public void getAllLicenses() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/license/all"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/licenses"))
                 .andExpect(status().isOk());
     }
 
@@ -55,7 +55,7 @@ public class LicenseControllerTest {
         Map<String, String> licenseObject = objectMapper.convertValue(license, Map.class);
         JSONObject jsonObject = new JSONObject(licenseObject);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/license/amend")
+        mockMvc.perform(MockMvcRequestBuilders.put("/licenses")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
@@ -70,7 +70,7 @@ public class LicenseControllerTest {
         Map<String, String> id = objectMapper.convertValue(license, Map.class);
         JSONObject jsonObject = new JSONObject(id);
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/license/remove")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/licenses")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());

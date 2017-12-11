@@ -23,11 +23,11 @@ country.
 ### Identity-Service API
 URL|Request Method|Request Body| Description
 :---:|:---:|:---:|:---:
-`identity-service:8080/identities`|**POST**|**Identity**|Adds an Identity to the Identity Service.
+`identity-service:8080/identities`|**POST**|**Identity**|Adds an Identity to the Identity-Service.
 `identity-service:8080/identities/name`|**POST**|**{"name": ${name}}**|Retrieves a List of Identities given a name.
-`identity-service:8080/identities`|**GET**||Retrieves all Identities from the Identity Service.
-`identity-service:8080/identities`|**PUT**|**Identity**|Updates an Identity in the Identity Service.
-`identity-service:8080/identities`|**DELETE**|**Identity**|Removes an Identity from the Identity Service.
+`identity-service:8080/identities`|**GET**||Retrieves all Identities from the Identity-Service.
+`identity-service:8080/identities`|**PUT**|**Identity**|Updates an Identity in the Identity-Service.
+`identity-service:8080/identities`|**DELETE**|**Identity**|Removes an Identity from the Identity-Service.
 
 ## License-Service
 
@@ -39,6 +39,14 @@ fail to present an ID. :thinking:
 So when a user without an ID attempts to apply for a License, the 
 system itself should not allow the user to achieve this as that 
 would be illegal :smirk: .
+
+### License-Service API
+URL|Request Method|Request Body| Description
+:---:|:---:|:---:|:---:
+`identity-service:8081/licenses`|**POST**|**License**|Adds a License to the License-Service.
+`identity-service:8081/licenses`|**GET**||Retrieves all Licenses from the License-Service.
+`identity-service:8081/licenses`|**PUT**|**License**|Updates License data in the License-Service.
+`identity-service:8081/licenses`|**DELETE**|**License**|Removes License data from the License-Service.
 
 # Infrastructure
 
