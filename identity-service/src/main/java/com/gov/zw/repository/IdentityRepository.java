@@ -13,4 +13,6 @@ public interface IdentityRepository extends MongoRepository<Identity, String> {
     List<Identity> findIdentitiesBySurname(String surname);
     List<Identity> findIdentitiesByVillageOfOrigin(String villageOfOrigin);
     List<Identity> findIdentitiesByNameAndSurnameAndVillageOfOrigin(String name, String surname, String villageOfOrigin);
+
+    Identity findIdentityByIdentityRef(String identityReference);
 }

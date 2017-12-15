@@ -17,6 +17,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -50,6 +52,18 @@ public class IdentityControllerTest {
         JSONObject jsonObject = new JSONObject(name);
         mockMvc.perform(MockMvcRequestBuilders.post("/identities/name")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .content(jsonObject.toJSONString()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getIdentityByReferenceNumber() throws Exception {
+        Map<String, String> idReferenceNumber = new HashMap<>();
+        idReferenceNumber.put("idRef", "1");
+        JSONObject jsonObject = new JSONObject(idReferenceNumber);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/identities/reference")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
     }

@@ -7,6 +7,7 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
 @EnableEurekaClient
 @SpringBootApplication
+@EnableFeignClients
 public class LicenseServiceApplication {
 
 	public static void main(String[] args) {
