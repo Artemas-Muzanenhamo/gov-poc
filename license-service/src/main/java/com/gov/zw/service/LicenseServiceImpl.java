@@ -5,6 +5,8 @@ import com.gov.zw.domain.Identity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class LicenseServiceImpl implements LicenseService {
 
@@ -12,7 +14,7 @@ public class LicenseServiceImpl implements LicenseService {
     private IdentityClient identityClient;
 
     @Override
-    public Identity findIdentityByIdReferenceNumber(String referenceNumber) {
+    public Identity findIdentityByIdReferenceNumber(Map<String, String> referenceNumber) {
         return identityClient.findIdentityByIdReferenceNumber(referenceNumber);
     }
 }
