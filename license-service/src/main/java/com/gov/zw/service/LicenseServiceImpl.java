@@ -1,7 +1,7 @@
 package com.gov.zw.service;
 
 import com.gov.zw.client.IdentityClient;
-import com.gov.zw.domain.Identity;
+import com.gov.zw.client.Identity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

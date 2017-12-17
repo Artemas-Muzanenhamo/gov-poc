@@ -1,6 +1,6 @@
 package com.gov.zw.service;
 
-import com.gov.zw.domain.Identity;
+import com.gov.zw.client.Identity;
 
 import java.util.Map;
 
