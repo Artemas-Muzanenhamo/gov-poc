@@ -1,6 +1,7 @@
 package com.gov.zw.client;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -11,4 +12,7 @@ public interface IdentityClient {
 
     @PostMapping(value = "/identities/reference")
     Identity findIdentityByIdReferenceNumber(@RequestBody Map<String, String> referenceNumber);
+
+    @GetMapping(value = "/")
+    String request();
 }
