@@ -32,6 +32,11 @@ public class IdentityController {
         return identityRepository.findIdentitiesByName(name.get("name"));
     }
 
+    @PostMapping(value = "/reference", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Identity getIdentityByReferenceNumber(@RequestBody Map<String, String> idReferenceNumber){
+        return identityRepository.findIdentityByIdentityRef(idReferenceNumber.get("idRef"));
+    }
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Identity> getIdentities(){
         return identityRepository.findAll();

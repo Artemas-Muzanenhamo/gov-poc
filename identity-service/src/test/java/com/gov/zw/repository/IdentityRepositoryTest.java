@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @RunWith(SpringRunner.class)
 @DataMongoTest
 public class IdentityRepositoryTest {
@@ -43,16 +45,16 @@ public class IdentityRepositoryTest {
         this.repository.save(new Identity("2","2","Takudzwa", "Mutongi", "27/01/1987",
                 "Mashayamombe", "Harare", "17/11/2017"));
 
-        Assertions.assertThat(this.repository.findAll().size()).isEqualTo(EXPECTTWO);
+        assertThat(this.repository.findAll().size()).isEqualTo(EXPECTTWO);
     }
 
     @Test
     public void findIdentitiesByName(){
 
         List<Identity> identities = this.repository.findIdentitiesByName("Artemas");
-        Assertions.assertThat(identities.size()).isEqualTo(EXPECTONE);
-        Assertions.assertThat(identities.get(FIRSTINDEX).getName()).isEqualTo("Artemas");
-        Assertions.assertThat(identities.get(FIRSTINDEX).getSurname()).isEqualTo("Muzanenhamo");
+        assertThat(identities.size()).isEqualTo(EXPECTONE);
+        assertThat(identities.get(FIRSTINDEX).getName()).isEqualTo("Artemas");
+        assertThat(identities.get(FIRSTINDEX).getSurname()).isEqualTo("Muzanenhamo");
 
     }
 
@@ -60,27 +62,34 @@ public class IdentityRepositoryTest {
     public void findIdentitiesBySurname(){
 
         List<Identity> identities = this.repository.findIdentitiesBySurname("Muzanenhamo");
-        Assertions.assertThat(identities.size()).isEqualTo(EXPECTONE);
-        Assertions.assertThat(identities.get(FIRSTINDEX).getName()).isEqualTo("Artemas");
-        Assertions.assertThat(identities.get(FIRSTINDEX).getSurname()).isEqualTo("Muzanenhamo");
+        assertThat(identities.size()).isEqualTo(EXPECTONE);
+        assertThat(identities.get(FIRSTINDEX).getName()).isEqualTo("Artemas");
+        assertThat(identities.get(FIRSTINDEX).getSurname()).isEqualTo("Muzanenhamo");
 
     }
 
     @Test
     public void findIdentitiesByVillageOfOrigin(){
         List<Identity> identities = this.repository.findIdentitiesByVillageOfOrigin("Mashayamombe");
-        Assertions.assertThat(identities.size()).isEqualTo(EXPECTONE);
-        Assertions.assertThat(identities.get(FIRSTINDEX).getName()).isEqualTo("Artemas");
-        Assertions.assertThat(identities.get(FIRSTINDEX).getSurname()).isEqualTo("Muzanenhamo");
+        assertThat(identities.size()).isEqualTo(EXPECTONE);
+        assertThat(identities.get(FIRSTINDEX).getName()).isEqualTo("Artemas");
+        assertThat(identities.get(FIRSTINDEX).getSurname()).isEqualTo("Muzanenhamo");
     }
 
     @Test
     public void findIdentitiesByNameSurnameAndVillageOfOrigin(){
         List<Identity> identities = this.repository.findIdentitiesByNameAndSurnameAndVillageOfOrigin(
                 "Artemas", "Muzanenhamo", "Mashayamombe");
-        Assertions.assertThat(identities.size()).isEqualTo(EXPECTONE);
-        Assertions.assertThat(identities.get(FIRSTINDEX).getName()).isEqualTo("Artemas");
-        Assertions.assertThat(identities.get(FIRSTINDEX).getSurname()).isEqualTo("Muzanenhamo");
+        assertThat(identities.size()).isEqualTo(EXPECTONE);
+        assertThat(identities.get(FIRSTINDEX).getName()).isEqualTo("Artemas");
+        assertThat(identities.get(FIRSTINDEX).getSurname()).isEqualTo("Muzanenhamo");
+    }
+
+    @Test
+    public void findIdentityByIdReferenceNumber(){
+        Identity identity = this.repository.findIdentityByIdentityRef("1");
+        assertThat(identity.getName()).isEqualTo("Artemas");
+        assertThat(identity.getSurname()).isEqualTo("Muzanenhamo");
     }
 
     @Test
@@ -99,8 +108,8 @@ public class IdentityRepositoryTest {
         identities.forEach(t -> this.repository.save(t));
 
         this.repository.findAll().forEach(identityList :: add);
-        Assertions.assertThat(identityList.size()).isEqualTo(EXPECTFOUR);
-        Assertions.assertThat(identityList.get(FIRSTINDEX).getSurname()).isEqualTo("Muzanenhamo");
+        assertThat(identityList.size()).isEqualTo(EXPECTFOUR);
+        assertThat(identityList.get(FIRSTINDEX).getSurname()).isEqualTo("Muzanenhamo");
     }
 
     @Test
@@ -108,8 +117,8 @@ public class IdentityRepositoryTest {
         Identity identity = new Identity("1","1","Takudzwa", "Muzanenhamo", "28/03/1990",
                 "Mashayamombe", "Harare", "17/11/2017");
         this.repository.save(identity);
-        Assertions.assertThat(this.repository.findAll().size()).isEqualTo(EXPECTONE);
-        Assertions.assertThat(this.repository.findAll().get(FIRSTINDEX).getName()).isEqualTo("Takudzwa");
+        assertThat(this.repository.findAll().size()).isEqualTo(EXPECTONE);
+        assertThat(this.repository.findAll().get(FIRSTINDEX).getName()).isEqualTo("Takudzwa");
     }
 
     @Test
@@ -118,7 +127,7 @@ public class IdentityRepositoryTest {
                 "Mashayamombe", "Harare", "17/11/2017");
         this.repository.save(identity);
         this.repository.delete(identity);
-        Assertions.assertThat(this.repository.findAll().size()).isEqualTo(EXPECTONE);
+        assertThat(this.repository.findAll().size()).isEqualTo(EXPECTONE);
     }
 
 
