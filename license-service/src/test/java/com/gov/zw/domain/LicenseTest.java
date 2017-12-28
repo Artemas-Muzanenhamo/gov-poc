@@ -3,9 +3,6 @@ package com.gov.zw.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-/**
- * Created by Artemas on 23/11/2017.
- */
 public class LicenseTest {
 
     @Test
