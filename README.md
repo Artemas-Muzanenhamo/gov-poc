@@ -70,7 +70,10 @@ secure APIs at any scale. We will be using the Zuul proxy as our API Gateway.
 [Zuul](https://github.com/Netflix/zuul) is the front door for all requests from devices and web sites to the backend of the Netflix streaming application. 
 As an edge service application, Zuul is built to enable dynamic routing, monitoring, resiliency and security. It also 
 has the ability to route requests to multiple Amazon Auto Scaling Groups as appropriate.
-You can access the Gateway can be accessed on: `http://localhost:9999`
+You can access the Gateway can be accessed on: `http://localhost:9999`. Should you wish to 
+access any of the services via the gateway you can just access them as below:
+`http://localhost:9999/license-service/identies` for the `license-service` or
+`http://localhost:9999/identity-service/identities` for the `identity-service`.
 
 ## Configuration Server
 
