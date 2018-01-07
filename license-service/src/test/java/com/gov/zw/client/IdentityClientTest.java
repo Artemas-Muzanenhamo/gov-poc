@@ -36,4 +36,9 @@ public class IdentityClientTest {
 
         assertThat(identityClient.request()).isEqualTo("Hello World!");
     }
+
+    @Test
+    public void should_return_identity_by_reference() throws Exception {
+        // to do
+    }
 }
