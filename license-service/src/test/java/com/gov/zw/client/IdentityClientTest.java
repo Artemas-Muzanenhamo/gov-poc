@@ -49,6 +49,7 @@ public class IdentityClientTest {
     @Ignore
     @PactVerification(fragment = "createAddressCollectionResourcePact")
     public void verifyAddressCollectionPact() {
+        // to do
         Map<String, String> map = new HashMap<>();
         map.put("refNumber", "MUZAN1234");
         Identity identity = identityClient.findIdentityByIdReferenceNumber(map);
