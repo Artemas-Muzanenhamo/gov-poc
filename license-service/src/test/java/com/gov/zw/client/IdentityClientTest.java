@@ -20,24 +20,21 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(properties = {
-        // overriding provider address
-        "addresses.ribbon.listOfServers: localhost:8888"
-})
+@SpringBootTest
 public class IdentityClientTest {
 
     @Rule
-    public PactProviderRuleMk2 stubProvider = new PactProviderRuleMk2("identityServiceProvider", "localhost", 8888, this);
+    public PactProviderRuleMk2 stubProvider = new PactProviderRuleMk2("identityServiceProvider", "localhost", 8080, this);
 
     @Autowired
     private IdentityClient identityClient;
 
-    @Pact(state = "an Identity", provider = "customerServiceProvider", consumer = "identityClient")
+    @Pact(state = "an Identity", provider = "identityServiceProvider", consumer = "identityClient")
     public RequestResponsePact createAddressCollectionResourcePact(PactDslWithProvider builder) {
         return builder
                 .given("an Identity")
                 .uponReceiving("a request to the address collection resource")
-                .path("/addresses/")
+                .path("/identities/reference")
                 .method("GET")
                 .willRespondWith()
                 .status(200)
@@ -47,7 +44,7 @@ public class IdentityClientTest {
 
     @Test
     @Ignore
-    @PactVerification(fragment = "createAddressCollectionResourcePact")
+    @PactVerification(fragment = "an Identity")
     public void verifyAddressCollectionPact() {
         // to do
         Map<String, String> map = new HashMap<>();
