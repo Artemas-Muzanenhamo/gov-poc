@@ -1,40 +1,58 @@
 package com.gov.zw.client;
 
-import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
-import org.junit.ClassRule;
+import au.com.dius.pact.consumer.Pact;
+import au.com.dius.pact.consumer.PactProviderRuleMk2;
+import au.com.dius.pact.consumer.PactVerification;
+import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
+import au.com.dius.pact.model.RequestResponsePact;
+import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
-import org.springframework.cloud.contract.wiremock.WireMockSpring;
+import org.springframework.hateoas.Resources;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.NONE, properties = "eureka.client.enabled=false")
-@AutoConfigureWireMock(port = 8081)
+@SpringBootTest(properties = {
+        // overriding provider address
+        "addresses.ribbon.listOfServers: localhost:8888"
+})
 public class IdentityClientTest {
 
-    @ClassRule
-    public static WireMockClassRule wiremock = new WireMockClassRule(
-            WireMockSpring.options().dynamicPort());
+    @Rule
+    public PactProviderRuleMk2 stubProvider = new PactProviderRuleMk2("identityServiceProvider", "localhost", 8888, this);
 
     @Autowired
     private IdentityClient identityClient;
 
+    @Pact(state = "an Identity", provider = "customerServiceProvider", consumer = "identityClient")
+    public RequestResponsePact createAddressCollectionResourcePact(PactDslWithProvider builder) {
+        return builder
+                .given("an Identity")
+                .uponReceiving("a request to the address collection resource")
+                .path("/addresses/")
+                .method("GET")
+                .willRespondWith()
+                .status(200)
+                .body("")
+                .toPact();
+    }
+
     @Test
-    public void contextLoads() throws Exception {
-
-        stubFor(get(urlEqualTo("/"))
-                .willReturn(aResponse()
-                        .withHeader("Content-Type", "text/plain")
-                        .withBody("Hello World!")
-                ));
-
-        assertThat(identityClient.request()).isEqualTo("Hello World!");
+    @Ignore
+    @PactVerification(fragment = "createAddressCollectionResourcePact")
+    public void verifyAddressCollectionPact() {
+        Map<String, String> map = new HashMap<>();
+        map.put("refNumber", "MUZAN1234");
+        Identity identity = identityClient.findIdentityByIdReferenceNumber(map);
+        assertThat(identity).isEqualTo("Hello");
     }
 
     @Test
