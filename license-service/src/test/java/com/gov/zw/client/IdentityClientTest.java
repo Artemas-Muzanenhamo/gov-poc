@@ -24,7 +24,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class IdentityClientTest {
 
     @Rule
-    public PactProviderRuleMk2 stubProvider = new PactProviderRuleMk2("identityServiceProvider", "localhost", 8080, this);
+    public PactProviderRuleMk2 stubProvider =
+            new PactProviderRuleMk2("identityServiceProvider", "localhost", 8080, this);
 
     @Autowired
     private IdentityClient identityClient;
