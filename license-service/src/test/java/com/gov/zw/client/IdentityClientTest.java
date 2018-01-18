@@ -20,7 +20,10 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(properties = {
+        // overriding provider address
+        "addresses.ribbon.listOfServers: localhost:8888"
+})
 public class IdentityClientTest {
 
     @Rule
@@ -36,26 +39,20 @@ public class IdentityClientTest {
                 .given("an Identity")
                 .uponReceiving("a request to the address collection resource")
                 .path("/identities/reference")
-                .method("GET")
+                .method("POST")
                 .willRespondWith()
                 .status(200)
-                .body("")
+                .body("Hello", "application/json")
                 .toPact();
     }
 
     @Test
-    @Ignore
-    @PactVerification(fragment = "an Identity")
+    @PactVerification(fragment = "createAddressCollectionResourcePact")
     public void verifyAddressCollectionPact() {
         // to do
         Map<String, String> map = new HashMap<>();
         map.put("refNumber", "MUZAN1234");
         Identity identity = identityClient.findIdentityByIdReferenceNumber(map);
         assertThat(identity).isEqualTo("Hello");
-    }
-
-    @Test
-    public void should_return_identity_by_reference() throws Exception {
-        // to do
     }
 }
