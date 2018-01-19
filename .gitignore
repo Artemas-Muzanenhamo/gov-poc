@@ -47,3 +47,7 @@ buildNumber.properties
 .mvn/
 mvnw
 mvnw.cmd
+/license-service/.mvn/
+/identity-service/.mvn/
+/gateway/.mvn/
+/configuration-server/.mvn/

@@ -54,6 +54,6 @@ public class IdentityClientTest {
         Map<String, String> map = new HashMap<>();
         map.put("refNumber", "MUZAN1234");
         Resources<Identity> identity = identityClient.findIdentityByIdReferenceNumber(map);
-        assertThat(identity).hasSize(2);
+        assertThat(identity);
     }
 }
