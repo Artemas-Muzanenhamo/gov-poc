@@ -51,7 +51,7 @@ public class IdentityClientTest {
     public void verifyAddressCollectionPact() {
         // to do
         Map<String, String> map = new HashMap<>();
-        map.put("refNumber", "MUZAN1234");
+        map.put("idRef", "MUZAN1234");
         Identity identity = identityClient.findIdentityByIdReferenceNumber(map);
         assertThat(identity);
     }
