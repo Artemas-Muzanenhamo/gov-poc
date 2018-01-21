@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.hateoas.Resources;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.HashMap;
@@ -53,7 +52,7 @@ public class IdentityClientTest {
         // to do
         Map<String, String> map = new HashMap<>();
         map.put("refNumber", "MUZAN1234");
-        Resources<Identity> identity = identityClient.findIdentityByIdReferenceNumber(map);
+        Identity identity = identityClient.findIdentityByIdReferenceNumber(map);
         assertThat(identity);
     }
 }
