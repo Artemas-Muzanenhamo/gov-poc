@@ -5,7 +5,7 @@ import au.com.dius.pact.consumer.PactProviderRuleMk2;
 import au.com.dius.pact.consumer.PactVerification;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.model.RequestResponsePact;
-import org.junit.Ignore;
+import net.minidev.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,38 +21,57 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest(properties = {
         // overriding provider address
-        "addresses.ribbon.listOfServers: localhost:8888"
+        "identity-service.ribbon.listOfServers: localhost:9999"
 })
 public class IdentityClientTest {
 
     @Rule
     public PactProviderRuleMk2 stubProvider =
-            new PactProviderRuleMk2("identityServiceProvider", "localhost", 8080, this);
+            new PactProviderRuleMk2("identity-service", "localhost", 9999, this);
 
     @Autowired
     private IdentityClient identityClient;
 
-    @Pact(state = "an Identity", provider = "identityServiceProvider", consumer = "identityClient")
-    public RequestResponsePact createAddressCollectionResourcePact(PactDslWithProvider builder) {
+    @Pact(state = "an identity", provider = "identity-service", consumer = "license-service")
+    public RequestResponsePact retrieveIdentityPact(PactDslWithProvider builder) {
+
+        // What I will send as a Request in the Pact JSON
+        Map<String, String> requestObject = new HashMap<>();
+        requestObject.put("idRef", "MUZAN1234");
+        JSONObject requestBodyJson = new JSONObject(requestObject);
+
+        // What I will send as a Response in the Pact JSON
+        Map<String, String> responseObject = new HashMap<>();
+        responseObject.put("id", "1");
+        responseObject.put("identityRef", "1");
+        responseObject.put("name", "Artemas");
+        responseObject.put("surname", "Muzanenhamo");
+        responseObject.put("birthDate", "28/03/1990");
+        responseObject.put("villageOfOrigin", "Mashayamombe");
+        responseObject.put("placeOfBirth", "Harare");
+        responseObject.put("dateOfIssue", "22/01/2018");
+        JSONObject responseBodyJson = new JSONObject(responseObject);
+
+
         return builder
-                .given("an Identity")
-                .uponReceiving("a request to the address collection resource")
-                .path("/identities/reference")
-                .method("POST")
+                .given("an identity reference number")
+                .uponReceiving("a request to the identity-service client")
+                    .path("/identities/reference")
+                    .method("POST")
+                    .body(requestBodyJson.toJSONString(), "application/json;charset=UTF-8")
                 .willRespondWith()
-                .status(200)
-                .body("{\"asd\": \"dsa\"}", "application/hal+json")
+                    .status(200)
+                    .body(responseBodyJson.toJSONString(), "application/json;charset=UTF-8")
                 .toPact();
     }
 
     @Test
-    @Ignore
-    @PactVerification(fragment = "createAddressCollectionResourcePact")
+    @PactVerification(fragment = "retrieveIdentityPact")
     public void verifyAddressCollectionPact() {
-        // to do
         Map<String, String> map = new HashMap<>();
         map.put("idRef", "MUZAN1234");
         Identity identity = identityClient.findIdentityByIdReferenceNumber(map);
-        assertThat(identity);
+        assertThat(identity.getName()).isEqualTo("Artemas");
+        assertThat(identity.getSurname()).isEqualTo("Muzanenhamo");
     }
 }
