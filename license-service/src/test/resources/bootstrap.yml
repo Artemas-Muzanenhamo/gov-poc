@@ -1,3 +1,6 @@
 eureka:
   client:
     enabled: false
+identity-service:
+  ribbon:
+    listOfServers: localhost:9999

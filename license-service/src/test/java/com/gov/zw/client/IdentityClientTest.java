@@ -19,10 +19,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(properties = {
-        // overriding provider address
-        "identity-service.ribbon.listOfServers: localhost:9999"
-})
+@SpringBootTest
 public class IdentityClientTest {
 
     @Rule
@@ -67,7 +64,7 @@ public class IdentityClientTest {
 
     @Test
     @PactVerification(fragment = "retrieveIdentityPact")
-    public void verifyAddressCollectionPact() {
+    public void verifyIdentityPact() {
         Map<String, String> map = new HashMap<>();
         map.put("idRef", "MUZAN1234");
         Identity identity = identityClient.findIdentityByIdReferenceNumber(map);

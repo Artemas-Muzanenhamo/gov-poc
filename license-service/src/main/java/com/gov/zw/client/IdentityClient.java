@@ -12,7 +12,4 @@ public interface IdentityClient {
 
     @PostMapping(value = "/identities/reference")
     Identity findIdentityByIdReferenceNumber(@RequestBody Map<String, String> referenceNumber);
-
-    @GetMapping(value = "/")
-    String request();
 }
