@@ -78,3 +78,45 @@ access any of the services via the gateway you can just access them as below:
 ## Configuration Server
 
 The Configuration Server will use `Spring-Cloud-Config` to support externalised (externalized :smirk: American..) configuration in a distributed system. With the Configuration Server we will have a central place to manage external properties for applications across all environments. Why all this Whyyyyy??!!!! Well if you think about scalability of your services. Suppose we now have 10 more `License-Service` services scaled up and we want to change some properties within those services. How can we make one change and have that update all the other services??? :thinking: .... The Configuration Server can handle this for us simply by us externalizing our configuration.
+
+## Pact
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/29547780/35231146-eb6550d6-ff8f-11e7-8546-25646cd138d9.png">
+</p>
+
+The project uses [Pact](https://docs.pact.io/) in order to test communication between microservices. 
+
+### Scenario
+
+Suppose a person wants to get a new drivers' license. They will be required to present their identification to verify that they are who they say they are and also that they are legally allowed to 
+acquire a drivers' license (By checking their age of course :smirk: ). Instead of the staff at the `License` company calling the `Identity` company every time someone wants to get a new license, we thought we could have our microservices 
+doing that for us. In this case, we wanted the `License` company staff to enter the license applicant's unique ID number in the `License-Service` and then let the `License-Service` talk to the `Identity-Service` to retrieve the applicant's ID details.
+
+#### Implementing this scenario using TDD
+
+We are all TDD advocates right??... :smirk: Well.... to test this is not a walk in the park type of test. Traditionally, we would have integration tests in this scenario or even end-to-end tests in some cases where we would need both our `License-Service` microservice and our `Identity-Service` microservice up and running and maybe a few other things our microservices would depend on in order to function properly and give us the 
+expected outcomes we require in our tests. 
+
+**TRUSTWORTHY** - The good thing is that when all the resources( including infrastructure dependencies) are up and running, these tests are trustworthy and work as expected.
+
+~~**CHEAP**~~ - These tests are really expensive to write, as you not only code but you'll need to agree with other teams working on resources that your service depend on (meaning more meetings !!) and that could take a long time.
+
+~~**FAST**~~ - Another point is that these tests are not as fast as you might expect. In fact, they will, in most cases, execute in order and suppose you had 50 resources( other dependencies or services) your service depended on to be able to pass your integration test... You wouldn't want to get that test wrong !!
+
+~~**RELIABLE**~~ - Because there are so many moving parts/resources, these tests aren't really relaiable as when one resource doesn't work properly, almost everything will break and give you a lot of painful red tests with
+no explanation as to why they would be breaking or perhaps you will receive stack traces of problems that have nothing to do with the actual code you are testing. 
+
+### Solutions
+
+**Wiremock**
+
+...
+
+**Spring-Cloud-Contracts**
+
+...
+
+**Pact**
+
+...
