@@ -3,6 +3,8 @@ package com.gov.zw.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Objects;
+
 @Document(collection = "Licenses")
 public class License {
 
@@ -125,5 +127,29 @@ public class License {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        License license = (License) o;
+        return Objects.equals(id, license.id) &&
+                Objects.equals(identityRef, license.identityRef) &&
+                Objects.equals(surname, license.surname) &&
+                Objects.equals(firstNames, license.firstNames) &&
+                Objects.equals(dateOfBirth, license.dateOfBirth) &&
+                Objects.equals(country, license.country) &&
+                Objects.equals(dateOfIssue, license.dateOfIssue) &&
+                Objects.equals(expiryDate, license.expiryDate) &&
+                Objects.equals(agency, license.agency) &&
+                Objects.equals(licenseNumber, license.licenseNumber) &&
+                Objects.equals(signatureImage, license.signatureImage) &&
+                Objects.equals(address, license.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, identityRef, surname, firstNames, dateOfBirth, country, dateOfIssue, expiryDate, agency, licenseNumber, signatureImage, address);
     }
 }

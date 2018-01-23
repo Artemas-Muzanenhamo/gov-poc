@@ -68,7 +68,9 @@ public class IdentityClientTest {
         Map<String, String> map = new HashMap<>();
         map.put("idRef", "MUZAN1234");
         Identity identity = identityClient.findIdentityByIdReferenceNumber(map);
-        assertThat(identity.getName()).isEqualTo("Artemas");
-        assertThat(identity.getSurname()).isEqualTo("Muzanenhamo");
+        Identity expectedIdentity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990", "Mashayamombe",
+                "Harare", "22/01/2018");
+        assertThat(identity.getName()).isEqualTo(expectedIdentity.getName());
+        assertThat(identity.getSurname()).isEqualTo(expectedIdentity.getSurname());
     }
 }
