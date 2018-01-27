@@ -37,7 +37,7 @@ public class License {
         this.address = address;
     }
 
-    License() {
+    public License() {
         //JPA Why?...
     }
 

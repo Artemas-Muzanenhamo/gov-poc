@@ -23,7 +23,7 @@ public class LicenseController {
     // Create
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void addLicense(@RequestBody License license){
-        this.licenseServiceImpl.findIdentityByIdReferenceNumber(license);
+        this.licenseServiceImpl.addLicense(license);
     }
 
     // Read
