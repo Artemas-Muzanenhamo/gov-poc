@@ -53,80 +53,40 @@ public class License {
         return surname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     public String getFirstNames() {
         return firstNames;
-    }
-
-    public void setFirstNames(String firstNames) {
-        this.firstNames = firstNames;
     }
 
     public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
     public String getCountry() {
         return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public String getDateOfIssue() {
         return dateOfIssue;
     }
 
-    public void setDateOfIssue(String dateOfIssue) {
-        this.dateOfIssue = dateOfIssue;
-    }
-
     public String getExpiryDate() {
         return expiryDate;
-    }
-
-    public void setExpiryDate(String expiryDate) {
-        this.expiryDate = expiryDate;
     }
 
     public String getAgency() {
         return agency;
     }
 
-    public void setAgency(String agency) {
-        this.agency = agency;
-    }
-
     public String getLicenseNumber() {
         return licenseNumber;
-    }
-
-    public void setLicenseNumber(String licenseNumber) {
-        this.licenseNumber = licenseNumber;
     }
 
     public String getSignatureImage() {
         return signatureImage;
     }
 
-    public void setSignatureImage(String signatureImage) {
-        this.signatureImage = signatureImage;
-    }
-
     public String getAddress() {
         return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     @Override
