@@ -2,7 +2,6 @@ package com.gov.zw.service;
 
 import com.gov.zw.client.Identity;
 import com.gov.zw.client.IdentityClient;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
