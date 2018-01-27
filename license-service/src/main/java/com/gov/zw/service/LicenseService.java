@@ -1,9 +1,8 @@
 package com.gov.zw.service;
 
 import com.gov.zw.client.Identity;
-
-import java.util.Map;
+import com.gov.zw.domain.License;
 
 public interface LicenseService {
-    Identity findIdentityByIdReferenceNumber(Map<String, String> referenceNumber);
+    Identity findIdentityByIdReferenceNumber(License license);
 }
