@@ -17,6 +17,6 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public Identity findIdentityByIdReferenceNumber(Map<String, String> referenceNumber) {
-        return null;
+        return identityClient.findIdentityByIdReferenceNumber(referenceNumber);
     }
 }
