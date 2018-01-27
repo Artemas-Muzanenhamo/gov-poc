@@ -1,6 +1,5 @@
 package com.gov.zw.service;
 
-import com.gov.zw.client.Identity;
 import com.gov.zw.client.IdentityClient;
 import com.gov.zw.domain.License;
 import com.gov.zw.repository.LicenseRepository;
@@ -9,13 +8,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -24,7 +21,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 public class LicenseServiceTest {
 
     @InjectMocks
-    private LicenseServiceImpl licenseServiceImpl;
+    private LicenseServiceImpl licenseService;
 
     @Mock
     private IdentityClient identityClient;
@@ -43,7 +40,7 @@ public class LicenseServiceTest {
                 "28/03/1990", "Zimbabwe", "25 January 2018",
                 "25 January 2050", "DVLA", "MUZANATCK1990", "Doc1.png",
                 "150 Sunningdale road");
-        licenseServiceImpl.addLicense(license);
+        licenseService.addLicense(license);
         Map<String, String> stringMap = new HashMap<>();
         stringMap.put("idRef", "1");
         verify(identityClient, times(1)).findIdentityByIdReferenceNumber(stringMap);
