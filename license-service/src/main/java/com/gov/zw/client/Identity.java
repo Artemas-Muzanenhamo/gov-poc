@@ -1,5 +1,7 @@
 package com.gov.zw.client;
 
+import java.util.Objects;
+
 public class Identity {
 
     private String id;
@@ -54,5 +56,25 @@ public class Identity {
 
     public String getDateOfIssue() {
         return dateOfIssue;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Identity)) return false;
+        Identity identity = (Identity) o;
+        return Objects.equals(id, identity.id) &&
+                Objects.equals(identityRef, identity.identityRef) &&
+                Objects.equals(name, identity.name) &&
+                Objects.equals(surname, identity.surname) &&
+                Objects.equals(birthDate, identity.birthDate) &&
+                Objects.equals(villageOfOrigin, identity.villageOfOrigin) &&
+                Objects.equals(placeOfBirth, identity.placeOfBirth) &&
+                Objects.equals(dateOfIssue, identity.dateOfIssue);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, identityRef, name, surname, birthDate, villageOfOrigin, placeOfBirth, dateOfIssue);
     }
 }

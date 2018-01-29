@@ -72,5 +72,6 @@ public class IdentityClientTest {
                 "Harare", "22/01/2018");
         assertThat(identity.getName()).isEqualTo(expectedIdentity.getName());
         assertThat(identity.getSurname()).isEqualTo(expectedIdentity.getSurname());
+        assertThat(identity).isEqualTo(expectedIdentity);
     }
 }
