@@ -1,8 +1,10 @@
 package com.gov.zw.service;
 
+import com.gov.zw.client.Identity;
 import com.gov.zw.client.IdentityClient;
 import com.gov.zw.domain.License;
 import com.gov.zw.repository.LicenseRepository;
+import com.gov.zw.util.IdentityInvalidException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,8 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @RunWith(SpringRunner.class)
@@ -35,15 +36,33 @@ public class LicenseServiceTest {
     }
 
     @Test
-    public void should_return_an_identity(){
+    public void should_return_an_identity() throws Exception {
+
+        // GIVEN
+        Identity expectedIdentity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990", "Mashayamombe",
+                "Harare", "22/01/2018");
+        Map<String, String> idReference = new HashMap<>();
+        idReference.put("idRef", "1");
+
+        // WHEN
+        when(identityClient.findIdentityByIdReferenceNumber(idReference)).thenReturn(expectedIdentity);
+
+        // THEN RETURN
         License license = new License("1", "1", "Muzanenhamo", "Artemas",
                 "28/03/1990", "Zimbabwe", "25 January 2018",
                 "25 January 2050", "DVLA", "MUZANATCK1990", "Doc1.png",
                 "150 Sunningdale road");
+
         licenseService.addLicense(license);
         Map<String, String> stringMap = new HashMap<>();
         stringMap.put("idRef", "1");
         verify(identityClient, times(1)).findIdentityByIdReferenceNumber(stringMap);
+    }
+
+    @Test(expected = IdentityInvalidException.class)
+    public void should_return_an_identity_not_valid_exception() throws Exception {
+        License license = new License();
+        licenseService.addLicense(license);
     }
 
 }
