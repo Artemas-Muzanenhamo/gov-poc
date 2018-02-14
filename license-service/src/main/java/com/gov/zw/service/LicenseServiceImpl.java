@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -39,5 +40,10 @@ public class LicenseServiceImpl implements LicenseService {
         }else {
             throw new IdentityInvalidException("Identity is invalid or does not exist!");
         }
+    }
+
+    @Override
+    public List<License> getAllLicenses() {
+        return this.licenseRepository.findAll();
     }
 }
