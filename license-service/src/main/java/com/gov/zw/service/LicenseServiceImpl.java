@@ -46,4 +46,9 @@ public class LicenseServiceImpl implements LicenseService {
     public List<License> getAllLicenses() {
         return this.licenseRepository.findAll();
     }
+
+    @Override
+    public void updateLicense(License license) throws IdentityInvalidException {
+        this.licenseRepository.save(license);
+    }
 }

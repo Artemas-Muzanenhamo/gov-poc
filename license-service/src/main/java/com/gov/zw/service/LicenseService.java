@@ -9,4 +9,6 @@ public interface LicenseService {
     void addLicense(License license) throws IdentityInvalidException;
 
     List<License> getAllLicenses();
+
+    void updateLicense(License license) throws IdentityInvalidException;
 }

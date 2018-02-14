@@ -35,8 +35,8 @@ public class LicenseController {
 
     // Update
     @PutMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public void updateLicense(@RequestBody License license) {
-        this.licenseRepository.save(license);
+    public void updateLicense(@RequestBody License license) throws IdentityInvalidException {
+        this.licenseServiceImpl.updateLicense(license);
     }
 
     // Delete
