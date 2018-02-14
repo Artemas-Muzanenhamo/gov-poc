@@ -5,11 +5,13 @@ import com.gov.zw.client.IdentityClient;
 import com.gov.zw.domain.License;
 import com.gov.zw.repository.LicenseRepository;
 import com.gov.zw.util.IdentityInvalidException;
+import com.gov.zw.util.InvalidLicenseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -39,5 +41,20 @@ public class LicenseServiceImpl implements LicenseService {
         }else {
             throw new IdentityInvalidException("Identity is invalid or does not exist!");
         }
+    }
+
+    @Override
+    public List<License> getAllLicenses() {
+        return this.licenseRepository.findAll();
+    }
+
+    @Override
+    public void updateLicense(License license) throws InvalidLicenseException {
+        this.licenseRepository.save(license);
+    }
+
+    @Override
+    public void removeLicense(License license) throws InvalidLicenseException {
+        this.licenseRepository.delete(license);
     }
 }
