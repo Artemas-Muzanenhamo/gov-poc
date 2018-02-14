@@ -29,9 +29,6 @@ public class LicenseControllerTest {
     @MockBean
     private LicenseService licenseServiceImpl;
 
-    @MockBean
-    private LicenseRepository licenseRepository;
-
     @Test
     public void addLicense() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();

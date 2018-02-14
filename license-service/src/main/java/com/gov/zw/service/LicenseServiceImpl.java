@@ -5,6 +5,7 @@ import com.gov.zw.client.IdentityClient;
 import com.gov.zw.domain.License;
 import com.gov.zw.repository.LicenseRepository;
 import com.gov.zw.util.IdentityInvalidException;
+import com.gov.zw.util.InvalidLicenseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -48,7 +49,12 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Override
-    public void updateLicense(License license) throws IdentityInvalidException {
+    public void updateLicense(License license) throws InvalidLicenseException {
         this.licenseRepository.save(license);
+    }
+
+    @Override
+    public void removeLicense(License license) throws InvalidLicenseException {
+        this.licenseRepository.delete(license);
     }
 }
