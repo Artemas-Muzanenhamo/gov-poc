@@ -92,4 +92,10 @@ public class LicenseServiceTest {
         licenseService.updateLicense(null);
     }
 
+    @Test
+    public void should_save_when_empty_license_details_are_passed() throws Exception {
+        License license = new License();
+        licenseService.updateLicense(license);
+    }
+
 }
