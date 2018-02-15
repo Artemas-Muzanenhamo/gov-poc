@@ -50,11 +50,21 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public void updateLicense(License license) throws InvalidLicenseException {
-        this.licenseRepository.save(license);
+        Optional<License> licenseOptional = Optional.ofNullable(license);
+        if (licenseOptional.isPresent()){
+            this.licenseRepository.save(license);
+        } else {
+            throw new InvalidLicenseException("The license is invalid!");
+        }
     }
 
     @Override
     public void removeLicense(License license) throws InvalidLicenseException {
-        this.licenseRepository.delete(license);
+        Optional<License> licenseOptional = Optional.ofNullable(license);
+        if (licenseOptional.isPresent()) {
+            this.licenseRepository.delete(license);
+        } else {
+            throw new InvalidLicenseException("The license is invalid!");
+        }
     }
 }
