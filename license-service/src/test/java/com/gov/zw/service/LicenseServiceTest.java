@@ -10,11 +10,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.stubbing.Answer;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -63,6 +68,22 @@ public class LicenseServiceTest {
     public void should_return_an_identity_not_valid_exception() throws Exception {
         License license = new License();
         licenseService.addLicense(license);
+    }
+
+    @Test
+    public void should_return_licenses_from_the_repository(){
+        // GIVEN
+        License license = new License("1", "1", "Muzanenhamo", "Artemas",
+                "28/03/1990", "Zimbabwe", "25 January 2018",
+                "25 January 2050", "DVLA", "MUZANATCK1990", "Doc1.png",
+                "150 Sunningdale road");
+        List<License> licenses = Arrays.asList(license);
+
+        // WHEN
+        when(licenseService.getAllLicenses()).thenReturn(licenses);
+
+        // THE RETURN
+        assertThat(licenseService.getAllLicenses()).isEqualTo(licenses);
     }
 
 }
