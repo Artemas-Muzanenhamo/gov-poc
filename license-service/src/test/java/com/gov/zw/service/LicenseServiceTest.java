@@ -5,6 +5,7 @@ import com.gov.zw.client.IdentityClient;
 import com.gov.zw.domain.License;
 import com.gov.zw.repository.LicenseRepository;
 import com.gov.zw.util.IdentityInvalidException;
+import com.gov.zw.util.InvalidLicenseException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -84,6 +85,11 @@ public class LicenseServiceTest {
 
         // THE RETURN
         assertThat(licenseService.getAllLicenses()).isEqualTo(licenses);
+    }
+
+    @Test(expected = InvalidLicenseException.class)
+    public void should_throw_an_exception_when_invalid_license_details_are_passed() throws Exception {
+        licenseService.updateLicense(null);
     }
 
 }
