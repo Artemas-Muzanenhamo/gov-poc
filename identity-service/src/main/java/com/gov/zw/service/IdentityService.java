@@ -15,5 +15,5 @@ public interface IdentityService {
 
     List<Identity> findAll();
 
-    void delete(Identity identity);
+    void delete(Identity identity) throws InvalidIdentityException;
 }

@@ -57,9 +57,12 @@ public class IdentityServiceTest {
 
     @Test
     public void should_return_an_identity_if_id_reference_is_valid() throws InvalidIdentityReferenceException {
+        // given
         Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
                 "Mashayamombe", "Harare", "17/11/2017");
+        // when
         when(identityRepository.findIdentityByIdentityRef(identity.getIdentityRef())).thenReturn(identity);
+        // then
         assertThat(identityService.findIdentityByIdentityRef("1")).isEqualTo(identity);
         assertThat(identityService.findIdentityByIdentityRef("1").getName()).isEqualTo("Artemas");
     }
@@ -82,5 +85,21 @@ public class IdentityServiceTest {
         // then return
         assertThat(identityService.findAll().size()).isEqualTo(3);
         assertThat(identityService.findAll()).isEqualTo(identities);
+    }
+
+    @Test(expected = InvalidIdentityException.class)
+    public void should_throw_an_exception_when_an_invalid_identity_is_passed_to_be_deleted() throws InvalidIdentityException {
+        identityService.delete(null);
+    }
+
+    @Test
+    public void should_delete_an_identity_if_the_identity_is_valid() throws InvalidIdentityException {
+        // given
+        Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
+                "Mashayamombe", "Harare", "17/11/2017");
+        // when
+        identityService.delete(identity);
+        // then verify
+        verify(identityRepository, times(1)).delete(identity);
     }
 }

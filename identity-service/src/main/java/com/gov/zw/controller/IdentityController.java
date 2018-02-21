@@ -55,7 +55,7 @@ public class IdentityController {
     // Delete
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public void deleteIdentity(@RequestBody Identity identity) {
+    public void deleteIdentity(@RequestBody Identity identity) throws InvalidIdentityException {
         this.identityServiceImpl.delete(identity);
     }
 
