@@ -28,13 +28,23 @@ public class IdentityServiceImpl implements IdentityService {
     }
 
     @Override
-    public List<Identity> findIdentitiesByName(String name) {
-        return null;
+    public List<Identity> findIdentitiesByName(String name) throws InvalidIdentityNameException {
+        Optional<String> nameOptional = Optional.ofNullable(name);
+        if (nameOptional.isPresent()) {
+            return identityRepository.findIdentitiesByName(name);
+        } else {
+            throw new InvalidIdentityNameException("The name supplied does not exist!");
+        }
     }
 
     @Override
-    public Identity findIdentityByIdentityRef(String idRef) {
-        return null;
+    public Identity findIdentityByIdentityRef(String idRef) throws InvalidIdentityReferenceException {
+        Optional<String> idRefenceOptional = Optional.ofNullable(idRef);
+        if (idRefenceOptional.isPresent()) {
+            return identityRepository.findIdentityByIdentityRef(idRef);
+        } else {
+            throw new InvalidIdentityReferenceException("The ID reference supplied is not valid!");
+        }
     }
 
     @Override

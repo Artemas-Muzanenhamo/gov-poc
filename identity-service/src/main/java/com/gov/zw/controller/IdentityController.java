@@ -2,6 +2,8 @@ package com.gov.zw.controller;
 
 import com.gov.zw.domain.Identity;
 import com.gov.zw.service.IdentityService;
+import com.gov.zw.service.InvalidIdentityNameException;
+import com.gov.zw.service.InvalidIdentityReferenceException;
 import com.gov.zw.util.InvalidIdentityException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,12 +31,12 @@ public class IdentityController {
 
     // Retrieve
     @PostMapping(value = "/name", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<Identity> getIdentitiesByName(@RequestBody Map<String, String> name) {
+    public List<Identity> getIdentitiesByName(@RequestBody Map<String, String> name) throws InvalidIdentityNameException {
         return identityServiceImpl.findIdentitiesByName(name.get("name"));
     }
 
     @PostMapping(value = "/reference", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Identity getIdentityByReferenceNumber(@RequestBody Map<String, String> idReferenceNumber) {
+    public Identity getIdentityByReferenceNumber(@RequestBody Map<String, String> idReferenceNumber) throws InvalidIdentityReferenceException {
         return identityServiceImpl.findIdentityByIdentityRef(idReferenceNumber.get("idRef"));
     }
 

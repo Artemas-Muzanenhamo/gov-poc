@@ -9,8 +9,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 public class IdentityServiceTest {
@@ -32,5 +35,28 @@ public class IdentityServiceTest {
                 "Mashayamombe", "Harare", "17/11/2017");
         identityService.save(identity);
         verify(identityRepository, times(1)).save(identity);
+    }
+
+    @Test
+    public void should_return_a_name_if_name_exists() throws InvalidIdentityNameException {
+        List<Identity> identities = Arrays.asList(new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
+                "Mashayamombe", "Harare", "17/11/2017"));
+        when(identityRepository.findIdentitiesByName(identities.get(0).getName())).thenReturn(identities);
+        assertThat(identityService.findIdentitiesByName("Artemas")).isEqualTo(identities);
+    }
+
+    @Test(expected = InvalidIdentityNameException.class)
+    public void should_throw_an_exception_when_an_invalid_name_is_passed() throws Exception {
+        identityService.findIdentitiesByName(null);
+    }
+
+    @Test(expected = InvalidIdentityReferenceException.class)
+    public void should_throw_exception_when__an_invalid_idRef_is_passed() throws Exception {
+        identityService.findIdentityByIdentityRef(null);
+    }
+
+    @Test
+    public void should_return_an_identity_if_id_reference_is_valid() {
+
     }
 }

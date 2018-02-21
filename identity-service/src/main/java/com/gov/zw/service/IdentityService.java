@@ -9,9 +9,9 @@ public interface IdentityService {
 
     void save(Identity identity) throws InvalidIdentityException;
 
-    List<Identity> findIdentitiesByName(String name);
+    List<Identity> findIdentitiesByName(String name) throws InvalidIdentityNameException;
 
-    Identity findIdentityByIdentityRef(String idRef);
+    Identity findIdentityByIdentityRef(String idRef) throws InvalidIdentityReferenceException;
 
     List<Identity> findAll();
 
