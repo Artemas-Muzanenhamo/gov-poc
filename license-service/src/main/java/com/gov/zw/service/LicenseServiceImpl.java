@@ -4,7 +4,7 @@ import com.gov.zw.client.Identity;
 import com.gov.zw.client.IdentityClient;
 import com.gov.zw.domain.License;
 import com.gov.zw.repository.LicenseRepository;
-import com.gov.zw.util.IdentityInvalidException;
+import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidLicenseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +30,7 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Override
-    public void addLicense(License license) throws IdentityInvalidException {
+    public void addLicense(License license) throws InvalidIdentityException {
         Map<String, String> referenceNumber = new HashMap<>();
         referenceNumber.put("idRef", license.getIdentityRef());
         logger.debug("Reference Number passed is: " + referenceNumber.get("idRef"));
@@ -39,7 +39,7 @@ public class LicenseServiceImpl implements LicenseService {
         if (identityOptional.isPresent()){
             licenseRepository.save(license);
         }else {
-            throw new IdentityInvalidException("Identity is invalid or does not exist!");
+            throw new InvalidIdentityException("Identity is invalid or does not exist!");
         }
     }
 

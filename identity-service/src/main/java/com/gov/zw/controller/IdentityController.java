@@ -1,7 +1,10 @@
 package com.gov.zw.controller;
 
 import com.gov.zw.domain.Identity;
-import com.gov.zw.repository.IdentityRepository;
+import com.gov.zw.service.IdentityService;
+import com.gov.zw.service.InvalidIdentityNameException;
+import com.gov.zw.service.InvalidIdentityReferenceException;
+import com.gov.zw.util.InvalidIdentityException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -13,54 +16,54 @@ import java.util.Map;
 @RequestMapping("/identities")
 public class IdentityController {
 
-    private final IdentityRepository identityRepository;
+    private final IdentityService identityServiceImpl;
 
-    public IdentityController(IdentityRepository identityRepository){
-        this.identityRepository = identityRepository;
+    public IdentityController(IdentityService identityServiceImpl) {
+        this.identityServiceImpl = identityServiceImpl;
     }
 
     // Create
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void saveIdentity(@RequestBody Identity identity) {
-        this.identityRepository.save(identity);
+    public void saveIdentity(@RequestBody Identity identity) throws InvalidIdentityException {
+        this.identityServiceImpl.save(identity);
     }
 
     // Retrieve
     @PostMapping(value = "/name", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<Identity> getIdentitiesByName(@RequestBody Map<String, String> name){
-        return identityRepository.findIdentitiesByName(name.get("name"));
+    public List<Identity> getIdentitiesByName(@RequestBody Map<String, String> name) throws InvalidIdentityNameException {
+        return identityServiceImpl.findIdentitiesByName(name.get("name"));
     }
 
     @PostMapping(value = "/reference", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Identity getIdentityByReferenceNumber(@RequestBody Map<String, String> idReferenceNumber){
-        return identityRepository.findIdentityByIdentityRef(idReferenceNumber.get("idRef"));
+    public Identity getIdentityByReferenceNumber(@RequestBody Map<String, String> idReferenceNumber) throws InvalidIdentityReferenceException {
+        return identityServiceImpl.findIdentityByIdentityRef(idReferenceNumber.get("idRef"));
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<Identity> getIdentities(){
-        return identityRepository.findAll();
+    public List<Identity> getIdentities() {
+        return identityServiceImpl.findAll();
     }
 
     //Update
     @PutMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public void updateIdentity(@RequestBody Identity identity){
-        this.identityRepository.save(identity);
+    public void updateIdentity(@RequestBody Identity identity) throws InvalidIdentityException {
+        this.identityServiceImpl.save(identity);
     }
 
     // Delete
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public void deleteIdentity(@RequestBody Identity identity){
-        this.identityRepository.delete(identity);
+    public void deleteIdentity(@RequestBody Identity identity) throws InvalidIdentityException {
+        this.identityServiceImpl.delete(identity);
     }
 
     @GetMapping(value = "/saveTest")
-    public void saveDummyData(){
-        Identity identity = new Identity("1","1","Artemas", "Muzanenhamo", "28/03/1990",
+    public void saveDummyData() throws InvalidIdentityException {
+        Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
                 "Mashayamombe", "Harare", "17/11/2017");
-        this.identityRepository.save(identity);
+        this.identityServiceImpl.save(identity);
     }
 
 }

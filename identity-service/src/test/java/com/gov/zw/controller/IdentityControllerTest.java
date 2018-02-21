@@ -3,6 +3,7 @@ package com.gov.zw.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gov.zw.domain.Identity;
 import com.gov.zw.repository.IdentityRepository;
+import com.gov.zw.service.IdentityService;
 import net.minidev.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +30,7 @@ public class IdentityControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private IdentityRepository identityRepository;
+    private IdentityService identityServiceImpl;
 
     @Test
     public void saveIdentity() throws Exception {

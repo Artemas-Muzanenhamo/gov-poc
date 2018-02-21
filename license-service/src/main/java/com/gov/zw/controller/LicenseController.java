@@ -2,7 +2,7 @@ package com.gov.zw.controller;
 
 import com.gov.zw.domain.License;
 import com.gov.zw.service.LicenseService;
-import com.gov.zw.util.IdentityInvalidException;
+import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidLicenseException;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ public class LicenseController {
 
     // Create
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public void addLicense(@RequestBody License license) throws IdentityInvalidException {
+    public void addLicense(@RequestBody License license) throws InvalidIdentityException {
         this.licenseServiceImpl.addLicense(license);
     }
 

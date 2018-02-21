@@ -19,7 +19,7 @@ public class Identity {
     private String placeOfBirth;
     private String dateOfIssue;
 
-    Identity(){
+    public Identity(){
         // Why JPA Why ?!!!
     }
 
