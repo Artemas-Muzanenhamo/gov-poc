@@ -39,8 +39,8 @@ public class IdentityServiceImpl implements IdentityService {
 
     @Override
     public Identity findIdentityByIdentityRef(String idRef) throws InvalidIdentityReferenceException {
-        Optional<String> idRefenceOptional = Optional.ofNullable(idRef);
-        if (idRefenceOptional.isPresent()) {
+        Optional<String> idReferenceOptional = Optional.ofNullable(idRef);
+        if (idReferenceOptional.isPresent()) {
             return identityRepository.findIdentityByIdentityRef(idRef);
         } else {
             throw new InvalidIdentityReferenceException("The ID reference supplied is not valid!");

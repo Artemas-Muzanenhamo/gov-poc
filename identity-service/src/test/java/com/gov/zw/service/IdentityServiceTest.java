@@ -56,7 +56,11 @@ public class IdentityServiceTest {
     }
 
     @Test
-    public void should_return_an_identity_if_id_reference_is_valid() {
-
+    public void should_return_an_identity_if_id_reference_is_valid() throws InvalidIdentityReferenceException {
+        Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
+                "Mashayamombe", "Harare", "17/11/2017");
+        when(identityRepository.findIdentityByIdentityRef(identity.getIdentityRef())).thenReturn(identity);
+        assertThat(identityService.findIdentityByIdentityRef("1")).isEqualTo(identity);
+        assertThat(identityService.findIdentityByIdentityRef("1").getName()).isEqualTo("Artemas");
     }
 }
