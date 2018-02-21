@@ -49,7 +49,7 @@ public class IdentityServiceImpl implements IdentityService {
 
     @Override
     public List<Identity> findAll() {
-        return null;
+        return identityRepository.findAll();
     }
 
     @Override
