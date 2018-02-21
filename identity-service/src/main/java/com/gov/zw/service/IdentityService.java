@@ -2,6 +2,8 @@ package com.gov.zw.service;
 
 import com.gov.zw.domain.Identity;
 import com.gov.zw.util.InvalidIdentityException;
+import com.gov.zw.util.InvalidIdentityNameException;
+import com.gov.zw.util.InvalidIdentityReferenceException;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.gov.zw.service;
+package com.gov.zw.util;
 
 public class InvalidIdentityNameException extends Exception {
 

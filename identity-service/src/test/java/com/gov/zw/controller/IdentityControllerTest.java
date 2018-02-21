@@ -2,7 +2,6 @@ package com.gov.zw.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gov.zw.domain.Identity;
-import com.gov.zw.repository.IdentityRepository;
 import com.gov.zw.service.IdentityService;
 import net.minidev.json.JSONObject;
 import org.junit.Test;
@@ -18,8 +17,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)

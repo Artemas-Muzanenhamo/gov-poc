@@ -2,8 +2,8 @@ package com.gov.zw.controller;
 
 import com.gov.zw.domain.Identity;
 import com.gov.zw.service.IdentityService;
-import com.gov.zw.service.InvalidIdentityNameException;
-import com.gov.zw.service.InvalidIdentityReferenceException;
+import com.gov.zw.util.InvalidIdentityNameException;
+import com.gov.zw.util.InvalidIdentityReferenceException;
 import com.gov.zw.util.InvalidIdentityException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
