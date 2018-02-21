@@ -4,15 +4,13 @@ import com.gov.zw.client.Identity;
 import com.gov.zw.client.IdentityClient;
 import com.gov.zw.domain.License;
 import com.gov.zw.repository.LicenseRepository;
-import com.gov.zw.util.IdentityInvalidException;
+import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidLicenseException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.stubbing.Answer;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
@@ -65,7 +63,7 @@ public class LicenseServiceTest {
         verify(identityClient, times(1)).findIdentityByIdReferenceNumber(stringMap);
     }
 
-    @Test(expected = IdentityInvalidException.class)
+    @Test(expected = InvalidIdentityException.class)
     public void should_return_an_identity_not_valid_exception() throws Exception {
         License license = new License();
         licenseService.addLicense(license);
