@@ -47,10 +47,8 @@ public class LicenseServiceTest {
                 "Harare", "22/01/2018");
         Map<String, String> idReference = new HashMap<>();
         idReference.put("idRef", "1");
-
         // WHEN
         when(identityClient.findIdentityByIdReferenceNumber(idReference)).thenReturn(expectedIdentity);
-
         // THEN RETURN
         License license = new License("1", "1", "Muzanenhamo", "Artemas",
                 "28/03/1990", "Zimbabwe", "25 January 2018",
@@ -77,10 +75,8 @@ public class LicenseServiceTest {
                 "25 January 2050", "DVLA", "MUZANATCK1990", "Doc1.png",
                 "150 Sunningdale road");
         List<License> licenses = Arrays.asList(license);
-
         // WHEN
         when(licenseService.getAllLicenses()).thenReturn(licenses);
-
         // THE RETURN
         assertThat(licenseService.getAllLicenses()).isEqualTo(licenses);
     }
@@ -92,13 +88,43 @@ public class LicenseServiceTest {
 
     @Test
     public void should_save_when_empty_license_details_are_passed() throws Exception {
+        // GIVEN
         License license = new License();
+        // WHEN
         licenseService.updateLicense(license);
+        //THEN VERIFY
+        verify(this.licenseRepository, times(1)).save(license);
+    }
+
+    @Test
+    public void should_update_license_details_when_a_valid_license_is_passed() throws Exception {
+        // GIVEN
+        License license = new License("1", "1", "Muzanenhamo", "Artemas",
+                "28/03/1990", "Zimbabwe", "25 January 2018",
+                "25 January 2050", "DVLA", "MUZANATCK1990", "Doc1.png",
+                "150 Sunningdale road");
+        // WHEN
+        licenseService.updateLicense(license);
+        // THEN VERIFY
+        verify(licenseRepository, times(1)).save(license);
     }
 
     @Test(expected = InvalidLicenseException.class)
     public void should_return_an_identity_not_valid_exception_when_trying_to_delete_license() throws Exception {
         licenseService.removeLicense(null);
+    }
+
+    @Test
+    public void should_delete_a_license_when_a_valid_license_is_passed() throws Exception {
+        // GIVEN
+        License license = new License("1", "1", "Muzanenhamo", "Artemas",
+                "28/03/1990", "Zimbabwe", "25 January 2018",
+                "25 January 2050", "DVLA", "MUZANATCK1990", "Doc1.png",
+                "150 Sunningdale road");
+        // WHEN
+        licenseService.removeLicense(license);
+        // VERIFY
+        verify(licenseRepository, times(1)).delete(license);
     }
 
 }
