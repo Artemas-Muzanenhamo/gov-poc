@@ -35,7 +35,6 @@ public class LicenseServiceImpl implements LicenseService {
         referenceNumber.put("idRef", license.getIdentityRef());
         logger.debug("Reference Number passed is: " + referenceNumber.get("idRef"));
         Optional<Identity> identityOptional = Optional.ofNullable(identityClient.findIdentityByIdReferenceNumber(referenceNumber));
-
         if (identityOptional.isPresent()){
             licenseRepository.save(license);
         }else {

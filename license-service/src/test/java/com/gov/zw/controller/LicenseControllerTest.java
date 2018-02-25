@@ -2,7 +2,6 @@ package com.gov.zw.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gov.zw.domain.License;
-import com.gov.zw.repository.LicenseRepository;
 import com.gov.zw.service.LicenseService;
 import net.minidev.json.JSONObject;
 import org.junit.Test;
