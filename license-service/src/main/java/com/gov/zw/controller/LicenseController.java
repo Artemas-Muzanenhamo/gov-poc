@@ -14,7 +14,7 @@ import java.util.List;
 public class LicenseController {
     private final LicenseService licenseServiceImpl;
 
-    public LicenseController(LicenseService licenseServiceImpl){
+    public LicenseController(LicenseService licenseServiceImpl) {
         this.licenseServiceImpl = licenseServiceImpl;
     }
 
