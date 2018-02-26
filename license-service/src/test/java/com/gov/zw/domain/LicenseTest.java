@@ -6,9 +6,10 @@ import org.junit.Test;
 public class LicenseTest {
 
     @Test
-    public void creation(){
+    public void creation() {
         License license = new License(
-                "1", "1234AMUZ1", "Muzanenhamo", "Artemas Takudzwa", "28/03/1990", "ZIM", "20/11/2017", "19/11/2027", "ZDVLA",
+                "1", "1234AMUZ1", "Muzanenhamo", "Artemas Takudzwa",
+                "28/03/1990", "ZIM", "20/11/2017", "19/11/2027", "ZDVLA",
                 "MUZANEN123456ABCDEF", "signature.jpg", "768 Sunningdale 3, Harare, Zimbabwe");
 
         Assertions.assertThat(license.getId()).isEqualTo("1");
