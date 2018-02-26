@@ -74,7 +74,7 @@ public class IdentityServiceTest {
         // given
         List<Identity> identities = Arrays.asList(
                 new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
-                "Mashayamombe", "Harare", "17/11/2017"),
+                        "Mashayamombe", "Harare", "17/11/2017"),
                 new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
                         "Mashayamombe", "Harare", "17/11/2017"),
                 new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
