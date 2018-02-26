@@ -76,7 +76,7 @@ public class LicenseServiceTest {
                 "150 Sunningdale road");
         List<License> licenses = Arrays.asList(license);
         // WHEN
-        when(licenseService.getAllLicenses()).thenReturn(licenses);
+        when(licenseRepository.findAll()).thenReturn(licenses);
         // THE RETURN
         assertThat(licenseService.getAllLicenses()).isEqualTo(licenses);
     }
