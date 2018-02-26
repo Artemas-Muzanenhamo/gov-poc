@@ -79,6 +79,7 @@ public class LicenseServiceTest {
         when(licenseRepository.findAll()).thenReturn(licenses);
         // THE RETURN
         assertThat(licenseService.getAllLicenses()).isEqualTo(licenses);
+        verify(licenseRepository, times(1)).findAll();
     }
 
     @Test(expected = InvalidLicenseException.class)
