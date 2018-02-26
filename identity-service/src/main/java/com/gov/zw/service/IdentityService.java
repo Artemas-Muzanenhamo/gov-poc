@@ -23,14 +23,29 @@ public interface IdentityService {
     /**
      * Allows you to find an {@link Identity} by name.
      * @param name - Name of the {@link Identity} to be returned.
-     * @return - a list of Identities.
+     * @return - a {@link List<Identity>} of Identities.
      * @throws InvalidIdentityNameException
      */
     List<Identity> findIdentitiesByName(String name) throws InvalidIdentityNameException;
 
+    /**
+     * Allows you to find an {@link Identity} by the ID reference.
+     * @param idRef - The ID reference of the {@link Identity} to be returned.
+     * @return - An {@link Identity}.
+     * @throws InvalidIdentityReferenceException
+     */
     Identity findIdentityByIdentityRef(String idRef) throws InvalidIdentityReferenceException;
 
+    /**
+     * Allows you to retrieve all the Identities.
+     * @return - A {@link List<Identity>} of Identities.
+     */
     List<Identity> findAll();
 
+    /**
+     * Deletes an {@link Identity}.
+     * @param identity - {@link Identity} to be deleted.
+     * @throws InvalidIdentityException
+     */
     void delete(Identity identity) throws InvalidIdentityException;
 }
