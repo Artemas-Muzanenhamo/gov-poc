@@ -24,7 +24,7 @@ public class LicenseServiceImpl implements LicenseService {
 
     private LicenseRepository licenseRepository;
 
-    public LicenseServiceImpl(IdentityClient identityClient, LicenseRepository licenseRepository){
+    public LicenseServiceImpl(IdentityClient identityClient, LicenseRepository licenseRepository) {
         this.identityClient = identityClient;
         this.licenseRepository = licenseRepository;
     }
@@ -35,9 +35,9 @@ public class LicenseServiceImpl implements LicenseService {
         referenceNumber.put("idRef", license.getIdentityRef());
         logger.debug("Reference Number passed is: " + referenceNumber.get("idRef"));
         Optional<Identity> identityOptional = Optional.ofNullable(identityClient.findIdentityByIdReferenceNumber(referenceNumber));
-        if (identityOptional.isPresent()){
+        if (identityOptional.isPresent()) {
             licenseRepository.save(license);
-        }else {
+        } else {
             throw new InvalidIdentityException("Identity is invalid or does not exist!");
         }
     }
@@ -50,7 +50,7 @@ public class LicenseServiceImpl implements LicenseService {
     @Override
     public void updateLicense(License license) throws InvalidLicenseException {
         Optional<License> licenseOptional = Optional.ofNullable(license);
-        if (licenseOptional.isPresent()){
+        if (licenseOptional.isPresent()) {
             this.licenseRepository.save(license);
         } else {
             throw new InvalidLicenseException("The license is invalid!");

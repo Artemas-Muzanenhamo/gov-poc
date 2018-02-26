@@ -35,7 +35,7 @@ public class LicenseServiceTest {
     private LicenseRepository licenseRepository;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         initMocks(this);
     }
 
@@ -68,7 +68,7 @@ public class LicenseServiceTest {
     }
 
     @Test
-    public void should_return_licenses_from_the_repository(){
+    public void should_return_licenses_from_the_repository() {
         // GIVEN
         License license = new License("1", "1", "Muzanenhamo", "Artemas",
                 "28/03/1990", "Zimbabwe", "25 January 2018",
