@@ -21,18 +21,18 @@ public class LicenseRepositoryTest {
     private LicenseRepository licenseRepository;
 
     @Before
-    public void addToRepository(){
+    public void addToRepository() {
         List<License> licenseList = Arrays.asList(
-                new License("1", "1","Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
+                new License("1", "1", "Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
                         "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                         "01.jpg", "123 Glendale, Harare, Zimbabwe"),
-                new License("2", "2","Juliet", "Bravo Zulu", "28/03/1990", "ZIM",
+                new License("2", "2", "Juliet", "Bravo Zulu", "28/03/1990", "ZIM",
                         "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                         "01.jpg", "123 Glendale, Harare, Zimbabwe"),
-                new License("3", "3","Foxtrot", "Juliet Papa", "28/03/1990", "ZIM",
+                new License("3", "3", "Foxtrot", "Juliet Papa", "28/03/1990", "ZIM",
                         "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                         "01.jpg", "123 Glendale, Harare, Zimbabwe"),
-                new License("4", "4","Yankee", "Xray Whiskey", "28/03/1990", "ZIM",
+                new License("4", "4", "Yankee", "Xray Whiskey", "28/03/1990", "ZIM",
                         "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                         "01.jpg", "123 Glendale, Harare, Zimbabwe")
         );
@@ -41,13 +41,13 @@ public class LicenseRepositoryTest {
     }
 
     @After
-    public void purgeRepository(){
+    public void purgeRepository() {
         this.licenseRepository.deleteAll();
     }
 
     @Test
-    public void addLicense(){
-        License license = new License("5", "5","James", "Lebron", "28/03/1990", "ZIM",
+    public void addLicense() {
+        License license = new License("5", "5", "James", "Lebron", "28/03/1990", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                 "01.jpg", "123 Glendale, Harare, Zimbabwe");
         this.licenseRepository.save(license);
@@ -57,7 +57,7 @@ public class LicenseRepositoryTest {
     }
 
     @Test
-    public void findAllLicenses(){
+    public void findAllLicenses() {
         List<License> licenses = this.licenseRepository.findAll();
         Assertions.assertThat(licenses.size()).isEqualTo(4);
         Assertions.assertThat(licenses.get(0).getAgency()).isEqualTo("ZDVLA");
@@ -65,8 +65,8 @@ public class LicenseRepositoryTest {
     }
 
     @Test
-    public void updateLicense(){
-        License license = new License("4", "4","Charlie", "Delta Golf", "28/03/1990", "ZIM",
+    public void updateLicense() {
+        License license = new License("4", "4", "Charlie", "Delta Golf", "28/03/1990", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                 "01.jpg", "123 Glendale, Harare, Zimbabwe");
         this.licenseRepository.save(license);
@@ -77,7 +77,7 @@ public class LicenseRepositoryTest {
     }
 
     @Test
-    public void deleteLicense(){
+    public void deleteLicense() {
         this.licenseRepository.delete("1");
         List<License> licenses = this.licenseRepository.findAll();
 
