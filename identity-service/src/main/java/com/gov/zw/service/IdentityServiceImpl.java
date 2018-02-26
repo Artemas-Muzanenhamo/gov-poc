@@ -22,7 +22,7 @@ public class IdentityServiceImpl implements IdentityService {
     @Override
     public void save(Identity identity) throws InvalidIdentityException {
         Optional<Identity> identityOptional = Optional.ofNullable(identity);
-        if (identityOptional.isPresent()){
+        if (identityOptional.isPresent()) {
             identityRepository.save(identity);
         } else {
             throw new InvalidIdentityException("The Identity is invalid!");
