@@ -13,7 +13,8 @@ public class Identity {
     private String placeOfBirth;
     private String dateOfIssue;
 
-    public Identity(){}
+    public Identity() {
+    }
 
     public Identity(String id, String identityRef, String name, String surname, String birthDate, String villageOfOrigin, String placeOfBirth, String dateOfIssue) {
         this.id = id;
