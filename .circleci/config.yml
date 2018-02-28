@@ -33,6 +33,3 @@ jobs:
 
       # run corbetura
       - run: mvn cobertura:cobertura
-
-      # execute
-      - shell: <(curl -s https://codecov.io/bash)
