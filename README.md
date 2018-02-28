@@ -2,8 +2,6 @@
 
 CircleCi: [![CircleCI](https://circleci.com/gh/Artemas-Muzanenhamo/gov-poc/tree/develop.svg?style=svg)](https://circleci.com/gh/Artemas-Muzanenhamo/gov-poc/tree/develop)
 
-Travis: [![Build Status](https://travis-ci.org/Artemas-Muzanenhamo/gov-poc.svg?branch=develop)](https://travis-ci.org/Artemas-Muzanenhamo/gov-poc)
-
 # About
 This is a proof of concept to demo government services using the Microservice Architecture with spring boot and spring cloud. We will not really dive into the Authentication aspect at first but we will look at how data should flow within a Microservice Architecture.
 
