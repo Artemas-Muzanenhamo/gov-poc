@@ -31,6 +31,9 @@ jobs:
       # run tests!
       - run: mvn integration-test
 
-      test:
-        post:
-          - bash <(curl -s https://codecov.io/bash)
+      # run corbetura
+      - run: mvn cobertura:cobertura
+
+      # execute
+      - run: curl -s https://codecov.io/bash
+
