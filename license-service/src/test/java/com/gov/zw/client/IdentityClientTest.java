@@ -32,6 +32,10 @@ public class IdentityClientTest {
     @Pact(state = "an identity", provider = "identity-service", consumer = "license-service")
     public RequestResponsePact retrieveIdentityPact(PactDslWithProvider builder) {
 
+        // Set Headers
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json;charset=utf-8");
+
         // What I will send as a Request in the Pact JSON
         Map<String, String> requestObject = new HashMap<>();
         requestObject.put("idRef", "MUZAN1234");
@@ -58,7 +62,8 @@ public class IdentityClientTest {
                     .body(requestBodyJson.toJSONString(), "application/json;charset=UTF-8")
                 .willRespondWith()
                     .status(200)
-                    .body(responseBodyJson.toJSONString(), "application/json;charset=UTF-8")
+                    .headers(headers)
+                    .body(responseBodyJson.toJSONString(), "application/json;charset=utf-8")
                 .toPact();
     }
 
