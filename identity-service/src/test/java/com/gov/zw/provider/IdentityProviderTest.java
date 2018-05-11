@@ -16,7 +16,6 @@ import org.junit.ClassRule;
 import org.junit.runner.RunWith;
 import org.springframework.http.MediaType;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static com.github.restdriver.clientdriver.RestClientDriver.giveResponse;
@@ -32,13 +31,10 @@ public class IdentityProviderTest {
 
     @State("an identity reference number")
     public void toPostState() throws Exception {
-        Map<String, String> idRef = new HashMap<>();
-        idRef.put("idRef", "MUZAN1234");
-        JSONObject ref = new JSONObject(idRef);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        Identity identity = new Identity("1","1","Artemas", "Muzanenhamo", "28/03/1990",
-                "Mashayamombe", "Harare", "22/01/2018");
+        Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo",
+                "28/03/1990", "Mashayamombe", "Harare", "22/01/2018");
         Map<String, String> id = objectMapper.convertValue(identity, Map.class);
         JSONObject jsonObject = new JSONObject(id);
 

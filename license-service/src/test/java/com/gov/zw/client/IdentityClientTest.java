@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.HashMap;
@@ -59,11 +60,11 @@ public class IdentityClientTest {
                 .uponReceiving("a request to the identity-service client")
                     .path("/identities/reference")
                     .method("POST")
-                    .body(requestBodyJson.toJSONString(), "application/json;charset=UTF-8")
+                    .body(requestBodyJson.toJSONString(), MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .willRespondWith()
                     .status(200)
                     .headers(headers)
-                    .body(responseBodyJson.toJSONString(), "application/json;charset=utf-8")
+                    .body(responseBodyJson.toJSONString())
                 .toPact();
     }
 
