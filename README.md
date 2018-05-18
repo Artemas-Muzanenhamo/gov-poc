@@ -128,3 +128,5 @@ A `Contract` is a collection of agreements between a client _(Consumer)_ and an 
 Consumer Driven Contracts is a pattern that drives the development of the Provider from its Consumer's point of view. It is TDD for services.
 
 `Pact` is a testing tool that helps you write Contracts, and guarantees those Contracts are satisfied.
+
+**Pros for using Pact**
