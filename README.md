@@ -111,7 +111,15 @@ no explanation as to why they would be breaking or perhaps you will receive stac
 
 **Wiremock**
 
-[Link is Here](http://wiremock.org/)
+`WireMock` is an _HTTP mock server_. At its core it is a web server that can be _primed to serve canned responses_ to particular requests (stubbing) and that captures incoming requests so that they can be checked later (verification).
+
+It also has an assortment of other useful features including record/playback of interactions with other APIs, injection of faults and delays, simulation of stateful behaviour.
+
+It can be used as a library by any JVM application, or run as a standalone process either on the same host as the system under test or a remote server.
+
+All of WireMock’s features are accessible via its REST (JSON) interface and its Java API. Additionally, stubs can be configured via JSON files.
+
+[Link to WireMock is Here](http://wiremock.org/docs/)
 
 **Spring-Cloud-Contracts**
 
