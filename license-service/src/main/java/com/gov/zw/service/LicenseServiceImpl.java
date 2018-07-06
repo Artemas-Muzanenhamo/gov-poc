@@ -30,7 +30,7 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Override
-    public void addLicense(License license) throws InvalidIdentityException {
+    public void addLicense(License license) throws InvalidLicenseException, InvalidIdentityException {
         Map<String, String> referenceNumber = new HashMap<>();
         referenceNumber.put("idRef", license.getIdentityRef());
         logger.debug("Reference Number passed is: " + referenceNumber.get("idRef"));

@@ -59,9 +59,9 @@ public class IdentityController {
         this.identityServiceImpl.delete(identity);
     }
 
-    @GetMapping(value = "/saveTest")
+    @GetMapping(value = "/save-test")
     public void saveDummyData() throws InvalidIdentityException {
-        Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
+        Identity identity = new Identity("1", "121", "Artemas", "Muzanenhamo", "28/03/1990",
                 "Mashayamombe", "Harare", "17/11/2017");
         this.identityServiceImpl.save(identity);
     }

@@ -7,7 +7,7 @@ import com.gov.zw.util.InvalidLicenseException;
 import java.util.List;
 
 public interface LicenseService {
-    void addLicense(License license) throws InvalidIdentityException;
+    void addLicense(License license) throws InvalidLicenseException, InvalidIdentityException;
 
     List<License> getAllLicenses();
 
