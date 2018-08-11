@@ -5,19 +5,20 @@ import com.gov.zw.repository.IdentityRepository;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidIdentityNameException;
 import com.gov.zw.util.InvalidIdentityReferenceException;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public class IdentityServiceTest {
 
     @InjectMocks
@@ -26,9 +27,9 @@ public class IdentityServiceTest {
     @Mock
     private IdentityRepository identityRepository;
 
-    @Test(expected = InvalidIdentityException.class)
+    @Test
     public void should_throw_an_exception_when_an_invalid_identity_is_passed() throws Exception {
-        identityService.save(null);
+        assertThrows(InvalidIdentityException.class, () -> identityService.save(null));
     }
 
     @Test
@@ -47,14 +48,14 @@ public class IdentityServiceTest {
         assertThat(identityService.findIdentitiesByName("Artemas")).isEqualTo(identities);
     }
 
-    @Test(expected = InvalidIdentityNameException.class)
+    @Test
     public void should_throw_an_exception_when_an_invalid_name_is_passed() throws Exception {
-        identityService.findIdentitiesByName(null);
+        assertThrows(InvalidIdentityNameException.class, () -> identityService.findIdentitiesByName(null));
     }
 
-    @Test(expected = InvalidIdentityReferenceException.class)
+    @Test
     public void should_throw_exception_when__an_invalid_idRef_is_passed() throws Exception {
-        identityService.findIdentityByIdentityRef(null);
+        assertThrows(InvalidIdentityReferenceException.class, () ->identityService.findIdentityByIdentityRef(null));
     }
 
     @Test
@@ -89,9 +90,9 @@ public class IdentityServiceTest {
         assertThat(identityService.findAll()).isEqualTo(identities);
     }
 
-    @Test(expected = InvalidIdentityException.class)
+    @Test
     public void should_throw_an_exception_when_an_invalid_identity_is_passed_to_be_deleted() throws InvalidIdentityException {
-        identityService.delete(null);
+        assertThrows(InvalidIdentityException.class, () -> identityService.delete(null));
     }
 
     @Test
