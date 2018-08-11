@@ -106,56 +106,36 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<configuration>
+					<!-- The destination file for the code coverage report has to be set
+						to the same value in the parent pom and in each module pom. Then JaCoCo will
+						add up information in the same report, so that, it will give the cross-module
+						code coverage. -->
+					<destFile>target/jacoco-it.exec</destFile>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
+
+	<!--mvn sonar:sonar \-->
+	<!-- -Dsonar.organization=artemas-muzanenhamo-github \-->
+	<!-- -Dsonar.host.url=https://sonarcloud.io \-->
+	<!-- -Dsonar.login=375081dc032030b36420587fc54c182a0567fbcd-->
 
 	<profiles>
 		<profile>
 			<id>sonar</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<properties>
-				<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 				<sonar.organization>artemas-muzanenhamo-github</sonar.organization>
+				<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+				<sonar.login>e42400e4a3ed61f0ee5980b72e1ed5524db9b7cf</sonar.login>
 			</properties>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.jacoco</groupId>
-						<artifactId>jacoco-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>prepare-agent</id>
-								<goals>
-									<goal>prepare-agent</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>report</id>
-								<phase>prepare-package</phase>
-								<goals>
-									<goal>report</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>post-unit-test</id>
-								<phase>test</phase>
-								<goals>
-									<goal>report</goal>
-								</goals>
-								<configuration>
-									<!--Sets the path to the file which contains the execution data.-->
-									<dataFile>target/jacoco.exec</dataFile>
-									<!--Sets the output directory for the code coverage report.-->
-									<outputDirectory>target/jacoco-ut</outputDirectory>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.sonarsource.scanner.maven</groupId>
-						<artifactId>sonar-maven-plugin</artifactId>
-					</plugin>
-				</plugins>
-			</build>
 		</profile>
 	</profiles>
 

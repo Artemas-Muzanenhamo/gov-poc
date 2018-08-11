@@ -23,58 +23,18 @@
         <sonar.jacoco.reportPath>${user.dir}/license-service/target/jacoco.exec</sonar.jacoco.reportPath>
     </properties>
 
-    <!--<build>-->
-        <!--<pluginManagement>-->
-            <!--<plugins>-->
-                <!--<plugin>-->
-                    <!--<groupId>org.sonarsource.scanner.maven</groupId>-->
-                    <!--<artifactId>sonar-maven-plugin</artifactId>-->
-                    <!--<version>3.3.0.603</version>-->
-                    <!--<executions>-->
-                        <!--<execution>-->
-                            <!--<phase>verify</phase>-->
-                            <!--<goals>-->
-                                <!--<goal>sonar</goal>-->
-                            <!--</goals>-->
-                        <!--</execution>-->
-                    <!--</executions>-->
-                <!--</plugin>-->
-                <!--<plugin>-->
-                    <!--<groupId>org.jacoco</groupId>-->
-                    <!--<artifactId>jacoco-maven-plugin</artifactId>-->
-                    <!--<version>0.7.9</version>-->
-                    <!--<configuration>-->
-                        <!--<append>true</append>-->
-                    <!--</configuration>-->
-                    <!--<executions>-->
-                        <!--<execution>-->
-                            <!--<id>prepare-agent</id>-->
-                            <!--<goals>-->
-                                <!--<goal>prepare-agent</goal>-->
-                            <!--</goals>-->
-                            <!--<configuration>-->
-                                <!--<propertyName>jacoco.agent.argLine</propertyName>-->
-                                <!--<destFile>${sonar.jacoco.reportPath}</destFile>-->
-                            <!--</configuration>-->
-                        <!--</execution>-->
-                        <!--<execution>-->
-                            <!--<id>prepare-agent-integration</id>-->
-                            <!--<goals>-->
-                                <!--<goal>prepare-agent-integration</goal>-->
-                            <!--</goals>-->
-                        <!--</execution>-->
-                        <!--<execution>-->
-                            <!--<id>jacoco-site</id>-->
-                            <!--<phase>verify</phase>-->
-                            <!--<goals>-->
-                                <!--<goal>report</goal>-->
-                            <!--</goals>-->
-                        <!--</execution>-->
-                    <!--</executions>-->
-                <!--</plugin>-->
-            <!--</plugins>-->
-        <!--</pluginManagement>-->
-    <!--</build>-->
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
