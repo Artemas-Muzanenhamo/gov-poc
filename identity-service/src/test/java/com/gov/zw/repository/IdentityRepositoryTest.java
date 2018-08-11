@@ -1,14 +1,13 @@
 package com.gov.zw.repository;
 
 import com.gov.zw.domain.Identity;
-import org.assertj.core.api.Assertions;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,26 +15,26 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @DataMongoTest
-public class IdentityRepositoryTest {
+class IdentityRepositoryTest {
 
-    public final int EXPECTONE = 1;
-    public final int EXPECTTWO = 2;
-    public final int EXPECTFOUR = 4;
-    public final int FIRSTINDEX = 0;
+    private final int EXPECTONE = 1;
+    private final int EXPECTTWO = 2;
+    private final int EXPECTFOUR = 4;
+    private final int FIRSTINDEX = 0;
 
     @Autowired
-    IdentityRepository repository;
+    private IdentityRepository repository;
 
-    @Before
+    @BeforeEach
     public void saveId() {
         this.repository.save(
                 new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
                         "Mashayamombe", "Harare", "17/11/2017"));
     }
 
-    @After
+    @AfterEach
     public void purgeIdentities() {
         this.repository.deleteAll();
     }
