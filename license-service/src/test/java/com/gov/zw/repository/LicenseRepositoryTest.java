@@ -2,25 +2,25 @@ package com.gov.zw.repository;
 
 import com.gov.zw.domain.License;
 import org.assertj.core.api.Assertions;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
 import java.util.List;
 
 @DataMongoTest
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public class LicenseRepositoryTest {
 
     @Autowired
     private LicenseRepository licenseRepository;
 
-    @Before
+    @BeforeEach
     public void addToRepository() {
         List<License> licenseList = Arrays.asList(
                 new License("1", "1", "Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
@@ -37,10 +37,10 @@ public class LicenseRepositoryTest {
                         "01.jpg", "123 Glendale, Harare, Zimbabwe")
         );
 
-        this.licenseRepository.save(licenseList);
+        this.licenseRepository.insert(licenseList);
     }
 
-    @After
+    @AfterEach
     public void purgeRepository() {
         this.licenseRepository.deleteAll();
     }
@@ -78,7 +78,7 @@ public class LicenseRepositoryTest {
 
     @Test
     public void deleteLicense() {
-        this.licenseRepository.delete("1");
+        this.licenseRepository.deleteById("1");
         List<License> licenses = this.licenseRepository.findAll();
 
         Assertions.assertThat(licenses.get(0).getFirstNames()).isEqualTo("Bravo Zulu");
