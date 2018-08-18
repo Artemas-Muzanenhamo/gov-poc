@@ -3,10 +3,10 @@ package com.gov.zw.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class IdentityTest {
+class IdentityTest {
 
     @Test
-    public void creation(){
+    void creation(){
         Identity identity = new Identity(
                 "1", "1234AM1", "Artemas", "Muzanenhamo", "28/03/1990", "Mashayamombe",
                 "Harare", "22/11/2017");

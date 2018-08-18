@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
-public class IdentityServiceTest {
+class IdentityServiceTest {
 
     @InjectMocks
     private IdentityServiceImpl identityService;
@@ -28,12 +28,12 @@ public class IdentityServiceTest {
     private IdentityRepository identityRepository;
 
     @Test
-    public void should_throw_an_exception_when_an_invalid_identity_is_passed() throws Exception {
+    void should_throw_an_exception_when_an_invalid_identity_is_passed() throws Exception {
         assertThrows(InvalidIdentityException.class, () -> identityService.save(null));
     }
 
     @Test
-    public void should_save_identity_if_identity_details_exist() throws InvalidIdentityException {
+    void should_save_identity_if_identity_details_exist() throws InvalidIdentityException {
         Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
                 "Mashayamombe", "Harare", "17/11/2017");
         identityService.save(identity);
@@ -41,7 +41,7 @@ public class IdentityServiceTest {
     }
 
     @Test
-    public void should_return_a_name_if_name_exists() throws InvalidIdentityNameException {
+    void should_return_a_name_if_name_exists() throws InvalidIdentityNameException {
         List<Identity> identities = Arrays.asList(new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
                 "Mashayamombe", "Harare", "17/11/2017"));
         when(identityRepository.findIdentitiesByName(identities.get(0).getName())).thenReturn(identities);
@@ -49,17 +49,17 @@ public class IdentityServiceTest {
     }
 
     @Test
-    public void should_throw_an_exception_when_an_invalid_name_is_passed() throws Exception {
+    void should_throw_an_exception_when_an_invalid_name_is_passed() throws Exception {
         assertThrows(InvalidIdentityNameException.class, () -> identityService.findIdentitiesByName(null));
     }
 
     @Test
-    public void should_throw_exception_when__an_invalid_idRef_is_passed() throws Exception {
+    void should_throw_exception_when__an_invalid_idRef_is_passed() throws Exception {
         assertThrows(InvalidIdentityReferenceException.class, () ->identityService.findIdentityByIdentityRef(null));
     }
 
     @Test
-    public void should_return_an_identity_if_id_reference_is_valid() throws InvalidIdentityReferenceException {
+    void should_return_an_identity_if_id_reference_is_valid() throws InvalidIdentityReferenceException {
         // given
         Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
                 "Mashayamombe", "Harare", "17/11/2017");
@@ -71,7 +71,7 @@ public class IdentityServiceTest {
     }
 
     @Test
-    public void should_return_a_list_of_all_identities() {
+    void should_return_a_list_of_all_identities() {
         // given
         List<Identity> identities = Arrays.asList(
                 new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
@@ -91,12 +91,12 @@ public class IdentityServiceTest {
     }
 
     @Test
-    public void should_throw_an_exception_when_an_invalid_identity_is_passed_to_be_deleted() throws InvalidIdentityException {
+    void should_throw_an_exception_when_an_invalid_identity_is_passed_to_be_deleted() throws InvalidIdentityException {
         assertThrows(InvalidIdentityException.class, () -> identityService.delete(null));
     }
 
     @Test
-    public void should_delete_an_identity_if_the_identity_is_valid() throws InvalidIdentityException {
+    void should_delete_an_identity_if_the_identity_is_valid() throws InvalidIdentityException {
         // given
         Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
                 "Mashayamombe", "Harare", "17/11/2017");

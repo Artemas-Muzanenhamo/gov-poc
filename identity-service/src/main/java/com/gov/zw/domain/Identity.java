@@ -1,5 +1,8 @@
 package com.gov.zw.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -7,6 +10,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Created by Artemas on 18/11/2017.
  */
 @Document(collection = "Identities")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Identity {
 
     @Id
@@ -18,52 +24,5 @@ public class Identity {
     private String villageOfOrigin;
     private String placeOfBirth;
     private String dateOfIssue;
-
-    public Identity() {
-        // Why JPA Why ?!!!
-    }
-
-    public Identity(String id, String identityRef, String name, String surname, String birthDate, String villageOfOrigin, String placeOfBirth, String dateOfIssue) {
-        this.id = id;
-        this.identityRef = identityRef;
-        this.name = name;
-        this.surname = surname;
-        this.birthDate = birthDate;
-        this.villageOfOrigin = villageOfOrigin;
-        this.placeOfBirth = placeOfBirth;
-        this.dateOfIssue = dateOfIssue;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getIdentityRef() {
-        return identityRef;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public String getBirthDate() {
-        return birthDate;
-    }
-
-    public String getVillageOfOrigin() {
-        return villageOfOrigin;
-    }
-
-    public String getPlaceOfBirth() {
-        return placeOfBirth;
-    }
-
-    public String getDateOfIssue() {
-        return dateOfIssue;
-    }
 
 }

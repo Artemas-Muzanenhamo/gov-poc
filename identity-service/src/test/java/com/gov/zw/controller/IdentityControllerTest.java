@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(IdentityController.class)
-public class IdentityControllerTest {
+class IdentityControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -30,7 +30,7 @@ public class IdentityControllerTest {
     private IdentityService identityServiceImpl;
 
     @Test
-    public void saveIdentity() throws Exception {
+    void saveIdentity() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         Identity identity = new Identity("1","1","Artemas", "Muzanenhamo", "28/03/1990",
                 "Mashayamombe", "Harare", "17/11/2017");
@@ -44,7 +44,7 @@ public class IdentityControllerTest {
     }
 
     @Test
-    public void getIdentitiesByName() throws Exception {
+    void getIdentitiesByName() throws Exception {
         Map<String, String> name = new HashMap<>();
         name.put("name", "Artemas");
         JSONObject jsonObject = new JSONObject(name);
@@ -55,7 +55,7 @@ public class IdentityControllerTest {
     }
 
     @Test
-    public void getIdentityByReferenceNumber() throws Exception {
+    void getIdentityByReferenceNumber() throws Exception {
         Map<String, String> idReferenceNumber = new HashMap<>();
         idReferenceNumber.put("idRef", "1");
         JSONObject jsonObject = new JSONObject(idReferenceNumber);
@@ -67,13 +67,13 @@ public class IdentityControllerTest {
     }
 
     @Test
-    public void getAllIdentities() throws Exception {
+    void getAllIdentities() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/identities"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void updateIdentity() throws Exception {
+    void updateIdentity() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         Identity identity = new Identity("1","1","Takudzwa", "Muzanenhamo", "28/03/1990",
                 "Mashayamombe", "Harare", "17/11/2017");
@@ -86,7 +86,7 @@ public class IdentityControllerTest {
     }
 
     @Test
-    public void deleteIdentity() throws Exception {
+    void deleteIdentity() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         Identity identity = new Identity("1","1","Artemas", "Muzanenhamo", "28/03/1990",
                 "Mashayamombe", "Harare", "17/11/2017");
