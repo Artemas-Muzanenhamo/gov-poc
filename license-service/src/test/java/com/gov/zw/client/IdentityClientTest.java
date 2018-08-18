@@ -30,6 +30,7 @@ public class IdentityClientTest {
     @Autowired
     private IdentityClient identityClient;
 
+
     @Pact(state = "an identity", provider = "identity-service", consumer = "license-service")
     public RequestResponsePact retrieveIdentityPact(PactDslWithProvider builder) {
 
