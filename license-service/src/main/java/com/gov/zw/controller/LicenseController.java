@@ -42,13 +42,4 @@ public class LicenseController {
         this.licenseServiceImpl.removeLicense(license);
     }
 
-    @GetMapping(value = "/save-test")
-    public void saveDummyDate() throws InvalidLicenseException, InvalidIdentityException {
-        License license = new License("MUZAN1234", "121", "Muzanenhamo", "Artemas",
-                "28/03/1990", "United Kingdom", "28/03/2010",
-                "28/03/2060", "DVLA", "MUZANK9843ACTK", "001.jpg",
-                "27 Foxhill Street, Guildford, Surrey, GU21 9EE");
-        this.licenseServiceImpl.addLicense(license);
-    }
-
 }

@@ -15,13 +15,13 @@ import java.util.List;
 
 @DataMongoTest
 @ExtendWith(SpringExtension.class)
-public class LicenseRepositoryTest {
+class LicenseRepositoryTest {
 
     @Autowired
     private LicenseRepository licenseRepository;
 
     @BeforeEach
-    public void addToRepository() {
+    void addToRepository() {
         List<License> licenseList = Arrays.asList(
                 new License("1", "1", "Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
                         "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
@@ -41,12 +41,12 @@ public class LicenseRepositoryTest {
     }
 
     @AfterEach
-    public void purgeRepository() {
+    void purgeRepository() {
         this.licenseRepository.deleteAll();
     }
 
     @Test
-    public void addLicense() {
+    void addLicense() {
         License license = new License("5", "5", "James", "Lebron", "28/03/1990", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                 "01.jpg", "123 Glendale, Harare, Zimbabwe");
@@ -57,7 +57,7 @@ public class LicenseRepositoryTest {
     }
 
     @Test
-    public void findAllLicenses() {
+    void findAllLicenses() {
         List<License> licenses = this.licenseRepository.findAll();
         Assertions.assertThat(licenses.size()).isEqualTo(4);
         Assertions.assertThat(licenses.get(0).getAgency()).isEqualTo("ZDVLA");
@@ -65,7 +65,7 @@ public class LicenseRepositoryTest {
     }
 
     @Test
-    public void updateLicense() {
+    void updateLicense() {
         License license = new License("4", "4", "Charlie", "Delta Golf", "28/03/1990", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                 "01.jpg", "123 Glendale, Harare, Zimbabwe");
@@ -77,7 +77,7 @@ public class LicenseRepositoryTest {
     }
 
     @Test
-    public void deleteLicense() {
+    void deleteLicense() {
         this.licenseRepository.deleteById("1");
         List<License> licenses = this.licenseRepository.findAll();
 

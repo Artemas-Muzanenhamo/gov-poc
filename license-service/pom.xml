@@ -131,13 +131,20 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<configuration>
-					<!-- The destination file for the code coverage report has to be set
-						to the same value in the parent pom and in each module pom. Then JaCoCo will
-						add up information in the same report, so that, it will give the cross-module
-						code coverage. -->
-					<destFile>target/jacoco-it.exec</destFile>
-				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -146,20 +153,5 @@
 	<!-- -Dsonar.organization=artemas-muzanenhamo-github \-->
 	<!-- -Dsonar.host.url=https://sonarcloud.io \-->
 	<!-- -Dsonar.login=375081dc032030b36420587fc54c182a0567fbcd-->
-
-	<profiles>
-		<profile>
-			<id>sonar</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<sonar.organization>artemas-muzanenhamo-github</sonar.organization>
-				<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-				<sonar.login>e42400e4a3ed61f0ee5980b72e1ed5524db9b7cf</sonar.login>
-			</properties>
-		</profile>
-	</profiles>
-
 
 </project>
