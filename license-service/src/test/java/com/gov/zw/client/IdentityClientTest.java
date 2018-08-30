@@ -77,8 +77,14 @@ public class IdentityClientTest {
         Identity identity = identityClient.findIdentityByIdReferenceNumber(map);
         Identity expectedIdentity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990", "Mashayamombe",
                 "Harare", "22/01/2018");
+        assertThat(identity.getId()).isEqualTo(expectedIdentity.getId());
+        assertThat(identity.getIdentityRef()).isEqualTo(expectedIdentity.getIdentityRef());
         assertThat(identity.getName()).isEqualTo(expectedIdentity.getName());
         assertThat(identity.getSurname()).isEqualTo(expectedIdentity.getSurname());
+        assertThat(identity.getBirthDate()).isEqualTo(expectedIdentity.getBirthDate());
+        assertThat(identity.getVillageOfOrigin()).isEqualTo(expectedIdentity.getVillageOfOrigin());
+        assertThat(identity.getPlaceOfBirth()).isEqualTo(expectedIdentity.getPlaceOfBirth());
+        assertThat(identity.getDateOfIssue()).isEqualTo(expectedIdentity.getDateOfIssue());
         assertThat(identity).isEqualTo(expectedIdentity);
     }
 }
