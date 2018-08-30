@@ -44,6 +44,11 @@ class IdentityTest {
     }
 
     @Test
+    void noArgsNotEqualToNull() {
+        assertThat(identity2).isNotNull();
+    }
+
+    @Test
     void hashCodeNotEquals(){
         Identity expectedId = new Identity();
         assertThat(expectedId.hashCode()).isNotEqualTo(identity.hashCode());
@@ -53,6 +58,11 @@ class IdentityTest {
     void hashCodeEquals(){
         Identity expectedId = identity;
         assertThat(expectedId.hashCode()).isEqualTo(identity.hashCode());
+    }
+
+    @Test
+    void hashCodeNotEqualToNull() {
+        assertThat(identity2.hashCode()).isNotNull();
     }
 
     @Test
