@@ -86,5 +86,6 @@ public class IdentityClientTest {
         assertThat(identity.getPlaceOfBirth()).isEqualTo(expectedIdentity.getPlaceOfBirth());
         assertThat(identity.getDateOfIssue()).isEqualTo(expectedIdentity.getDateOfIssue());
         assertThat(identity).isEqualTo(expectedIdentity);
+        assertThat(identity.hashCode()).isEqualTo(expectedIdentity.hashCode());
     }
 }
