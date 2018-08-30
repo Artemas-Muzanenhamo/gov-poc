@@ -20,7 +20,7 @@ class IdentityTest {
     }
 
     @Test
-    void creation(){
+    void creation() {
         assertThat(identity.getId()).isEqualTo("1");
         assertThat(identity.getIdentityRef()).isEqualTo("1234AM1");
         assertThat(identity.getName()).isEqualTo("Artemas");
@@ -32,13 +32,13 @@ class IdentityTest {
     }
 
     @Test
-    void noArgsEquals(){
+    void noArgsEquals() {
         Identity expectedId = new Identity();
         assertThat(expectedId).isEqualTo(identity2);
     }
 
     @Test
-    void noArgsNotEquals(){
+    void noArgsNotEquals() {
         Identity expectedId = new Identity();
         assertThat(expectedId).isNotEqualTo(identity);
     }
@@ -49,13 +49,13 @@ class IdentityTest {
     }
 
     @Test
-    void hashCodeNotEquals(){
+    void hashCodeNotEquals() {
         Identity expectedId = new Identity();
         assertThat(expectedId.hashCode()).isNotEqualTo(identity.hashCode());
     }
 
     @Test
-    void hashCodeEquals(){
+    void hashCodeEquals() {
         Identity expectedId = identity;
         assertThat(expectedId.hashCode()).isEqualTo(identity.hashCode());
     }
@@ -66,13 +66,13 @@ class IdentityTest {
     }
 
     @Test
-    void toStringNotEquals(){
+    void toStringNotEquals() {
         Identity expectedId = new Identity();
         assertThat(expectedId.toString()).isNotEqualTo(identity.toString());
     }
 
     @Test
-    void toStringEquals(){
+    void toStringEquals() {
         Identity expectedId = new Identity();
         assertThat(expectedId.toString()).isEqualTo(identity2.toString());
     }
