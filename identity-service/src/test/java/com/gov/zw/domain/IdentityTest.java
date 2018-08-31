@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class IdentityTest {
 
@@ -49,6 +50,12 @@ class IdentityTest {
     }
 
     @Test
+    void noArgsEqualsToNull(){
+        Identity identity = null;
+        assertThat(identity).isNull();
+    }
+
+    @Test
     void hashCodeNotEquals() {
         Identity expectedId = new Identity();
         assertThat(expectedId.hashCode()).isNotEqualTo(identity.hashCode());
@@ -63,6 +70,12 @@ class IdentityTest {
     @Test
     void hashCodeNotEqualToNull() {
         assertThat(identity2.hashCode()).isNotNull();
+    }
+
+    @Test
+    void hashCodeIsEqualsToNull(){
+        Identity identity = null;
+        assertThrows(NullPointerException.class, () -> identity.hashCode());
     }
 
     @Test
