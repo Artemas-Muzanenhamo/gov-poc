@@ -19,8 +19,21 @@
 
     <properties>
         <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+        <sonar.language>java</sonar.language>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-        <sonar.jacoco.reportPath>${user.dir}/license-service/target/jacoco.exec</sonar.jacoco.reportPath>
+        <sonar.jacoco.reportPaths>
+            ${project.basedir}/license-service/target/jacoco.exec,
+            ${project.basedir}/identity-service/target/jacoco.exec
+        </sonar.jacoco.reportPaths>
+        <sonar.junit.reportPaths>
+            ${project.basedir}/license-service/target/surefire-reports/TEST-*.xml,
+            ${project.basedir}/identity-service/target/surefire-reports/TEST-*.xml
+        </sonar.junit.reportPaths>
+        <sonar.exclusions>
+            **/domain/*,
+            **/DBSeeder.java,
+            **/*Application.java
+        </sonar.exclusions>
     </properties>
 
     <build>
@@ -33,6 +46,22 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <configuration>
+                    <destFile>${sonar.jacoco.reportPath}</destFile>
+                    <append>true</append>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
