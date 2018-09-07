@@ -6,8 +6,6 @@ import com.gov.zw.domain.License;
 import com.gov.zw.repository.LicenseRepository;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidLicenseException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -17,8 +15,6 @@ import java.util.Optional;
 
 @Service
 public class LicenseServiceImpl implements LicenseService {
-
-    private static Logger logger = LoggerFactory.getLogger(LicenseServiceImpl.class);
 
     private IdentityClient identityClient;
 
