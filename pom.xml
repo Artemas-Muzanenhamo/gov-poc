@@ -32,7 +32,8 @@
         <sonar.exclusions>
             **/domain/*,
             **/DBSeeder.java,
-            **/*Application.java
+            **/*Application.java,
+            **/client/*
         </sonar.exclusions>
     </properties>
 
