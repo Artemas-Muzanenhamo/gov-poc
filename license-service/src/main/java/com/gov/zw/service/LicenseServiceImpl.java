@@ -33,7 +33,6 @@ public class LicenseServiceImpl implements LicenseService {
     public void addLicense(License license) throws InvalidLicenseException, InvalidIdentityException {
         Map<String, String> referenceNumber = new HashMap<>();
         referenceNumber.put("idRef", license.getIdentityRef());
-        logger.debug("Reference Number passed is: " + referenceNumber.get("idRef"));
         Optional<Identity> identityOptional = Optional.ofNullable(identityClient.findIdentityByIdReferenceNumber(referenceNumber));
         if (identityOptional.isPresent()) {
             licenseRepository.save(license);
