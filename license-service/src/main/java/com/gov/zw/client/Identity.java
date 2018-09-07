@@ -2,8 +2,6 @@ package com.gov.zw.client;
 
 import lombok.*;
 
-import java.util.Objects;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
