@@ -74,7 +74,8 @@ public class LicenseTest {
     @Test
     public void emptyToString(){
         License license = new License();
-        assertEquals(license.toString(), "License(id=null, identityRef=null, surname=null, firstNames=null, dateOfBirth=null, country=null, dateOfIssue=null, expiryDate=null, agency=null, licenseNumber=null, signatureImage=null, address=null)");
+        License license1 = new License();
+        assertEquals(license1.toString(), license.toString());
     }
 
 }
