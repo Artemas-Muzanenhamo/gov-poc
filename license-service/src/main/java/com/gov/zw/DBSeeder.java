@@ -1,3 +1,5 @@
+package com.gov.zw;
+
 import com.gov.zw.domain.License;
 import com.gov.zw.repository.LicenseRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -20,9 +22,9 @@ public class DBSeeder implements CommandLineRunner{
                 "27 Foxhill Street, Guildford, Surrey, GU21 9EE");
 
         // delete all data before we put data to use
-        licenseRepository.deleteAll();
+        this.licenseRepository.deleteAll();
 
         // add dummy data
-        licenseRepository.save(license);
+        this.licenseRepository.save(license);
     }
 }
