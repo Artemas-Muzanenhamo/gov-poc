@@ -61,4 +61,10 @@ public class LicenseServiceImpl implements LicenseService {
             throw new InvalidLicenseException("The license is invalid!");
         }
     }
+
+    @Override
+    public License getLicenseByIdentityRef(String identityRef) throws InvalidLicenseException {
+        Optional.ofNullable(identityRef).orElseThrow((() -> new InvalidLicenseException("License IdRef is not valid")));
+        return this.licenseRepository.findLicenseByIdentityRef(identityRef);
+    }
 }

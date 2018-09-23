@@ -128,4 +128,21 @@ public class LicenseServiceTest {
         verify(licenseRepository, times(1)).delete(license);
     }
 
+    @Test
+    public void should_return_a_license_given_the_identity_reference() throws Exception {
+        // GIVEN
+        License license = new License("1", "1", "Muzanenhamo", "Artemas",
+                "28/03/1990", "Zimbabwe", "25 January 2018",
+                "25 January 2050", "DVLA", "MUZANATCK1990", "Doc1.png",
+                "150 Sunningdale road");
+        String identityRef = "123";
+
+        // WHEN
+        when(licenseRepository.findLicenseByIdentityRef(identityRef)).thenReturn(license);
+
+        // THEN
+        assertThat(licenseService.getLicenseByIdentityRef(identityRef)).isEqualTo(license);
+        verify(licenseRepository, times(1)).findLicenseByIdentityRef(identityRef);
+    }
+
 }

@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/licenses")
@@ -29,6 +30,11 @@ public class LicenseController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<License> getAllLicenses() {
         return this.licenseServiceImpl.getAllLicenses();
+    }
+
+    @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE, value = "ref")
+    public License getLicenseByIdentityRef(@RequestBody Map<String, String> identityRef) throws InvalidLicenseException{
+        return this.licenseServiceImpl.getLicenseByIdentityRef(identityRef.get("ref"));
     }
 
     // Update

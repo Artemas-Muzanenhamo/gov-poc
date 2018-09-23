@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -74,6 +75,18 @@ public class LicenseControllerTest {
         JSONObject jsonObject = new JSONObject(id);
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/licenses")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(jsonObject.toJSONString()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldReturnLicenseByIdentityRef() throws Exception {
+        Map<String, String> idRef = new HashMap<>();
+        idRef.put("ref", "121");
+        JSONObject jsonObject = new JSONObject(idRef);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/licenses/ref")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
