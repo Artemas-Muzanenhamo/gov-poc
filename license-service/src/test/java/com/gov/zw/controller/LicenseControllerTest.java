@@ -30,7 +30,7 @@ public class LicenseControllerTest {
     private LicenseService licenseServiceImpl;
 
     @Test
-    public void addLicense() throws Exception {
+    public void shouldAddALicense() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         License license = new License("1", "1", "Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
@@ -45,13 +45,26 @@ public class LicenseControllerTest {
     }
 
     @Test
-    public void getAllLicenses() throws Exception {
+    public void shouldReturn200WhenAnEmptyLicenseIsPassedToAddLicense() throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        License license = new License();
+        Map<String, String> licenseObject = objectMapper.convertValue(license, Map.class);
+        JSONObject jsonObject = new JSONObject(licenseObject);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/licenses")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(jsonObject.toJSONString()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldReturnAllLicenses() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/licenses"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void updateLicense() throws Exception {
+    public void shouldUpdateALicense() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         License license = new License("1", "1", "Delta", "Charlie Foxtrot", "28/03/1990", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
@@ -66,7 +79,21 @@ public class LicenseControllerTest {
     }
 
     @Test
-    public void deleteLicense() throws Exception {
+    public void shouldReturn200WhenAnEmptyLicenseIsPassedToUpdateLicense() throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        License license = new License();
+        Map<String, String> licenseObject = objectMapper.convertValue(license, Map.class);
+        JSONObject jsonObject = new JSONObject(licenseObject);
+
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/licenses")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(jsonObject.toJSONString()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldDeleteALicense() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         License license = new License("1", "1", "Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
@@ -81,10 +108,36 @@ public class LicenseControllerTest {
     }
 
     @Test
+    public void shouldReturn200WhenAnEmptyLicenseIsPassedToDeleteLicense() throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        License license = new License();
+        Map<String, String> licenseObject = objectMapper.convertValue(license, Map.class);
+        JSONObject jsonObject = new JSONObject(licenseObject);
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/licenses")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(jsonObject.toJSONString()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     public void shouldReturnLicenseByIdentityRef() throws Exception {
         Map<String, String> idRef = new HashMap<>();
         idRef.put("ref", "121");
         JSONObject jsonObject = new JSONObject(idRef);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/licenses/ref")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(jsonObject.toJSONString()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldReturn200WhenAnEmptyLicenseIsPassedToGetLicenseByIdReference() throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        License license = new License();
+        Map<String, String> licenseObject = objectMapper.convertValue(license, Map.class);
+        JSONObject jsonObject = new JSONObject(licenseObject);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/licenses/ref")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
