@@ -14,6 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/identities")
+@CrossOrigin(origins = "http://localhost:4200")
 public class IdentityController {
 
     private final IdentityService identityServiceImpl;
