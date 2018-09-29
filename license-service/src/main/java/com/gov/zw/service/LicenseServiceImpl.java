@@ -55,16 +55,13 @@ public class LicenseServiceImpl implements LicenseService {
     @Override
     public void removeLicense(License license) throws InvalidLicenseException {
         Optional<License> licenseOptional = Optional.ofNullable(license);
-        if (licenseOptional.isPresent()) {
-            this.licenseRepository.delete(license);
-        } else {
-            throw new InvalidLicenseException("The license is invalid!");
-        }
+        this.licenseRepository.delete(licenseOptional.orElseThrow(() -> new InvalidLicenseException("The license is invalid!")));
     }
 
     @Override
     public License getLicenseByIdentityRef(String identityRef) throws InvalidLicenseException {
-        Optional.ofNullable(identityRef).orElseThrow((() -> new InvalidLicenseException("License IdRef is not valid")));
-        return this.licenseRepository.findLicenseByIdentityRef(identityRef);
+        Optional<String> identityRefOptional = Optional.ofNullable(identityRef);
+        return this.licenseRepository.findLicenseByIdentityRef(identityRefOptional
+                .orElseThrow((() -> new InvalidLicenseException("License IdRef is not valid"))));
     }
 }
