@@ -17,7 +17,6 @@ import java.util.Optional;
 public class LicenseServiceImpl implements LicenseService {
 
     private IdentityClient identityClient;
-
     private LicenseRepository licenseRepository;
 
     public LicenseServiceImpl(IdentityClient identityClient, LicenseRepository licenseRepository) {
@@ -27,8 +26,10 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public void addLicense(License license) throws InvalidLicenseException, InvalidIdentityException {
+        Optional<License> licenseOptional = Optional.ofNullable(license);
         Map<String, String> referenceNumber = new HashMap<>();
-        referenceNumber.put("idRef", license.getIdentityRef());
+        referenceNumber.put("idRef", licenseOptional
+                .orElseThrow(() -> new InvalidLicenseException("The license is invalid!")).getIdentityRef());
         Optional<Identity> identityOptional = Optional.ofNullable(identityClient.findIdentityByIdReferenceNumber(referenceNumber));
         if (identityOptional.isPresent()) {
             licenseRepository.save(license);
@@ -45,26 +46,21 @@ public class LicenseServiceImpl implements LicenseService {
     @Override
     public void updateLicense(License license) throws InvalidLicenseException {
         Optional<License> licenseOptional = Optional.ofNullable(license);
-        if (licenseOptional.isPresent()) {
-            this.licenseRepository.save(license);
-        } else {
-            throw new InvalidLicenseException("The license is invalid!");
-        }
+        this.licenseRepository.save(licenseOptional
+                .orElseThrow(() -> new InvalidLicenseException("The license is invalid!")));
     }
 
     @Override
     public void removeLicense(License license) throws InvalidLicenseException {
         Optional<License> licenseOptional = Optional.ofNullable(license);
-        if (licenseOptional.isPresent()) {
-            this.licenseRepository.delete(license);
-        } else {
-            throw new InvalidLicenseException("The license is invalid!");
-        }
+        this.licenseRepository.delete(licenseOptional
+                .orElseThrow(() -> new InvalidLicenseException("The license is invalid!")));
     }
 
     @Override
     public License getLicenseByIdentityRef(String identityRef) throws InvalidLicenseException {
-        Optional.ofNullable(identityRef).orElseThrow((() -> new InvalidLicenseException("License IdRef is not valid")));
-        return this.licenseRepository.findLicenseByIdentityRef(identityRef);
+        Optional<String> identityRefOptional = Optional.ofNullable(identityRef);
+        return this.licenseRepository.findLicenseByIdentityRef(identityRefOptional
+                .orElseThrow((() -> new InvalidLicenseException("License IdRef is not valid"))));
     }
 }
