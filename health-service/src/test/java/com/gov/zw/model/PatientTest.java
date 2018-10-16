@@ -24,9 +24,13 @@ public class PatientTest {
 
     @Test
     public void shouldReturnPatientObjectPopulated() {
+        patient = new Patient("Artemas", "Muzanenhamo", LocalDate.of(1990, 3, 28),
+                "MUZAN123", "68 Jeremy Street, London, W1 7AA");
+
         Patient patientDummy =
                 new Patient("Artemas", "Muzanenhamo", LocalDate.of(1990, 3, 28),
                         "MUZAN123", "68 Jeremy Street, London, W1 7AA");
-
+        assertThat(patient).isEqualTo(patientDummy);
+        assertThat(patient.getName()).isEqualTo(patientDummy.getName());
     }
 }
