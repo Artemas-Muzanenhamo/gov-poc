@@ -32,5 +32,11 @@ public class PatientTest {
                         "MUZAN123", "68 Jeremy Street, London, W1 7AA");
         assertThat(patient).isEqualTo(patientDummy);
         assertThat(patient.getName()).isEqualTo(patientDummy.getName());
+        assertThat(patient.getSurname()).isEqualTo(patientDummy.getSurname());
+        assertThat(patient.getDateOfBirth()).isEqualTo(patientDummy.getDateOfBirth());
+        assertThat(patient.getIdentityRef()).isEqualTo(patientDummy.getIdentityRef());
+        assertThat(patient.getAddress()).isEqualTo(patientDummy.getAddress());
+        assertThat(patient.hashCode()).isEqualTo(patientDummy.hashCode());
+        assertThat(patient.toString()).isEqualTo(patientDummy.toString());
     }
 }
