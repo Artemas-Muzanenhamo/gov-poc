@@ -1,4 +1,4 @@
-package com.gov.zw.model;
+package com.gov.zw.patient;
 
 import lombok.*;
 
