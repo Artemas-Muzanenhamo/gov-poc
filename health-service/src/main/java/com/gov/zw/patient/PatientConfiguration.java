@@ -12,9 +12,9 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 public class PatientConfiguration {
 
     @Bean
-    RouterFunction<?> patientRoutes(PatientService patientService) {
-        return route(GET("/patient"),
-                request -> ok().body(patientService.getAllPatients(), Patient.class)
+    RouterFunction<?> patientRoutes(PatientService patientServiceImpl) {
+        return route(GET("/patients"),
+                request -> ok().body(patientServiceImpl.getAllPatients(), Patient.class)
         );
     }
 }
