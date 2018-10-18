@@ -2,36 +2,43 @@ package com.gov.zw.patient;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
-import org.springframework.mock.web.reactive.function.server.MockServerRequest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.reactive.function.server.HandlerFunction;
-import org.springframework.web.reactive.function.server.RouterFunction;
-import org.springframework.web.reactive.function.server.ServerResponse;
-import reactor.core.publisher.Mono;
-import reactor.test.StepVerifier;
+import org.springframework.test.web.reactive.server.WebTestClient;
+import reactor.core.publisher.Flux;
 
-import static org.junit.Assert.assertNotNull;
+import java.time.LocalDate;
 
-@RunWith(SpringRunner.class)
+import static reactor.core.publisher.Mono.when;
+
 @WebFluxTest
+@RunWith(SpringRunner.class)
+@Import(PatientConfiguration.class)
 public class PatientEndPointTest {
 
+    @Autowired
+    private WebTestClient client;
+
+    @MockBean
+    private PatientService patientService;
+
+    private final Patient patient1 = new Patient("Artemas", "Muzanenhamo", LocalDate.of(1990, 3, 28),
+            "MUZAN123", "68 Jeremy Street, London, W1 7AA");;
+    private final Patient patient2 = new Patient("Artemas", "Muzanenhamo", LocalDate.of(1990, 3, 28),
+            "MUZAN123", "68 Jeremy Street, London, W1 7AA");;
+
     @Test
-    public void getAllPatientsTest() {
-        HandlerFunction<ServerResponse> handlerFunction = request -> ServerResponse.ok().build();
-        RouterFunction<ServerResponse> routerFunction1 = request -> Mono.empty();
-        RouterFunction<ServerResponse> routerFunction2 = request -> Mono.just(handlerFunction);
+    public void shouldReturnAllPatients() {
+        when(patientService.getAllPatients())
+                .thenReturn(Flux.just(patient1, patient2));
 
-        RouterFunction<ServerResponse> result = routerFunction1.and(routerFunction2);
-        assertNotNull(result);
-
-        MockServerRequest request = MockServerRequest.builder().build();
-        Mono<HandlerFunction<ServerResponse>> resultHandlerFunction = result.route(request);
-
-        StepVerifier.create(resultHandlerFunction)
-                .expectNext(handlerFunction)
-                .expectComplete()
-                .verify();
+        client
+                .get()
+                .uri("http://localhost:8080/patients")
+                .exchange()
+                .expectStatus().isOk();
     }
 }
