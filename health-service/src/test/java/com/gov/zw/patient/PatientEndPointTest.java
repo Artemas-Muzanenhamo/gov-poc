@@ -12,7 +12,7 @@ import reactor.core.publisher.Flux;
 
 import java.time.LocalDate;
 
-import static reactor.core.publisher.Mono.when;
+import static org.mockito.Mockito.when;
 
 @WebFluxTest
 @RunWith(SpringRunner.class)
