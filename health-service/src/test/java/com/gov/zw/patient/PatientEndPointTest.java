@@ -12,8 +12,6 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.mockito.Mockito.when;
 
@@ -32,8 +30,6 @@ public class PatientEndPointTest {
             "MUZAN123", "68 Jeremy Street, London, W1 7AA");
     private final Patient patient2 = new Patient("Artemas", "Muzanenhamo", LocalDate.of(1990, 3, 28),
             "MUZAN123", "68 Jeremy Street, London, W1 7AA");
-
-    List<Integer> dateOfBirth = Arrays.asList(1990,3,28);
 
     @Test
     public void shouldReturnAllPatients() {
