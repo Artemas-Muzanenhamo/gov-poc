@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.mockito.Mockito.when;
 
@@ -26,9 +29,11 @@ public class PatientEndPointTest {
     private PatientService patientService;
 
     private final Patient patient1 = new Patient("Artemas", "Muzanenhamo", LocalDate.of(1990, 3, 28),
-            "MUZAN123", "68 Jeremy Street, London, W1 7AA");;
+            "MUZAN123", "68 Jeremy Street, London, W1 7AA");
     private final Patient patient2 = new Patient("Artemas", "Muzanenhamo", LocalDate.of(1990, 3, 28),
-            "MUZAN123", "68 Jeremy Street, London, W1 7AA");;
+            "MUZAN123", "68 Jeremy Street, London, W1 7AA");
+
+    List<Integer> dateOfBirth = Arrays.asList(1990,3,28);
 
     @Test
     public void shouldReturnAllPatients() {
@@ -39,6 +44,12 @@ public class PatientEndPointTest {
                 .get()
                 .uri("http://localhost:8080/patients")
                 .exchange()
-                .expectStatus().isOk();
+                .expectStatus().isOk()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+                .expectBody()
+                .jsonPath("@.[0].name").isEqualTo("Artemas")
+                .jsonPath("@.[0].surname").isEqualTo("Muzanenhamo")
+                .jsonPath("@.[0].identityRef").isEqualTo("MUZAN123")
+                .jsonPath("@.[0].address").isEqualTo("68 Jeremy Street, London, W1 7AA");
     }
 }
