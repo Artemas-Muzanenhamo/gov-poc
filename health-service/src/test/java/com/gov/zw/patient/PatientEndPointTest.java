@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 
@@ -26,19 +27,21 @@ public class PatientEndPointTest {
     @MockBean
     private PatientService patientService;
 
+    private static final String ALLPATIENTSURI = "http://localhost:8080/patients";
+
     private final Patient patient1 = new Patient("Artemas", "Muzanenhamo", LocalDate.of(1990, 3, 28),
             "MUZAN123", "68 Jeremy Street, London, W1 7AA");
     private final Patient patient2 = new Patient("Artemas", "Muzanenhamo", LocalDate.of(1990, 3, 28),
             "MUZAN123", "68 Jeremy Street, London, W1 7AA");
 
     @Test
-    public void shouldReturnAllPatients() {
+    public void shouldReturnAllMockedPatients() {
         when(patientService.getAllPatients())
                 .thenReturn(Flux.just(patient1, patient2));
 
         client
                 .get()
-                .uri("http://localhost:8080/patients")
+                .uri(ALLPATIENTSURI)
                 .exchange()
                 .expectStatus().isOk()
                 .expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
@@ -47,5 +50,17 @@ public class PatientEndPointTest {
                 .jsonPath("@.[0].surname").isEqualTo("Muzanenhamo")
                 .jsonPath("@.[0].identityRef").isEqualTo("MUZAN123")
                 .jsonPath("@.[0].address").isEqualTo("68 Jeremy Street, London, W1 7AA");
+    }
+
+    @Test
+    public void shouldReturn200WhenRetrievingAllPatients() {
+        when(patientService.getAllPatients())
+                .thenReturn(Flux.empty()); // revise
+
+        client
+                .get()
+                .uri(ALLPATIENTSURI)
+                .exchange()
+                .expectStatus().isOk();
     }
 }
