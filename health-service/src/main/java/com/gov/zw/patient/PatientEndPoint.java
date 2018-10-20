@@ -10,7 +10,7 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
 @Configuration
-public class PatientConfiguration {
+public class PatientEndPoint {
 
     @Bean
     RouterFunction<ServerResponse> patientRoutes(PatientService patientServiceImpl) {

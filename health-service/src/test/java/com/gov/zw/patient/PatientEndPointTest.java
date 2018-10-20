@@ -10,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 
@@ -18,7 +17,7 @@ import static org.mockito.Mockito.when;
 
 @WebFluxTest
 @RunWith(SpringRunner.class)
-@Import(PatientConfiguration.class)
+@Import(PatientEndPoint.class)
 public class PatientEndPointTest {
 
     @Autowired
@@ -29,10 +28,10 @@ public class PatientEndPointTest {
 
     private static final String ALLPATIENTSURI = "http://localhost:8080/patients";
 
-    private final Patient patient1 = new Patient("Artemas", "Muzanenhamo", LocalDate.of(1990, 3, 28),
-            "MUZAN123", "68 Jeremy Street, London, W1 7AA");
-    private final Patient patient2 = new Patient("Artemas", "Muzanenhamo", LocalDate.of(1990, 3, 28),
-            "MUZAN123", "68 Jeremy Street, London, W1 7AA");
+    private final Patient patient1 = new Patient("MUZAN123", "Artemas", "Muzanenhamo",
+            LocalDate.of(1990, 3, 28), "68 Jeremy Street, London, W1 7AA");
+    private final Patient patient2 = new Patient("MUZAN123", "Artemas", "Muzanenhamo",
+            LocalDate.of(1990, 3, 28), "68 Jeremy Street, London, W1 7AA");
 
     @Test
     public void shouldReturnAllMockedPatients() {
