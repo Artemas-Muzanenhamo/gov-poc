@@ -29,6 +29,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongodb-driver-reactivestreams</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
