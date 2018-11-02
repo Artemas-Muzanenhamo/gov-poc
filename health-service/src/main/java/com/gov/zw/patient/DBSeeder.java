@@ -22,6 +22,12 @@ public class DBSeeder implements CommandLineRunner {
                         .just(
                                 new Patient("MUZAN123", "Artemas", "Muzanenhamo",
                                         LocalDate.of(1990, 3, 28),
+                                        "68 Jeremy Street, London, W1 7AA"),
+                                new Patient("THOMJ123", "Thomas", "Jefferson",
+                                        LocalDate.of(1990, 3, 28),
+                                        "68 Jeremy Street, London, W1 7AA"),
+                                new Patient("MARKS123", "Mark", "Smith",
+                                        LocalDate.of(1990, 3, 28),
                                         "68 Jeremy Street, London, W1 7AA")
                         );
 

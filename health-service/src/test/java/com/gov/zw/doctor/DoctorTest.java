@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Collections;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,8 +18,6 @@ public class DoctorTest {
 
     @Test
     public void shouldReturnAllDoctorDetails() {
-        List<String> expectedPractices = Collections.singletonList("Surgery");
-
         Doctor expectedDoctor = new Doctor("Mark", "Smith", Collections.singletonList("Surgery"), "DR1234");
 
         assertThat(doctor).isEqualTo(expectedDoctor);
