@@ -16,7 +16,7 @@ public class DBSeeder implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         Flux<Patient> patients =
                 Flux
                         .just(
