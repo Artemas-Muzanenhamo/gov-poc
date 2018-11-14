@@ -32,7 +32,7 @@ public class IdentityProviderTest {
     public static final ClientDriverRule embeddedService = new ClientDriverRule(8333);
 
     @State("an identity reference number")
-    public void toPostState() throws Exception {
+    public void toPostState() {
 
         ObjectMapper objectMapper = new ObjectMapper();
         Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo",
