@@ -26,11 +26,13 @@ import static com.github.restdriver.clientdriver.RestClientDriver.onRequestTo;
 @PactFolder("../pacts")
 public class IdentityProviderTest {
 
+    private static final String IDENTITIES_REFERENCE = "/identities/reference";
+
     @ClassRule
     public static final ClientDriverRule embeddedService = new ClientDriverRule(8333);
 
     @State("an identity reference number")
-    public void toPostState() throws Exception {
+    public void toPostState() {
 
         ObjectMapper objectMapper = new ObjectMapper();
         Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo",
@@ -39,7 +41,7 @@ public class IdentityProviderTest {
         JSONObject jsonObject = new JSONObject(id);
 
         embeddedService.addExpectation(
-                onRequestTo("/identities/reference")
+                onRequestTo(IDENTITIES_REFERENCE)
                         .withMethod(ClientDriverRequest.Method.POST),
                 giveResponse(jsonObject.toJSONString(), MediaType.APPLICATION_JSON_UTF8_VALUE)
         );

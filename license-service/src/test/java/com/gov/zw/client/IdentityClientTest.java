@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -22,6 +23,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class IdentityClientTest {
+
+    private static final String IDENTITIES_REFERENCE = "/identities/reference";
 
     @Rule
     public PactProviderRuleMk2 stubProvider =
@@ -59,8 +62,8 @@ public class IdentityClientTest {
         return builder
                 .given("an identity reference number")
                 .uponReceiving("a request to the identity-service client")
-                    .path("/identities/reference")
-                    .method("POST")
+                    .path(IDENTITIES_REFERENCE)
+                    .method(HttpMethod.POST.name())
                     .body(requestBodyJson.toJSONString(), MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .willRespondWith()
                     .status(200)

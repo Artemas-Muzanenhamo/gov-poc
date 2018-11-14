@@ -17,22 +17,19 @@ public class DBSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        Flux<Patient> patients =
-                Flux
-                        .just(
-                                new Patient("MUZAN123", "Artemas", "Muzanenhamo",
-                                        LocalDate.of(1990, 3, 28),
-                                        "68 Jeremy Street, London, W1 7AA"),
-                                new Patient("THOMJ123", "Thomas", "Jefferson",
-                                        LocalDate.of(1990, 3, 28),
-                                        "68 Jeremy Street, London, W1 7AA"),
-                                new Patient("MARKS123", "Mark", "Smith",
-                                        LocalDate.of(1990, 3, 28),
-                                        "68 Jeremy Street, London, W1 7AA")
-                        );
+
+        Patient artemas = new Patient("MUZAN123", "Artemas", "Muzanenhamo",
+                LocalDate.of(1990, 3, 28),
+                "68 Jeremy Street, London, W1 7AA");
+        Patient thomas = new Patient("THOMJ123", "Thomas", "Jefferson",
+                LocalDate.of(1990, 3, 28),
+                "68 Jeremy Street, London, W1 7AA");
+        Patient mark = new Patient("MARKS123", "Mark", "Smith",
+                LocalDate.of(1990, 3, 28),
+                "68 Jeremy Street, London, W1 7AA");
 
         patientRepository.deleteAll();
 
-        patientRepository.saveAll(patients);
+        patientRepository.saveAll(Flux.just(artemas, thomas, mark)).subscribe();
     }
 }
