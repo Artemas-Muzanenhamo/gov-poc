@@ -1,6 +1,5 @@
-package com.gov.zw;
+package com.gov.zw.doctor;
 
-import com.gov.zw.doctor.Doctor;
 import com.gov.zw.patient.PatientEndPoint;
 import org.junit.Test;
 import org.junit.runner.RunWith;

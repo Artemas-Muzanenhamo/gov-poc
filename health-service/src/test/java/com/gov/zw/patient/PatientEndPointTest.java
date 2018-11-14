@@ -54,7 +54,7 @@ public class PatientEndPointTest {
     @Test
     public void shouldReturn200WhenRetrievingAllPatients() {
         when(patientService.getAllPatients())
-                .thenReturn(Flux.empty()); // revise
+                .thenReturn(Flux.empty());
 
         client
                 .get()
