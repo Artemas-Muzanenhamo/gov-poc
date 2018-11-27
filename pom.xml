@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>identity-service</module>
+        <!--<module>identity-service</module>-->
 	    <module>license-service</module>
 	    <module>discovery-server</module>
         <module>health-service</module>
