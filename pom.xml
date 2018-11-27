@@ -13,7 +13,7 @@
         <module>identity-service</module>
 	    <module>license-service</module>
 	    <module>discovery-server</module>
-        <module>health-service</module>
+        <!--<module>health-service</module>-->
         <module>gateway</module>
         <module>configuration-server</module>
     </modules>
@@ -43,7 +43,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.0</version>
+                <version>3.8.0</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
