@@ -13,7 +13,7 @@
         <module>identity-service</module>
 	    <module>license-service</module>
 	    <module>discovery-server</module>
-        <!--<module>health-service</module>-->
+        <module>health-service</module>
         <module>gateway</module>
         <module>configuration-server</module>
     </modules>
