@@ -20,13 +20,17 @@ import static org.mockito.Mockito.when;
 @Import(PatientEndPoint.class)
 public class PatientEndPointTest {
 
+    private static final String ALL_PATIENTS_URI = "http://localhost:8080/patients";
+
     @Autowired
     private WebTestClient client;
 
     @MockBean
     private PatientService patientService;
 
-    private static final String ALLPATIENTSURI = "http://localhost:8080/patients";
+    @MockBean
+    private PatientRepository patientRepository;
+
 
     private final Patient patient1 = new Patient("MUZAN123", "Artemas", "Muzanenhamo",
             LocalDate.of(1990, 3, 28), "68 Jeremy Street, London, W1 7AA");
@@ -40,7 +44,7 @@ public class PatientEndPointTest {
 
         client
                 .get()
-                .uri(ALLPATIENTSURI)
+                .uri(ALL_PATIENTS_URI)
                 .exchange()
                 .expectStatus().isOk()
                 .expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
@@ -58,7 +62,7 @@ public class PatientEndPointTest {
 
         client
                 .get()
-                .uri(ALLPATIENTSURI)
+                .uri(ALL_PATIENTS_URI)
                 .exchange()
                 .expectStatus().isOk();
     }
