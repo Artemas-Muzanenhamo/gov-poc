@@ -46,7 +46,7 @@ public class IdentityClientTest {
         requestObject.put("idRef", "MUZAN1234");
         JSONObject requestBodyJson = new JSONObject(requestObject);
 
-        // What I will send as a Response in the Pact JSON
+        // What I will get as a Response in the Pact JSON
         Map<String, String> responseObject = new HashMap<>();
         responseObject.put("id", "1");
         responseObject.put("identityRef", "1");
@@ -59,6 +59,7 @@ public class IdentityClientTest {
         JSONObject responseBodyJson = new JSONObject(responseObject);
 
 
+        // build the request/response
         return builder
                 .given("an identity reference number")
                 .uponReceiving("a request to the identity-service client")
