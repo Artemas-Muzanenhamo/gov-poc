@@ -9,6 +9,5 @@ import java.util.List;
 
 public interface LicenseRepository extends MongoRepository<License, String> {
     List<License> findLicensesByFirstNames(@Param("name") String name);
-
     License findLicenseByIdentityRef(String identityRef);
 }
