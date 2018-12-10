@@ -10,10 +10,13 @@ import java.util.List;
 @RepositoryRestResource
 public interface IdentityRepository extends MongoRepository<Identity, String> {
 
-    List<Identity> findIdentitiesByName(String name);
-    List<Identity> findIdentitiesBySurname(String surname);
-    List<Identity> findIdentitiesByVillageOfOrigin(String villageOfOrigin);
-    List<Identity> findIdentitiesByNameAndSurnameAndVillageOfOrigin(String name, String surname, String villageOfOrigin);
-    Identity findIdentityByNameAndSurname(@Param("name") String name, @Param("surname") String surname);
+    List<Identity> findIdentitiesByName(@Param("name") String name);
+    List<Identity> findIdentitiesBySurname(@Param("surname") String surname);
+    List<Identity> findIdentitiesByVillageOfOrigin(@Param("villageoforigin") String villageOfOrigin);
+    List<Identity> findIdentitiesByNameAndSurnameAndVillageOfOrigin(
+            @Param("name") String name,
+            @Param("surname") String surname,
+            @Param("villageoforigin") String villageOfOrigin
+    );
     Identity findIdentityByIdentityRef(String identityReference);
 }

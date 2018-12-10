@@ -5,3 +5,6 @@ spring:
       config:
         uri: http://localhost:8888
         fail-fast: true
+  data:
+    rest:
+      base-path: /search-id
