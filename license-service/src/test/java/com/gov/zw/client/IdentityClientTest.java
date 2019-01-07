@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -62,12 +63,12 @@ public class IdentityClientTest {
         // build the request/response
         return builder
                 .given("an identity reference number")
-                .uponReceiving("a request to the identity-service client")
+                .uponReceiving("a request from the License-Service consumer")
                     .path(IDENTITIES_REFERENCE)
                     .method(HttpMethod.POST.name())
                     .body(requestBodyJson.toJSONString(), MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .willRespondWith()
-                    .status(200)
+                    .status(HttpStatus.OK.value())
                     .headers(headers)
                     .body(responseBodyJson.toJSONString())
                 .toPact();
@@ -79,7 +80,9 @@ public class IdentityClientTest {
         Map<String, String> map = new HashMap<>();
         map.put("idRef", "MUZAN1234");
         Identity identity = identityClient.findIdentityByIdReferenceNumber(map);
-        Identity expectedIdentity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990", "Mashayamombe",
+        Identity expectedIdentity =
+                new Identity("1", "1", "Artemas", "Muzanenhamo",
+                "28/03/1990", "Mashayamombe",
                 "Harare", "22/01/2018");
         assertThat(identity.getId()).isEqualTo(expectedIdentity.getId());
         assertThat(identity.getIdentityRef()).isEqualTo(expectedIdentity.getIdentityRef());
