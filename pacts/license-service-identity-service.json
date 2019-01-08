@@ -7,7 +7,7 @@
     },
     "interactions": [
         {
-            "description": "a request to the identity-service client",
+            "description": "a request from the License-Service consumer",
             "request": {
                 "method": "POST",
                 "path": "/identities/reference",

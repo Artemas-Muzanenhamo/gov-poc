@@ -12,12 +12,15 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.apache.http.entity.ContentType.APPLICATION_JSON;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -25,6 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class IdentityClientTest {
 
     private static final String IDENTITIES_REFERENCE = "/identities/reference";
+    private static final String APPLICATION_JSON_UTF_8_VALUE = "application/json;charset=utf-8";
 
     @Rule
     public PactProviderRuleMk2 stubProvider =
@@ -39,7 +43,7 @@ public class IdentityClientTest {
 
         // Set Headers
         Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json;charset=utf-8");
+        headers.put("Content-Type", APPLICATION_JSON_UTF_8_VALUE);
 
         // What I will send as a Request in the Pact JSON
         Map<String, String> requestObject = new HashMap<>();
@@ -62,12 +66,12 @@ public class IdentityClientTest {
         // build the request/response
         return builder
                 .given("an identity reference number")
-                .uponReceiving("a request to the identity-service client")
+                .uponReceiving("a request from the License-Service consumer")
                     .path(IDENTITIES_REFERENCE)
                     .method(HttpMethod.POST.name())
                     .body(requestBodyJson.toJSONString(), MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .willRespondWith()
-                    .status(200)
+                    .status(HttpStatus.OK.value())
                     .headers(headers)
                     .body(responseBodyJson.toJSONString())
                 .toPact();
@@ -79,7 +83,9 @@ public class IdentityClientTest {
         Map<String, String> map = new HashMap<>();
         map.put("idRef", "MUZAN1234");
         Identity identity = identityClient.findIdentityByIdReferenceNumber(map);
-        Identity expectedIdentity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990", "Mashayamombe",
+        Identity expectedIdentity =
+                new Identity("1", "1", "Artemas", "Muzanenhamo",
+                "28/03/1990", "Mashayamombe",
                 "Harare", "22/01/2018");
         assertThat(identity.getId()).isEqualTo(expectedIdentity.getId());
         assertThat(identity.getIdentityRef()).isEqualTo(expectedIdentity.getIdentityRef());
