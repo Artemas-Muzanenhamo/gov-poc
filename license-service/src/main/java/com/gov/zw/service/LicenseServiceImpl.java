@@ -16,6 +16,7 @@ import java.util.Optional;
 @Service
 public class LicenseServiceImpl implements LicenseService {
 
+    public static final String THE_LICENSE_IS_INVALID = "The license is invalid!";
     private IdentityClient identityClient;
     private LicenseRepository licenseRepository;
 
@@ -29,7 +30,7 @@ public class LicenseServiceImpl implements LicenseService {
         Optional<License> licenseOptional = Optional.ofNullable(license);
         Map<String, String> referenceNumber = new HashMap<>();
         referenceNumber.put("idRef", licenseOptional
-                .orElseThrow(() -> new InvalidLicenseException("The license is invalid!")).getIdentityRef());
+                .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID)).getIdentityRef());
         Optional<Identity> identityOptional = Optional.ofNullable(identityClient.findIdentityByIdReferenceNumber(referenceNumber));
         if (identityOptional.isPresent()) {
             licenseRepository.save(license);
@@ -47,14 +48,14 @@ public class LicenseServiceImpl implements LicenseService {
     public void updateLicense(License license) throws InvalidLicenseException {
         Optional<License> licenseOptional = Optional.ofNullable(license);
         this.licenseRepository.save(licenseOptional
-                .orElseThrow(() -> new InvalidLicenseException("The license is invalid!")));
+                .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID)));
     }
 
     @Override
     public void removeLicense(License license) throws InvalidLicenseException {
         Optional<License> licenseOptional = Optional.ofNullable(license);
         this.licenseRepository.delete(licenseOptional
-                .orElseThrow(() -> new InvalidLicenseException("The license is invalid!")));
+                .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID)));
     }
 
     @Override
