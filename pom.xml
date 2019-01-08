@@ -25,16 +25,20 @@
         <sonar.jacoco.reportPaths>
             ${project.basedir}/license-service/target/jacoco.exec,
             ${project.basedir}/identity-service/target/jacoco.exec
+            ${project.basedir}/health-service/target/jacoco.exec
         </sonar.jacoco.reportPaths>
         <sonar.junit.reportPaths>
             ${project.basedir}/license-service/target/surefire-reports/TEST-*.xml,
             ${project.basedir}/identity-service/target/surefire-reports/TEST-*.xml
+            ${project.basedir}/health-service/target/surefire-reports/TEST-*.xml
         </sonar.junit.reportPaths>
         <sonar.exclusions>
             **/domain/*,
             **/com.gov.zw.DBSeeder.java,
             **/*Application.java,
-            **/client/*
+            **/client/*,
+            **/*Patient.java,
+            **/*DBSeeder.java
         </sonar.exclusions>
     </properties>
 
