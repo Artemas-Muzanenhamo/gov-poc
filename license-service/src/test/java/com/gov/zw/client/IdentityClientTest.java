@@ -28,6 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class IdentityClientTest {
 
     private static final String IDENTITIES_REFERENCE = "/identities/reference";
+    private static final Charset UTF_8 = Charset.forName("utf-8");
 
     @Rule
     public PactProviderRuleMk2 stubProvider =
@@ -42,7 +43,7 @@ public class IdentityClientTest {
 
         // Set Headers
         Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", APPLICATION_JSON.withCharset(Charset.forName("utf-8")).toString());
+        headers.put("Content-Type", APPLICATION_JSON.withCharset(UTF_8).toString());
 
         // What I will send as a Request in the Pact JSON
         Map<String, String> requestObject = new HashMap<>();
