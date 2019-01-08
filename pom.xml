@@ -34,7 +34,6 @@
         </sonar.junit.reportPaths>
         <sonar.exclusions>
             **/domain/*,
-            **/com.gov.zw.DBSeeder.java,
             **/*Application.java,
             **/client/*,
             **/*Patient.java,

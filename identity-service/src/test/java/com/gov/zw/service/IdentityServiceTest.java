@@ -28,7 +28,7 @@ class IdentityServiceTest {
     private IdentityRepository identityRepository;
 
     @Test
-    void should_throw_an_exception_when_an_invalid_identity_is_passed() throws Exception {
+    void should_throw_an_exception_when_an_invalid_identity_is_passed() {
         assertThrows(InvalidIdentityException.class, () -> identityService.save(null));
     }
 
@@ -49,12 +49,12 @@ class IdentityServiceTest {
     }
 
     @Test
-    void should_throw_an_exception_when_an_invalid_name_is_passed() throws Exception {
+    void should_throw_an_exception_when_an_invalid_name_is_passed() {
         assertThrows(InvalidIdentityNameException.class, () -> identityService.findIdentitiesByName(null));
     }
 
     @Test
-    void should_throw_exception_when__an_invalid_idRef_is_passed() throws Exception {
+    void should_throw_exception_when__an_invalid_idRef_is_passed() {
         assertThrows(InvalidIdentityReferenceException.class, () ->identityService.findIdentityByIdentityRef(null));
     }
 
@@ -91,7 +91,7 @@ class IdentityServiceTest {
     }
 
     @Test
-    void should_throw_an_exception_when_an_invalid_identity_is_passed_to_be_deleted() throws InvalidIdentityException {
+    void should_throw_an_exception_when_an_invalid_identity_is_passed_to_be_deleted() {
         assertThrows(InvalidIdentityException.class, () -> identityService.delete(null));
     }
 
