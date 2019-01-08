@@ -36,6 +36,7 @@
             **/domain/*,
             **/*Application.java,
             **/client/*,
+            **/provider/*,
             **/*Patient.java,
             **/*DBSeeder.java
         </sonar.exclusions>
