@@ -16,9 +16,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.apache.http.entity.ContentType.APPLICATION_JSON;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -40,7 +42,7 @@ public class IdentityClientTest {
 
         // Set Headers
         Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json;charset=utf-8");
+        headers.put("Content-Type", APPLICATION_JSON.withCharset(Charset.forName("utf-8")).toString());
 
         // What I will send as a Request in the Pact JSON
         Map<String, String> requestObject = new HashMap<>();
