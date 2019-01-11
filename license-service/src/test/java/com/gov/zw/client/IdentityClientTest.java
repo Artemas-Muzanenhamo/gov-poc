@@ -65,7 +65,7 @@ public class IdentityClientTest {
 
         // build the request/response
         return builder
-                .given("an identity reference number")
+                .given("an identity reference number from License Service client")
                 .uponReceiving("a request from the License-Service consumer")
                     .path(IDENTITIES_REFERENCE)
                     .method(HttpMethod.POST.name())

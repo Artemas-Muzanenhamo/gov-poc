@@ -36,7 +36,7 @@
             },
             "providerStates": [
                 {
-                    "name": "an identity reference number"
+                    "name": "an identity reference number from License Service client"
                 }
             ]
         }
