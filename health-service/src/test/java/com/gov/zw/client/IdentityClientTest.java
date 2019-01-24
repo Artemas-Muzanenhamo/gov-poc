@@ -1,4 +1,4 @@
-package com.gov.zw.patient;
+package com.gov.zw.client;
 
 import au.com.dius.pact.consumer.Pact;
 import au.com.dius.pact.consumer.PactProviderRuleMk2;
@@ -10,8 +10,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,7 +28,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @WebFluxTest
 @RunWith(SpringRunner.class)
-@Import(Identity.class)
 public class IdentityClientTest {
 
     private static final String IDENTITIES_REFERENCE = "/identities/reference";

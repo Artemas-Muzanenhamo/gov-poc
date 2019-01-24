@@ -12,9 +12,8 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 //import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
 @SpringBootApplication
-@EnableFeignClients
-
 @EnableWebFlux
+@EnableFeignClients
 @EnableReactiveMongoRepositories
 public class HealthServiceApplication extends AbstractReactiveMongoConfiguration {
 
