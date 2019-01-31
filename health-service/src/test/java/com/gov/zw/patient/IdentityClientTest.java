@@ -1,21 +1,19 @@
-package com.gov.zw.client;
+package com.gov.zw.patient;
 
 import au.com.dius.pact.consumer.Pact;
 import au.com.dius.pact.consumer.PactProviderRuleMk2;
 import au.com.dius.pact.consumer.PactVerification;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.model.RequestResponsePact;
+import com.gov.zw.patient.Identity;
+import com.gov.zw.patient.IdentityClient;
 import net.minidev.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo;
-import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,9 +24,10 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@WebFluxTest
 @RunWith(SpringRunner.class)
+@SpringBootTest
 public class IdentityClientTest {
+
 
     private static final String IDENTITIES_REFERENCE = "/identities/reference";
     private static final String APPLICATION_JSON_UTF_8_VALUE = "application/json;charset=utf-8";

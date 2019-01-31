@@ -1,0 +1,6 @@
+eureka:
+  client:
+    enabled: false
+health-service:
+  ribbon:
+    listOfServers: localhost:9999

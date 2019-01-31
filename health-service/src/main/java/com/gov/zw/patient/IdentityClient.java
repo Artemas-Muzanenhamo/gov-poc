@@ -1,4 +1,4 @@
-package com.gov.zw.client;
+package com.gov.zw.patient;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Map;
 
-@Component
 @FeignClient(name = "identity-service")
+@Component
 public interface IdentityClient {
 
     @PostMapping(value = "/identities/reference")

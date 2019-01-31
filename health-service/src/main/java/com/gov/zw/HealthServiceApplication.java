@@ -4,17 +4,17 @@ import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoClients;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.data.mongodb.config.AbstractReactiveMongoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.reactive.config.EnableWebFlux;
 
-//import org.springframework.cloud.netflix.feign.EnableFeignClients;
-
 @SpringBootApplication
+@EnableEurekaClient
 @EnableWebFlux
-@EnableFeignClients
 @EnableReactiveMongoRepositories
+@Controller
 public class HealthServiceApplication extends AbstractReactiveMongoConfiguration {
 
 	public static void main(String[] args) {
