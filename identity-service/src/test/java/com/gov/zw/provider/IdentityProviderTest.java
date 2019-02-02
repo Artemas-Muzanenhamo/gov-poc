@@ -31,8 +31,11 @@ public class IdentityProviderTest {
     @ClassRule
     public static final ClientDriverRule embeddedService = new ClientDriverRule(8333);
 
-    @State("an identity reference number from License Service client")
-    public void toPostState() {
+    @State({
+            "an identity reference number from License Service client",
+            "identity details from the Health Service client"
+    })
+    public void licenseServiceResponse() {
 
         ObjectMapper objectMapper = new ObjectMapper();
         Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo",
@@ -46,6 +49,22 @@ public class IdentityProviderTest {
                 giveResponse(jsonObject.toJSONString(), MediaType.APPLICATION_JSON_UTF8_VALUE)
         );
     }
+
+//    @State("identity details from the Health Service client")
+//    public void healthServiceResponse() {
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo",
+//                "28/03/1990", "Mashayamombe", "Harare", "22/01/2018");
+//        Map<String, String> id = objectMapper.convertValue(identity, Map.class);
+//        JSONObject jsonObject = new JSONObject(id);
+//
+//        embeddedService.addExpectation(
+//                onRequestTo(IDENTITIES_REFERENCE)
+//                        .withMethod(ClientDriverRequest.Method.POST),
+//                giveResponse(jsonObject.toJSONString(), MediaType.APPLICATION_JSON_UTF8_VALUE)
+//        );
+//    }
 
     @TestTarget
     public final Target target = new HttpTarget(8333);

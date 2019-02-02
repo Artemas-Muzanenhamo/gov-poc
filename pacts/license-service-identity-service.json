@@ -3,11 +3,11 @@
         "name": "identity-service"
     },
     "consumer": {
-        "name": "health-service"
+        "name": "license-service"
     },
     "interactions": [
         {
-            "description": "a request from the Health-Service consumer",
+            "description": "a request from the License-Service consumer",
             "request": {
                 "method": "POST",
                 "path": "/identities/reference",
@@ -15,8 +15,6 @@
                     "Content-Type": "application/json;charset=UTF-8"
                 },
                 "body": {
-                    "id-surname": "Muzanenhamo",
-                    "id-name": "Artemas",
                     "idRef": "MUZAN1234"
                 }
             },
@@ -38,7 +36,7 @@
             },
             "providerStates": [
                 {
-                    "name": "identity details from the Health Service client"
+                    "name": "an identity reference number from License Service client"
                 }
             ]
         }
