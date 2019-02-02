@@ -35,7 +35,7 @@ public class IdentityProviderTest {
             "an identity reference number from License Service client",
             "identity details from the Health Service client"
     })
-    public void returnIdentityDetailsState() {
+    public void identityDetailsState() {
 
         ObjectMapper objectMapper = new ObjectMapper();
         Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo",
