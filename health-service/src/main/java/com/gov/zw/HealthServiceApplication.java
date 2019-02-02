@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.reactive.config.EnableWebFlux;
 
 @SpringBootApplication
-@EnableEurekaClient
 @EnableWebFlux
 @EnableFeignClients
 @EnableReactiveMongoRepositories

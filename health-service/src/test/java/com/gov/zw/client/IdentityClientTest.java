@@ -1,12 +1,10 @@
-package com.gov.zw.patient.client;
+package com.gov.zw.client;
 
 import au.com.dius.pact.consumer.Pact;
 import au.com.dius.pact.consumer.PactProviderRuleMk2;
 import au.com.dius.pact.consumer.PactVerification;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.model.RequestResponsePact;
-import com.gov.zw.client.Identity;
-import com.gov.zw.client.IdentityClient;
 import net.minidev.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
