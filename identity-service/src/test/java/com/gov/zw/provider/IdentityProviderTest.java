@@ -31,8 +31,11 @@ public class IdentityProviderTest {
     @ClassRule
     public static final ClientDriverRule embeddedService = new ClientDriverRule(8333);
 
-    @State("an identity reference number from License Service client")
-    public void toPostState() {
+    @State({
+            "an identity reference number from License Service client",
+            "identity details from the Health Service client"
+    })
+    public void licenseServiceResponse() {
 
         ObjectMapper objectMapper = new ObjectMapper();
         Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo",
