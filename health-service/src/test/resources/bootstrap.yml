@@ -1,6 +1,6 @@
 eureka:
   client:
     enabled: false
-health-service:
+identity-service:
   ribbon:
     listOfServers: localhost:9999
