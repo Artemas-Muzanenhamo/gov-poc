@@ -24,10 +24,8 @@ public class PatientEndPointTest {
 
     @Autowired
     private WebTestClient client;
-
     @MockBean
     private PatientService patientService;
-
     @MockBean
     private PatientRepository patientRepository;
 
