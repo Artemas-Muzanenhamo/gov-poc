@@ -33,7 +33,7 @@ public class IdentityClientTest extends CDCIdentityClientBaseTest {
 
         // What I will send as a Request in the Pact JSON
         Map<String, String> requestObject = new HashMap<>();
-        requestObject.put("id-ref", "MUZAN1234");
+        requestObject.put("idRef", "MUZAN1234");
         requestObject.put("id-name", "Artemas");
         requestObject.put("id-surname", "Muzanenhamo");
         JSONObject requestBodyJson = new JSONObject(requestObject);
@@ -68,7 +68,7 @@ public class IdentityClientTest extends CDCIdentityClientBaseTest {
     @PactVerification(fragment = "retrievePatientIdentityPact")
     public void verifyPatientIdentityPact() {
         Map<String, String> map = new HashMap<>();
-        map.put("id-ref", "MUZAN1234");
+        map.put("idRef", "MUZAN1234");
         map.put("id-name", "Artemas");
         map.put("id-surname", "Muzanenhamo");
         Identity identity = identityClient.findIdentityByIdReferenceNumber(map);

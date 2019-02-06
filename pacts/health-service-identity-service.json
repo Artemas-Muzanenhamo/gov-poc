@@ -16,8 +16,8 @@
                 },
                 "body": {
                     "id-surname": "Muzanenhamo",
-                    "id-ref": "MUZAN1234",
-                    "id-name": "Artemas"
+                    "id-name": "Artemas",
+                    "idRef": "MUZAN1234"
                 }
             },
             "response": {
