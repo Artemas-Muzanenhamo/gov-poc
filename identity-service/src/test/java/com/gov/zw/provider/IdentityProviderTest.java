@@ -8,18 +8,18 @@ import au.com.dius.pact.provider.junit.target.HttpTarget;
 import au.com.dius.pact.provider.junit.target.Target;
 import au.com.dius.pact.provider.junit.target.TestTarget;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.restdriver.clientdriver.ClientDriverRequest;
 import com.github.restdriver.clientdriver.ClientDriverRule;
 import com.gov.zw.domain.Identity;
 import net.minidev.json.JSONObject;
 import org.junit.ClassRule;
 import org.junit.runner.RunWith;
-import org.springframework.http.MediaType;
 
 import java.util.Map;
 
+import static com.github.restdriver.clientdriver.ClientDriverRequest.Method.POST;
 import static com.github.restdriver.clientdriver.RestClientDriver.giveResponse;
 import static com.github.restdriver.clientdriver.RestClientDriver.onRequestTo;
+import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
 @RunWith(PactRunner.class)
 @Provider("identity-service")
@@ -45,8 +45,8 @@ public class IdentityProviderTest {
 
         embeddedService.addExpectation(
                 onRequestTo(IDENTITIES_REFERENCE)
-                        .withMethod(ClientDriverRequest.Method.POST),
-                giveResponse(jsonObject.toJSONString(), MediaType.APPLICATION_JSON_UTF8_VALUE)
+                        .withMethod(POST),
+                giveResponse(jsonObject.toJSONString(), APPLICATION_JSON_UTF8_VALUE)
         );
     }
 
