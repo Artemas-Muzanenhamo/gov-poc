@@ -6,6 +6,7 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
+      fail-fast: true
   mongodb:
     embedded:
       version: 3.2.2
