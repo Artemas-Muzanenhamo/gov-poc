@@ -13,8 +13,8 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 @EnableWebFlux
 @EnableFeignClients
 @EnableReactiveMongoRepositories
-@SpringBootApplication
 @EnableEurekaClient
+@SpringBootApplication
 public class HealthServiceApplication extends AbstractReactiveMongoConfiguration {
 
 	public static void main(String[] args) {
@@ -28,6 +28,6 @@ public class HealthServiceApplication extends AbstractReactiveMongoConfiguration
 
 	@Override
 	protected String getDatabaseName() {
-		return "reactive";
+		return "health-service-db";
 	}
 }

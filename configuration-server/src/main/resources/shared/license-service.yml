@@ -1,9 +1,9 @@
 spring:
   data:
-      mongodb:
-        host: localhost
-        port: 27017
-        database: license-service-db
+    mongodb:
+      host: localhost
+      port: 27017
+      database: license-service-db
 server:
   port: 8081
 eureka:

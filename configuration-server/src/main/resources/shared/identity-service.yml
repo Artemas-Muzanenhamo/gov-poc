@@ -1,9 +1,9 @@
 spring:
   data:
-      mongodb:
-        host: localhost
-        port: 27017
-        database: identity-service-db
+    mongodb:
+      host: localhost
+      port: 27017
+      database: identity-service-db
 server:
   port: 8080
 eureka:

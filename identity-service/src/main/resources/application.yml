@@ -1,10 +1,10 @@
 spring:
   application:
-      name: identity-service
+    name: identity-service
   cloud:
-      config:
-        uri: http://localhost:8888
-        fail-fast: true
+    config:
+      uri: http://localhost:8888
+      fail-fast: true
   data:
     rest:
       base-path: /search-id
