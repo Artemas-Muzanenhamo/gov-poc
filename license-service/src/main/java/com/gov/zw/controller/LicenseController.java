@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+import static org.springframework.http.HttpStatus.OK;
+
 @RestController
 @RequestMapping("/licenses")
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class LicenseController {
     private final LicenseService licenseServiceImpl;
 
@@ -22,6 +24,7 @@ public class LicenseController {
 
     // Create
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseStatus(value = OK)
     public void addLicense(@RequestBody License license) throws InvalidLicenseException, InvalidIdentityException {
         this.licenseServiceImpl.addLicense(license);
     }
@@ -39,12 +42,14 @@ public class LicenseController {
 
     // Update
     @PutMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseStatus(value = OK)
     public void updateLicense(@RequestBody License license) throws InvalidLicenseException {
         this.licenseServiceImpl.updateLicense(license);
     }
 
     // Delete
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseStatus(value = OK)
     public void deleteLicense(@RequestBody License license) throws InvalidLicenseException {
         this.licenseServiceImpl.removeLicense(license);
     }

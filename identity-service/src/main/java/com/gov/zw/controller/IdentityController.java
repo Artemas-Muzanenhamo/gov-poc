@@ -2,19 +2,20 @@ package com.gov.zw.controller;
 
 import com.gov.zw.domain.Identity;
 import com.gov.zw.service.IdentityService;
+import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidIdentityNameException;
 import com.gov.zw.util.InvalidIdentityReferenceException;
-import com.gov.zw.util.InvalidIdentityException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
+import static org.springframework.http.HttpStatus.OK;
+
 @RestController
 @RequestMapping("/identities")
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class IdentityController {
 
     private final IdentityService identityServiceImpl;
@@ -25,7 +26,8 @@ public class IdentityController {
 
     // Create
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseBody
+    @ResponseStatus(value = OK)
     public void saveIdentity(@RequestBody Identity identity) throws InvalidIdentityException {
         this.identityServiceImpl.save(identity);
     }
@@ -48,14 +50,16 @@ public class IdentityController {
 
     //Update
     @PutMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @ResponseStatus(OK)
     public void updateIdentity(@RequestBody Identity identity) throws InvalidIdentityException {
         this.identityServiceImpl.save(identity);
     }
 
     // Delete
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @ResponseStatus(OK)
     public void deleteIdentity(@RequestBody Identity identity) throws InvalidIdentityException {
         this.identityServiceImpl.delete(identity);
     }
