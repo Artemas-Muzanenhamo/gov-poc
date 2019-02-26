@@ -14,5 +14,3 @@ spring:
       database: patient-service
       host: localhost
       port: 27017
-    rest:
-      base-path: /search-id
