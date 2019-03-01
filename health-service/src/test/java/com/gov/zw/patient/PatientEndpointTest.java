@@ -17,8 +17,8 @@ import static org.mockito.Mockito.when;
 
 @WebFluxTest
 @RunWith(SpringRunner.class)
-@Import(PatientEndPoint.class)
-public class PatientEndPointTest {
+@Import(PatientEndpoint.class)
+public class PatientEndpointTest {
 
     private static final String ALL_PATIENTS_URI = "http://localhost:8080/patients";
 
@@ -36,7 +36,7 @@ public class PatientEndPointTest {
             LocalDate.of(1990, 3, 28), "68 Jeremy Street, London, W1 7AA");
 
     @Test
-    public void shouldReturnAllMockedPatients() {
+    public void should_return_all_mocked_patients() {
         when(patientService.getAllPatients())
                 .thenReturn(Flux.just(patient1, patient2));
 
@@ -54,7 +54,7 @@ public class PatientEndPointTest {
     }
 
     @Test
-    public void shouldReturn200WhenRetrievingAllPatients() {
+    public void should_return_200_when_retrieving_all_patients() {
         when(patientService.getAllPatients())
                 .thenReturn(Flux.empty());
 
@@ -64,4 +64,7 @@ public class PatientEndPointTest {
                 .exchange()
                 .expectStatus().isOk();
     }
+
+//    @Test
+//    public void should
 }
