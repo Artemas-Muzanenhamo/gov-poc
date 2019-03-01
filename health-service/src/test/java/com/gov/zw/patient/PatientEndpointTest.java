@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 
@@ -65,6 +66,23 @@ public class PatientEndpointTest {
                 .expectStatus().isOk();
     }
 
-//    @Test
-//    public void should
+    @Test
+    public void should_add_patient_given_the_user_has_a_valid_identity() {
+        Patient patient =
+                new Patient(
+                        "12345",
+                        "Arty",
+                        "Muza",
+                        LocalDate.of(1990, 3, 28),
+                        "Flat 7, Elm Rose Road, E16 9AA"
+                );
+
+        client
+                .put()
+                .uri(ALL_PATIENTS_URI)
+                .body(Mono.justOrEmpty(patient), Patient.class)
+                .exchange()
+                .expectStatus()
+                .is2xxSuccessful();
+    }
 }

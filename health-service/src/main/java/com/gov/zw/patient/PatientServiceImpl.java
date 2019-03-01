@@ -16,4 +16,9 @@ public class PatientServiceImpl implements PatientService {
     public Flux<Patient> getAllPatients() {
         return patientRepository.findAll();
     }
+
+    @Override
+    public void addPatient(Patient patient) {
+        patientRepository.insert(patient);
+    }
 }

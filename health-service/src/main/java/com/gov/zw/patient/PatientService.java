@@ -4,4 +4,6 @@ import reactor.core.publisher.Flux;
 
 interface PatientService {
     Flux<Patient> getAllPatients();
+
+    void addPatient(Patient patient);
 }
