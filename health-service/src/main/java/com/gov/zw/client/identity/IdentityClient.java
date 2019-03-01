@@ -1,4 +1,4 @@
-package com.gov.zw.client;
+package com.gov.zw.client.identity;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.gov.zw.client;
+package com.gov.zw.client.identity;
 
 import au.com.dius.pact.consumer.Pact;
 import au.com.dius.pact.consumer.PactVerification;
