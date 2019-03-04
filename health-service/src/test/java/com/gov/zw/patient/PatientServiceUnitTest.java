@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PatientServiceUnitTest {
@@ -31,4 +32,16 @@ public class PatientServiceUnitTest {
 
         assertThat(actualPatient).isEqualTo(patient);
     }
+
+//    @Test
+//    public void should_add_patient_details_given_a_valid_id() {
+//        Patient patient = new Patient("MUZAN123", "Artemas", "Muzanenhamo", LocalDate.of(1990, 3, 28),
+//                "68 Jeremy Street, London, W1 7AA");
+//
+//        given(patientRepository.save(patient));
+//
+//        patientServiceImpl.addPatient(patient);
+//
+//        verify(patientRepository.save(patient)).block().canEqual(patient);
+//    }
 }
