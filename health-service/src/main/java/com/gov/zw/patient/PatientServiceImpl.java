@@ -1,7 +1,9 @@
 package com.gov.zw.patient;
 
+import org.reactivestreams.Publisher;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -18,7 +20,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public void addPatient(Patient patient) {
-        patientRepository.insert(patient);
+    public Publisher<Void> addPatient(Mono<Patient> patientMono) {
+        return null;
     }
 }
