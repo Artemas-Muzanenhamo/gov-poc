@@ -24,8 +24,6 @@ public class PatientEndpoint {
                 PUT("/patients").and(accept(APPLICATION_JSON).and(contentType(APPLICATION_JSON))),
                 request -> {
                     Mono<Patient> patientMono = request.bodyToMono(Patient.class);
-                    // TODO: Sort endpoint
-                    request.body(toMono(patientServiceImpl.addPatient(patientMono)))
                     return ok().build();
                 });
     }
