@@ -6,5 +6,5 @@ import reactor.core.publisher.Mono;
 interface PatientService {
     Flux<Patient> getAllPatients();
 
-    Flux<Patient> addPatient(Mono<Patient> patientMono);
+    Mono<Patient> addPatient(Mono<Patient> patientMono);
 }

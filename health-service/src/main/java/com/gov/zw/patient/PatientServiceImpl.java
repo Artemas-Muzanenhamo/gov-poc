@@ -19,7 +19,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Flux<Patient> addPatient(Mono<Patient> patientMono) {
-        return patientRepository.insert(patientMono);
+    public Mono<Patient> addPatient(Mono<Patient> patientMono) {
+        return patientRepository.insert(patientMono.block());
     }
 }
