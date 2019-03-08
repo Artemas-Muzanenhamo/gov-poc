@@ -39,7 +39,7 @@ public class PatientServiceUnitTest {
         Patient patient = new Patient("MUZAN123", "Artemas", "Muzanenhamo", LocalDate.of(1990, 3, 28),
                 "68 Jeremy Street, London, W1 7AA");
         Mono<Patient> patientMono =  justOrEmpty(patient);
-        given(patientRepository.save(patient)).willReturn(patientMono);
+        given(patientRepository.insert(patient)).willReturn(patientMono);
 
         Patient patient1 = patientServiceImpl.addPatient(patientMono).block();
 

@@ -24,7 +24,6 @@ public class PatientEndpoint {
                 request -> {
                     Mono<Patient> patientMono = request.bodyToMono(Patient.class);
                     request.bodyToMono(Patient.class);
-                    // TODO: call patientServiceImpl.addPatient(patientMono(Patient)
                     return ok().build();
                 });
     }
