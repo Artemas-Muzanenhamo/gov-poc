@@ -20,6 +20,6 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Mono<Patient> addPatient(Mono<Patient> patientMono) {
-        return patientRepository.insert(patientMono.block());
+        return patientRepository.insert(patientMono).next();
     }
 }

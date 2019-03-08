@@ -1,6 +1,5 @@
 package com.gov.zw.patient;
 
-import org.reactivestreams.Publisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -21,11 +20,7 @@ public class PatientEndpoint {
                 request -> ok().body(patientServiceImpl.getAllPatients(), Patient.class)
         ).andRoute(
                 PUT("/patients").and(accept(APPLICATION_JSON).and(contentType(APPLICATION_JSON))),
-                request -> {
-                    // TODO: Create publisher
-                    Publisher<Patient> patientPublisher = null;
-                    return ok().body(patientPublisher, Patient.class);
-//                    return ok().build();
-                });
+                request -> ok().body(patientServiceImpl.addPatient(request.bodyToMono(Patient.class)), Patient.class)
+        );
     }
 }

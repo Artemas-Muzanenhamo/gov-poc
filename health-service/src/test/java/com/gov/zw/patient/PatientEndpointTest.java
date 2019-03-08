@@ -80,7 +80,7 @@ public class PatientEndpointTest {
         client
                 .put()
                 .uri(ALL_PATIENTS_URI)
-                .body(Mono.justOrEmpty(patient), Patient.class)
+                .body(Mono.just(patient), Patient.class)
                 .exchange()
                 .expectStatus()
                 .is2xxSuccessful();

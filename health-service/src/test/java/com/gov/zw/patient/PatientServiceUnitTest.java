@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
-import static reactor.core.publisher.Mono.justOrEmpty;
+import static reactor.core.publisher.Mono.just;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PatientServiceUnitTest {
@@ -38,8 +38,8 @@ public class PatientServiceUnitTest {
     public void should_add_patient_details_given_a_valid_id() {
         Patient patient = new Patient("MUZAN123", "Artemas", "Muzanenhamo", LocalDate.of(1990, 3, 28),
                 "68 Jeremy Street, London, W1 7AA");
-        Mono<Patient> patientMono =  justOrEmpty(patient);
-        given(patientRepository.insert(patient)).willReturn(patientMono);
+        Mono<Patient> patientMono = just(patient);
+        given(patientRepository.insert(patientMono)).willReturn(Flux.just(patient));
 
         Patient patient1 = patientServiceImpl.addPatient(patientMono).block();
 
