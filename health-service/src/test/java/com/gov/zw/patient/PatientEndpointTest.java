@@ -15,6 +15,7 @@ import reactor.core.publisher.Mono;
 import java.time.LocalDate;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @WebFluxTest
 @RunWith(SpringRunner.class)
@@ -77,12 +78,14 @@ public class PatientEndpointTest {
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
 
+        // TODO: Fix Test
         client
                 .put()
+//                .body(Mono.just(patient), Patient.class)
                 .uri(ALL_PATIENTS_URI)
                 .body(Mono.just(patient), Patient.class)
                 .exchange()
                 .expectStatus()
-                .is2xxSuccessful();
+                .isOk();
     }
 }
