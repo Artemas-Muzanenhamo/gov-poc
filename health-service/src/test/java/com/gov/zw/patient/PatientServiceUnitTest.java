@@ -24,8 +24,9 @@ public class PatientServiceUnitTest {
     private PatientRepository patientRepository;
 
     @Test
-    public void shouldReturnAllPatients() {
-        Patient patient = new Patient("MUZAN123", "Artemas", "Muzanenhamo", LocalDate.of(1990, 3, 28),
+    public void should_return_all_patients() {
+        Patient patient = new Patient("MUZAN123", "Artemas", "Muzanenhamo",
+                LocalDate.of(1990, 3, 28),
                 "68 Jeremy Street, London, W1 7AA");
         given(patientRepository.findAll()).willReturn(Flux.just(patient));
 
@@ -36,7 +37,8 @@ public class PatientServiceUnitTest {
 
     @Test
     public void should_add_patient_details_given_a_valid_id() {
-        Patient patient = new Patient("MUZAN123", "Artemas", "Muzanenhamo", LocalDate.of(1990, 3, 28),
+        Patient patient = new Patient("MUZAN123", "Artemas", "Muzanenhamo",
+                LocalDate.of(1990, 3, 28),
                 "68 Jeremy Street, London, W1 7AA");
         Mono<Patient> patientMono = just(patient);
         given(patientRepository.insert(patientMono)).willReturn(Flux.just(patient));
