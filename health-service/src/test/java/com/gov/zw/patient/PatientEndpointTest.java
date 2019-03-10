@@ -5,7 +5,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
@@ -15,11 +14,9 @@ import reactor.core.publisher.Mono;
 import java.time.LocalDate;
 
 import static org.mockito.Mockito.when;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
 
-@WebFluxTest
 @RunWith(SpringRunner.class)
-@Import(PatientEndpoint.class)
+@WebFluxTest({PatientEndpoint.class, PatientHandler.class})
 public class PatientEndpointTest {
 
     private static final String ALL_PATIENTS_URI = "http://localhost:8080/patients";
@@ -28,9 +25,6 @@ public class PatientEndpointTest {
     private WebTestClient client;
     @MockBean
     private PatientService patientService;
-    @MockBean
-    private PatientRepository patientRepository;
-
 
     private final Patient patient1 = new Patient("MUZAN123", "Artemas", "Muzanenhamo",
             LocalDate.of(1990, 3, 28), "68 Jeremy Street, London, W1 7AA");
