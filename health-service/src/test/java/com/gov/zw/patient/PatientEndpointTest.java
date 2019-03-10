@@ -61,7 +61,6 @@ public class PatientEndpointTest {
                 .expectStatus().isOk();
     }
 
-    @Test
     public void should_add_patient_given_the_user_has_a_valid_identity() {
         Patient patient =
                 new Patient(

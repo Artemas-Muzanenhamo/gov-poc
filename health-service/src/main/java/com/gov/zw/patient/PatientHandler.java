@@ -20,4 +20,9 @@ public class PatientHandler {
         Flux<Patient> patients = patientServiceImpl.getAllPatients();
         return ok().body(patients, Patient.class);
     }
+
+    Mono<ServerResponse> addPatient(ServerRequest request) {
+        Mono<Patient> patient = request.bodyToMono(Patient.class);
+        return ok().build(patientServiceImpl.addPatient(patient));
+    }
 }
