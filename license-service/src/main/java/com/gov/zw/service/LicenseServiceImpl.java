@@ -16,7 +16,8 @@ import java.util.Optional;
 @Service
 public class LicenseServiceImpl implements LicenseService {
 
-    public static final String THE_LICENSE_IS_INVALID = "The license is invalid!";
+    private static final String THE_LICENSE_IS_INVALID = "The license is invalid!";
+    private static final String IDENTITY_IS_INVALID_OR_DOES_NOT_EXIST = "Identity is invalid or does not exist!";
     private IdentityClient identityClient;
     private LicenseRepository licenseRepository;
 
@@ -35,7 +36,7 @@ public class LicenseServiceImpl implements LicenseService {
         if (identityOptional.isPresent()) {
             licenseRepository.save(license);
         } else {
-            throw new InvalidIdentityException("Identity is invalid or does not exist!");
+            throw new InvalidIdentityException(IDENTITY_IS_INVALID_OR_DOES_NOT_EXIST);
         }
     }
 

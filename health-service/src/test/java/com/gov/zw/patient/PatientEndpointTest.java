@@ -5,20 +5,19 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 
 import static org.mockito.Mockito.when;
 
-@WebFluxTest
 @RunWith(SpringRunner.class)
-@Import(PatientEndPoint.class)
-public class PatientEndPointTest {
+@WebFluxTest({PatientEndpoint.class, PatientHandler.class})
+public class PatientEndpointTest {
 
     private static final String ALL_PATIENTS_URI = "http://localhost:8080/patients";
 
@@ -26,9 +25,6 @@ public class PatientEndPointTest {
     private WebTestClient client;
     @MockBean
     private PatientService patientService;
-    @MockBean
-    private PatientRepository patientRepository;
-
 
     private final Patient patient1 = new Patient("MUZAN123", "Artemas", "Muzanenhamo",
             LocalDate.of(1990, 3, 28), "68 Jeremy Street, London, W1 7AA");
@@ -36,7 +32,7 @@ public class PatientEndPointTest {
             LocalDate.of(1990, 3, 28), "68 Jeremy Street, London, W1 7AA");
 
     @Test
-    public void shouldReturnAllMockedPatients() {
+    public void should_return_all_mocked_patients() {
         when(patientService.getAllPatients())
                 .thenReturn(Flux.just(patient1, patient2));
 
@@ -54,7 +50,7 @@ public class PatientEndPointTest {
     }
 
     @Test
-    public void shouldReturn200WhenRetrievingAllPatients() {
+    public void should_return_200_when_retrieving_all_patients() {
         when(patientService.getAllPatients())
                 .thenReturn(Flux.empty());
 
@@ -63,5 +59,26 @@ public class PatientEndPointTest {
                 .uri(ALL_PATIENTS_URI)
                 .exchange()
                 .expectStatus().isOk();
+    }
+
+    public void should_add_patient_given_the_user_has_a_valid_identity() {
+        Patient patient =
+                new Patient(
+                        "12345",
+                        "Arty",
+                        "Muza",
+                        LocalDate.of(1990, 3, 28),
+                        "Flat 7, Elm Rose Road, E16 9AA"
+                );
+
+        // TODO: Fix Test
+        client
+                .put()
+//                .body(Mono.just(patient), Patient.class)
+                .uri(ALL_PATIENTS_URI)
+                .body(Mono.just(patient), Patient.class)
+                .exchange()
+                .expectStatus()
+                .isOk();
     }
 }
