@@ -2,6 +2,7 @@ package com.gov.zw.patient;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -9,11 +10,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 
 import static org.mockito.Mockito.when;
+import static reactor.core.publisher.Mono.just;
 
 @RunWith(SpringRunner.class)
 @WebFluxTest({PatientEndpoint.class, PatientHandler.class})
@@ -61,6 +62,7 @@ public class PatientEndpointTest {
                 .expectStatus().isOk();
     }
 
+    @Test
     public void should_add_patient_given_the_user_has_a_valid_identity() {
         Patient patient =
                 new Patient(
@@ -71,12 +73,13 @@ public class PatientEndpointTest {
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
 
-        // TODO: Fix Test
+        when(patientService.addPatient(just(patient))).thenReturn(just(patient));
+
         client
                 .put()
 //                .body(Mono.just(patient), Patient.class)
                 .uri(ALL_PATIENTS_URI)
-                .body(Mono.just(patient), Patient.class)
+                .body(just(patient), Patient.class)
                 .exchange()
                 .expectStatus()
                 .isOk();
