@@ -10,6 +10,7 @@ import reactor.core.publisher.Mono;
 import java.net.URI;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
+import static org.springframework.web.reactive.function.server.ServerResponse.created;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
 @Component
@@ -27,14 +28,13 @@ public class PatientHandler {
 
     Mono<ServerResponse> addPatient(ServerRequest request) {
         Mono<Patient> patient = request.bodyToMono(Patient.class);
-        return ok().body(patient, Patient.class);
+        return created(URI.create("/patients")).body(patient, Patient.class);
     }
 
     private static Mono<ServerResponse> defaultWriteResponse(Publisher<Patient> patients) {
         return Mono
                 .from(patients)
-                .flatMap(p -> ServerResponse
-                        .created(URI.create("/patients"))
+                .flatMap(p -> created(URI.create("/patients"))
                         .contentType(APPLICATION_JSON_UTF8)
                         .build()
                 );

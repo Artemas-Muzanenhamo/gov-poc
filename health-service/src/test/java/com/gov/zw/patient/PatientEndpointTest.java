@@ -77,11 +77,10 @@ public class PatientEndpointTest {
 
         client
                 .put()
-//                .body(Mono.just(patient), Patient.class)
                 .uri(ALL_PATIENTS_URI)
                 .body(just(patient), Patient.class)
                 .exchange()
                 .expectStatus()
-                .isOk();
+                .isCreated();
     }
 }
