@@ -35,16 +35,16 @@ public class PatientServiceUnitTest {
         assertThat(actualPatient).isEqualTo(patient);
     }
 
-    //TODO: Fix test
+    @Test
     public void should_add_patient_details_given_a_valid_id() {
         Patient patient = new Patient("MUZAN123", "Artemas", "Muzanenhamo",
                 LocalDate.of(1990, 3, 28),
                 "68 Jeremy Street, London, W1 7AA");
-        Mono<Patient> patientMono = just(patient);
-        given(patientRepository.insert(patientMono)).willReturn(Flux.just(patient));
+        Mono<Patient> newPatientMono = just(patient);
+        given(patientRepository.insert(newPatientMono)).willReturn(Flux.just(patient));
 
-//        Patient patient1 = patientServiceImpl.addPatient(patientMono);
-//
-//        assertThat(patient1).isEqualTo(patient);
+        Mono<Patient> createdPatient = patientServiceImpl.addPatient(newPatientMono);
+
+        assertThat(createdPatient.block()).isEqualTo(patient);
     }
 }
