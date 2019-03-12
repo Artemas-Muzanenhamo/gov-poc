@@ -22,4 +22,9 @@ public class PatientServiceImpl implements PatientService {
     public Mono<Patient> addPatient(Mono<Patient> patientMono) {
         return patientRepository.insert(patientMono).next();
     }
+
+    @Override
+    public Mono<Patient> updatePatient(Patient updatedPatient) {
+        return patientRepository.save(updatedPatient);
+    }
 }

@@ -47,4 +47,17 @@ public class PatientServiceUnitTest {
 
         assertThat(createdPatient.block()).isEqualTo(patient);
     }
+
+    @Test
+    public void should_update_patient_details() {
+        Patient updatedPatient = new Patient("MUZAN123", "Artemas", "Thomas",
+                LocalDate.of(1990, 3, 28),
+                "123 Rock Street, London, W1 7XX");
+
+        given(patientRepository.save(updatedPatient)).willReturn(just(updatedPatient));
+
+        Mono<Patient> patient = patientServiceImpl.updatePatient(updatedPatient);
+
+        assertThat(updatedPatient).isEqualTo(patient.block());
+    }
 }

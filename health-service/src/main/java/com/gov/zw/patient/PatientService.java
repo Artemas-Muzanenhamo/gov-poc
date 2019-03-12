@@ -7,4 +7,6 @@ interface PatientService {
     Flux<Patient> getAllPatients();
 
     Mono<Patient> addPatient(Mono<Patient> patientMono);
+
+    Mono<Patient> updatePatient(Patient updatedPatientMono);
 }
