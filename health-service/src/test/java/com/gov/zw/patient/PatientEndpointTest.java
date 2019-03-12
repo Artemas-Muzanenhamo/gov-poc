@@ -94,6 +94,8 @@ public class PatientEndpointTest {
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
 
+        when(patientService.updatePatient(patient)).thenReturn(just(patient));
+
         client
                 .post()
                 .uri(ALL_PATIENTS_URI)

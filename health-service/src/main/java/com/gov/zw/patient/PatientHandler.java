@@ -27,13 +27,14 @@ public class PatientHandler {
     }
 
     Mono<ServerResponse> addPatient(ServerRequest request) {
-        Mono<Patient> patient = request.bodyToMono(Patient.class);
-        return created(URI.create("/patients")).body(patient, Patient.class);
+        Mono<Patient> patient = patientServiceImpl.addPatient(request.bodyToMono(Patient.class));
+        return created(URI.create("/patients")).build();
     }
 
     Mono<ServerResponse> updatePatient(ServerRequest request) {
-        Mono<Patient> patient = request.bodyToMono(Patient.class);
-        return ok().body(patient, Patient.class);
+        Mono<Patient> patientMono = request.bodyToMono(Patient.class)
+                .flatMap(patientServiceImpl::updatePatient);
+        return ok().body(patientMono, Patient.class);
     }
 
     private static Mono<ServerResponse> defaultWriteResponse(Publisher<Patient> patients) {
