@@ -40,11 +40,23 @@ public class PatientServiceUnitTest {
         Patient patient = new Patient("MUZAN123", "Artemas", "Muzanenhamo",
                 LocalDate.of(1990, 3, 28),
                 "68 Jeremy Street, London, W1 7AA");
-        Mono<Patient> newPatientMono = just(patient);
-        given(patientRepository.insert(newPatientMono)).willReturn(Flux.just(patient));
+        given(patientRepository.insert(patient)).willReturn(just(patient));
 
-        Mono<Patient> createdPatient = patientServiceImpl.addPatient(newPatientMono);
+        Mono<Patient> createdPatient = patientServiceImpl.addPatient(patient);
 
         assertThat(createdPatient.block()).isEqualTo(patient);
+    }
+
+    @Test
+    public void should_update_patient_details() {
+        Patient updatedPatient = new Patient("MUZAN123", "Artemas", "Thomas",
+                LocalDate.of(1990, 3, 28),
+                "123 Rock Street, London, W1 7XX");
+
+        given(patientRepository.save(updatedPatient)).willReturn(just(updatedPatient));
+
+        Mono<Patient> patient = patientServiceImpl.updatePatient(updatedPatient);
+
+        assertThat(updatedPatient).isEqualTo(patient.block());
     }
 }

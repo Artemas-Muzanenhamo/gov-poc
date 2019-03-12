@@ -72,7 +72,7 @@ public class PatientEndpointTest {
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
 
-        when(patientService.addPatient(just(patient))).thenReturn(just(patient));
+        when(patientService.addPatient(patient)).thenReturn(just(patient));
 
         client
                 .put()
@@ -81,5 +81,27 @@ public class PatientEndpointTest {
                 .exchange()
                 .expectStatus()
                 .isCreated();
+    }
+
+    @Test
+    public void should_update_existing_patient() {
+        Patient patient =
+                new Patient(
+                        "12345",
+                        "Arty",
+                        "Muza",
+                        LocalDate.of(1990, 3, 28),
+                        "Flat 7, Elm Rose Road, E16 9AA"
+                );
+
+        when(patientService.updatePatient(patient)).thenReturn(just(patient));
+
+        client
+                .post()
+                .uri(ALL_PATIENTS_URI)
+                .body(just(patient), Patient.class)
+                .exchange()
+                .expectStatus()
+                .isOk();
     }
 }
