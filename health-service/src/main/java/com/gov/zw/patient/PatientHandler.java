@@ -31,6 +31,11 @@ public class PatientHandler {
         return created(URI.create("/patients")).body(patient, Patient.class);
     }
 
+    Mono<ServerResponse> updatePatient(ServerRequest request) {
+        Mono<Patient> patient = request.bodyToMono(Patient.class);
+        return ok().body(patient, Patient.class);
+    }
+
     private static Mono<ServerResponse> defaultWriteResponse(Publisher<Patient> patients) {
         return Mono
                 .from(patients)
