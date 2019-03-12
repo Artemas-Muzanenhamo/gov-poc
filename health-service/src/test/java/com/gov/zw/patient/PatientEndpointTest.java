@@ -72,7 +72,7 @@ public class PatientEndpointTest {
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
 
-        when(patientService.addPatient(just(patient))).thenReturn(just(patient));
+        when(patientService.addPatient(patient)).thenReturn(just(patient));
 
         client
                 .put()
