@@ -19,7 +19,8 @@ public class IdentityJson {
         this.identityRef = identity.getIdentityRef();
         this.name = identity.getName();
         this.surname = identity.getSurname();
-        this.birthDate = identity.getVillageOfOrigin();
+        this.birthDate = identity.getBirthDate();
+        this.villageOfOrigin = identity.getVillageOfOrigin();
         this.placeOfBirth = identity.getPlaceOfBirth();
         this.dateOfIssue = identity.getDateOfIssue();
     }
