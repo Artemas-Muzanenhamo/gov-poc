@@ -15,7 +15,7 @@ import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/licenses")
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class LicenseController {
     private final LicenseService licenseServiceImpl;
 
@@ -23,6 +23,7 @@ public class LicenseController {
         this.licenseServiceImpl = licenseServiceImpl;
     }
 
+    // TODO: REMOVE THIS ENDPOINT
     // Create
 //    @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 //    @ResponseStatus(value = OK)
