@@ -3,6 +3,8 @@ package com.gov.zw.service;
 import com.gov.zw.client.Identity;
 import com.gov.zw.client.IdentityClient;
 import com.gov.zw.domain.License;
+import com.gov.zw.domain.LicenseJson;
+import com.gov.zw.domain.LicenseJsonMapper;
 import com.gov.zw.repository.LicenseRepository;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidLicenseException;
@@ -18,12 +20,15 @@ public class LicenseServiceImpl implements LicenseService {
 
     private static final String THE_LICENSE_IS_INVALID = "The license is invalid!";
     private static final String IDENTITY_IS_INVALID_OR_DOES_NOT_EXIST = "Identity is invalid or does not exist!";
+
     private IdentityClient identityClient;
     private LicenseRepository licenseRepository;
+    private LicenseJsonMapper licenseJsonMapper;
 
-    public LicenseServiceImpl(IdentityClient identityClient, LicenseRepository licenseRepository) {
+    public LicenseServiceImpl(IdentityClient identityClient, LicenseRepository licenseRepository, LicenseJsonMapper licenseJsonMapper) {
         this.identityClient = identityClient;
         this.licenseRepository = licenseRepository;
+        this.licenseJsonMapper = licenseJsonMapper;
     }
 
     @Override
@@ -38,6 +43,12 @@ public class LicenseServiceImpl implements LicenseService {
         } else {
             throw new InvalidIdentityException(IDENTITY_IS_INVALID_OR_DOES_NOT_EXIST);
         }
+    }
+
+    @Override
+    public void addLicense(LicenseJson licenseJson) throws InvalidIdentityException, InvalidLicenseException {
+        License license = licenseJsonMapper.toDto(licenseJson);
+        addLicense(license);
     }
 
     @Override

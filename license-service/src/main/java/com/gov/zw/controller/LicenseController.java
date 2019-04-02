@@ -1,6 +1,7 @@
 package com.gov.zw.controller;
 
 import com.gov.zw.domain.License;
+import com.gov.zw.domain.LicenseJson;
 import com.gov.zw.service.LicenseService;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidLicenseException;
@@ -14,7 +15,7 @@ import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/licenses")
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class LicenseController {
     private final LicenseService licenseServiceImpl;
 
@@ -23,10 +24,16 @@ public class LicenseController {
     }
 
     // Create
+//    @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+//    @ResponseStatus(value = OK)
+//    public void addLicense(@RequestBody License license) throws InvalidLicenseException, InvalidIdentityException {
+//        this.licenseServiceImpl.addLicense(license);
+//    }
+
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = OK)
-    public void addLicense(@RequestBody License license) throws InvalidLicenseException, InvalidIdentityException {
-        this.licenseServiceImpl.addLicense(license);
+    public void addLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException, InvalidIdentityException {
+        this.licenseServiceImpl.addLicense(licenseJson);
     }
 
     // Read
