@@ -48,15 +48,10 @@ public class LicenseServiceTest {
     @Test
     public void should_return_an_identity() throws Exception {
 
-        Identity expectedIdentity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990", "Mashayamombe",
-                "Harare", "22/01/2018");
-        Map<String, String> idReference = new HashMap<>();
-        idReference.put("idRef", "1");
+        Identity expectedIdentity = expectedIdentity();
+        Map<String, String> idReference = givenIdentityReference();
+        License license = givenALicense();
         given(identityClient.findIdentityByIdReferenceNumber(idReference)).willReturn(expectedIdentity);
-        License license = new License("1", "1", "Muzanenhamo", "Artemas",
-                "28/03/1990", "Zimbabwe", "25 January 2018",
-                "25 January 2050", "DVLA", "MUZANATCK1990", "Doc1.png",
-                "150 Sunningdale road");
         Map<String, String> stringMap = new HashMap<>();
         stringMap.put("idRef", "1");
         LicenseJson licenseJson = new LicenseJson(license);
@@ -76,10 +71,7 @@ public class LicenseServiceTest {
     @Test
     public void should_return_licenses_from_the_repository() {
         // GIVEN
-        License license = new License("1", "1", "Muzanenhamo", "Artemas",
-                "28/03/1990", "Zimbabwe", "25 January 2018",
-                "25 January 2050", "DVLA", "MUZANATCK1990", "Doc1.png",
-                "150 Sunningdale road");
+        License license = givenALicense();
         List<License> licenses = Arrays.asList(license);
         // WHEN
         when(licenseRepository.findAll()).thenReturn(licenses);
@@ -106,10 +98,7 @@ public class LicenseServiceTest {
     @Test
     public void should_update_license_details_when_a_valid_license_is_passed() throws Exception {
         // GIVEN
-        License license = new License("1", "1", "Muzanenhamo", "Artemas",
-                "28/03/1990", "Zimbabwe", "25 January 2018",
-                "25 January 2050", "DVLA", "MUZANATCK1990", "Doc1.png",
-                "150 Sunningdale road");
+        License license = givenALicense();
         // WHEN
         licenseService.updateLicense(license);
         // THEN VERIFY
@@ -124,10 +113,7 @@ public class LicenseServiceTest {
     @Test
     public void should_delete_a_license_when_a_valid_license_is_passed() throws Exception {
         // GIVEN
-        License license = new License("1", "1", "Muzanenhamo", "Artemas",
-                "28/03/1990", "Zimbabwe", "25 January 2018",
-                "25 January 2050", "DVLA", "MUZANATCK1990", "Doc1.png",
-                "150 Sunningdale road");
+        License license = givenALicense();
         // WHEN
         licenseService.removeLicense(license);
         // VERIFY
@@ -137,10 +123,7 @@ public class LicenseServiceTest {
     @Test
     public void should_return_a_license_given_the_identity_reference() throws Exception {
         // GIVEN
-        License license = new License("1", "1", "Muzanenhamo", "Artemas",
-                "28/03/1990", "Zimbabwe", "25 January 2018",
-                "25 January 2050", "DVLA", "MUZANATCK1990", "Doc1.png",
-                "150 Sunningdale road");
+        License license = givenALicense();
         String identityRef = "123";
 
         // WHEN
@@ -151,4 +134,21 @@ public class LicenseServiceTest {
         verify(licenseRepository, times(1)).findLicenseByIdentityRef(identityRef);
     }
 
+    private Map<String, String> givenIdentityReference() {
+        Map<String, String> idReference = new HashMap<>();
+        idReference.put("idRef", "1");
+        return idReference;
+    }
+
+    private Identity expectedIdentity() {
+        return new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990", "Mashayamombe",
+                "Harare", "22/01/2018");
+    }
+
+    private License givenALicense() {
+        return new License("1", "1", "Muzanenhamo", "Artemas",
+                "28/03/1990", "Zimbabwe", "25 January 2018",
+                "25 January 2050", "DVLA", "MUZANATCK1990", "Doc1.png",
+                "150 Sunningdale road");
+    }
 }
