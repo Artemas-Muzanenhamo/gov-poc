@@ -8,6 +8,7 @@ import com.gov.zw.domain.LicenseJsonMapper;
 import com.gov.zw.repository.LicenseRepository;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidLicenseException;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,14 +49,9 @@ public class LicenseServiceTest {
     @Test
     public void should_return_an_identity() throws Exception {
 
-        Identity expectedIdentity = expectedIdentity();
-        Map<String, String> idReference = givenIdentityReference();
-        License license = givenALicense();
-        given(identityClient.findIdentityByIdReferenceNumber(idReference)).willReturn(expectedIdentity);
+        LicenseJson licenseJson = givenAValidLicense();
         Map<String, String> stringMap = new HashMap<>();
         stringMap.put("idRef", "1");
-        LicenseJson licenseJson = new LicenseJson(license);
-        given(licenseJsonMapper.toDto(licenseJson)).willReturn(license);
 
         licenseService.addLicense(licenseJson);
 
@@ -150,5 +146,15 @@ public class LicenseServiceTest {
                 "28/03/1990", "Zimbabwe", "25 January 2018",
                 "25 January 2050", "DVLA", "MUZANATCK1990", "Doc1.png",
                 "150 Sunningdale road");
+    }
+
+    private LicenseJson givenAValidLicense() {
+        Identity expectedIdentity = expectedIdentity();
+        Map<String, String> idReference = givenIdentityReference();
+        License license = givenALicense();
+        LicenseJson licenseJson = new LicenseJson(license);
+        given(identityClient.findIdentityByIdReferenceNumber(idReference)).willReturn(expectedIdentity);
+        given(licenseJsonMapper.toDto(licenseJson)).willReturn(license);
+        return licenseJson;
     }
 }
