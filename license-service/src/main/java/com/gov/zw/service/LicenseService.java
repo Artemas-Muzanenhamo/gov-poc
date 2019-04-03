@@ -8,7 +8,6 @@ import com.gov.zw.util.InvalidLicenseException;
 import java.util.List;
 
 public interface LicenseService {
-    void addLicense(License license) throws InvalidLicenseException, InvalidIdentityException;
     void addLicense(LicenseJson licenseJson) throws InvalidIdentityException, InvalidLicenseException;
 
     List<License> getAllLicenses();

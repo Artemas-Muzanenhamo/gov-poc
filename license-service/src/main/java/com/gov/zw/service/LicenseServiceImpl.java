@@ -31,8 +31,7 @@ public class LicenseServiceImpl implements LicenseService {
         this.licenseJsonMapper = licenseJsonMapper;
     }
 
-    @Override
-    public void addLicense(License license) throws InvalidLicenseException, InvalidIdentityException {
+    void addLicense(License license) throws InvalidLicenseException, InvalidIdentityException {
         Optional<License> licenseOptional = Optional.ofNullable(license);
         Map<String, String> referenceNumber = new HashMap<>();
         referenceNumber.put("idRef", licenseOptional
