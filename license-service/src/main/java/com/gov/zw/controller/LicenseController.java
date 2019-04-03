@@ -23,14 +23,6 @@ public class LicenseController {
         this.licenseServiceImpl = licenseServiceImpl;
     }
 
-    // TODO: REMOVE THIS ENDPOINT
-    // Create
-//    @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//    @ResponseStatus(value = OK)
-//    public void addLicense(@RequestBody License license) throws InvalidLicenseException, InvalidIdentityException {
-//        this.licenseServiceImpl.addLicense(license);
-//    }
-
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = OK)
     public void addLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException, InvalidIdentityException {
