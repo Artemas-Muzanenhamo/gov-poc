@@ -1,6 +1,7 @@
 package com.gov.zw.service;
 
 import com.gov.zw.domain.Identity;
+import com.gov.zw.domain.IdentityJson;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidIdentityNameException;
 import com.gov.zw.util.InvalidIdentityReferenceException;
@@ -19,6 +20,7 @@ public interface IdentityService {
      * @throws InvalidIdentityException
      */
     void save(Identity identity) throws InvalidIdentityException;
+    void save(IdentityJson identityJson) throws InvalidIdentityException;
 
     /**
      * Allows you to find an {@link Identity} by name.
@@ -48,4 +50,5 @@ public interface IdentityService {
      * @throws InvalidIdentityException
      */
     void delete(Identity identity) throws InvalidIdentityException;
+
 }

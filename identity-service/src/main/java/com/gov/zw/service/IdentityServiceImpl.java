@@ -1,6 +1,8 @@
 package com.gov.zw.service;
 
 import com.gov.zw.domain.Identity;
+import com.gov.zw.domain.IdentityJson;
+import com.gov.zw.domain.IdentityJsonMapper;
 import com.gov.zw.repository.IdentityRepository;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidIdentityNameException;
@@ -14,9 +16,11 @@ import java.util.Optional;
 public class IdentityServiceImpl implements IdentityService {
 
     private final IdentityRepository identityRepository;
+    private final IdentityJsonMapper identityJsonMapper;
 
-    public IdentityServiceImpl(IdentityRepository identityRepository) {
+    public IdentityServiceImpl(IdentityRepository identityRepository, IdentityJsonMapper identityJsonMapper) {
         this.identityRepository = identityRepository;
+        this.identityJsonMapper = identityJsonMapper;
     }
 
     @Override
@@ -24,6 +28,12 @@ public class IdentityServiceImpl implements IdentityService {
         Optional<Identity> identityOptional = Optional.ofNullable(identity);
         identityRepository.save(identityOptional
                 .orElseThrow( () -> new InvalidIdentityException("The Identity is invalid!")));
+    }
+
+    @Override
+    public void save(IdentityJson identityJson) throws InvalidIdentityException {
+        Identity identity = identityJsonMapper.toIdentity(identityJson);
+        save(identity);
     }
 
     @Override

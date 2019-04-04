@@ -1,6 +1,8 @@
 package com.gov.zw.service;
 
 import com.gov.zw.domain.Identity;
+import com.gov.zw.domain.IdentityJson;
+import com.gov.zw.domain.IdentityJsonMapper;
 import com.gov.zw.repository.IdentityRepository;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidIdentityNameException;
@@ -27,9 +29,12 @@ class IdentityServiceTest {
     @Mock
     private IdentityRepository identityRepository;
 
+    @Mock
+    private IdentityJsonMapper identityJsonMapper;
+
     @Test
     void should_throw_an_exception_when_an_invalid_identity_is_passed() {
-        assertThrows(InvalidIdentityException.class, () -> identityService.save(null));
+        assertThrows(InvalidIdentityException.class, () -> identityService.save((IdentityJson) null));
     }
 
     @Test
