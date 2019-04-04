@@ -29,14 +29,6 @@ public class IdentityController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @ResponseStatus(value = OK)
-    public void saveIdentity(@RequestBody Identity identity) throws InvalidIdentityException {
-        this.identityServiceImpl.save(identity);
-    }
-
-    // Create
-    @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
-    @ResponseStatus(value = OK)
     public void saveIdentity(@RequestBody IdentityJson identityJson) throws InvalidIdentityException {
         this.identityServiceImpl.save(identityJson);
     }
