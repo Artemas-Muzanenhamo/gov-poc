@@ -1,6 +1,7 @@
 package com.gov.zw.controller;
 
 import com.gov.zw.domain.License;
+import com.gov.zw.domain.LicenseJson;
 import com.gov.zw.service.LicenseService;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidLicenseException;
@@ -22,11 +23,10 @@ public class LicenseController {
         this.licenseServiceImpl = licenseServiceImpl;
     }
 
-    // Create
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = OK)
-    public void addLicense(@RequestBody License license) throws InvalidLicenseException, InvalidIdentityException {
-        this.licenseServiceImpl.addLicense(license);
+    public void addLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException, InvalidIdentityException {
+        this.licenseServiceImpl.addLicense(licenseJson);
     }
 
     // Read
@@ -43,15 +43,15 @@ public class LicenseController {
     // Update
     @PutMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = OK)
-    public void updateLicense(@RequestBody License license) throws InvalidLicenseException {
-        this.licenseServiceImpl.updateLicense(license);
+    public void updateLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException {
+        this.licenseServiceImpl.updateLicense(licenseJson);
     }
 
     // Delete
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = OK)
-    public void deleteLicense(@RequestBody License license) throws InvalidLicenseException {
-        this.licenseServiceImpl.removeLicense(license);
+    public void deleteLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException {
+        this.licenseServiceImpl.removeLicense(licenseJson);
     }
 
 }
