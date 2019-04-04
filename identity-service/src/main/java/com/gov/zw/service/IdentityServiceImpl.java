@@ -23,8 +23,7 @@ public class IdentityServiceImpl implements IdentityService {
         this.identityJsonMapper = identityJsonMapper;
     }
 
-    @Override
-    public void save(Identity identity) throws InvalidIdentityException {
+    void save(Identity identity) throws InvalidIdentityException {
         Optional<Identity> identityOptional = Optional.ofNullable(identity);
         identityRepository.save(identityOptional
                 .orElseThrow( () -> new InvalidIdentityException("The Identity is invalid!")));

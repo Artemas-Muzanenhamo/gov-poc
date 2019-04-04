@@ -53,8 +53,8 @@ public class IdentityController {
     @PutMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @ResponseStatus(OK)
-    public void updateIdentity(@RequestBody Identity identity) throws InvalidIdentityException {
-        this.identityServiceImpl.save(identity);
+    public void updateIdentity(@RequestBody IdentityJson identityJson) throws InvalidIdentityException {
+        this.identityServiceImpl.save(identityJson);
     }
 
     // Delete
