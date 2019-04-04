@@ -67,11 +67,16 @@ public class LicenseServiceImpl implements LicenseService {
         updateLicense(license);
     }
 
-    @Override
-    public void removeLicense(License license) throws InvalidLicenseException {
+    void removeLicense(License license) throws InvalidLicenseException {
         Optional<License> licenseOptional = Optional.ofNullable(license);
         this.licenseRepository.delete(licenseOptional
                 .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID)));
+    }
+
+    @Override
+    public void removeLicense(LicenseJson licenseJson) throws InvalidLicenseException {
+        License license = licenseJsonMapper.toDto(licenseJson);
+        removeLicense(license);
     }
 
     @Override

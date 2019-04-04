@@ -14,7 +14,7 @@ public interface LicenseService {
 
     void updateLicense(LicenseJson licenseJson) throws InvalidLicenseException;
 
-    void removeLicense(License license) throws InvalidLicenseException;
+    void removeLicense(LicenseJson licenseJson) throws InvalidLicenseException;
 
     License getLicenseByIdentityRef(String identityRef) throws InvalidLicenseException;
 

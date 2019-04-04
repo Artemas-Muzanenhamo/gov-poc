@@ -108,7 +108,7 @@ public class LicenseServiceTest {
 
     @Test(expected = InvalidLicenseException.class)
     public void should_return_an_identity_not_valid_exception_when_trying_to_delete_license() throws Exception {
-        licenseService.removeLicense(null);
+        licenseService.removeLicense((LicenseJson) null);
     }
 
     @Test

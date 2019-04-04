@@ -50,8 +50,8 @@ public class LicenseController {
     // Delete
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = OK)
-    public void deleteLicense(@RequestBody License license) throws InvalidLicenseException {
-        this.licenseServiceImpl.removeLicense(license);
+    public void deleteLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException {
+        this.licenseServiceImpl.removeLicense(licenseJson);
     }
 
 }
