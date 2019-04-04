@@ -8,7 +8,6 @@ import com.gov.zw.domain.LicenseJsonMapper;
 import com.gov.zw.repository.LicenseRepository;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidLicenseException;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +15,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -63,11 +65,10 @@ public class LicenseServiceTest {
 
     @Test
     public void should_return_licenses_from_the_repository() {
-        // GIVEN
         List<License> licenses = getLicenses();
-        // WHEN
+
         List<License> allLicenses = licenseService.getAllLicenses();
-        // THE RETURN
+
         assertThat(allLicenses).isEqualTo(licenses);
         verify(licenseRepository, times(1)).findAll();
     }
