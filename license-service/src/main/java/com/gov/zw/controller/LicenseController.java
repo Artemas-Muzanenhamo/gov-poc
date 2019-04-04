@@ -43,8 +43,8 @@ public class LicenseController {
     // Update
     @PutMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = OK)
-    public void updateLicense(@RequestBody License license) throws InvalidLicenseException {
-        this.licenseServiceImpl.updateLicense(license);
+    public void updateLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException {
+        this.licenseServiceImpl.updateLicense(licenseJson);
     }
 
     // Delete

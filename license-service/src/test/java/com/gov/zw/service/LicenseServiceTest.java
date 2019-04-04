@@ -78,7 +78,12 @@ public class LicenseServiceTest {
 
     @Test(expected = InvalidLicenseException.class)
     public void should_throw_an_exception_when_invalid_license_details_are_passed() throws Exception {
-        licenseService.updateLicense(null);
+        licenseService.updateLicense((License) null);
+    }
+
+    @Test(expected = InvalidLicenseException.class)
+    public void should_throw_an_exception_when_invalid_license_json_is_passed() throws Exception {
+        licenseService.updateLicense((LicenseJson) null);
     }
 
     @Test

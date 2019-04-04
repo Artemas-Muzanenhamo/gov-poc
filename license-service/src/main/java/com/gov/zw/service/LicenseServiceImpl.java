@@ -55,11 +55,16 @@ public class LicenseServiceImpl implements LicenseService {
         return this.licenseRepository.findAll();
     }
 
-    @Override
-    public void updateLicense(License license) throws InvalidLicenseException {
+    void updateLicense(License license) throws InvalidLicenseException {
         Optional<License> licenseOptional = Optional.ofNullable(license);
         this.licenseRepository.save(licenseOptional
                 .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID)));
+    }
+
+    @Override
+    public void updateLicense(LicenseJson licenseJson) throws InvalidLicenseException {
+        License license = licenseJsonMapper.toDto(licenseJson);
+        updateLicense(license);
     }
 
     @Override
