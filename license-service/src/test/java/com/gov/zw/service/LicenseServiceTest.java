@@ -16,10 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -67,18 +64,12 @@ public class LicenseServiceTest {
     @Test
     public void should_return_licenses_from_the_repository() {
         // GIVEN
-        License license = givenALicense();
-        List<License> licenses = Arrays.asList(license);
+        List<License> licenses = getLicenses();
         // WHEN
-        when(licenseRepository.findAll()).thenReturn(licenses);
+        List<License> allLicenses = licenseService.getAllLicenses();
         // THE RETURN
-        assertThat(licenseService.getAllLicenses()).isEqualTo(licenses);
+        assertThat(allLicenses).isEqualTo(licenses);
         verify(licenseRepository, times(1)).findAll();
-    }
-
-    @Test(expected = InvalidLicenseException.class)
-    public void should_throw_an_exception_when_invalid_license_details_are_passed() throws Exception {
-        licenseService.updateLicense((License) null);
     }
 
     @Test(expected = InvalidLicenseException.class)
@@ -88,21 +79,19 @@ public class LicenseServiceTest {
 
     @Test
     public void should_save_when_empty_license_details_are_passed() throws Exception {
-        // GIVEN
         License license = new License();
-        // WHEN
+
         licenseService.updateLicense(license);
-        //THEN VERIFY
+
         verify(this.licenseRepository, times(1)).save(license);
     }
 
     @Test
     public void should_update_license_details_when_a_valid_license_is_passed() throws Exception {
-        // GIVEN
         License license = givenALicense();
-        // WHEN
+
         licenseService.updateLicense(license);
-        // THEN VERIFY
+
         verify(licenseRepository, times(1)).save(license);
     }
 
@@ -113,25 +102,22 @@ public class LicenseServiceTest {
 
     @Test
     public void should_delete_a_license_when_a_valid_license_is_passed() throws Exception {
-        // GIVEN
         License license = givenALicense();
-        // WHEN
+
         licenseService.removeLicense(license);
-        // VERIFY
+
         verify(licenseRepository, times(1)).delete(license);
     }
 
     @Test
     public void should_return_a_license_given_the_identity_reference() throws Exception {
-        // GIVEN
         License license = givenALicense();
         String identityRef = "123";
-
-        // WHEN
         when(licenseRepository.findLicenseByIdentityRef(identityRef)).thenReturn(license);
 
-        // THEN
-        assertThat(licenseService.getLicenseByIdentityRef(identityRef)).isEqualTo(license);
+        License licenseByIdentityRef = licenseService.getLicenseByIdentityRef(identityRef);
+
+        assertThat(licenseByIdentityRef).isEqualTo(license);
         verify(licenseRepository, times(1)).findLicenseByIdentityRef(identityRef);
     }
 
@@ -161,5 +147,12 @@ public class LicenseServiceTest {
         given(identityClient.findIdentityByIdReferenceNumber(idReference)).willReturn(expectedIdentity);
         given(licenseJsonMapper.toDto(licenseJson)).willReturn(license);
         return licenseJson;
+    }
+
+    private List<License> getLicenses() {
+        License license = givenALicense();
+        List<License> licenses = Collections.singletonList(license);
+        when(licenseRepository.findAll()).thenReturn(licenses);
+        return licenses;
     }
 }
