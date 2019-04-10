@@ -97,7 +97,7 @@ class IdentityServiceTest {
 
     @Test
     void should_throw_an_exception_when_an_invalid_identity_is_passed_to_be_deleted() {
-        assertThrows(InvalidIdentityException.class, () -> identityService.delete(null));
+        assertThrows(InvalidIdentityException.class, () -> identityService.delete((IdentityJson) null));
     }
 
     @Test

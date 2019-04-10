@@ -16,10 +16,9 @@ public interface IdentityService {
 
     /**
      * Allows you to save an {@link Identity}.
-     * @param identity - {@link Identity} to be saved.
+     * @param identityJson - {@link Identity} to be saved.
      * @throws InvalidIdentityException
      */
-    void save(Identity identity) throws InvalidIdentityException;
     void save(IdentityJson identityJson) throws InvalidIdentityException;
 
     /**
@@ -46,9 +45,9 @@ public interface IdentityService {
 
     /**
      * Deletes an {@link Identity}.
-     * @param identity - {@link Identity} to be deleted.
+     * @param identityJson - {@link Identity} to be deleted.
      * @throws InvalidIdentityException
      */
-    void delete(Identity identity) throws InvalidIdentityException;
+    void delete(IdentityJson identityJson) throws InvalidIdentityException;
 
 }

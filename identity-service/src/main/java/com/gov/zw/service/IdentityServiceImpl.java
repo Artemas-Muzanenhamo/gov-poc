@@ -23,8 +23,7 @@ public class IdentityServiceImpl implements IdentityService {
         this.identityJsonMapper = identityJsonMapper;
     }
 
-    @Override
-    public void save(Identity identity) throws InvalidIdentityException {
+    void save(Identity identity) throws InvalidIdentityException {
         Optional<Identity> identityOptional = Optional.ofNullable(identity);
         identityRepository.save(identityOptional
                 .orElseThrow( () -> new InvalidIdentityException("The Identity is invalid!")));
@@ -55,10 +54,15 @@ public class IdentityServiceImpl implements IdentityService {
         return identityRepository.findAll();
     }
 
-    @Override
-    public void delete(Identity identity) throws InvalidIdentityException {
+    void delete(Identity identity) throws InvalidIdentityException {
         Optional<Identity> identityOptional = Optional.ofNullable(identity);
         identityRepository.delete(identityOptional
                 .orElseThrow(() -> new InvalidIdentityException("The Identity to be deleted is invalid!")));
+    }
+
+    @Override
+    public void delete(IdentityJson identityJson) throws InvalidIdentityException {
+        Identity identity = identityJsonMapper.toIdentity(identityJson);
+        delete(identity);
     }
 }
