@@ -2,9 +2,7 @@ package com.gov.zw.service;
 
 import com.gov.zw.client.Identity;
 import com.gov.zw.client.IdentityClient;
-import com.gov.zw.domain.License;
-import com.gov.zw.domain.LicenseJson;
-import com.gov.zw.domain.LicenseJsonMapper;
+import com.gov.zw.domain.*;
 import com.gov.zw.repository.LicenseRepository;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidLicenseException;
@@ -24,6 +22,7 @@ public class LicenseServiceImpl implements LicenseService {
     private IdentityClient identityClient;
     private LicenseRepository licenseRepository;
     private LicenseJsonMapper licenseJsonMapper;
+    private IdentityReferenceJsonMapper identityReferenceJsonMapper;
 
     public LicenseServiceImpl(IdentityClient identityClient, LicenseRepository licenseRepository, LicenseJsonMapper licenseJsonMapper) {
         this.identityClient = identityClient;
@@ -79,10 +78,15 @@ public class LicenseServiceImpl implements LicenseService {
         removeLicense(license);
     }
 
-    @Override
-    public License getLicenseByIdentityRef(String identityRef) throws InvalidLicenseException {
+    License getLicenseByIdentityRef(String identityRef) throws InvalidLicenseException {
         Optional<String> identityRefOptional = Optional.ofNullable(identityRef);
         return this.licenseRepository.findLicenseByIdentityRef(identityRefOptional
                 .orElseThrow((() -> new InvalidLicenseException("License IdRef is not valid"))));
+    }
+
+    @Override
+    public License getLicenseByIdentityRef(IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException {
+        String IdentityRef = identityReferenceJsonMapper.toIdentityReference(identityReferenceJson);
+        return getLicenseByIdentityRef(IdentityRef);
     }
 }
