@@ -1,4 +1,4 @@
-package com.gov.zw.domain;
+package com.gov.zw.client;
 
 public class IdentityReferenceJsonMapper {
     public String toIdentityReference(IdentityReferenceJson json) {

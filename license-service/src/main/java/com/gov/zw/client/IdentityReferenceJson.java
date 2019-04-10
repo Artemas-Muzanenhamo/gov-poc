@@ -1,4 +1,4 @@
-package com.gov.zw.domain;
+package com.gov.zw.client;
 
 import java.util.Map;
 

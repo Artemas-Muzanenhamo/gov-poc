@@ -2,6 +2,8 @@ package com.gov.zw.service;
 
 import com.gov.zw.client.Identity;
 import com.gov.zw.client.IdentityClient;
+import com.gov.zw.client.IdentityReferenceJson;
+import com.gov.zw.client.IdentityReferenceJsonMapper;
 import com.gov.zw.domain.*;
 import com.gov.zw.repository.LicenseRepository;
 import com.gov.zw.util.InvalidIdentityException;
