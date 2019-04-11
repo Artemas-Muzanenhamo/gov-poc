@@ -26,10 +26,13 @@ public class LicenseServiceImpl implements LicenseService {
     private LicenseJsonMapper licenseJsonMapper;
     private IdentityReferenceJsonMapper identityReferenceJsonMapper;
 
-    public LicenseServiceImpl(IdentityClient identityClient, LicenseRepository licenseRepository, LicenseJsonMapper licenseJsonMapper) {
+    public LicenseServiceImpl(IdentityClient identityClient, LicenseRepository licenseRepository,
+                              LicenseJsonMapper licenseJsonMapper,
+                              IdentityReferenceJsonMapper identityReferenceJsonMapper) {
         this.identityClient = identityClient;
         this.licenseRepository = licenseRepository;
         this.licenseJsonMapper = licenseJsonMapper;
+        this.identityReferenceJsonMapper = identityReferenceJsonMapper;
     }
 
     void addLicense(License license) throws InvalidLicenseException, InvalidIdentityException {
