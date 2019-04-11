@@ -11,7 +11,7 @@ import java.util.List;
 public interface LicenseService {
     void addLicense(LicenseJson licenseJson) throws InvalidIdentityException, InvalidLicenseException;
 
-    List<License> getAllLicenses();
+    List<LicenseJson> getAllLicenses();
 
     void updateLicense(LicenseJson licenseJson) throws InvalidLicenseException;
 

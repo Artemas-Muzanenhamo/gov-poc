@@ -31,7 +31,7 @@ public class LicenseController {
 
     // Read
     @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<License> getAllLicenses() {
+    public List<LicenseJson> getAllLicenses() {
         return this.licenseServiceImpl.getAllLicenses();
     }
 
