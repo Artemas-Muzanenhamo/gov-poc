@@ -90,8 +90,9 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Override
-    public License getLicenseByIdentityRef(IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException {
+    public LicenseJson getLicenseByIdentityRef(IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException {
         String IdentityRef = identityReferenceJsonMapper.toIdentityReference(identityReferenceJson);
-        return getLicenseByIdentityRef(IdentityRef);
+        License license = getLicenseByIdentityRef(IdentityRef);
+        return new LicenseJson(license);
     }
 }
