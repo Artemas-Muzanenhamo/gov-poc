@@ -15,9 +15,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
@@ -49,8 +51,12 @@ class IdentityServiceTest {
     void should_return_a_name_if_name_exists() throws InvalidIdentityNameException {
         List<Identity> identities = Arrays.asList(new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
                 "Mashayamombe", "Harare", "17/11/2017"));
-        when(identityRepository.findIdentitiesByName(identities.get(0).getName())).thenReturn(identities);
-        assertThat(identityService.findIdentitiesByName("Artemas")).isEqualTo(identities);
+        List<IdentityJson> expectedIdentityJsonList = identities.stream().map(IdentityJson::new).collect(Collectors.toList());
+        given(identityRepository.findIdentitiesByName(identities.get(0).getName())).willReturn(identities);
+
+        List<IdentityJson> identityJsonList = identityService.findIdentitiesByName("Artemas");
+
+        assertThat(identityJsonList).isEqualTo(expectedIdentityJsonList);
     }
 
     @Test

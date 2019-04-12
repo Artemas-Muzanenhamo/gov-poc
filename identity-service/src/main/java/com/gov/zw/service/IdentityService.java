@@ -27,7 +27,7 @@ public interface IdentityService {
      * @return - a {@link List<Identity>} of Identities.
      * @throws InvalidIdentityNameException
      */
-    List<Identity> findIdentitiesByName(String name) throws InvalidIdentityNameException;
+    List<IdentityJson> findIdentitiesByName(String name) throws InvalidIdentityNameException;
 
     /**
      * Allows you to find an {@link Identity} by the ID reference.

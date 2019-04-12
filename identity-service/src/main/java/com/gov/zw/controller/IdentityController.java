@@ -35,7 +35,7 @@ public class IdentityController {
 
     // Retrieve
     @PostMapping(value = "/name", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<Identity> getIdentitiesByName(@RequestBody Map<String, String> name) throws InvalidIdentityNameException {
+    public List<IdentityJson> getIdentitiesByName(@RequestBody Map<String, String> name) throws InvalidIdentityNameException {
         return identityServiceImpl.findIdentitiesByName(name.get("name"));
     }
 
