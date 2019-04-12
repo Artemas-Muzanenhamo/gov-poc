@@ -41,7 +41,7 @@ public interface IdentityService {
      * Allows you to retrieve all the Identities.
      * @return - A {@link List<Identity>} of Identities.
      */
-    List<Identity> findAll();
+    List<IdentityJson> findAll();
 
     /**
      * Deletes an {@link Identity}.

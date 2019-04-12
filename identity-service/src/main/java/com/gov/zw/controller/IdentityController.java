@@ -45,7 +45,7 @@ public class IdentityController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<Identity> getIdentities() {
+    public List<IdentityJson> getIdentities() {
         return identityServiceImpl.findAll();
     }
 

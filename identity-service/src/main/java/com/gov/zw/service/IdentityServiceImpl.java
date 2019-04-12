@@ -53,8 +53,8 @@ public class IdentityServiceImpl implements IdentityService {
     }
 
     @Override
-    public List<Identity> findAll() {
-        return identityRepository.findAll();
+    public List<IdentityJson> findAll() {
+        return identityRepository.findAll().stream().map(IdentityJson::new).collect(toList());
     }
 
     void delete(Identity identity) throws InvalidIdentityException {

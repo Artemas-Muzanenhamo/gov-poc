@@ -7,6 +7,7 @@ import com.gov.zw.repository.IdentityRepository;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidIdentityNameException;
 import com.gov.zw.util.InvalidIdentityReferenceException;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -51,12 +52,17 @@ class IdentityServiceTest {
     void should_return_a_name_if_name_exists() throws InvalidIdentityNameException {
         List<Identity> identities = Arrays.asList(new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
                 "Mashayamombe", "Harare", "17/11/2017"));
-        List<IdentityJson> expectedIdentityJsonList = identities.stream().map(IdentityJson::new).collect(Collectors.toList());
+        List<IdentityJson> expectedIdentityJsonList = getIdentityListJson(identities);
         given(identityRepository.findIdentitiesByName(identities.get(0).getName())).willReturn(identities);
 
         List<IdentityJson> identityJsonList = identityService.findIdentitiesByName("Artemas");
 
         assertThat(identityJsonList).isEqualTo(expectedIdentityJsonList);
+    }
+
+    @NotNull
+    private List<IdentityJson> getIdentityListJson(List<Identity> identities) {
+        return identities.stream().map(IdentityJson::new).collect(Collectors.toList());
     }
 
     @Test
@@ -92,13 +98,15 @@ class IdentityServiceTest {
                 new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
                         "Mashayamombe", "Harare", "17/11/2017")
         );
+        when(identityRepository.findAll()).thenReturn(identities);
+        List<IdentityJson> identityListJson = getIdentityListJson(identities);
 
         // when
-        when(identityRepository.findAll()).thenReturn(identities);
+        List<IdentityJson> identityJsonList = identityService.findAll();
 
         // then return
-        assertThat(identityService.findAll().size()).isEqualTo(3);
-        assertThat(identityService.findAll()).isEqualTo(identities);
+        assertThat(identityJsonList.size()).isEqualTo(3);
+        assertThat(identityJsonList).isEqualTo(identityListJson);
     }
 
     @Test
