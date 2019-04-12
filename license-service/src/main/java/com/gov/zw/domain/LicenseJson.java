@@ -32,4 +32,22 @@ public class LicenseJson {
         this.signatureImage = license.getSignatureImage();
         this.address = license.getAddress();
     }
+
+    @Override
+    public String toString() {
+        return "LicenseJson{" +
+                "id='" + id + '\'' +
+                ", identityRef='" + identityRef + '\'' +
+                ", surname='" + surname + '\'' +
+                ", firstNames='" + firstNames + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", country='" + country + '\'' +
+                ", dateOfIssue='" + dateOfIssue + '\'' +
+                ", expiryDate='" + expiryDate + '\'' +
+                ", agency='" + agency + '\'' +
+                ", licenseNumber='" + licenseNumber + '\'' +
+                ", signatureImage='" + signatureImage + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }

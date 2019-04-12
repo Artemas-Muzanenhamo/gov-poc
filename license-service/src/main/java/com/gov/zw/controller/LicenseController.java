@@ -31,12 +31,12 @@ public class LicenseController {
 
     // Read
     @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<License> getAllLicenses() {
+    public List<LicenseJson> getAllLicenses() {
         return this.licenseServiceImpl.getAllLicenses();
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE, value = "ref")
-    public License getLicenseByIdentityRef(@RequestBody IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException{
+    public LicenseJson getLicenseByIdentityRef(@RequestBody IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException{
         return this.licenseServiceImpl.getLicenseByIdentityRef(identityReferenceJson);
     }
 

@@ -10,10 +10,10 @@ import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidLicenseException;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class LicenseServiceImpl implements LicenseService {
@@ -55,8 +55,9 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Override
-    public List<License> getAllLicenses() {
-        return this.licenseRepository.findAll();
+    public List<LicenseJson> getAllLicenses() {
+        List<License> licenses = this.licenseRepository.findAll();
+        return licenses.stream().map(LicenseJson::new).collect(toList());
     }
 
     void updateLicense(License license) throws InvalidLicenseException {
@@ -90,8 +91,9 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Override
-    public License getLicenseByIdentityRef(IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException {
+    public LicenseJson getLicenseByIdentityRef(IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException {
         String IdentityRef = identityReferenceJsonMapper.toIdentityReference(identityReferenceJson);
-        return getLicenseByIdentityRef(IdentityRef);
+        License license = getLicenseByIdentityRef(IdentityRef);
+        return new LicenseJson(license);
     }
 }

@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -66,10 +67,11 @@ public class LicenseServiceTest {
     @Test
     public void should_return_licenses_from_the_repository() {
         List<License> licenses = getLicenses();
+        List<LicenseJson> licenseJsons = givenAValidLicenseJson(licenses);
 
-        List<License> allLicenses = licenseService.getAllLicenses();
+        List<LicenseJson> allLicenses = licenseService.getAllLicenses();
 
-        assertThat(allLicenses).isEqualTo(licenses);
+        assertThat(allLicenses.toString()).isEqualTo(licenseJsons.toString());
         verify(licenseRepository, times(1)).findAll();
     }
 
@@ -138,6 +140,10 @@ public class LicenseServiceTest {
                 "28/03/1990", "Zimbabwe", "25 January 2018",
                 "25 January 2050", "DVLA", "MUZANATCK1990", "Doc1.png",
                 "150 Sunningdale road");
+    }
+
+    private List<LicenseJson> givenAValidLicenseJson(List<License> licenses) {
+        return licenses.stream().map(LicenseJson::new).collect(Collectors.toList());
     }
 
     private LicenseJson givenAValidLicense() {

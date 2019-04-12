@@ -11,11 +11,11 @@ import java.util.List;
 public interface LicenseService {
     void addLicense(LicenseJson licenseJson) throws InvalidIdentityException, InvalidLicenseException;
 
-    List<License> getAllLicenses();
+    List<LicenseJson> getAllLicenses();
 
     void updateLicense(LicenseJson licenseJson) throws InvalidLicenseException;
 
     void removeLicense(LicenseJson licenseJson) throws InvalidLicenseException;
 
-    License getLicenseByIdentityRef(IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException;
+    LicenseJson getLicenseByIdentityRef(IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException;
 }
