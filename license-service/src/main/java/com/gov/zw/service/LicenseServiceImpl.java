@@ -4,14 +4,18 @@ import com.gov.zw.client.Identity;
 import com.gov.zw.client.IdentityClient;
 import com.gov.zw.client.IdentityReferenceJson;
 import com.gov.zw.client.IdentityReferenceJsonMapper;
-import com.gov.zw.domain.*;
+import com.gov.zw.domain.License;
+import com.gov.zw.domain.LicenseJson;
+import com.gov.zw.domain.LicenseJsonMapper;
 import com.gov.zw.repository.LicenseRepository;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidLicenseException;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 

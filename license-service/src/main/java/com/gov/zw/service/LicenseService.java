@@ -1,7 +1,6 @@
 package com.gov.zw.service;
 
 import com.gov.zw.client.IdentityReferenceJson;
-import com.gov.zw.domain.License;
 import com.gov.zw.domain.LicenseJson;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidLicenseException;
