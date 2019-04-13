@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 public class IdentityServiceImpl implements IdentityService {
 
@@ -36,10 +38,11 @@ public class IdentityServiceImpl implements IdentityService {
     }
 
     @Override
-    public List<Identity> findIdentitiesByName(String name) throws InvalidIdentityNameException {
+    public List<IdentityJson> findIdentitiesByName(String name) throws InvalidIdentityNameException {
         Optional<String> nameOptional = Optional.ofNullable(name);
-        return identityRepository.findIdentitiesByName(nameOptional
-                .orElseThrow( () -> new InvalidIdentityNameException("The name supplied does not exist!")));
+        List<Identity> identities = identityRepository.findIdentitiesByName(nameOptional
+                .orElseThrow(() -> new InvalidIdentityNameException("The name supplied does not exist!")));
+        return identities.stream().map(IdentityJson::new).collect(toList());
     }
 
     @Override
@@ -50,8 +53,8 @@ public class IdentityServiceImpl implements IdentityService {
     }
 
     @Override
-    public List<Identity> findAll() {
-        return identityRepository.findAll();
+    public List<IdentityJson> findAll() {
+        return identityRepository.findAll().stream().map(IdentityJson::new).collect(toList());
     }
 
     void delete(Identity identity) throws InvalidIdentityException {
