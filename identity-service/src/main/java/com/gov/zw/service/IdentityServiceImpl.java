@@ -1,8 +1,6 @@
 package com.gov.zw.service;
 
-import com.gov.zw.domain.Identity;
-import com.gov.zw.domain.IdentityJson;
-import com.gov.zw.domain.IdentityJsonMapper;
+import com.gov.zw.domain.*;
 import com.gov.zw.repository.IdentityRepository;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidIdentityNameException;
@@ -11,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -19,10 +18,12 @@ public class IdentityServiceImpl implements IdentityService {
 
     private final IdentityRepository identityRepository;
     private final IdentityJsonMapper identityJsonMapper;
+    private final IdentityRefJsonMapper identityRefJsonMapper;
 
-    public IdentityServiceImpl(IdentityRepository identityRepository, IdentityJsonMapper identityJsonMapper) {
+    public IdentityServiceImpl(IdentityRepository identityRepository, IdentityJsonMapper identityJsonMapper, IdentityRefJsonMapper identityRefJsonMapper) {
         this.identityRepository = identityRepository;
         this.identityJsonMapper = identityJsonMapper;
+        this.identityRefJsonMapper = identityRefJsonMapper;
     }
 
     void save(Identity identity) throws InvalidIdentityException {
@@ -67,5 +68,14 @@ public class IdentityServiceImpl implements IdentityService {
     public void delete(IdentityJson identityJson) throws InvalidIdentityException {
         Identity identity = identityJsonMapper.toIdentity(identityJson);
         delete(identity);
+    }
+
+    @Override
+    public IdentityJson findIdentityByIdentityRef(IdentityRefJson identityRefJson) throws InvalidIdentityReferenceException {
+        String idReference = identityRefJsonMapper.toIdentityRef(identityRefJson);
+        Identity identity = findIdentityByIdentityRef(idReference);
+        Stream<Identity> identityByIdentityRef = Stream.of(identity);
+        // TODO: Resolve this
+        return identityByIdentityRef.map(IdentityJson::new)
     }
 }

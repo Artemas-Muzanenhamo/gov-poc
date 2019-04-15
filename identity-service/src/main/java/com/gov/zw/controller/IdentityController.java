@@ -2,6 +2,7 @@ package com.gov.zw.controller;
 
 import com.gov.zw.domain.Identity;
 import com.gov.zw.domain.IdentityJson;
+import com.gov.zw.domain.IdentityRefJson;
 import com.gov.zw.service.IdentityService;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidIdentityNameException;
@@ -42,6 +43,11 @@ public class IdentityController {
     @PostMapping(value = "/reference", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Identity getIdentityByReferenceNumber(@RequestBody Map<String, String> idReferenceNumber) throws InvalidIdentityReferenceException {
         return identityServiceImpl.findIdentityByIdentityRef(idReferenceNumber.get("idRef"));
+    }
+
+    @PostMapping(value = "/reference", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public IdentityJson getIdentityByReferenceNumber(@RequestBody IdentityRefJson identityRefJson) throws InvalidIdentityReferenceException {
+        return identityServiceImpl.findIdentityByIdentityRef(identityRefJson);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
