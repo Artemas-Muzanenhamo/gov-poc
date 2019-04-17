@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -19,11 +18,15 @@ public class IdentityServiceImpl implements IdentityService {
     private final IdentityRepository identityRepository;
     private final IdentityJsonMapper identityJsonMapper;
     private final IdentityRefJsonMapper identityRefJsonMapper;
+    private final IdentityNameJsonMapper identityNameJsonMapper;
 
-    public IdentityServiceImpl(IdentityRepository identityRepository, IdentityJsonMapper identityJsonMapper, IdentityRefJsonMapper identityRefJsonMapper) {
+    public IdentityServiceImpl(IdentityRepository identityRepository, IdentityJsonMapper identityJsonMapper,
+                               IdentityRefJsonMapper identityRefJsonMapper,
+                               IdentityNameJsonMapper identityNameJsonMapper) {
         this.identityRepository = identityRepository;
         this.identityJsonMapper = identityJsonMapper;
         this.identityRefJsonMapper = identityRefJsonMapper;
+        this.identityNameJsonMapper = identityNameJsonMapper;
     }
 
     void save(Identity identity) throws InvalidIdentityException {
@@ -53,6 +56,13 @@ public class IdentityServiceImpl implements IdentityService {
     }
 
     @Override
+    public IdentityJson findIdentityByIdentityRef(IdentityRefJson identityRefJson) throws InvalidIdentityReferenceException {
+        String idReference = identityRefJsonMapper.toIdentityRef(identityRefJson);
+        Identity identity = findIdentityByIdentityRef(idReference);
+        return new IdentityJson(identity);
+    }
+
+    @Override
     public List<IdentityJson> findAll() {
         return identityRepository.findAll().stream().map(IdentityJson::new).collect(toList());
     }
@@ -70,9 +80,8 @@ public class IdentityServiceImpl implements IdentityService {
     }
 
     @Override
-    public IdentityJson findIdentityByIdentityRef(IdentityRefJson identityRefJson) throws InvalidIdentityReferenceException {
-        String idReference = identityRefJsonMapper.toIdentityRef(identityRefJson);
-        Identity identity = findIdentityByIdentityRef(idReference);
-        return new IdentityJson(identity);
+    public List<IdentityJson> findIdentitiesByName(IdentityNameJson identityNameJson) throws InvalidIdentityNameException {
+        String identityName = identityNameJsonMapper.toIdentityName(identityNameJson);
+        return findIdentitiesByName(identityName);
     }
 }

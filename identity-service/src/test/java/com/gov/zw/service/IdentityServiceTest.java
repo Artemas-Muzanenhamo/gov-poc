@@ -26,15 +26,14 @@ class IdentityServiceTest {
 
     @InjectMocks
     private IdentityServiceImpl identityService;
-
     @Mock
     private IdentityRepository identityRepository;
-
     @Mock
     private IdentityJsonMapper identityJsonMapper;
-
     @Mock
     private IdentityRefJsonMapper identityRefJsonMapper;
+    @Mock
+    private IdentityNameJsonMapper identityNameJsonMapper;
 
     @Test
     void should_throw_an_exception_when_an_invalid_identity_is_passed() {
@@ -68,7 +67,7 @@ class IdentityServiceTest {
 
     @Test
     void should_throw_an_exception_when_an_invalid_name_is_passed() {
-        assertThrows(InvalidIdentityNameException.class, () -> identityService.findIdentitiesByName(null));
+        assertThrows(InvalidIdentityNameException.class, () -> identityService.findIdentitiesByName((IdentityNameJson) null));
     }
 
     @Test

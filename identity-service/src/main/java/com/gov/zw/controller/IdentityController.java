@@ -1,7 +1,7 @@
 package com.gov.zw.controller;
 
-import com.gov.zw.domain.Identity;
 import com.gov.zw.domain.IdentityJson;
+import com.gov.zw.domain.IdentityNameJson;
 import com.gov.zw.domain.IdentityRefJson;
 import com.gov.zw.service.IdentityService;
 import com.gov.zw.util.InvalidIdentityException;
@@ -36,8 +36,8 @@ public class IdentityController {
 
     // Retrieve
     @PostMapping(value = "/name", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<IdentityJson> getIdentitiesByName(@RequestBody Map<String, String> name) throws InvalidIdentityNameException {
-        return identityServiceImpl.findIdentitiesByName(name.get("name"));
+    public List<IdentityJson> getIdentitiesByName(@RequestBody IdentityNameJson identityNameJson) throws InvalidIdentityNameException {
+        return identityServiceImpl.findIdentitiesByName(identityNameJson);
     }
 
     @PostMapping(value = "/reference", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

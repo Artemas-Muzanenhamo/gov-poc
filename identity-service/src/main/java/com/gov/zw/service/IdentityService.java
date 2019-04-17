@@ -2,6 +2,7 @@ package com.gov.zw.service;
 
 import com.gov.zw.domain.Identity;
 import com.gov.zw.domain.IdentityJson;
+import com.gov.zw.domain.IdentityNameJson;
 import com.gov.zw.domain.IdentityRefJson;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidIdentityNameException;
@@ -51,4 +52,5 @@ public interface IdentityService {
      */
     void delete(IdentityJson identityJson) throws InvalidIdentityException;
 
+    List<IdentityJson> findIdentitiesByName(IdentityNameJson identityNameJson) throws InvalidIdentityNameException;
 }
