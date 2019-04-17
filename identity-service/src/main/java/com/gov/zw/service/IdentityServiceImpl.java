@@ -46,8 +46,7 @@ public class IdentityServiceImpl implements IdentityService {
         return identities.stream().map(IdentityJson::new).collect(toList());
     }
 
-    @Override
-    public Identity findIdentityByIdentityRef(String idRef) throws InvalidIdentityReferenceException {
+    Identity findIdentityByIdentityRef(String idRef) throws InvalidIdentityReferenceException {
         Optional<String> idReferenceOptional = Optional.ofNullable(idRef);
         return identityRepository.findIdentityByIdentityRef(idReferenceOptional
                 .orElseThrow( () -> new InvalidIdentityReferenceException("The ID reference supplied is not valid!")));
@@ -74,8 +73,6 @@ public class IdentityServiceImpl implements IdentityService {
     public IdentityJson findIdentityByIdentityRef(IdentityRefJson identityRefJson) throws InvalidIdentityReferenceException {
         String idReference = identityRefJsonMapper.toIdentityRef(identityRefJson);
         Identity identity = findIdentityByIdentityRef(idReference);
-        Stream<Identity> identityByIdentityRef = Stream.of(identity);
-        // TODO: Resolve this
-        return identityByIdentityRef.map(IdentityJson::new)
+        return new IdentityJson(identity);
     }
 }

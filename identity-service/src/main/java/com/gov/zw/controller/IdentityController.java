@@ -41,11 +41,6 @@ public class IdentityController {
     }
 
     @PostMapping(value = "/reference", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Identity getIdentityByReferenceNumber(@RequestBody Map<String, String> idReferenceNumber) throws InvalidIdentityReferenceException {
-        return identityServiceImpl.findIdentityByIdentityRef(idReferenceNumber.get("idRef"));
-    }
-
-    @PostMapping(value = "/reference", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public IdentityJson getIdentityByReferenceNumber(@RequestBody IdentityRefJson identityRefJson) throws InvalidIdentityReferenceException {
         return identityServiceImpl.findIdentityByIdentityRef(identityRefJson);
     }

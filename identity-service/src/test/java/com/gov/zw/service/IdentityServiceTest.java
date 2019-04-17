@@ -3,6 +3,7 @@ package com.gov.zw.service;
 import com.gov.zw.domain.Identity;
 import com.gov.zw.domain.IdentityJson;
 import com.gov.zw.domain.IdentityJsonMapper;
+import com.gov.zw.domain.IdentityRefJson;
 import com.gov.zw.repository.IdentityRepository;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidIdentityNameException;
@@ -72,7 +73,9 @@ class IdentityServiceTest {
 
     @Test
     void should_throw_exception_when__an_invalid_idRef_is_passed() {
-        assertThrows(InvalidIdentityReferenceException.class, () ->identityService.findIdentityByIdentityRef(null));
+        // TODO : Amend this test
+//        given(identityJsonMapper.toIdentity(null)).willReturn(null);
+        assertThrows(InvalidIdentityReferenceException.class, () ->identityService.findIdentityByIdentityRef((String) null));
     }
 
     @Test
