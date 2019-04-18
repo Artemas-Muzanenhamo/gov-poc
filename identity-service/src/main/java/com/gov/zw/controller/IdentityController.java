@@ -1,7 +1,8 @@
 package com.gov.zw.controller;
 
-import com.gov.zw.domain.Identity;
 import com.gov.zw.domain.IdentityJson;
+import com.gov.zw.domain.IdentityNameJson;
+import com.gov.zw.domain.IdentityRefJson;
 import com.gov.zw.service.IdentityService;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidIdentityNameException;
@@ -10,7 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.springframework.http.HttpStatus.OK;
 
@@ -35,13 +35,13 @@ public class IdentityController {
 
     // Retrieve
     @PostMapping(value = "/name", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<IdentityJson> getIdentitiesByName(@RequestBody Map<String, String> name) throws InvalidIdentityNameException {
-        return identityServiceImpl.findIdentitiesByName(name.get("name"));
+    public List<IdentityJson> getIdentitiesByName(@RequestBody IdentityNameJson identityNameJson) throws InvalidIdentityNameException {
+        return identityServiceImpl.findIdentitiesByName(identityNameJson);
     }
 
     @PostMapping(value = "/reference", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Identity getIdentityByReferenceNumber(@RequestBody Map<String, String> idReferenceNumber) throws InvalidIdentityReferenceException {
-        return identityServiceImpl.findIdentityByIdentityRef(idReferenceNumber.get("idRef"));
+    public IdentityJson getIdentityByReferenceNumber(@RequestBody IdentityRefJson identityRefJson) throws InvalidIdentityReferenceException {
+        return identityServiceImpl.findIdentityByIdentityRef(identityRefJson);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

@@ -2,6 +2,8 @@ package com.gov.zw.service;
 
 import com.gov.zw.domain.Identity;
 import com.gov.zw.domain.IdentityJson;
+import com.gov.zw.domain.IdentityNameJson;
+import com.gov.zw.domain.IdentityRefJson;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidIdentityNameException;
 import com.gov.zw.util.InvalidIdentityReferenceException;
@@ -31,11 +33,11 @@ public interface IdentityService {
 
     /**
      * Allows you to find an {@link Identity} by the ID reference.
-     * @param idRef - The ID reference of the {@link Identity} to be returned.
+     * @param identityRefJson - The ID reference of the {@link Identity} to be returned.
      * @return - An {@link Identity}.
      * @throws InvalidIdentityReferenceException
      */
-    Identity findIdentityByIdentityRef(String idRef) throws InvalidIdentityReferenceException;
+    IdentityJson findIdentityByIdentityRef(IdentityRefJson identityRefJson) throws InvalidIdentityReferenceException;
 
     /**
      * Allows you to retrieve all the Identities.
@@ -50,4 +52,5 @@ public interface IdentityService {
      */
     void delete(IdentityJson identityJson) throws InvalidIdentityException;
 
+    List<IdentityJson> findIdentitiesByName(IdentityNameJson identityNameJson) throws InvalidIdentityNameException;
 }

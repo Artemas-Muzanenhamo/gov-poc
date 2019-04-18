@@ -1,8 +1,6 @@
 package com.gov.zw.service;
 
-import com.gov.zw.domain.Identity;
-import com.gov.zw.domain.IdentityJson;
-import com.gov.zw.domain.IdentityJsonMapper;
+import com.gov.zw.domain.*;
 import com.gov.zw.repository.IdentityRepository;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidIdentityNameException;
@@ -19,10 +17,16 @@ public class IdentityServiceImpl implements IdentityService {
 
     private final IdentityRepository identityRepository;
     private final IdentityJsonMapper identityJsonMapper;
+    private final IdentityRefJsonMapper identityRefJsonMapper;
+    private final IdentityNameJsonMapper identityNameJsonMapper;
 
-    public IdentityServiceImpl(IdentityRepository identityRepository, IdentityJsonMapper identityJsonMapper) {
+    public IdentityServiceImpl(IdentityRepository identityRepository, IdentityJsonMapper identityJsonMapper,
+                               IdentityRefJsonMapper identityRefJsonMapper,
+                               IdentityNameJsonMapper identityNameJsonMapper) {
         this.identityRepository = identityRepository;
         this.identityJsonMapper = identityJsonMapper;
+        this.identityRefJsonMapper = identityRefJsonMapper;
+        this.identityNameJsonMapper = identityNameJsonMapper;
     }
 
     void save(Identity identity) throws InvalidIdentityException {
@@ -45,11 +49,17 @@ public class IdentityServiceImpl implements IdentityService {
         return identities.stream().map(IdentityJson::new).collect(toList());
     }
 
-    @Override
-    public Identity findIdentityByIdentityRef(String idRef) throws InvalidIdentityReferenceException {
+    Identity findIdentityByIdentityRef(String idRef) throws InvalidIdentityReferenceException {
         Optional<String> idReferenceOptional = Optional.ofNullable(idRef);
         return identityRepository.findIdentityByIdentityRef(idReferenceOptional
                 .orElseThrow( () -> new InvalidIdentityReferenceException("The ID reference supplied is not valid!")));
+    }
+
+    @Override
+    public IdentityJson findIdentityByIdentityRef(IdentityRefJson identityRefJson) throws InvalidIdentityReferenceException {
+        String idReference = identityRefJsonMapper.toIdentityRef(identityRefJson);
+        Identity identity = findIdentityByIdentityRef(idReference);
+        return new IdentityJson(identity);
     }
 
     @Override
@@ -67,5 +77,11 @@ public class IdentityServiceImpl implements IdentityService {
     public void delete(IdentityJson identityJson) throws InvalidIdentityException {
         Identity identity = identityJsonMapper.toIdentity(identityJson);
         delete(identity);
+    }
+
+    @Override
+    public List<IdentityJson> findIdentitiesByName(IdentityNameJson identityNameJson) throws InvalidIdentityNameException {
+        String identityName = identityNameJsonMapper.toIdentityName(identityNameJson);
+        return findIdentitiesByName(identityName);
     }
 }
