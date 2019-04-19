@@ -2,6 +2,7 @@ package com.gov.zw.service;
 
 import com.gov.zw.client.Identity;
 import com.gov.zw.client.IdentityClient;
+import com.gov.zw.client.IdentityReferenceJson;
 import com.gov.zw.domain.License;
 import com.gov.zw.domain.LicenseJson;
 import com.gov.zw.domain.LicenseJsonMapper;
@@ -52,10 +53,11 @@ public class LicenseServiceTest {
         LicenseJson licenseJson = givenAValidLicense();
         Map<String, String> stringMap = new HashMap<>();
         stringMap.put("idRef", "1");
+        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(stringMap);
 
         licenseService.addLicense(licenseJson);
 
-        verify(identityClient, times(1)).findIdentityByIdReferenceNumber(stringMap);
+        verify(identityClient, times(1)).findIdentityByIdReferenceNumber(identityReferenceJson);
     }
 
     @Test(expected = InvalidIdentityException.class)
@@ -151,7 +153,8 @@ public class LicenseServiceTest {
         Map<String, String> idReference = givenIdentityReference();
         License license = givenALicense();
         LicenseJson licenseJson = new LicenseJson(license);
-        given(identityClient.findIdentityByIdReferenceNumber(idReference)).willReturn(expectedIdentity);
+        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(idReference);
+        given(identityClient.findIdentityByIdReferenceNumber(identityReferenceJson)).willReturn(expectedIdentity);
         given(licenseJsonMapper.toDto(licenseJson)).willReturn(license);
         return licenseJson;
     }

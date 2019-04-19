@@ -13,5 +13,5 @@ import java.util.Map;
 public interface IdentityClient {
 
     @PostMapping(value = "/identities/reference")
-    Identity findIdentityByIdReferenceNumber(@RequestBody Map<String, String> referenceNumber);
+    Identity findIdentityByIdReferenceNumber(@RequestBody IdentityReferenceJson identityReferenceJson);
 }
