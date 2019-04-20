@@ -1,9 +1,6 @@
 package com.gov.zw.service;
 
-import com.gov.zw.client.Identity;
-import com.gov.zw.client.IdentityClient;
-import com.gov.zw.client.IdentityReferenceJson;
-import com.gov.zw.client.IdentityReferenceJsonMapper;
+import com.gov.zw.client.*;
 import com.gov.zw.domain.License;
 import com.gov.zw.domain.LicenseJson;
 import com.gov.zw.domain.LicenseJsonMapper;
@@ -44,8 +41,7 @@ public class LicenseServiceImpl implements LicenseService {
         Map<String, String> referenceNumber = new HashMap<>();
         referenceNumber.put("idRef", licenseOptional
                 .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID)).getIdentityRef());
-        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(referenceNumber);
-        Optional<Identity> identityOptional = Optional.ofNullable(identityClient.findIdentityByIdReferenceNumber(identityReferenceJson));
+        Optional<Identity> identityOptional = Optional.ofNullable(identityClient.findIdentityByIdReferenceNumber(referenceNumber.get("idRef")));
         if (identityOptional.isPresent()) {
             licenseRepository.save(license);
         } else {

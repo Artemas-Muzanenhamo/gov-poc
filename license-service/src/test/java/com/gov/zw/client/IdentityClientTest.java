@@ -54,7 +54,7 @@ public class IdentityClientTest extends CDCIdentityClientBaseTest {
                 .uponReceiving("a request from the License-Service consumer")
                     .path(IDENTITIES_REFERENCE)
                     .method(HttpMethod.POST.name())
-                    .body(requestBodyJson.toJSONString(), MediaType.APPLICATION_JSON_UTF8_VALUE)
+                    .body("MUZAN1234", MediaType.TEXT_PLAIN_VALUE)
                 .willRespondWith()
                     .status(HttpStatus.OK.value())
                     .headers(headers)
@@ -69,7 +69,7 @@ public class IdentityClientTest extends CDCIdentityClientBaseTest {
         map.put("idRef", "MUZAN1234");
         IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson();
         identityReferenceJson.idRef = map.get("idRef");
-        Identity identity = identityClient.findIdentityByIdReferenceNumber(identityReferenceJson);
+        Identity identity = identityClient.findIdentityByIdReferenceNumber("MUZAN1234");
         Identity expectedIdentity =
                 new Identity("1", "1", "Artemas", "Muzanenhamo",
                 "28/03/1990", "Mashayamombe",

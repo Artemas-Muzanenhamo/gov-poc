@@ -2,12 +2,10 @@ package com.gov.zw.service;
 
 import com.gov.zw.client.Identity;
 import com.gov.zw.client.IdentityClient;
-import com.gov.zw.client.IdentityReferenceJson;
 import com.gov.zw.domain.License;
 import com.gov.zw.domain.LicenseJson;
 import com.gov.zw.domain.LicenseJsonMapper;
 import com.gov.zw.repository.LicenseRepository;
-import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidLicenseException;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,17 +51,18 @@ public class LicenseServiceTest {
         LicenseJson licenseJson = givenAValidLicense();
         Map<String, String> stringMap = new HashMap<>();
         stringMap.put("idRef", "1");
-        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(stringMap);
+        given(identityClient.findIdentityByIdReferenceNumber(stringMap.get("idRef"))).willReturn(expectedIdentity());
 
         licenseService.addLicense(licenseJson);
 
-        verify(identityClient, times(1)).findIdentityByIdReferenceNumber(identityReferenceJson);
+        verify(identityClient, times(1)).findIdentityByIdReferenceNumber(stringMap.get("idRef"));
     }
 
-    @Test(expected = InvalidIdentityException.class)
+    @Test(expected = InvalidLicenseException.class)
     public void should_return_an_identity_not_valid_exception() throws Exception {
         License license = new License();
-        licenseService.addLicense(license);
+        LicenseJson licenseJson = new LicenseJson(license);
+        licenseService.addLicense(licenseJson);
     }
 
     @Test
@@ -153,8 +152,7 @@ public class LicenseServiceTest {
         Map<String, String> idReference = givenIdentityReference();
         License license = givenALicense();
         LicenseJson licenseJson = new LicenseJson(license);
-        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(idReference);
-        given(identityClient.findIdentityByIdReferenceNumber(identityReferenceJson)).willReturn(expectedIdentity);
+        given(identityClient.findIdentityByIdReferenceNumber(idReference.get("idRef"))).willReturn(expectedIdentity);
         given(licenseJsonMapper.toDto(licenseJson)).willReturn(license);
         return licenseJson;
     }
