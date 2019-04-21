@@ -31,9 +31,8 @@ public class IdentityClientTest extends CDCIdentityClientBaseTest {
         headers.put("Content-Type", APPLICATION_JSON_UTF_8_VALUE);
 
         // What I will send as a Request in the Pact JSON
-        Map<String, String> requestObject = new HashMap<>();
-        requestObject.put("idRef", "MUZAN1234");
-        JSONObject requestBodyJson = new JSONObject(requestObject);
+        JSONObject requestBodyJson = new JSONObject();
+        requestBodyJson.put("idRef", "MUZAN1234");
 
         // What I will get as a Response in the Pact JSON
         Map<String, String> responseObject = new HashMap<>();
@@ -54,7 +53,7 @@ public class IdentityClientTest extends CDCIdentityClientBaseTest {
                 .uponReceiving("a request from the License-Service consumer")
                     .path(IDENTITIES_REFERENCE)
                     .method(HttpMethod.POST.name())
-                    .body("MUZAN1234", MediaType.TEXT_PLAIN_VALUE)
+                    .body(requestBodyJson.toJSONString(), MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .willRespondWith()
                     .status(HttpStatus.OK.value())
                     .headers(headers)
@@ -67,9 +66,8 @@ public class IdentityClientTest extends CDCIdentityClientBaseTest {
     public void verifyIdentityPact() {
         Map<String, String> map = new HashMap<>();
         map.put("idRef", "MUZAN1234");
-        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson();
-        identityReferenceJson.idRef = map.get("idRef");
-        Identity identity = identityClient.findIdentityByIdReferenceNumber("MUZAN1234");
+        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(map);
+        Identity identity = identityClient.findIdentityByIdReferenceNumber(identityReferenceJson);
         Identity expectedIdentity =
                 new Identity("1", "1", "Artemas", "Muzanenhamo",
                 "28/03/1990", "Mashayamombe",

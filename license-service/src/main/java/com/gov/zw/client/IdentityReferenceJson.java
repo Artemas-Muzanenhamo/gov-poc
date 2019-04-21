@@ -1,6 +1,7 @@
 package com.gov.zw.client;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class IdentityReferenceJson {
     public String idRef;
@@ -8,7 +9,20 @@ public class IdentityReferenceJson {
     public IdentityReferenceJson() { }
 
     public IdentityReferenceJson(Map<String, String> idRef) {
-        this.idRef = idRef.get("ref");
+        this.idRef = idRef.get("idRef");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        IdentityReferenceJson that = (IdentityReferenceJson) o;
+        return Objects.equals(idRef, that.idRef);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idRef);
     }
 
     @Override

@@ -12,9 +12,11 @@
                 "method": "POST",
                 "path": "/identities/reference",
                 "headers": {
-                    "Content-Type": "text/plain"
+                    "Content-Type": "application/json;charset=UTF-8"
                 },
-                "body": "MUZAN1234"
+                "body": {
+                    "idRef": "MUZAN1234"
+                }
             },
             "response": {
                 "status": 200,

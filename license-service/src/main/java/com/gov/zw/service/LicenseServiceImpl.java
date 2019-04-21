@@ -41,7 +41,8 @@ public class LicenseServiceImpl implements LicenseService {
         Map<String, String> referenceNumber = new HashMap<>();
         referenceNumber.put("idRef", licenseOptional
                 .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID)).getIdentityRef());
-        Optional<Identity> identityOptional = Optional.ofNullable(identityClient.findIdentityByIdReferenceNumber(referenceNumber.get("idRef")));
+        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(referenceNumber);
+        Optional<Identity> identityOptional = Optional.ofNullable(identityClient.findIdentityByIdReferenceNumber(identityReferenceJson));
         if (identityOptional.isPresent()) {
             licenseRepository.save(license);
         } else {
