@@ -7,7 +7,6 @@ import com.gov.zw.domain.License;
 import com.gov.zw.domain.LicenseJson;
 import com.gov.zw.domain.LicenseJsonMapper;
 import com.gov.zw.repository.LicenseRepository;
-import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidLicenseException;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,16 +53,18 @@ public class LicenseServiceTest {
         Map<String, String> stringMap = new HashMap<>();
         stringMap.put("idRef", "1");
         IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(stringMap);
+        given(identityClient.findIdentityByIdReferenceNumber(identityReferenceJson)).willReturn(expectedIdentity());
 
         licenseService.addLicense(licenseJson);
 
         verify(identityClient, times(1)).findIdentityByIdReferenceNumber(identityReferenceJson);
     }
 
-    @Test(expected = InvalidIdentityException.class)
+    @Test(expected = InvalidLicenseException.class)
     public void should_return_an_identity_not_valid_exception() throws Exception {
         License license = new License();
-        licenseService.addLicense(license);
+        LicenseJson licenseJson = new LicenseJson(license);
+        licenseService.addLicense(licenseJson);
     }
 
     @Test
