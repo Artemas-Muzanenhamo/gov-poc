@@ -1,6 +1,9 @@
 package com.gov.zw.service;
 
-import com.gov.zw.client.*;
+import com.gov.zw.client.Identity;
+import com.gov.zw.client.IdentityClient;
+import com.gov.zw.client.IdentityReferenceJson;
+import com.gov.zw.client.IdentityReferenceJsonMapper;
 import com.gov.zw.domain.License;
 import com.gov.zw.domain.LicenseJson;
 import com.gov.zw.domain.LicenseJsonMapper;
@@ -9,9 +12,7 @@ import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidLicenseException;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
@@ -38,10 +39,8 @@ public class LicenseServiceImpl implements LicenseService {
 
     void addLicense(License license) throws InvalidLicenseException, InvalidIdentityException {
         Optional<License> licenseOptional = Optional.ofNullable(license);
-        Map<String, String> referenceNumber = new HashMap<>();
-        referenceNumber.put("idRef", licenseOptional
+        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(licenseOptional
                 .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID)).getIdentityRef());
-        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(referenceNumber);
         Optional<Identity> identityOptional = Optional.ofNullable(identityClient.findIdentityByIdReferenceNumber(identityReferenceJson));
         if (identityOptional.isPresent()) {
             licenseRepository.save(license);

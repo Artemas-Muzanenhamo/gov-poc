@@ -16,9 +16,7 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,15 +27,14 @@ import static org.mockito.MockitoAnnotations.initMocks;
 @RunWith(SpringRunner.class)
 public class LicenseServiceTest {
 
+    private static final String ID_REF = "1";
+
     @InjectMocks
     private LicenseServiceImpl licenseService;
-
     @Mock
     private IdentityClient identityClient;
-
     @Mock
     private LicenseRepository licenseRepository;
-
     @Mock
     private LicenseJsonMapper licenseJsonMapper;
 
@@ -50,9 +47,7 @@ public class LicenseServiceTest {
     public void should_return_an_identity() throws Exception {
 
         LicenseJson licenseJson = givenAValidLicense();
-        Map<String, String> stringMap = new HashMap<>();
-        stringMap.put("idRef", "1");
-        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(stringMap);
+        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(ID_REF);
         given(identityClient.findIdentityByIdReferenceNumber(identityReferenceJson)).willReturn(expectedIdentity());
 
         licenseService.addLicense(licenseJson);
@@ -118,19 +113,12 @@ public class LicenseServiceTest {
     @Test
     public void should_return_a_license_given_the_identity_reference() throws Exception {
         License license = givenALicense();
-        String identityRef = "123";
-        when(licenseRepository.findLicenseByIdentityRef(identityRef)).thenReturn(license);
+        when(licenseRepository.findLicenseByIdentityRef(ID_REF)).thenReturn(license);
 
-        License licenseByIdentityRef = licenseService.getLicenseByIdentityRef(identityRef);
+        License licenseByIdentityRef = licenseService.getLicenseByIdentityRef(ID_REF);
 
         assertThat(licenseByIdentityRef).isEqualTo(license);
-        verify(licenseRepository, times(1)).findLicenseByIdentityRef(identityRef);
-    }
-
-    private Map<String, String> givenIdentityReference() {
-        Map<String, String> idReference = new HashMap<>();
-        idReference.put("idRef", "1");
-        return idReference;
+        verify(licenseRepository, times(1)).findLicenseByIdentityRef(ID_REF);
     }
 
     private Identity expectedIdentity() {
@@ -151,10 +139,9 @@ public class LicenseServiceTest {
 
     private LicenseJson givenAValidLicense() {
         Identity expectedIdentity = expectedIdentity();
-        Map<String, String> idReference = givenIdentityReference();
         License license = givenALicense();
         LicenseJson licenseJson = new LicenseJson(license);
-        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(idReference);
+        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(ID_REF);
         given(identityClient.findIdentityByIdReferenceNumber(identityReferenceJson)).willReturn(expectedIdentity);
         given(licenseJsonMapper.toDto(licenseJson)).willReturn(license);
         return licenseJson;

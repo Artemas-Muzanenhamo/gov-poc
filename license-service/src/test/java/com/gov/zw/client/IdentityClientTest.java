@@ -64,9 +64,10 @@ public class IdentityClientTest extends CDCIdentityClientBaseTest {
     @Test
     @PactVerification(fragment = "retrieveIdentityPact")
     public void verifyIdentityPact() {
+        // TODO: Remove map
         Map<String, String> map = new HashMap<>();
         map.put("idRef", "MUZAN1234");
-        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(map);
+        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson("MUZAN1234");
         Identity identity = identityClient.findIdentityByIdReferenceNumber(identityReferenceJson);
         Identity expectedIdentity =
                 new Identity("1", "1", "Artemas", "Muzanenhamo",
