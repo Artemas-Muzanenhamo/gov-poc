@@ -113,6 +113,12 @@
             <artifactId>spring-data-rest-hal-browser</artifactId>
             <version>LATEST</version>
         </dependency>
+        <dependency>
+            <groupId>net.minidev</groupId>
+            <artifactId>json-smart</artifactId>
+            <version>2.3</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>

@@ -3,11 +3,11 @@ package com.gov.zw.domain;
 import java.util.Objects;
 
 public class IdentityRefJson {
-    public String idRef;
+    String idRef;
 
-    public IdentityRefJson() { }
+    IdentityRefJson() { }
 
-    public IdentityRefJson(String idRef) {
+    IdentityRefJson(String idRef) {
         this.idRef = idRef;
     }
 
