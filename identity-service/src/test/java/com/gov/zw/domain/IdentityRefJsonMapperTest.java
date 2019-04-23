@@ -28,4 +28,11 @@ class IdentityRefJsonMapperTest {
         String identityRef = identityRefJsonMapper.toIdentityRef(identityRefJson);
         assertThat(identityRef).isEqualTo(null);
     }
+
+    @Test
+    void should_convert_empty_identity_ref_json_to_string() {
+        identityRefJson = new IdentityRefJson("");
+        String identityRef = identityRefJsonMapper.toIdentityRef(identityRefJson);
+        assertThat(identityRef).isEqualTo("");
+    }
 }
