@@ -13,8 +13,7 @@ public class IdentityJson {
     public String placeOfBirth;
     public String dateOfIssue;
 
-    public IdentityJson() {
-    }
+    public IdentityJson() { }
 
     public IdentityJson(Identity identity) {
         this.id = identity.getId();
