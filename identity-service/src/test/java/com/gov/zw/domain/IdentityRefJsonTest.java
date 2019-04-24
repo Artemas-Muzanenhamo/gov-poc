@@ -3,7 +3,8 @@ package com.gov.zw.domain;
 import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 class IdentityRefJsonTest {
     private IdentityRefJson identityRefJson;

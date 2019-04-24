@@ -3,7 +3,8 @@ package com.gov.zw.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 class IdentityNameJsonMapperTest {
     private IdentityNameJsonMapper identityNameJsonMapper;
