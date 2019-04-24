@@ -17,21 +17,21 @@ class IdentityNameJsonMapperTest {
     @Test
     void should_convert_identity_name_json_to_string() {
         identityNameJson = new IdentityNameJson("12345");
-        String identityRef = identityNameJsonMapper.toIdentityName(identityNameJson);
-        assertThat(identityRef).isEqualTo("12345");
+        String identityName = identityNameJsonMapper.toIdentityName(identityNameJson);
+        assertThat(identityName).isEqualTo("12345");
     }
 
     @Test
     void should_convert_null_identity_name_json_to_string() {
         identityNameJson = new IdentityNameJson(null);
-        String identityRef = identityNameJsonMapper.toIdentityName(identityNameJson);
-        assertThat(identityRef).isEqualTo(null);
+        String identityName = identityNameJsonMapper.toIdentityName(identityNameJson);
+        assertThat(identityName).isEqualTo(null);
     }
 
     @Test
     void should_convert_empty_identity_name_json_to_string() {
         identityNameJson = new IdentityNameJson("");
-        String identityRef = identityNameJsonMapper.toIdentityName(identityNameJson);
-        assertThat(identityRef).isEqualTo("");
+        String identityName = identityNameJsonMapper.toIdentityName(identityNameJson);
+        assertThat(identityName).isEqualTo("");
     }
 }
