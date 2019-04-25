@@ -37,20 +37,4 @@ public class PatientHandler {
                 .flatMap(patientServiceImpl::updatePatient);
         return ok().body(patientMono, Patient.class);
     }
-
-    private static Mono<ServerResponse> defaultWriteResponse(Publisher<Patient> patients) {
-        return Mono
-                .from(patients)
-                .flatMap(p -> created(URI.create("/patients"))
-                        .contentType(APPLICATION_JSON_UTF8)
-                        .build()
-                );
-    }
-
-    private static Mono<ServerResponse> defaultReadResponse(Publisher<Patient> patients) {
-        return ServerResponse
-                .ok()
-                .contentType(APPLICATION_JSON_UTF8)
-                .body(patients, Patient.class);
-    }
 }
