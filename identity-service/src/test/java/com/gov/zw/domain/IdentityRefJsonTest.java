@@ -30,4 +30,13 @@ class IdentityRefJsonTest {
 
         assertThat(idRef).isEqualTo(idRefJson.get("idRef"));
     }
+
+    @Test
+    void equality_check() {
+        identityRefJson = new IdentityRefJson("12345");
+        IdentityRefJson newIdentityRef = new IdentityRefJson("12345");
+        assertThat(identityRefJson).isEqualTo(newIdentityRef);
+        assertThat(identityRefJson.toString()).isEqualTo(newIdentityRef.toString());
+        assertThat(identityRefJson.hashCode()).isEqualTo(newIdentityRef.hashCode());
+    }
 }

@@ -41,12 +41,12 @@ public class IdentityProviderTest {
         Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo",
                 "28/03/1990", "Mashayamombe", "Harare", "22/01/2018");
         Map<String, String> id = objectMapper.convertValue(identity, Map.class);
-        JSONObject jsonObject = new JSONObject(id);
+        JSONObject identityJsonObject = new JSONObject(id);
 
         embeddedService.addExpectation(
                 onRequestTo(IDENTITIES_REFERENCE)
                         .withMethod(POST),
-                giveResponse(jsonObject.toJSONString(), APPLICATION_JSON_UTF8_VALUE)
+                giveResponse(identityJsonObject.toJSONString(), APPLICATION_JSON_UTF8_VALUE)
         );
     }
 
