@@ -1,5 +1,7 @@
 package com.gov.zw.domain;
 
+import java.util.Objects;
+
 public class LicenseJson {
 
     public String id;
@@ -49,5 +51,29 @@ public class LicenseJson {
                 ", signatureImage='" + signatureImage + '\'' +
                 ", address='" + address + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LicenseJson that = (LicenseJson) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(identityRef, that.identityRef) &&
+                Objects.equals(surname, that.surname) &&
+                Objects.equals(firstNames, that.firstNames) &&
+                Objects.equals(dateOfBirth, that.dateOfBirth) &&
+                Objects.equals(country, that.country) &&
+                Objects.equals(dateOfIssue, that.dateOfIssue) &&
+                Objects.equals(expiryDate, that.expiryDate) &&
+                Objects.equals(agency, that.agency) &&
+                Objects.equals(licenseNumber, that.licenseNumber) &&
+                Objects.equals(signatureImage, that.signatureImage) &&
+                Objects.equals(address, that.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, identityRef, surname, firstNames, dateOfBirth, country, dateOfIssue, expiryDate, agency, licenseNumber, signatureImage, address);
     }
 }
