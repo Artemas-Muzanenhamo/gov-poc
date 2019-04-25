@@ -1,19 +1,19 @@
 package com.gov.zw.domain;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-public class LicenseTest {
+class LicenseTest {
 
     private License license;
     private License license2;
 
-    @Before
-    public void init() {
+    @BeforeEach
+    void init() {
         license = new License(
                 "1", "1234AMUZ1", "Muzanenhamo", "Artemas Takudzwa",
                 "28/03/1990", "ZIM", "20/11/2017", "19/11/2027", "ZDVLA",
@@ -26,7 +26,7 @@ public class LicenseTest {
     }
 
     @Test
-    public void creation() {
+    void creation() {
 
         Assertions.assertThat(license.getId()).isEqualTo("1");
         Assertions.assertThat(license.getIdentityRef()).isEqualTo("1234AMUZ1");
@@ -45,34 +45,34 @@ public class LicenseTest {
     }
 
     @Test
-    public void neverEqualsNull() {
+    void neverEqualsNull() {
         assertNotEquals(true, license.equals(null));
     }
 
     @Test
-    public void licenceIsEqual() {
+    void licenceIsEqual() {
         assertEquals(true, license.equals(license2));
     }
 
     @Test
-    public void licenseNotEqual() {
+    void licenseNotEqual() {
         License license3 = new License();
         assertNotEquals(true, license.equals(license3));
     }
 
     @Test
-    public void hashCodesNotEqual(){
+    void hashCodesNotEqual(){
         assertNotEquals(false,license.hashCode() == license2.hashCode());
     }
 
     @Test
-    public void hashCodesEqual(){
+    void hashCodesEqual(){
         license2 = license;
         assertEquals(true, license.hashCode() == license2.hashCode());
     }
 
     @Test
-    public void emptyToString(){
+    void emptyToString(){
         License license = new License();
         License license1 = new License();
         assertEquals(license1.toString(), license.toString());

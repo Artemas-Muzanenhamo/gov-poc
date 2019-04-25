@@ -37,7 +37,7 @@ public class LicenseServiceImpl implements LicenseService {
         this.identityReferenceJsonMapper = identityReferenceJsonMapper;
     }
 
-    void addLicense(License license) throws InvalidLicenseException, InvalidIdentityException {
+    private void addLicense(License license) throws InvalidLicenseException, InvalidIdentityException {
         Optional<License> licenseOptional = Optional.ofNullable(license);
         IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(licenseOptional
                 .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID)).getIdentityRef());
