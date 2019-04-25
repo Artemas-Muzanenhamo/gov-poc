@@ -1,6 +1,5 @@
 package com.gov.zw.patient;
 
-import org.reactivestreams.Publisher;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -9,7 +8,6 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static org.springframework.web.reactive.function.server.ServerResponse.created;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
