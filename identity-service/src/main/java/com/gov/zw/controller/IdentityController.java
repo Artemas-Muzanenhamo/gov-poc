@@ -7,12 +7,12 @@ import com.gov.zw.service.IdentityService;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidIdentityNameException;
 import com.gov.zw.util.InvalidIdentityReferenceException;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
 @RestController
 @RequestMapping("/identities")
@@ -26,7 +26,7 @@ public class IdentityController {
     }
 
     // Create
-    @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @ResponseStatus(value = OK)
     public void saveIdentity(@RequestBody IdentityJson identityJson) throws InvalidIdentityException {
@@ -34,23 +34,23 @@ public class IdentityController {
     }
 
     // Retrieve
-    @PostMapping(value = "/name", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(value = "/name", produces = APPLICATION_JSON_UTF8_VALUE)
     public List<IdentityJson> getIdentitiesByName(@RequestBody IdentityNameJson identityNameJson) throws InvalidIdentityNameException {
         return identityServiceImpl.findIdentitiesByName(identityNameJson);
     }
 
-    @PostMapping(value = "/reference", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(value = "/reference", produces = APPLICATION_JSON_UTF8_VALUE)
     public IdentityJson getIdentityByReferenceNumber(@RequestBody IdentityRefJson identityRefJson) throws InvalidIdentityReferenceException {
         return identityServiceImpl.findIdentityByIdentityRef(identityRefJson);
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     public List<IdentityJson> getIdentities() {
         return identityServiceImpl.findAll();
     }
 
     //Update
-    @PutMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PutMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @ResponseStatus(OK)
     public void updateIdentity(@RequestBody IdentityJson identityJson) throws InvalidIdentityException {
@@ -58,7 +58,7 @@ public class IdentityController {
     }
 
     // Delete
-    @DeleteMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @DeleteMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @ResponseStatus(OK)
     public void deleteIdentity(@RequestBody IdentityJson identityJson) throws InvalidIdentityException {
