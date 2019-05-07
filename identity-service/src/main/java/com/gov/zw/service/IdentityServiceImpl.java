@@ -41,8 +41,7 @@ public class IdentityServiceImpl implements IdentityService {
         save(identity);
     }
 
-    @Override
-    public List<IdentityJson> findIdentitiesByName(String name) throws InvalidIdentityNameException {
+    List<IdentityJson> findIdentitiesByName(String name) throws InvalidIdentityNameException {
         Optional<String> nameOptional = Optional.ofNullable(name);
         List<Identity> identities = identityRepository.findIdentitiesByName(nameOptional
                 .orElseThrow(() -> new InvalidIdentityNameException("The name supplied does not exist!")));

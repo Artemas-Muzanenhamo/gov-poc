@@ -6,14 +6,14 @@ import org.springframework.stereotype.Component;
 public class IdentityJsonMapper {
     public Identity toIdentity(IdentityJson json) {
         return new Identity(
-        json.id,
-        json.identityRef,
-        json.name,
-        json.surname,
-        json.birthDate,
-        json.villageOfOrigin,
-        json.placeOfBirth,
-        json.dateOfIssue
+                json.id,
+                json.identityRef,
+                json.name,
+                json.surname,
+                json.birthDate,
+                json.villageOfOrigin,
+                json.placeOfBirth,
+                json.dateOfIssue
         );
     }
 }

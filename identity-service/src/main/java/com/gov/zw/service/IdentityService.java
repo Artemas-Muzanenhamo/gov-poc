@@ -18,6 +18,7 @@ public interface IdentityService {
 
     /**
      * Allows you to save an {@link Identity}.
+     *
      * @param identityJson - {@link Identity} to be saved.
      * @throws InvalidIdentityException
      */
@@ -25,14 +26,17 @@ public interface IdentityService {
 
     /**
      * Allows you to find an {@link Identity} by name.
-     * @param name - Name of the {@link Identity} to be returned.
+     *
+     * @param identityNameJson - Name of the {@link Identity} to be returned.
      * @return - a {@link List<Identity>} of Identities.
      * @throws InvalidIdentityNameException
      */
-    List<IdentityJson> findIdentitiesByName(String name) throws InvalidIdentityNameException;
+    List<IdentityJson> findIdentitiesByName(IdentityNameJson identityNameJson) throws InvalidIdentityNameException;
+//    List<IdentityJson> findIdentitiesByName(String name) throws InvalidIdentityNameException;
 
     /**
      * Allows you to find an {@link Identity} by the ID reference.
+     *
      * @param identityRefJson - The ID reference of the {@link Identity} to be returned.
      * @return - An {@link Identity}.
      * @throws InvalidIdentityReferenceException
@@ -41,16 +45,17 @@ public interface IdentityService {
 
     /**
      * Allows you to retrieve all the Identities.
+     *
      * @return - A {@link List<Identity>} of Identities.
      */
     List<IdentityJson> findAll();
 
     /**
      * Deletes an {@link Identity}.
+     *
      * @param identityJson - {@link Identity} to be deleted.
      * @throws InvalidIdentityException
      */
     void delete(IdentityJson identityJson) throws InvalidIdentityException;
 
-    List<IdentityJson> findIdentitiesByName(IdentityNameJson identityNameJson) throws InvalidIdentityNameException;
 }

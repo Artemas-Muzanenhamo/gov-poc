@@ -35,7 +35,7 @@ public class LicenseController {
     }
 
     @PostMapping(produces = APPLICATION_JSON_UTF8_VALUE, value = "ref")
-    public LicenseJson getLicenseByIdentityRef(@RequestBody IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException{
+    public LicenseJson getLicenseByIdentityRef(@RequestBody IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException {
         return this.licenseServiceImpl.getLicenseByIdentityRef(identityReferenceJson);
     }
 
