@@ -95,7 +95,7 @@ public class PatientEndpointTest {
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
 
-        when(patientService.updatePatient(patient)).thenReturn(just(patient));
+        given(patientService.updatePatient(patient)).willReturn(just(patient));
 
         client
                 .post()
