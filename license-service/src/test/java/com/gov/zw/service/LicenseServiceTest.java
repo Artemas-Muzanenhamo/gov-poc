@@ -113,7 +113,7 @@ public class LicenseServiceTest {
     @Test
     public void should_return_a_license_given_the_identity_reference() throws Exception {
         License license = givenALicense();
-        when(licenseRepository.findLicenseByIdentityRef(ID_REF)).thenReturn(license);
+        given(licenseRepository.findLicenseByIdentityRef(ID_REF)).willReturn(license);
 
         License licenseByIdentityRef = licenseService.getLicenseByIdentityRef(ID_REF);
 
@@ -150,7 +150,7 @@ public class LicenseServiceTest {
     private List<License> getLicenses() {
         License license = givenALicense();
         List<License> licenses = Collections.singletonList(license);
-        when(licenseRepository.findAll()).thenReturn(licenses);
+        given(licenseRepository.findAll()).willReturn(licenses);
         return licenses;
     }
 }
