@@ -11,6 +11,8 @@ services:
     ports:
       - "8761:8761"
   gateway:
+    depends_on:
+      - configuration-server
     build: ./gateway
     container_name: gateway
     ports:
