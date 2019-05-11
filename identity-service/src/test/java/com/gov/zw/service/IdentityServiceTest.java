@@ -44,7 +44,9 @@ class IdentityServiceTest {
     void should_save_identity_if_identity_details_exist() throws InvalidIdentityException {
         Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
                 "Mashayamombe", "Harare", "17/11/2017");
+
         identityService.save(identity);
+
         verify(identityRepository, times(1)).save(identity);
     }
 
@@ -79,11 +81,12 @@ class IdentityServiceTest {
     void should_return_an_identity_if_id_reference_is_valid() throws InvalidIdentityReferenceException {
         Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
                 "Mashayamombe", "Harare", "17/11/2017");
+        given(identityRepository.findIdentityByIdentityRef(identity.getIdentityRef())).willReturn(identity);
 
-        when(identityRepository.findIdentityByIdentityRef(identity.getIdentityRef())).thenReturn(identity);
+        Identity identityByIdentityRef = identityService.findIdentityByIdentityRef("1");
 
-        assertThat(identityService.findIdentityByIdentityRef("1")).isEqualTo(identity);
-        assertThat(identityService.findIdentityByIdentityRef("1").getName()).isEqualTo("Artemas");
+        assertThat(identityByIdentityRef).isEqualTo(identity);
+        assertThat(identityByIdentityRef.getName()).isEqualTo("Artemas");
     }
 
     @Test
@@ -96,13 +99,13 @@ class IdentityServiceTest {
                 new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
                         "Mashayamombe", "Harare", "17/11/2017")
         );
-        when(identityRepository.findAll()).thenReturn(identities);
-        List<IdentityJson> identityListJson = getIdentityListJson(identities);
+        given(identityRepository.findAll()).willReturn(identities);
+        List<IdentityJson> expectedIdentityListJson = getIdentityListJson(identities);
 
         List<IdentityJson> identityJsonList = identityService.findAll();
 
         assertThat(identityJsonList.size()).isEqualTo(3);
-        assertThat(identityJsonList).isEqualTo(identityListJson);
+        assertThat(identityJsonList).isEqualTo(expectedIdentityListJson);
     }
 
     @Test

@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: configuration-server
   profiles:
     active: native
   cloud:

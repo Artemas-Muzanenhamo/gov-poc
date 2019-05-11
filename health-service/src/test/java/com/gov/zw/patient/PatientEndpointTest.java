@@ -12,6 +12,7 @@ import reactor.core.publisher.Flux;
 
 import java.time.LocalDate;
 
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 import static reactor.core.publisher.Mono.just;
 
@@ -33,8 +34,8 @@ public class PatientEndpointTest {
 
     @Test
     public void should_return_all_mocked_patients() {
-        when(patientService.getAllPatients())
-                .thenReturn(Flux.just(patient1, patient2));
+        given(patientService.getAllPatients())
+                .willReturn(Flux.just(patient1, patient2));
 
         client
                 .get()
@@ -51,8 +52,8 @@ public class PatientEndpointTest {
 
     @Test
     public void should_return_200_when_retrieving_all_patients() {
-        when(patientService.getAllPatients())
-                .thenReturn(Flux.empty());
+        given(patientService.getAllPatients())
+                .willReturn(Flux.empty());
 
         client
                 .get()
@@ -72,7 +73,7 @@ public class PatientEndpointTest {
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
 
-        when(patientService.addPatient(patient)).thenReturn(just(patient));
+        given(patientService.addPatient(patient)).willReturn(just(patient));
 
         client
                 .put()
@@ -94,7 +95,7 @@ public class PatientEndpointTest {
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
 
-        when(patientService.updatePatient(patient)).thenReturn(just(patient));
+        given(patientService.updatePatient(patient)).willReturn(just(patient));
 
         client
                 .post()
