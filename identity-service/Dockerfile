@@ -1,5 +1,5 @@
 FROM openjdk:8-jre-alpine AS identity-service
-# copy WAR into image
+# copy JAR into image
 COPY target/identity-service-*-SNAPSHOT.jar /identity-service.jar
 # expose port
 EXPOSE 8080

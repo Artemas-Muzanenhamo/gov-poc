@@ -1,5 +1,5 @@
 FROM openjdk:8-jre-alpine AS discovery-server
-# copy WAR into image
+# copy JAR into image
 COPY target/discovery-server-*-SNAPSHOT.jar /discovery-server.jar
 # expose port
 EXPOSE 8761
