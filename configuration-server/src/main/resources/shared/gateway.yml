@@ -1,2 +1,9 @@
 server:
   port: 9999
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+#      TODO: Get Gateway to reach discovery-server
+      defaultZone: http://discovery-server:8761/eureka
