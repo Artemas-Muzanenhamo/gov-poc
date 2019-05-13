@@ -25,3 +25,4 @@ services:
     container_name: license-service
     ports:
       - "8081:8081"
+  ## TODO: Add MongoDB for Identity-Service and License-Service
