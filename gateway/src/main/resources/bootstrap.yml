@@ -1,7 +1,19 @@
 spring:
+  profiles:
+    active:
+      - docker
   application:
     name: gateway
   cloud:
     config:
       uri: http://configuration-server:8888
+      fail-fast: true
+
+---
+
+spring:
+  profiles: dev
+  cloud:
+    config:
+      uri: http://localhost:8888
       fail-fast: true
