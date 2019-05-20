@@ -15,13 +15,24 @@ services:
     container_name: gateway
     ports:
       - "9999:9999"
+    depends_on:
+      - configuration-server
   identity-service:
     build: ./identity-service
     container_name: identity-service
     ports:
       - "8080:8080"
+    depends_on:
+      - configuration-server
+      - gateway
+      - discovery-server
   license-service:
     build: ./license-service
     container_name: license-service
     ports:
       - "8081:8081"
+    depends_on:
+      - configuration-server
+      - gateway
+      - discovery-server
+  ## TODO: Add MongoDB for Identity-Service and License-Service
