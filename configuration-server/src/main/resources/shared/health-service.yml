@@ -1,4 +1,23 @@
 spring:
+  profiles:
+    active:
+      - docker
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: health-service-db
+server:
+  port: 8082
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka
+
+---
+
+spring:
+  profiles: dev
   data:
     mongodb:
       host: localhost
