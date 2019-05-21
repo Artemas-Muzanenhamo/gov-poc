@@ -1,6 +1,23 @@
+spring:
+  profiles:
+    active:
+      - docker
 server:
   port: 9999
 eureka:
   client:
     service-url:
       defaultZone: http://discovery-server:8761/eureka
+
+---
+
+spring:
+  profiles:
+    active:
+      - dev
+server:
+  port: 9999
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

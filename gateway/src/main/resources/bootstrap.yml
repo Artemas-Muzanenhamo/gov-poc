@@ -12,7 +12,10 @@ spring:
 ---
 
 spring:
-  profiles: dev
+  profiles:
+    active: dev
+  application:
+    name: gateway
   cloud:
     config:
       uri: http://localhost:8888
