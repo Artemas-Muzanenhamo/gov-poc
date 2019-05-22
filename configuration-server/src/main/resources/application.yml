@@ -8,6 +8,7 @@ spring:
       server:
         native:
           search-locations: classpath:/shared
+        default-profile: dev
 #          TODO: Make Spring Cloud use DEV Profile in order to find the right dev config in classpath:/shared
 #          TODO: http://localhost:8888/gateway/default
 #        default-profile:
