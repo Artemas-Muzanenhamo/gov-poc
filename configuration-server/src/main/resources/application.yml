@@ -8,10 +8,12 @@ spring:
       server:
         native:
           search-locations: classpath:/shared
+        default-profile: dev
 server:
   port: 8888
 
 ---
+
 server:
   port: 8888
 spring:
