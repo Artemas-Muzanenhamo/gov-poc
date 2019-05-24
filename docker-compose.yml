@@ -50,5 +50,4 @@ services:
     ports:
       - "27017:27017"
     restart: always
-# TODO: Test this Mongo instance.
 # TODO: Get containers to build sequentially.
