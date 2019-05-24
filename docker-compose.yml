@@ -42,3 +42,5 @@ services:
     container_name: mongo_db
     ports:
       - "27017:27017"
+# TODO: Test this Mongo instance.
+# TODO: Get containers to build sequentially.
