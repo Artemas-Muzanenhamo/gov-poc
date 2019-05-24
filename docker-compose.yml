@@ -26,6 +26,7 @@ services:
       - configuration-server
       - gateway
       - discovery-server
+      - mongo-db-service
   license-service:
     build: ./license-service
     container_name: license-service
@@ -35,4 +36,9 @@ services:
       - configuration-server
       - gateway
       - discovery-server
-  ## TODO: Add MongoDB for Identity-Service and License-Service
+      - mongo-db-service
+  mongo-db-service:
+    build: ./mongodb
+    container_name: mongo_db
+    ports:
+      - "27017:27017"
