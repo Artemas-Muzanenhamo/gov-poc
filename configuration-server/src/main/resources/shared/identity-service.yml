@@ -4,7 +4,7 @@ spring:
       - docker
   data:
     mongodb:
-      host: http://mongo-db-service
+      host: mongo-db-service
       port: 27017
       database: identity-service-db
 server:

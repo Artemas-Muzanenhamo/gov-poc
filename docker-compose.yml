@@ -48,6 +48,6 @@ services:
     build: ./mongodb
     container_name: mongo_db
     ports:
-      - "27017:27017"
+      - "27018:27017"
     restart: always
 # TODO: Get containers to build sequentially.
