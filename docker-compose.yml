@@ -15,6 +15,7 @@ services:
     container_name: gateway
     ports:
       - "9999:9999"
+    restart: always
     depends_on:
       - configuration-server
   identity-service:
@@ -22,17 +23,31 @@ services:
     container_name: identity-service
     ports:
       - "8080:8080"
+    restart: always
+    links:
+      - mongo-db-service
     depends_on:
       - configuration-server
       - gateway
       - discovery-server
+      - mongo-db-service
   license-service:
     build: ./license-service
     container_name: license-service
     ports:
       - "8081:8081"
+    restart: always
+    links:
+      - mongo-db-service
     depends_on:
       - configuration-server
       - gateway
       - discovery-server
-  ## TODO: Add MongoDB for Identity-Service and License-Service
+      - mongo-db-service
+  mongo-db-service:
+    build: ./mongodb
+    container_name: mongo_db
+    ports:
+      - "27018:27017"
+    restart: always
+# TODO: Get containers to build sequentially.

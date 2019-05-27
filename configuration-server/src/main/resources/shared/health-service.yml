@@ -4,7 +4,7 @@ spring:
       - docker
   data:
     mongodb:
-      host: localhost
+      host: http://mongo-db-service
       port: 27017
       database: health-service-db
 server:

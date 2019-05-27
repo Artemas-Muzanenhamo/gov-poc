@@ -12,9 +12,7 @@ eureka:
 ---
 
 spring:
-  profiles:
-    active:
-      - dev
+  profiles: dev
 server:
   port: 9999
 eureka:
