@@ -23,6 +23,9 @@ public class PatientEndpoint {
         ).andRoute(
                 POST("/patients").and(contentType(APPLICATION_JSON_UTF8).and(accept(APPLICATION_JSON_UTF8))),
                 patientHandler::updatePatient
+        ).andRoute(
+                DELETE("/patients").and(contentType(APPLICATION_JSON_UTF8)).and(accept(APPLICATION_JSON_UTF8)),
+                patientHandler::deletePatient
         );
     }
 }

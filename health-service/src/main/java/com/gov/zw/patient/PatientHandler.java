@@ -35,4 +35,9 @@ public class PatientHandler {
                 .flatMap(patientServiceImpl::updatePatient);
         return ok().body(patientMono, Patient.class);
     }
+
+    Mono<ServerResponse> deletePatient(ServerRequest request) {
+        Mono<Patient> patientMono = request.bodyToMono(Patient.class);
+        return ok().build(patientServiceImpl.deletePatient(patientMono));
+    }
 }

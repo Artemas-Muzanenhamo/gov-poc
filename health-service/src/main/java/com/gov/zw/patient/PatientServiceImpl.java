@@ -27,4 +27,10 @@ public class PatientServiceImpl implements PatientService {
     public Mono<Patient> updatePatient(Patient updatedPatient) {
         return patientRepository.save(updatedPatient);
     }
+
+    @Override
+    public Mono<Void> deletePatient(Mono<Patient> patientMono) {
+        patientMono.flatMap(e -> e.getIdentityRef())
+        return patientRepository.delete();
+    }
 }
