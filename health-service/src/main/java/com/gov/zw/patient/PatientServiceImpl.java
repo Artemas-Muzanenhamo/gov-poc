@@ -30,6 +30,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Mono<Void> deletePatient(Mono<Patient> patientMono) {
+//        TODO: Fix this
         patientMono.flatMap(e -> e.getIdentityRef())
         return patientRepository.delete();
     }
