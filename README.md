@@ -81,24 +81,11 @@ access any of the services via the gateway you can just access them as below:
 The Configuration Server will use `Spring-Cloud-Config` to support externalised (externalized :smirk: American..) configuration in a distributed system. With the Configuration Server we will have a central place to manage external properties for applications across all environments. Why all this Whyyyyy??!!!! Well if you think about scalability of your services. Suppose we now have 10 more `License-Service` services scaled up and we want to change some properties within those services. How can we make one change and have that update all the other services??? :thinking: .... The Configuration Server can handle this for us simply by us externalizing our configuration.
 
 # Testing
-## Pact
+## CDC testing
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/29547780/35231146-eb6550d6-ff8f-11e7-8546-25646cd138d9.png">
 </p>
 
-`Pact` is like VCR in reverse. VCR records actual provider behaviour, and verifies that the consumer behaves as expected. Pact records consumer behaviour, and verifies that the provider behaves as expected. The advantages Pact provides are:
-
-The ability to develop the consumer (eg. a Javascript rich client UI) before the provider (eg. the JSON backend API).
-
-The ability to drive out the requirements for your provider first, meaning you implement exactly and only what you need in the provider.
-
-Well documented use cases ("Given ... a request for ... will return ...") that show exactly how a provider is being used.
-
-The ability to see exactly which fields each consumer is interested in, allowing unused fields to be removed, and new fields to be added in the provider API without impacting a consumer.
-
-The ability to immediately see which consumers will be broken if a change is made to the provider API.
-
-When using the Pact Broker, the ability to map the relationships between your services.
-
-See [here](https://github.com/pact-foundation/pact-ruby/wiki/FAQ#how-does-pact-differ-from-vcr) for more examples of similar technologies.
+`Pact` is what I'm using to test and verify API between consumers and providers.
+See [here](https://github.com/pact-foundation/pact-ruby/wiki/FAQ#how-does-pact-differ-from-vcr) to find out more about how Pact works.
