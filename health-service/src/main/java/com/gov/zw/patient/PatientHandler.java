@@ -1,5 +1,6 @@
 package com.gov.zw.patient;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -8,6 +9,7 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 
+import static org.springframework.web.reactive.function.BodyInserters.fromObject;
 import static org.springframework.web.reactive.function.server.ServerResponse.created;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
@@ -37,7 +39,10 @@ public class PatientHandler {
     }
 
     Mono<ServerResponse> deletePatient(ServerRequest request) {
-        Mono<Patient> patientMono = request.bodyToMono(Patient.class);
-        return ok().build(patientServiceImpl.deletePatient(patientMono));
+        // TODO: add tests for this...
+        int patientId = Integer.valueOf(request.pathVariable("id"));
+        return patientServiceImpl.getPatient(patientId)
+                .flatMap(patient -> ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(fromObject(patient)))
+                .switchIfEmpty(ServerResponse.notFound().build());
     }
 }

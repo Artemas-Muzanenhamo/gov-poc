@@ -6,6 +6,8 @@ import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 
+import static java.lang.String.valueOf;
+
 @Service
 public class PatientServiceImpl implements PatientService {
 
@@ -35,5 +37,10 @@ public class PatientServiceImpl implements PatientService {
         // TODO: Find a way to retrieve a mono and delete the object without blocking
         Optional<Patient> patientOptional = patientMono.blockOptional();
         return patientRepository.delete(patientOptional.get());
+    }
+
+    @Override
+    public Mono<Patient> getPatient(int patientId) {
+        return patientRepository.findById(valueOf(patientId));
     }
 }
