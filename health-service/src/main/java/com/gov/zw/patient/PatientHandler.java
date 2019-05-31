@@ -1,6 +1,5 @@
 package com.gov.zw.patient;
 
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -9,9 +8,9 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static org.springframework.web.reactive.function.BodyInserters.fromObject;
-import static org.springframework.web.reactive.function.server.ServerResponse.created;
-import static org.springframework.web.reactive.function.server.ServerResponse.ok;
+import static org.springframework.web.reactive.function.server.ServerResponse.*;
 
 @Component
 public class PatientHandler {
@@ -42,7 +41,7 @@ public class PatientHandler {
         // TODO: add tests for this...
         int patientId = Integer.valueOf(request.pathVariable("id"));
         return patientServiceImpl.getPatient(patientId)
-                .flatMap(patient -> ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(fromObject(patient)))
-                .switchIfEmpty(ServerResponse.notFound().build());
+                .flatMap(patient -> ok().contentType(APPLICATION_JSON_UTF8).body(fromObject(patient)))
+                .switchIfEmpty(notFound().build());
     }
 }

@@ -105,4 +105,26 @@ public class PatientEndpointTest {
                 .expectStatus()
                 .isOk();
     }
+
+    @Test
+    public void should_delete_an_existing_patient() {
+        Patient patient =
+                new Patient(
+                        "12345",
+                        "Arty",
+                        "Muza",
+                        LocalDate.of(1990, 3, 28),
+                        "Flat 7, Elm Rose Road, E16 9AA"
+                );
+
+        given(patientService.updatePatient(patient)).willReturn(just(patient));
+
+        client
+                .post()
+                .uri(ALL_PATIENTS_URI)
+                .body(just(patient), Patient.class)
+                .exchange()
+                .expectStatus()
+                .isOk();
+    }
 }
