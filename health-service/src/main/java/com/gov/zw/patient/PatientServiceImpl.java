@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Optional;
+
 @Service
 public class PatientServiceImpl implements PatientService {
 
@@ -30,8 +32,8 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Mono<Void> deletePatient(Mono<Patient> patientMono) {
-//        TODO: Fix this
-        patientMono.flatMap(e -> e.getIdentityRef())
-        return patientRepository.delete();
+        // TODO: Find a way to retrieve a mono and delete the object without blocking
+        Optional<Patient> patientOptional = patientMono.blockOptional();
+        return patientRepository.delete(patientOptional.get());
     }
 }
