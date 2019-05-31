@@ -12,19 +12,21 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 @Configuration
 public class PatientEndpoint {
 
+    private static final String PATIENTS_URI = "/patients";
+
     @Bean
     RouterFunction<ServerResponse> patientRoutes(PatientHandler patientHandler) {
         return route(
-                GET("/patients"),
+                GET(PATIENTS_URI),
                 patientHandler::listAllPatients
         ).andRoute(
-                PUT("/patients").and(contentType(APPLICATION_JSON_UTF8).and(accept(APPLICATION_JSON_UTF8))),
+                PUT(PATIENTS_URI).and(contentType(APPLICATION_JSON_UTF8).and(accept(APPLICATION_JSON_UTF8))),
                 patientHandler::addPatient
         ).andRoute(
-                POST("/patients").and(contentType(APPLICATION_JSON_UTF8).and(accept(APPLICATION_JSON_UTF8))),
+                POST(PATIENTS_URI).and(contentType(APPLICATION_JSON_UTF8).and(accept(APPLICATION_JSON_UTF8))),
                 patientHandler::updatePatient
         ).andRoute(
-                DELETE("/patients").and(contentType(APPLICATION_JSON_UTF8)).and(accept(APPLICATION_JSON_UTF8)),
+                DELETE(PATIENTS_URI),
                 patientHandler::deletePatient
         );
     }

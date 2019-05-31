@@ -39,7 +39,7 @@ public class PatientHandler {
 
     Mono<ServerResponse> deletePatient(ServerRequest request) {
         // TODO: add tests for this...
-        int patientId = Integer.valueOf(request.pathVariable("id"));
+        int patientId = Integer.valueOf(request.pathVariable("identityRef"));
         return patientServiceImpl.getPatient(patientId)
                 .flatMap(patient -> ok().contentType(APPLICATION_JSON_UTF8).body(fromObject(patient)))
                 .switchIfEmpty(notFound().build());

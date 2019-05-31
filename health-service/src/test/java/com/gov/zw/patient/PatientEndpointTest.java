@@ -9,11 +9,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 
+import static java.lang.Integer.valueOf;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static reactor.core.publisher.Mono.just;
 
 @RunWith(SpringRunner.class)
@@ -108,6 +110,7 @@ public class PatientEndpointTest {
 
     @Test
     public void should_delete_an_existing_patient() {
+        // TODO: Fix this
         Patient patient =
                 new Patient(
                         "12345",
@@ -117,12 +120,12 @@ public class PatientEndpointTest {
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
 
-        given(patientService.updatePatient(patient)).willReturn(just(patient));
+        given(patientService.getPatient(valueOf(patient.getIdentityRef()))).willReturn(just(patient));
+//        given(patientService.deletePatient(just(patient))).willReturn(just(patient).then());
 
         client
-                .post()
+                .delete()
                 .uri(ALL_PATIENTS_URI)
-                .body(just(patient), Patient.class)
                 .exchange()
                 .expectStatus()
                 .isOk();
