@@ -5,7 +5,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
@@ -13,6 +12,7 @@ import reactor.core.publisher.Flux;
 import java.time.LocalDate;
 
 import static java.lang.Integer.valueOf;
+import static java.lang.String.format;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static reactor.core.publisher.Mono.just;
@@ -22,6 +22,7 @@ import static reactor.core.publisher.Mono.just;
 public class PatientEndpointTest {
 
     private static final String ALL_PATIENTS_URI = "http://localhost:8080/patients";
+    private static final String GET_PATIENT_URI = "http://localhost:8080/patients/%s";
 
     @Autowired
     private WebTestClient client;
@@ -120,11 +121,10 @@ public class PatientEndpointTest {
                 );
 
         given(patientService.getPatient(valueOf(patient.getIdentityRef()))).willReturn(just(patient));
-//        given(patientService.deletePatient(just(patient))).willReturn(just(patient).then());
 
         client
                 .get()
-                .uri(ALL_PATIENTS_URI+ "/" + patient.getIdentityRef())
+                .uri(format(GET_PATIENT_URI, patient.getIdentityRef()))
                 .exchange()
                 .expectStatus()
                 .isOk()
