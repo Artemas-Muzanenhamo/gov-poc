@@ -8,6 +8,7 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 
+import static java.lang.Integer.valueOf;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static org.springframework.web.reactive.function.BodyInserters.fromObject;
 import static org.springframework.web.reactive.function.server.ServerResponse.*;
@@ -37,11 +38,10 @@ public class PatientHandler {
         return ok().body(patientMono, Patient.class);
     }
 
-    Mono<ServerResponse> deletePatient(ServerRequest request) {
-        // TODO: add tests for this...
-        int patientId = Integer.valueOf(request.pathVariable("identityRef"));
+    Mono<ServerResponse> getPatient(ServerRequest request) {
+        int patientId = valueOf(request.pathVariable("id"));
         return patientServiceImpl.getPatient(patientId)
                 .flatMap(patient -> ok().contentType(APPLICATION_JSON_UTF8).body(fromObject(patient)))
-                .switchIfEmpty(notFound().build());
+                .switchIfEmpty(badRequest().build());
     }
 }
