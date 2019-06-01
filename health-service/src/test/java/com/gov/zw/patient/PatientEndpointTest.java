@@ -5,15 +5,16 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 
 import java.time.LocalDate;
 
+import static java.lang.Integer.valueOf;
+import static java.lang.String.format;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.when;
+import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static reactor.core.publisher.Mono.just;
 
 @RunWith(SpringRunner.class)
@@ -21,6 +22,7 @@ import static reactor.core.publisher.Mono.just;
 public class PatientEndpointTest {
 
     private static final String ALL_PATIENTS_URI = "http://localhost:8080/patients";
+    private static final String GET_PATIENT_URI = "http://localhost:8080/patients/%s";
 
     @Autowired
     private WebTestClient client;
@@ -42,7 +44,7 @@ public class PatientEndpointTest {
                 .uri(ALL_PATIENTS_URI)
                 .exchange()
                 .expectStatus().isOk()
-                .expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+                .expectHeader().contentType(APPLICATION_JSON_UTF8)
                 .expectBody()
                 .jsonPath("@.[0].name").isEqualTo("Artemas")
                 .jsonPath("@.[0].surname").isEqualTo("Muzanenhamo")
@@ -104,5 +106,32 @@ public class PatientEndpointTest {
                 .exchange()
                 .expectStatus()
                 .isOk();
+    }
+
+    @Test
+    public void should_get_an_existing_patient() {
+        // TODO: Fix this
+        Patient patient =
+                new Patient(
+                        "12345",
+                        "Arty",
+                        "Muza",
+                        LocalDate.of(1990, 3, 28),
+                        "Flat 7, Elm Rose Road, E16 9AA"
+                );
+
+        given(patientService.getPatient(valueOf(patient.getIdentityRef()))).willReturn(just(patient));
+
+        client
+                .get()
+                .uri(format(GET_PATIENT_URI, patient.getIdentityRef()))
+                .exchange()
+                .expectStatus()
+                .isOk()
+                .expectBody()
+                .jsonPath("@.name").isEqualTo("Arty")
+                .jsonPath("@.surname").isEqualTo("Muza")
+                .jsonPath("@.identityRef").isEqualTo("12345")
+                .jsonPath("@.address").isEqualTo("Flat 7, Elm Rose Road, E16 9AA");
     }
 }

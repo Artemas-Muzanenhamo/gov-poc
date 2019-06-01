@@ -8,8 +8,10 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 
-import static org.springframework.web.reactive.function.server.ServerResponse.created;
-import static org.springframework.web.reactive.function.server.ServerResponse.ok;
+import static java.lang.Integer.valueOf;
+import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
+import static org.springframework.web.reactive.function.BodyInserters.fromObject;
+import static org.springframework.web.reactive.function.server.ServerResponse.*;
 
 @Component
 public class PatientHandler {
@@ -34,5 +36,12 @@ public class PatientHandler {
         Mono<Patient> patientMono = request.bodyToMono(Patient.class)
                 .flatMap(patientServiceImpl::updatePatient);
         return ok().body(patientMono, Patient.class);
+    }
+
+    Mono<ServerResponse> getPatient(ServerRequest request) {
+        int patientId = valueOf(request.pathVariable("id"));
+        return patientServiceImpl.getPatient(patientId)
+                .flatMap(patient -> ok().contentType(APPLICATION_JSON_UTF8).body(fromObject(patient)))
+                .switchIfEmpty(badRequest().build());
     }
 }

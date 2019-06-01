@@ -9,4 +9,8 @@ interface PatientService {
     Mono<Patient> addPatient(Patient patientMono);
 
     Mono<Patient> updatePatient(Patient updatedPatientMono);
+
+    Mono<Void> deletePatient(Mono<Patient> patientMono);
+
+    Mono<Patient> getPatient(int patientId);
 }
