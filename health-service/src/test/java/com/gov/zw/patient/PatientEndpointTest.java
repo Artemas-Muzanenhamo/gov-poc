@@ -110,7 +110,6 @@ public class PatientEndpointTest {
 
     @Test
     public void should_get_an_existing_patient() {
-        // TODO: Fix this
         Patient patient =
                 new Patient(
                         "12345",
