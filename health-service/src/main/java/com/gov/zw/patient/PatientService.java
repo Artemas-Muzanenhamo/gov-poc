@@ -10,5 +10,5 @@ interface PatientService {
 
     Mono<Patient> updatePatient(Patient updatedPatientMono);
 
-    Mono<Patient> getPatient(int patientId);
+    Mono<Patient> getPatient(String patientId);
 }

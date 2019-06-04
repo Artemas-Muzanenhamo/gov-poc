@@ -31,7 +31,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Mono<Patient> getPatient(int patientId) {
+    public Mono<Patient> getPatient(String patientId) {
         return patientRepository.findById(valueOf(patientId));
     }
 }

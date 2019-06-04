@@ -119,7 +119,7 @@ public class PatientEndpointTest {
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
 
-        given(patientService.getPatient(valueOf(patient.getIdentityRef()))).willReturn(just(patient));
+        given(patientService.getPatient(patient.getIdentityRef())).willReturn(just(patient));
 
         client
                 .get()

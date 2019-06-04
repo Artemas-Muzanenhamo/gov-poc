@@ -39,7 +39,7 @@ public class PatientHandler {
     }
 
     Mono<ServerResponse> getPatient(ServerRequest request) {
-        int patientId = valueOf(request.pathVariable("id"));
+        String patientId = request.pathVariable("id");
         return patientServiceImpl.getPatient(patientId)
                 .flatMap(patient -> ok().contentType(APPLICATION_JSON_UTF8).body(fromObject(patient)))
                 .switchIfEmpty(badRequest().build());

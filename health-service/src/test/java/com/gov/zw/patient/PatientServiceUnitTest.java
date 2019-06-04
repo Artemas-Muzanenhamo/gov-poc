@@ -10,6 +10,7 @@ import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 
+import static java.lang.Integer.valueOf;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static reactor.core.publisher.Mono.just;
@@ -58,5 +59,17 @@ public class PatientServiceUnitTest {
         Mono<Patient> patient = patientServiceImpl.updatePatient(updatedPatient);
 
         assertThat(updatedPatient).isEqualTo(patient.block());
+    }
+
+    @Test
+    public void should_retrive_a_single_patient_details() {
+        Patient patient = new Patient("MUZAN123", "Artemas", "Thomas",
+                LocalDate.of(1990, 3, 28),
+                "123 Rock Street, London, W1 7XX");
+        given(patientRepository.findById(patient.getIdentityRef())).willReturn(just(patient));
+
+        Mono<Patient> patientMono = patientServiceImpl.getPatient(patient.getIdentityRef());
+
+        assertThat(patient).isEqualTo(patientMono.block());
     }
 }
