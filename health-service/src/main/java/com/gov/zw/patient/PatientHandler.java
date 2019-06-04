@@ -15,6 +15,7 @@ import static org.springframework.web.reactive.function.server.ServerResponse.*;
 
 @Component
 public class PatientHandler {
+    private static final String PATIENT_IDENTITY_REF = "id";
     private final PatientService patientServiceImpl;
 
     public PatientHandler(PatientService patientServiceImpl) {
@@ -39,7 +40,7 @@ public class PatientHandler {
     }
 
     Mono<ServerResponse> getPatient(ServerRequest request) {
-        Optional<String> paiientIdOptional = Optional.of(request.pathVariable("id"));
+        Optional<String> paiientIdOptional = Optional.of(request.pathVariable(PATIENT_IDENTITY_REF));
         return patientServiceImpl.getPatient(paiientIdOptional)
                 .flatMap(patient -> ok().contentType(APPLICATION_JSON_UTF8).body(fromObject(patient)))
                 .switchIfEmpty(badRequest().build());
