@@ -11,7 +11,6 @@ import reactor.core.publisher.Flux;
 
 import java.time.LocalDate;
 
-import static java.lang.Integer.valueOf;
 import static java.lang.String.format;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
@@ -74,7 +73,6 @@ public class PatientEndpointTest {
                         LocalDate.of(1990, 3, 28),
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
-
         given(patientService.addPatient(patient)).willReturn(just(patient));
 
         client
@@ -96,7 +94,6 @@ public class PatientEndpointTest {
                         LocalDate.of(1990, 3, 28),
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
-
         given(patientService.updatePatient(patient)).willReturn(just(patient));
 
         client
@@ -118,7 +115,6 @@ public class PatientEndpointTest {
                         LocalDate.of(1990, 3, 28),
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
-
         given(patientService.getPatient(patient.getIdentityRef())).willReturn(just(patient));
 
         client
