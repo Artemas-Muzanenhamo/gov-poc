@@ -9,6 +9,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import static java.lang.Integer.valueOf;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -66,9 +67,10 @@ public class PatientServiceUnitTest {
         Patient patient = new Patient("MUZAN123", "Artemas", "Thomas",
                 LocalDate.of(1990, 3, 28),
                 "123 Rock Street, London, W1 7XX");
+        Optional<String> identityRefOptional = Optional.ofNullable(patient.getIdentityRef());
         given(patientRepository.findById(patient.getIdentityRef())).willReturn(just(patient));
 
-        Mono<Patient> patientMono = patientServiceImpl.getPatient(patient.getIdentityRef());
+        Mono<Patient> patientMono = patientServiceImpl.getPatient(identityRefOptional);
 
         assertThat(patient).isEqualTo(patientMono.block());
     }

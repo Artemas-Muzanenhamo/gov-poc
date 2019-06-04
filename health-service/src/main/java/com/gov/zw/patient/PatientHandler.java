@@ -7,6 +7,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
+import java.util.Optional;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static org.springframework.web.reactive.function.BodyInserters.fromObject;
@@ -38,8 +39,8 @@ public class PatientHandler {
     }
 
     Mono<ServerResponse> getPatient(ServerRequest request) {
-        String patientId = request.pathVariable("id");
-        return patientServiceImpl.getPatient(patientId)
+        Optional<String> paiientIdOptional = Optional.of(request.pathVariable("id"));
+        return patientServiceImpl.getPatient(paiientIdOptional)
                 .flatMap(patient -> ok().contentType(APPLICATION_JSON_UTF8).body(fromObject(patient)))
                 .switchIfEmpty(badRequest().build());
     }
