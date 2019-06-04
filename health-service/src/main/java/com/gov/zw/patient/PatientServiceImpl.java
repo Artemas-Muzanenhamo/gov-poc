@@ -6,8 +6,6 @@ import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 
-import static java.lang.String.valueOf;
-
 @Service
 public class PatientServiceImpl implements PatientService {
 
@@ -33,7 +31,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Mono<Patient> getPatient(Optional<String> patientId) {
-        return patientRepository.findById(valueOf(patientId));
+    public Mono<Patient> getPatient(Optional<String> patientIdOptional) {
+        return patientIdOptional.map(patientRepository::findById).orElseGet(Mono::empty);
     }
 }

@@ -67,7 +67,7 @@ public class PatientServiceUnitTest {
         Patient patient = new Patient("MUZAN123", "Artemas", "Thomas",
                 LocalDate.of(1990, 3, 28),
                 "123 Rock Street, London, W1 7XX");
-        Optional<String> identityRefOptional = Optional.ofNullable(patient.getIdentityRef());
+        Optional<String> identityRefOptional = Optional.of(patient.getIdentityRef());
         given(patientRepository.findById(patient.getIdentityRef())).willReturn(just(patient));
 
         Mono<Patient> patientMono = patientServiceImpl.getPatient(identityRefOptional);

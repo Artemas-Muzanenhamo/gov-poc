@@ -10,6 +10,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import static java.lang.String.format;
 import static org.mockito.BDDMockito.given;
@@ -115,7 +116,8 @@ public class PatientEndpointTest {
                         LocalDate.of(1990, 3, 28),
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
-        given(patientService.getPatient(patient.getIdentityRef())).willReturn(just(patient));
+        Optional<String> identityRefOptional = Optional.of(patient.getIdentityRef());
+        given(patientService.getPatient(identityRefOptional)).willReturn(just(patient));
 
         client
                 .get()
