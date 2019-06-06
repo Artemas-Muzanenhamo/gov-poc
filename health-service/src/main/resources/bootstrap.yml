@@ -1,9 +1,9 @@
 spring:
   profiles:
     active:
-    application:
-      name: health-service
-        - docker
+      - docker
+  application:
+    name: health-service
   #  TODO: We need to user cloud config. Check Identity-Service
   cloud:
     service-registry:
