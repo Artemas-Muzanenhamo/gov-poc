@@ -1,0 +1,36 @@
+spring:
+  profiles:
+    active:
+    application:
+      name: health-service
+        - docker
+  #  TODO: We need to user cloud config. Check Identity-Service
+  cloud:
+    service-registry:
+      auto-registration:
+        fail-fast: true
+    discovery:
+      client:
+        simple:
+          local:
+            uri: http://localhost:8888
+    inetutils:
+      default-hostname: http://configuration-server:8888
+
+---
+
+spring:
+  profiles: dev
+  application:
+    name: health-service
+  cloud:
+    service-registry:
+      auto-registration:
+        fail-fast: true
+    discovery:
+      client:
+        simple:
+          local:
+            uri: http://localhost:8888
+    inetutils:
+      default-hostname: http://localhost:8888
