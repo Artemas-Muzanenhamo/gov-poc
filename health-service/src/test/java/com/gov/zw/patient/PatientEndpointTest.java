@@ -2,12 +2,10 @@ package com.gov.zw.patient;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 
@@ -23,8 +21,8 @@ import static reactor.core.publisher.Mono.just;
 @WebFluxTest({PatientEndpoint.class, PatientHandler.class})
 class PatientEndpointTest {
 
-    private static final String ALL_PATIENTS_URI = "http://localhost:8080/patients";
-    private static final String GET_PATIENT_URI = "http://localhost:8080/patients/%s";
+    private static final String ALL_PATIENTS_URL = "http://localhost:8080/patients";
+    private static final String PATIENT_URL = "http://localhost:8080/patients/%s";
 
     @Autowired
     private WebTestClient client;
@@ -43,7 +41,7 @@ class PatientEndpointTest {
 
         client
                 .get()
-                .uri(ALL_PATIENTS_URI)
+                .uri(ALL_PATIENTS_URL)
                 .exchange()
                 .expectStatus().isOk()
                 .expectHeader().contentType(APPLICATION_JSON_UTF8)
@@ -61,7 +59,7 @@ class PatientEndpointTest {
 
         client
                 .get()
-                .uri(ALL_PATIENTS_URI)
+                .uri(ALL_PATIENTS_URL)
                 .exchange()
                 .expectStatus().isOk();
     }
@@ -80,7 +78,7 @@ class PatientEndpointTest {
 
         client
                 .put()
-                .uri(ALL_PATIENTS_URI)
+                .uri(ALL_PATIENTS_URL)
                 .body(just(patient), Patient.class)
                 .exchange()
                 .expectStatus()
@@ -101,7 +99,7 @@ class PatientEndpointTest {
 
         client
                 .post()
-                .uri(ALL_PATIENTS_URI)
+                .uri(ALL_PATIENTS_URL)
                 .body(just(patient), Patient.class)
                 .exchange()
                 .expectStatus()
@@ -123,7 +121,7 @@ class PatientEndpointTest {
 
         client
                 .get()
-                .uri(format(GET_PATIENT_URI, patient.getIdentityRef()))
+                .uri(format(PATIENT_URL, patient.getIdentityRef()))
                 .exchange()
                 .expectStatus()
                 .isOk()
@@ -133,4 +131,25 @@ class PatientEndpointTest {
                 .jsonPath("@.identityRef").isEqualTo("12345")
                 .jsonPath("@.address").isEqualTo("Flat 7, Elm Rose Road, E16 9AA");
     }
+
+    // TODO: Create Delete endpoint to delete patients by id
+//    @Test
+//    void should_delete_an_existing_patient() {
+//        Patient patient =
+//                new Patient(
+//                        "12345",
+//                        "Arty",
+//                        "Muza",
+//                        LocalDate.of(1990, 3, 28),
+//                        "Flat 7, Elm Rose Road, E16 9AA"
+//                );
+//
+//        client
+//                .delete()
+//                .uri(PATIENT_URL)
+//                .exchange()
+//                .expectStatus()
+//                .isOk();
+//
+//    }
 }
