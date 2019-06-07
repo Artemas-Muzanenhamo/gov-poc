@@ -1,9 +1,11 @@
 package com.gov.zw.patient;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -13,6 +15,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 import static reactor.core.publisher.Mono.just;
 
 @ExtendWith(MockitoExtension.class)
@@ -23,6 +26,11 @@ class PatientServiceUnitTest {
 
     @Mock
     private PatientRepository patientRepository;
+
+    @BeforeEach
+    void init_mocks() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     void should_return_all_patients() {
@@ -54,8 +62,7 @@ class PatientServiceUnitTest {
         Patient updatedPatient = new Patient("MUZAN123", "Artemas", "Thomas",
                 LocalDate.of(1990, 3, 28),
                 "123 Rock Street, London, W1 7XX");
-
-        given(patientRepository.save(updatedPatient)).willReturn(just(updatedPatient));
+        when(patientRepository.save(updatedPatient)).thenReturn(just(updatedPatient));
 
         Mono<Patient> patient = patientServiceImpl.updatePatient(updatedPatient);
 
