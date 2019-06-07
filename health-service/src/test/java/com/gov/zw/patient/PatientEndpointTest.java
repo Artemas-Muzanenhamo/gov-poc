@@ -1,10 +1,12 @@
 package com.gov.zw.patient;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
@@ -17,9 +19,9 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static reactor.core.publisher.Mono.just;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @WebFluxTest({PatientEndpoint.class, PatientHandler.class})
-public class PatientEndpointTest {
+class PatientEndpointTest {
 
     private static final String ALL_PATIENTS_URI = "http://localhost:8080/patients";
     private static final String GET_PATIENT_URI = "http://localhost:8080/patients/%s";
@@ -35,7 +37,7 @@ public class PatientEndpointTest {
             LocalDate.of(1990, 3, 28), "68 Jeremy Street, London, W1 7AA");
 
     @Test
-    public void should_return_all_mocked_patients() {
+    void should_return_all_mocked_patients() {
         given(patientService.getAllPatients())
                 .willReturn(Flux.just(patient1, patient2));
 
@@ -53,7 +55,7 @@ public class PatientEndpointTest {
     }
 
     @Test
-    public void should_return_200_when_retrieving_all_patients() {
+    void should_return_200_when_retrieving_all_patients() {
         given(patientService.getAllPatients())
                 .willReturn(Flux.empty());
 
@@ -65,7 +67,7 @@ public class PatientEndpointTest {
     }
 
     @Test
-    public void should_add_patient_given_the_user_has_a_valid_identity() {
+    void should_add_patient_given_the_user_has_a_valid_identity() {
         Patient patient =
                 new Patient(
                         "12345",
@@ -86,7 +88,7 @@ public class PatientEndpointTest {
     }
 
     @Test
-    public void should_update_existing_patient() {
+    void should_update_existing_patient() {
         Patient patient =
                 new Patient(
                         "12345",
@@ -107,7 +109,7 @@ public class PatientEndpointTest {
     }
 
     @Test
-    public void should_get_an_existing_patient() {
+    void should_get_an_existing_patient() {
         Patient patient =
                 new Patient(
                         "12345",

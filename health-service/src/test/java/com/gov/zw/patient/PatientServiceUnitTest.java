@@ -63,7 +63,7 @@ public class PatientServiceUnitTest {
     }
 
     @Test
-    public void should_retrive_a_single_patient_details() {
+    public void should_retrieve_a_single_patient_details() {
         Patient patient = new Patient("MUZAN123", "Artemas", "Thomas",
                 LocalDate.of(1990, 3, 28),
                 "123 Rock Street, London, W1 7XX");
