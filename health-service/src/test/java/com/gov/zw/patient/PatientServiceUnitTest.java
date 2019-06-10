@@ -21,7 +21,6 @@ import static reactor.core.publisher.Mono.just;
 @ExtendWith(MockitoExtension.class)
 class PatientServiceUnitTest {
 
-    @InjectMocks
     private PatientServiceImpl patientServiceImpl;
 
     @Mock
@@ -30,6 +29,7 @@ class PatientServiceUnitTest {
     @BeforeEach
     void init_mocks() {
         MockitoAnnotations.initMocks(this);
+        patientServiceImpl = new PatientServiceImpl(patientRepository);
     }
 
     @Test
