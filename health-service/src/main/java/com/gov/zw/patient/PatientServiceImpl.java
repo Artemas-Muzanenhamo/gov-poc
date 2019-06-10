@@ -34,4 +34,9 @@ public class PatientServiceImpl implements PatientService {
     public Mono<Patient> getPatient(Optional<String> patientIdOptional) {
         return patientIdOptional.map(patientRepository::findById).orElseGet(Mono::empty);
     }
+
+    @Override
+    public Mono<Void> deletePatient(Optional<String> patientIdOptional) {
+        return patientIdOptional.map(patientRepository::deleteById).orElseGet(Mono::empty);
+    }
 }

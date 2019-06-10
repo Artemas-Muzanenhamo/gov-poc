@@ -132,24 +132,23 @@ class PatientEndpointTest {
                 .jsonPath("@.address").isEqualTo("Flat 7, Elm Rose Road, E16 9AA");
     }
 
-    // TODO: Create Delete endpoint to delete patients by id
-//    @Test
-//    void should_delete_an_existing_patient() {
-//        Patient patient =
-//                new Patient(
-//                        "12345",
-//                        "Arty",
-//                        "Muza",
-//                        LocalDate.of(1990, 3, 28),
-//                        "Flat 7, Elm Rose Road, E16 9AA"
-//                );
-//
-//        client
-//                .delete()
-//                .uri(PATIENT_URL)
-//                .exchange()
-//                .expectStatus()
-//                .isOk();
-//
-//    }
+    @Test
+    void should_delete_an_existing_patient() {
+        Patient patient =
+                new Patient(
+                        "12345",
+                        "Arty",
+                        "Muza",
+                        LocalDate.of(1990, 3, 28),
+                        "Flat 7, Elm Rose Road, E16 9AA"
+                );
+
+        client
+                .delete()
+                .uri(PATIENT_URL)
+                .exchange()
+                .expectStatus()
+                .isOk();
+
+    }
 }

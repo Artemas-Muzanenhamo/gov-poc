@@ -40,9 +40,16 @@ public class PatientHandler {
     }
 
     Mono<ServerResponse> getPatient(ServerRequest request) {
-        Optional<String> paiientIdOptional = Optional.of(request.pathVariable(PATIENT_IDENTITY_REF));
-        return patientServiceImpl.getPatient(paiientIdOptional)
+        Optional<String> patientIdOptional = Optional.of(request.pathVariable(PATIENT_IDENTITY_REF));
+        return patientServiceImpl.getPatient(patientIdOptional)
                 .flatMap(patient -> ok().contentType(APPLICATION_JSON_UTF8).body(fromObject(patient)))
                 .switchIfEmpty(badRequest().build());
+    }
+
+    Mono<ServerResponse> deletePatient(ServerRequest request) {
+        Optional<String> patientIdOptional = Optional.of(request.pathVariable(PATIENT_IDENTITY_REF));
+        Mono<Void> deletedPatient = request.bodyToMono(patientIdOptional.getClass())
+                .flatMap(patientServiceImpl::deletePatient);
+        return ok().body(deletedPatient, Void.class);
     }
 }
