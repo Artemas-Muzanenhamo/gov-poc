@@ -55,7 +55,6 @@ class PatientServiceUnitTest {
         assertThat(createdPatient.block()).isEqualTo(patient);
     }
 
-    // TODO: Fix these to use JUNIT 5
     @Test
     void should_update_patient_details() {
         Patient updatedPatient = new Patient("MUZAN123", "Artemas", "Thomas",
