@@ -1,28 +1,28 @@
 package com.gov.zw.patient;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
-import static java.lang.Integer.valueOf;
 import static java.lang.String.format;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static reactor.core.publisher.Mono.just;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @WebFluxTest({PatientEndpoint.class, PatientHandler.class})
-public class PatientEndpointTest {
+class PatientEndpointTest {
 
-    private static final String ALL_PATIENTS_URI = "http://localhost:8080/patients";
-    private static final String GET_PATIENT_URI = "http://localhost:8080/patients/%s";
+    private static final String ALL_PATIENTS_URL = "http://localhost:8080/patients";
+    private static final String PATIENT_URL = "http://localhost:8080/patients/%s";
 
     @Autowired
     private WebTestClient client;
@@ -35,13 +35,13 @@ public class PatientEndpointTest {
             LocalDate.of(1990, 3, 28), "68 Jeremy Street, London, W1 7AA");
 
     @Test
-    public void should_return_all_mocked_patients() {
+    void should_return_all_mocked_patients() {
         given(patientService.getAllPatients())
                 .willReturn(Flux.just(patient1, patient2));
 
         client
                 .get()
-                .uri(ALL_PATIENTS_URI)
+                .uri(ALL_PATIENTS_URL)
                 .exchange()
                 .expectStatus().isOk()
                 .expectHeader().contentType(APPLICATION_JSON_UTF8)
@@ -53,19 +53,19 @@ public class PatientEndpointTest {
     }
 
     @Test
-    public void should_return_200_when_retrieving_all_patients() {
+    void should_return_200_when_retrieving_all_patients() {
         given(patientService.getAllPatients())
                 .willReturn(Flux.empty());
 
         client
                 .get()
-                .uri(ALL_PATIENTS_URI)
+                .uri(ALL_PATIENTS_URL)
                 .exchange()
                 .expectStatus().isOk();
     }
 
     @Test
-    public void should_add_patient_given_the_user_has_a_valid_identity() {
+    void should_add_patient_given_the_user_has_a_valid_identity() {
         Patient patient =
                 new Patient(
                         "12345",
@@ -74,12 +74,11 @@ public class PatientEndpointTest {
                         LocalDate.of(1990, 3, 28),
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
-
         given(patientService.addPatient(patient)).willReturn(just(patient));
 
         client
                 .put()
-                .uri(ALL_PATIENTS_URI)
+                .uri(ALL_PATIENTS_URL)
                 .body(just(patient), Patient.class)
                 .exchange()
                 .expectStatus()
@@ -87,7 +86,7 @@ public class PatientEndpointTest {
     }
 
     @Test
-    public void should_update_existing_patient() {
+    void should_update_existing_patient() {
         Patient patient =
                 new Patient(
                         "12345",
@@ -96,12 +95,11 @@ public class PatientEndpointTest {
                         LocalDate.of(1990, 3, 28),
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
-
         given(patientService.updatePatient(patient)).willReturn(just(patient));
 
         client
                 .post()
-                .uri(ALL_PATIENTS_URI)
+                .uri(ALL_PATIENTS_URL)
                 .body(just(patient), Patient.class)
                 .exchange()
                 .expectStatus()
@@ -109,7 +107,7 @@ public class PatientEndpointTest {
     }
 
     @Test
-    public void should_get_an_existing_patient() {
+    void should_get_an_existing_patient() {
         Patient patient =
                 new Patient(
                         "12345",
@@ -118,12 +116,12 @@ public class PatientEndpointTest {
                         LocalDate.of(1990, 3, 28),
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
-
-        given(patientService.getPatient(valueOf(patient.getIdentityRef()))).willReturn(just(patient));
+        Optional<String> identityRefOptional = Optional.of(patient.getIdentityRef());
+        given(patientService.getPatient(identityRefOptional)).willReturn(just(patient));
 
         client
                 .get()
-                .uri(format(GET_PATIENT_URI, patient.getIdentityRef()))
+                .uri(format(PATIENT_URL, patient.getIdentityRef()))
                 .exchange()
                 .expectStatus()
                 .isOk()
@@ -132,5 +130,25 @@ public class PatientEndpointTest {
                 .jsonPath("@.surname").isEqualTo("Muza")
                 .jsonPath("@.identityRef").isEqualTo("12345")
                 .jsonPath("@.address").isEqualTo("Flat 7, Elm Rose Road, E16 9AA");
+    }
+
+    @Test
+    void should_delete_an_existing_patient() {
+        Patient patient =
+                new Patient(
+                        "12345",
+                        "Arty",
+                        "Muza",
+                        LocalDate.of(1990, 3, 28),
+                        "Flat 7, Elm Rose Road, E16 9AA"
+                );
+
+        client
+                .delete()
+                .uri(PATIENT_URL)
+                .exchange()
+                .expectStatus()
+                .isOk();
+
     }
 }

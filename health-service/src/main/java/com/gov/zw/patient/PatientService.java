@@ -3,6 +3,8 @@ package com.gov.zw.patient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Optional;
+
 interface PatientService {
     Flux<Patient> getAllPatients();
 
@@ -10,5 +12,7 @@ interface PatientService {
 
     Mono<Patient> updatePatient(Patient updatedPatientMono);
 
-    Mono<Patient> getPatient(int patientId);
+    Mono<Patient> getPatient(Optional<String> patientIdOptional);
+
+    Mono<Void> deletePatient(Optional<String> patientIdOptional);
 }

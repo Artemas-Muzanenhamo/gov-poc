@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static java.lang.String.valueOf;
+import java.util.Optional;
 
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -31,7 +31,12 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Mono<Patient> getPatient(int patientId) {
-        return patientRepository.findById(valueOf(patientId));
+    public Mono<Patient> getPatient(Optional<String> patientIdOptional) {
+        return patientIdOptional.map(patientRepository::findById).orElseGet(Mono::empty);
+    }
+
+    @Override
+    public Mono<Void> deletePatient(Optional<String> patientIdOptional) {
+        return patientIdOptional.map(patientRepository::deleteById).orElseGet(Mono::empty);
     }
 }
