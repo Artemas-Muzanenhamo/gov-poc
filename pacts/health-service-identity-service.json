@@ -15,8 +15,8 @@
                     "Content-Type": "application/json;charset=UTF-8"
                 },
                 "body": {
-                    "id-surname": "Muzanenhamo",
                     "id-name": "Artemas",
+                    "id-surname": "Muzanenhamo",
                     "idRef": "MUZAN1234"
                 }
             },
@@ -26,13 +26,13 @@
                     "Content-Type": "application/json;charset=UTF-8"
                 },
                 "body": {
-                    "placeOfBirth": "Harare",
-                    "surname": "Muzanenhamo",
-                    "name": "Artemas",
+                    "birthDate": "28/03/1990",
+                    "dateOfIssue": "22/01/2018",
                     "id": "1",
                     "identityRef": "1",
-                    "dateOfIssue": "22/01/2018",
-                    "birthDate": "28/03/1990",
+                    "name": "Artemas",
+                    "placeOfBirth": "Harare",
+                    "surname": "Muzanenhamo",
                     "villageOfOrigin": "Mashayamombe"
                 }
             },
