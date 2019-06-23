@@ -5,23 +5,34 @@
 plugins {
     id 'java'
     id 'maven'
+    id 'org.springframework.boot' version '2.0.4.RELEASE'
 }
 
 repositories {
-    mavenLocal()
-    maven {
-        url = 'http://repo.maven.apache.org/maven2'
-    }
+    mavenCentral()
 }
 
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-actuator:2.0.4.RELEASE'
-    compile 'org.springframework.cloud:spring-cloud-starter-eureka-server:1.4.7.RELEASE'
+    compile 'org.springframework.cloud:spring-cloud-starter:2.0.4.RELEASE'
+    compile 'org.springframework.cloud:spring-cloud-netflix-eureka-server:2.0.4.RELEASE'
     compile "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     compile 'org.springframework:spring-test:5.1.8.RELEASE'
-    runtime 'org.springframework.boot:spring-boot-devtools:2.0.4.RELEASE'
+//    compile 'org.springframework.boot:spring-boot-devtools:2.0.4.RELEASE'
+//    compile 'org.springframework.boot:spring-boot-dependencies:2.0.4.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-jersey:2.0.4.RELEASE'
+    compile 'org.springframework.cloud:spring-cloud-dependencies:Finchley.RELEASE'
     testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.4.RELEASE'
+    compile 'com.google.code.gson:gson:2.8.5'
 }
+
+configurations {
+    provided.all*.exclude group: 'javax.servlet'
+}
+
+//jar {
+//    enabled = true
+//}
 
 group = 'com.gov.zw'
 version = '0.0.1-SNAPSHOT'

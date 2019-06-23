@@ -5,6 +5,7 @@
 plugins {
     id 'java'
     id 'maven'
+    id 'org.springframework.boot' version '2.0.4.RELEASE'
 }
 
 repositories {
@@ -16,6 +17,10 @@ dependencies {
     compile "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     compile 'org.springframework:spring-test:5.1.8.RELEASE'
     testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.4.RELEASE'
+}
+
+jar {
+    enabled = true
 }
 
 group = 'com.gov.zw'
