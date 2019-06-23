@@ -26,6 +26,10 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.5'
 }
 
+bootRun {
+    systemProperties = System.properties
+}
+
 configurations {
     provided.all*.exclude group: 'javax.servlet'
 }
