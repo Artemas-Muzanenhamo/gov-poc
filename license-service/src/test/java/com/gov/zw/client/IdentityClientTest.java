@@ -21,14 +21,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class IdentityClientTest extends CDCIdentityClientBaseTest {
 
     private static final String IDENTITIES_REFERENCE = "/identities/reference";
-    private static final String APPLICATION_JSON_UTF_8_VALUE = "application/json;charset=utf-8";
 
     @Pact(state = "an identity", provider = "identity-service", consumer = "license-service")
     public RequestResponsePact retrieveIdentityPact(PactDslWithProvider builder) {
 
         // Set Headers
         Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", APPLICATION_JSON_UTF_8_VALUE);
+        headers.put("Content-Type", MediaType.APPLICATION_JSON_UTF8_VALUE);
 
         // What I will send as a Request in the Pact JSON
         JSONObject requestBodyJson = new JSONObject();

@@ -29,7 +29,7 @@ public class IdentityClientTest extends CDCIdentityClientBaseTest {
 
         // Set Headers
         Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", APPLICATION_JSON_UTF_8_VALUE);
+        headers.put("Content-Type", MediaType.APPLICATION_JSON_UTF8_VALUE);
 
         // What I will send as a Request in the Pact JSON
         Map<String, String> requestObject = new HashMap<>();
