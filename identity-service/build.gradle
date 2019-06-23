@@ -35,6 +35,10 @@ dependencies {
     testCompile 'net.minidev:json-smart:2.3'
 }
 
+bootRun {
+    systemProperties = System.properties
+}
+
 group = 'com.gov.zw'
 version = '0.0.1-SNAPSHOT'
 description = 'identity-service'
