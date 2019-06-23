@@ -30,10 +30,6 @@ configurations {
     provided.all*.exclude group: 'javax.servlet'
 }
 
-//jar {
-//    enabled = true
-//}
-
 group = 'com.gov.zw'
 version = '0.0.1-SNAPSHOT'
 description = 'discovery-server'
