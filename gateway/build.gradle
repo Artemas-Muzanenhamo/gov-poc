@@ -8,21 +8,30 @@ plugins {
     id 'org.springframework.boot' version '2.0.4.RELEASE'
 }
 
+apply plugin: 'io.spring.dependency-management'
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-//    compile 'org.springframework.cloud:spring-cloud-dependencies:Finchley.RELEASE'
-//    compile 'org.springframework.cloud:spring-cloud-starter-eureka:1.4.5.RELEASE'
-//    compile 'org.springframework.cloud:spring-cloud-netflix-eureka-client:2.0.4.RELEASE'
     compile 'org.springframework.cloud:spring-cloud-starter-netflix-zuul:2.0.4.RELEASE'
     compile 'org.springframework.cloud:spring-cloud-starter-config:2.0.0.RELEASE'
     compile 'org.springframework.cloud:spring-cloud-netflix-core:2.0.4.RELEASE'
-//    compile 'org.springframework.cloud:spring-cloud-starter-netflix-archaius:2.0.4.RELEASE'
+    compile 'org.springframework.cloud:spring-cloud-netflix-eureka-client:2.0.4.RELEASE'
     compile 'org.junit.jupiter:junit-jupiter-api:5.4.2'
     compile 'org.springframework:spring-test:5.1.8.RELEASE'
     testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.4.RELEASE'
+}
+
+ext {
+    set('springCloudVersion', "Finchley.RELEASE")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 bootRun {
