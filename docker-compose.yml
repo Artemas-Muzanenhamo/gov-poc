@@ -1,0 +1,53 @@
+version: '3.7'
+services:
+  configuration-server:
+    build: ./configuration-server
+    container_name: configuration-server
+    ports:
+      - "8888:8888"
+  discovery-server:
+    build: ./discovery-server
+    container_name: discovery-server
+    ports:
+      - "8761:8761"
+  gateway:
+    build: ./gateway
+    container_name: gateway
+    ports:
+      - "9999:9999"
+    restart: always
+    depends_on:
+      - configuration-server
+  identity-service:
+    build: ./identity-service
+    container_name: identity-service
+    ports:
+      - "8080:8080"
+    restart: always
+    links:
+      - mongo-db-service
+    depends_on:
+      - configuration-server
+      - gateway
+      - discovery-server
+      - mongo-db-service
+  license-service:
+    build: ./license-service
+    container_name: license-service
+    ports:
+      - "8081:8081"
+    restart: always
+    links:
+      - mongo-db-service
+    depends_on:
+      - configuration-server
+      - gateway
+      - discovery-server
+      - mongo-db-service
+  mongo-db-service:
+    build: ./mongodb
+    container_name: mongo_db
+    ports:
+      - "27018:27017"
+    restart: always
+# TODO: Get containers to build sequentially.

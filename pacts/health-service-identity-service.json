@@ -1,0 +1,54 @@
+{
+    "provider": {
+        "name": "identity-service"
+    },
+    "consumer": {
+        "name": "health-service"
+    },
+    "interactions": [
+        {
+            "description": "a request from the Health-Service consumer",
+            "request": {
+                "method": "POST",
+                "path": "/identities/reference",
+                "headers": {
+                    "Content-Type": "application/json;charset=UTF-8"
+                },
+                "body": {
+                    "id-name": "Artemas",
+                    "id-surname": "Muzanenhamo",
+                    "idRef": "MUZAN1234"
+                }
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Content-Type": "application/json;charset=UTF-8"
+                },
+                "body": {
+                    "birthDate": "28/03/1990",
+                    "dateOfIssue": "22/01/2018",
+                    "id": "1",
+                    "identityRef": "1",
+                    "name": "Artemas",
+                    "placeOfBirth": "Harare",
+                    "surname": "Muzanenhamo",
+                    "villageOfOrigin": "Mashayamombe"
+                }
+            },
+            "providerStates": [
+                {
+                    "name": "identity details from the Health Service client"
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "pact-specification": {
+            "version": "3.0.0"
+        },
+        "pact-jvm": {
+            "version": "3.5.11"
+        }
+    }
+}

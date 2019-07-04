@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    active:
+      - docker
+  application:
+    name: identity-service
+  cloud:
+    config:
+      uri: http://configuration-server:8888
+      fail-fast: true
+  data:
+    rest:
+      base-path: /search-id
+
+---
+
+spring:
+  profiles: dev
+  application:
+    name: identity-service
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: true
+  data:
+    rest:
+      base-path: /search-id

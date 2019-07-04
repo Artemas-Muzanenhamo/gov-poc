@@ -7,7 +7,7 @@
     },
     "interactions": [
         {
-            "description": "a request to the identity-service client",
+            "description": "a request from the License-Service consumer",
             "request": {
                 "method": "POST",
                 "path": "/identities/reference",
@@ -21,7 +21,7 @@
             "response": {
                 "status": 200,
                 "headers": {
-                    "Content-Type": "application/json;charset=utf-8"
+                    "Content-Type": "application/json;charset=UTF-8"
                 },
                 "body": {
                     "placeOfBirth": "Harare",
@@ -36,7 +36,7 @@
             },
             "providerStates": [
                 {
-                    "name": "an identity reference number"
+                    "name": "an identity reference number from License Service client"
                 }
             ]
         }

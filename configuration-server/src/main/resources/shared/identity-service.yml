@@ -1,9 +1,28 @@
 spring:
+  profiles:
+    active:
+      - docker
   data:
-      mongodb:
-        host: localhost
-        port: 27017
-        database: identity-service-db
+    mongodb:
+      host: mongo-db-service
+      port: 27017
+      database: identity-service-db
+server:
+  port: 8080
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka
+
+---
+
+spring:
+  profiles: dev
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: identity-service-db
 server:
   port: 8080
 eureka:

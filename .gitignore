@@ -43,11 +43,19 @@ buildNumber.properties
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
 
-.idea/
 .mvn/
 mvnw
 mvnw.cmd
-/license-service/.mvn/
-/identity-service/.mvn/
-/gateway/.mvn/
-/configuration-server/.mvn/
+/configuration-server/.gradle/
+/configuration-server/build/
+/configuration-server/gradlew.bat
+/configuration-server/gradlew
+/discovery-server/gradlew.bat
+/discovery-server/gradlew
+/discovery-server/build/
+/gateway/.gradle/
+/discovery-server/.gradle/
+/.gradle/
+/license-service/.gradle/
+/gateway/build/
+/license-service/build/

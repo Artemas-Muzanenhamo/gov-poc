@@ -1,16 +1,14 @@
 package com.gov.zw.client;
 
 import au.com.dius.pact.consumer.Pact;
-import au.com.dius.pact.consumer.PactProviderRuleMk2;
 import au.com.dius.pact.consumer.PactVerification;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.model.RequestResponsePact;
 import net.minidev.json.JSONObject;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -20,30 +18,22 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
-public class IdentityClientTest {
+public class IdentityClientTest extends CDCIdentityClientBaseTest {
 
-    @Rule
-    public PactProviderRuleMk2 stubProvider =
-            new PactProviderRuleMk2("identity-service", "localhost", 9999, this);
-
-    @Autowired
-    private IdentityClient identityClient;
-
+    private static final String IDENTITIES_REFERENCE = "/identities/reference";
 
     @Pact(state = "an identity", provider = "identity-service", consumer = "license-service")
     public RequestResponsePact retrieveIdentityPact(PactDslWithProvider builder) {
 
         // Set Headers
         Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json;charset=utf-8");
+        headers.put("Content-Type", MediaType.APPLICATION_JSON_UTF8_VALUE);
 
         // What I will send as a Request in the Pact JSON
-        Map<String, String> requestObject = new HashMap<>();
-        requestObject.put("idRef", "MUZAN1234");
-        JSONObject requestBodyJson = new JSONObject(requestObject);
+        JSONObject requestBodyJson = new JSONObject();
+        requestBodyJson.put("idRef", "MUZAN1234");
 
-        // What I will send as a Response in the Pact JSON
+        // What I will get as a Response in the Pact JSON
         Map<String, String> responseObject = new HashMap<>();
         responseObject.put("id", "1");
         responseObject.put("identityRef", "1");
@@ -56,14 +46,15 @@ public class IdentityClientTest {
         JSONObject responseBodyJson = new JSONObject(responseObject);
 
 
+        // build the request/response
         return builder
-                .given("an identity reference number")
-                .uponReceiving("a request to the identity-service client")
-                    .path("/identities/reference")
-                    .method("POST")
+                .given("an identity reference number from License Service client")
+                .uponReceiving("a request from the License-Service consumer")
+                    .path(IDENTITIES_REFERENCE)
+                    .method(HttpMethod.POST.name())
                     .body(requestBodyJson.toJSONString(), MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .willRespondWith()
-                    .status(200)
+                    .status(HttpStatus.OK.value())
                     .headers(headers)
                     .body(responseBodyJson.toJSONString())
                 .toPact();
@@ -72,10 +63,11 @@ public class IdentityClientTest {
     @Test
     @PactVerification(fragment = "retrieveIdentityPact")
     public void verifyIdentityPact() {
-        Map<String, String> map = new HashMap<>();
-        map.put("idRef", "MUZAN1234");
-        Identity identity = identityClient.findIdentityByIdReferenceNumber(map);
-        Identity expectedIdentity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990", "Mashayamombe",
+        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson("MUZAN1234");
+        Identity identity = identityClient.findIdentityByIdReferenceNumber(identityReferenceJson);
+        Identity expectedIdentity =
+                new Identity("1", "1", "Artemas", "Muzanenhamo",
+                "28/03/1990", "Mashayamombe",
                 "Harare", "22/01/2018");
         assertThat(identity.getId()).isEqualTo(expectedIdentity.getId());
         assertThat(identity.getIdentityRef()).isEqualTo(expectedIdentity.getIdentityRef());
