@@ -39,7 +39,7 @@ test {
 }
 
 group = 'com.gov.zw'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0-SNAPSHOT'
 description = 'health-service'
 sourceCompatibility = '1.8'
 

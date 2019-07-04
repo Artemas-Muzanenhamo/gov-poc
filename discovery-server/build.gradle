@@ -45,7 +45,7 @@ configurations {
 }
 
 group = 'com.gov.zw'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0-SNAPSHOT'
 description = 'discovery-server'
 sourceCompatibility = '1.8'
 
