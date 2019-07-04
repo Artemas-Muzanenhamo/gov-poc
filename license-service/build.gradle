@@ -6,6 +6,7 @@ plugins {
     id 'java'
     id 'maven'
     id 'jacoco'
+    id 'org.springframework.boot' version '2.0.4.RELEASE'
 }
 
 repositories {
@@ -15,7 +16,8 @@ repositories {
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-data-mongodb:2.0.4.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-web:2.0.4.RELEASE'
-    compile 'org.springframework.cloud:spring-cloud-netflix-eureka-client:2.0.4.RELEASE'
+//    compile 'org.springframework.cloud:spring-cloud-netflix-eureka-client:2.0.4.RELEASE'
+    compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.0.4.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-actuator:2.0.4.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-data-rest:2.0.4.RELEASE'
     compile 'org.springframework.cloud:spring-cloud-starter-config:2.0.4.RELEASE'
@@ -27,14 +29,23 @@ dependencies {
     compile 'org.springframework.cloud:spring-cloud-netflix-core:2.0.4.RELEASE'
     compile 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon:2.0.4.RELEASE'
     compile 'org.junit.jupiter:junit-jupiter-api:5.2.0'
+    compile 'org.springframework.cloud:spring-cloud-dependencies:Finchley.RELEASE'
+    compile 'org.apache.httpcomponents:httpclient:4.5.9'
+    compile 'com.google.code.gson:gson:2.8.5'
     compileOnly 'org.projectlombok:lombok:1.18.8'
     testCompileOnly 'org.projectlombok:lombok:1.18.8'
     annotationProcessor 'org.projectlombok:lombok:1.18.8'
-//    testCompile 'org.junit.jupiter:junit-jupiter-api:5.2.0'
-    compile 'org.springframework.cloud:spring-cloud-dependencies:Finchley.RELEASE'
     testCompile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:2.0.3'
     testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.4.RELEASE'
     testCompile 'au.com.dius:pact-jvm-consumer-junit_2.12:3.5.11'
+}
+
+bootRun {
+    systemProperties = System.properties
+}
+
+ext {
+    springCloudVersion = 'Finchley.RELEASE'
 }
 
 test {

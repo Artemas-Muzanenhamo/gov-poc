@@ -5,6 +5,7 @@
 plugins {
     id 'java'
     id 'maven'
+    id 'org.springframework.boot' version '2.0.4.RELEASE'
 }
 
 repositories {
@@ -25,4 +26,8 @@ sourceCompatibility = '1.8'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+}
+
+bootRun {
+    bootRun.systemProperties = System.properties
 }
