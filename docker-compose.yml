@@ -44,6 +44,19 @@ services:
       - gateway
       - discovery-server
       - mongo-db-service
+  health-service:
+    build: ./license-service
+    container_name: license-service
+    ports:
+      - "8082:8082"
+    restart: always
+    links:
+      - mongo-db-service
+    depends_on:
+      - configuration-server
+      - gateway
+      - discovery-server
+      - mongo-db-service
   mongo-db-service:
     build: ./mongodb
     container_name: mongo_db
