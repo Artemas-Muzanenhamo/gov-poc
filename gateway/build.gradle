@@ -15,11 +15,9 @@ repositories {
 }
 
 dependencies {
-//    implementation 'io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry'
     compile 'org.springframework.cloud:spring-cloud-starter-netflix-zuul:2.0.4.RELEASE'
     compile 'org.springframework.cloud:spring-cloud-starter-config:2.0.0.RELEASE'
     compile 'org.springframework.cloud:spring-cloud-netflix-core:2.0.4.RELEASE'
-//    compile 'org.springframework.cloud:spring-cloud-netflix-eureka-client:2.0.4.RELEASE'
     compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.0.4.RELEASE'
     compile 'org.junit.jupiter:junit-jupiter-api:5.4.2'
     compile 'org.springframework:spring-test:5.1.8.RELEASE'
