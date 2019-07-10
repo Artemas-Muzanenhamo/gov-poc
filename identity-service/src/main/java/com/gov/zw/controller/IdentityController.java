@@ -2,7 +2,6 @@ package com.gov.zw.controller;
 
 import com.gov.zw.domain.IdentityJson;
 import com.gov.zw.domain.IdentityNameJson;
-import com.gov.zw.domain.IdentityRefJson;
 import com.gov.zw.domain.IdentityReferenceJson;
 import com.gov.zw.service.IdentityService;
 import com.gov.zw.util.InvalidIdentityException;
