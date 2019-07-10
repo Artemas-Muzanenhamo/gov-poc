@@ -1,9 +1,6 @@
 package com.gov.zw.service;
 
-import com.gov.zw.domain.Identity;
-import com.gov.zw.domain.IdentityJson;
-import com.gov.zw.domain.IdentityNameJson;
-import com.gov.zw.domain.IdentityRefJson;
+import com.gov.zw.domain.*;
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidIdentityNameException;
 import com.gov.zw.util.InvalidIdentityReferenceException;
@@ -41,7 +38,7 @@ public interface IdentityService {
      * @return - An {@link Identity}.
      * @throws InvalidIdentityReferenceException
      */
-    IdentityJson findIdentityByIdentityRef(IdentityRefJson identityRefJson) throws InvalidIdentityReferenceException;
+    IdentityJson findIdentityByIdentityRef(IdentityReferenceJson identityRefJson) throws InvalidIdentityReferenceException;
 
     /**
      * Allows you to retrieve all the Identities.
