@@ -55,7 +55,7 @@ public class IdentityServiceImpl implements IdentityService {
     }
 
     @Override
-    public IdentityJson findIdentityByIdentityRef(IdentityRefJson identityRefJson) throws InvalidIdentityReferenceException {
+    public IdentityJson findIdentityByIdentityRef(IdentityReferenceJson identityRefJson) throws InvalidIdentityReferenceException {
         String idReference = identityRefJsonMapper.toIdentityRef(identityRefJson);
         Identity identity = findIdentityByIdentityRef(idReference);
         return new IdentityJson(identity);

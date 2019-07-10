@@ -74,7 +74,7 @@ class IdentityServiceTest {
 
     @Test
     void should_throw_exception_when__an_invalid_idRef_is_passed() {
-        assertThrows(InvalidIdentityReferenceException.class, () ->identityService.findIdentityByIdentityRef((IdentityRefJson) null));
+        assertThrows(InvalidIdentityReferenceException.class, () ->identityService.findIdentityByIdentityRef((IdentityReferenceJson) null));
     }
 
     @Test

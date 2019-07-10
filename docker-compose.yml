@@ -45,8 +45,8 @@ services:
       - discovery-server
       - mongo-db-service
   health-service:
-    build: ./license-service
-    container_name: license-service
+    build: ./health-service
+    container_name: health-service
     ports:
       - "8082:8082"
     restart: always
