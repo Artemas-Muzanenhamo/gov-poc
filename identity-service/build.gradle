@@ -23,17 +23,20 @@ dependencies {
     compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.0.4.RELEASE'
     compile 'org.springframework.cloud:spring-cloud-dependencies:Finchley.RELEASE'
     compile 'com.google.code.gson:gson:2.8.5'
+    compile 'au.com.dius:pact-jvm-provider-junit5_2.12:3.6.11'
     compileOnly 'org.projectlombok:lombok:1.18.8'
     annotationProcessor 'org.projectlombok:lombok:1.18.8'
     testCompile 'org.mockito:mockito-junit-jupiter:2.17.0'
     testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.4.RELEASE'
     testCompile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:2.0.3'
     testCompile 'org.springframework:spring-jdbc:4.3.9.RELEASE'
-    testCompile 'au.com.dius:pact-jvm-provider-junit_2.12:3.5.11'
+    testCompile 'au.com.dius:pact-jvm-provider-junit5_2.12:3.6.11'
     testCompile 'com.github.rest-driver:rest-client-driver:2.0.0'
-    testCompile 'au.com.dius:pact-jvm-model:3.5.11'
+    testCompile 'au.com.dius:pact-jvm-model:3.6.11'
     testCompile 'org.junit.jupiter:junit-jupiter-api:5.2.0'
     testCompile 'net.minidev:json-smart:2.3'
+    testCompile 'ru.lanwen.wiremock:wiremock-junit5:1.1.1'
+    testCompile 'com.github.tomakehurst:wiremock:2.19.0'
 }
 
 bootRun {
