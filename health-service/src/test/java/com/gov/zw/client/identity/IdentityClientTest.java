@@ -1,77 +1,69 @@
 package com.gov.zw.client.identity;
 
+import au.com.dius.pact.consumer.MockServer;
 import au.com.dius.pact.consumer.Pact;
-import au.com.dius.pact.consumer.PactVerification;
+import au.com.dius.pact.consumer.PactFolder;
+import au.com.dius.pact.consumer.dsl.DslPart;
+import au.com.dius.pact.consumer.dsl.PactDslJsonBody;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
+import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
+import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.model.RequestResponsePact;
-import net.minidev.json.JSONObject;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(PactConsumerTestExt.class)
+@PactTestFor(providerName = "IdentityService", port = "9999")
+@PactFolder("../pacts")
 public class IdentityClientTest extends CDCIdentityClientBaseTest {
-
-
-    private static final String IDENTITIES_REFERENCE = "/identities/reference";
-    private static final String APPLICATION_JSON_UTF_8_VALUE = "application/json;charset=utf-8";
+    private static final String IDENTITIES_REFERENCE_PATH = "/identities/reference";
 
     @Pact(state = "an identity for a patient", provider = "identity-service", consumer = "health-service")
     public RequestResponsePact retrievePatientIdentityPact(PactDslWithProvider builder) {
 
         // Set Headers
         Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", MediaType.APPLICATION_JSON_UTF8_VALUE);
-
-        // What I will send as a Request in the Pact JSON
-        Map<String, String> requestObject = new HashMap<>();
-        requestObject.put("idRef", "MUZAN1234");
-        requestObject.put("id-name", "Artemas");
-        requestObject.put("id-surname", "Muzanenhamo");
-        JSONObject requestBodyJson = new JSONObject(requestObject);
-
-        // What I will get as a Response in the Pact JSON
-        Map<String, String> responseObject = new HashMap<>();
-        responseObject.put("id", "1");
-        responseObject.put("identityRef", "1");
-        responseObject.put("name", "Artemas");
-        responseObject.put("surname", "Muzanenhamo");
-        responseObject.put("birthDate", "28/03/1990");
-        responseObject.put("villageOfOrigin", "Mashayamombe");
-        responseObject.put("placeOfBirth", "Harare");
-        responseObject.put("dateOfIssue", "22/01/2018");
-        JSONObject responseBodyJson = new JSONObject(responseObject);
+        headers.put("Content-Type", "application/json;charset=UTF-8");
 
         // build the request/response
         return builder
                 .given("identity details from the Health Service client")
-                .uponReceiving("a request from the Health-Service consumer")
-                .path(IDENTITIES_REFERENCE)
-                .method(HttpMethod.POST.name())
-                .body(requestBodyJson.toJSONString(), MediaType.APPLICATION_JSON_UTF8_VALUE)
+                    .uponReceiving("a request from the Health-Service consumer")
+                    .path(IDENTITIES_REFERENCE_PATH)
+                    .method(HttpMethod.POST.name())
+                    .body(idReferenceJson().toString(), "application/json;charset=UTF-8")
                 .willRespondWith()
-                .status(HttpStatus.OK.value())
-                .headers(headers)
-                .body(responseBodyJson.toJSONString())
+                    .status(HttpStatus.OK.value())
+                    .headers(headers)
+                    .body(identityJson())
                 .toPact();
     }
 
     @Test
-    @PactVerification(fragment = "retrievePatientIdentityPact")
-    public void verifyPatientIdentityPact() {
+    @PactTestFor(pactMethod = "retrievePatientIdentityPact")
+    void verifyPatientIdentityPact(MockServer mockServer) {
         Map<String, String> map = new HashMap<>();
         map.put("idRef", "MUZAN1234");
         map.put("id-name", "Artemas");
         map.put("id-surname", "Muzanenhamo");
-        Identity identity = identityClient.findIdentityByIdReferenceNumber(map);
+
+        Identity identity =
+                given()
+                    .body(idReferenceJson().toString())
+                    .accept("application/json;charset=UTF-8")
+                    .contentType("application/json;charset=UTF-8")
+                .then()
+                    .request()
+                    .post(mockServer.getUrl() + IDENTITIES_REFERENCE_PATH).as(Identity.class);
+
         Identity expectedIdentity =
                 new Identity("1", "1", "Artemas", "Muzanenhamo",
                         "28/03/1990", "Mashayamombe",
@@ -86,5 +78,26 @@ public class IdentityClientTest extends CDCIdentityClientBaseTest {
         assertThat(identity.getDateOfIssue()).isEqualTo(expectedIdentity.getDateOfIssue());
         assertThat(identity).isEqualTo(expectedIdentity);
         assertThat(identity.hashCode()).isEqualTo(expectedIdentity.hashCode());
+    }
+
+    // What I will send as a Request in the Pact JSON
+    private DslPart idReferenceJson() {
+        return new PactDslJsonBody()
+                .stringType("idRef", "MUZAN1234")
+                .stringType("id-name", "Artemas")
+                .stringType("id-surname", "Muzanenhamo");
+    }
+
+    // What I will get as a Response in the Pact JSON
+    private DslPart identityJson() {
+        return new PactDslJsonBody()
+                .stringType("id", "1")
+                .stringType("identityRef", "1")
+                .stringType("name", "Artemas")
+                .stringType("surname", "Muzanenhamo")
+                .stringType("birthDate", "28/03/1990")
+                .stringType("villageOfOrigin", "Mashayamombe")
+                .stringType("placeOfBirth", "Harare")
+                .stringType("dateOfIssue", "22/01/2018");
     }
 }
