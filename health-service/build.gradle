@@ -51,3 +51,7 @@ tasks.withType(JavaCompile) {
 bootRun {
     systemProperties = System.properties
 }
+
+test {
+    useJUnitPlatform()
+}

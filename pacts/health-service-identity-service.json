@@ -12,7 +12,7 @@
         "method": "POST",
         "path": "/identities/reference",
         "headers": {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json;charset\u003dUTF-8"
         },
         "body": {
           "id-surname": "Muzanenhamo",

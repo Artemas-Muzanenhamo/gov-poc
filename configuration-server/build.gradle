@@ -13,9 +13,10 @@ repositories {
 }
 
 dependencies {
-    compile 'org.springframework.cloud:spring-cloud-config-server:2.0.0.RELEASE'
-    compile "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
-    compile 'org.springframework:spring-test:5.1.8.RELEASE'
+    implementation 'org.springframework.cloud:spring-cloud-config-server:2.0.4.RELEASE'
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    testCompile 'org.springframework:spring-test:5.1.8.RELEASE'
     testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.4.RELEASE'
 }
 
@@ -30,4 +31,8 @@ tasks.withType(JavaCompile) {
 
 bootRun {
     bootRun.systemProperties = System.properties
+}
+
+test {
+    useJUnitPlatform()
 }

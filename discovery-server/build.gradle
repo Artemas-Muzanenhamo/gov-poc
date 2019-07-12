@@ -18,11 +18,12 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-actuator:2.0.4.RELEASE'
     compile 'org.springframework.cloud:spring-cloud-starter:2.0.4.RELEASE'
     implementation 'org.springframework.cloud:spring-cloud-netflix-eureka-server:2.0.4.RELEASE'
-    compile "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     compile 'org.springframework:spring-test:5.1.8.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-jersey:2.0.4.RELEASE'
-    testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.4.RELEASE'
     compile 'com.google.code.gson:gson:2.8.5'
+    testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.4.RELEASE'
+    testCompile "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testCompile "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
 }
 
 ext {
@@ -50,4 +51,8 @@ sourceCompatibility = '1.8'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
 }
