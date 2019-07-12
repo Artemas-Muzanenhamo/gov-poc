@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "IdentityService", port = "9999")
 @PactFolder("../pacts")
-public class IdentityClientTest extends CDCIdentityClientBaseTest {
+public class IdentityClientTest {
 
     private static final String IDENTITIES_REFERENCE_PATH = "/identities/reference";
 
