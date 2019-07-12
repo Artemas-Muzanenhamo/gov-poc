@@ -36,7 +36,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.8'
     testCompile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:2.0.3'
     testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.4.RELEASE'
-    testCompile 'au.com.dius:pact-jvm-consumer-junit_2.12:3.5.11'
+    testCompile 'au.com.dius:pact-jvm-consumer-junit5_2.12:3.6.11'
+    testCompile 'io.rest-assured:rest-assured:4.0.0'
 }
 
 bootRun {
