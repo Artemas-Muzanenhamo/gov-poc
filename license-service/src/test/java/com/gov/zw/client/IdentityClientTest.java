@@ -39,12 +39,13 @@ public class IdentityClientTest {
                 .given("an identity reference number from License Service client")
                     .uponReceiving("a request from the License-Service consumer")
                     .path(IDENTITIES_REFERENCE_PATH)
-                    .headers(CONTENT_TYPE_JSON_UTF8)
+//                    .headers(CONTENT_TYPE_JSON_UTF8)
                     .method(HttpMethod.POST.name())
                     .body(idRefJson().toString())
                 .willRespondWith()
                     .status(HttpStatus.OK.value())
-                    .headers(CONTENT_TYPE_JSON_UTF8)
+//                    .headers(CONTENT_TYPE_JSON_UTF8)
+                    .headers(headers)
                     .body(identityJson().toString())
                 .toPact();
     }
