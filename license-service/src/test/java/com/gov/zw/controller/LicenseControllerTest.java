@@ -4,13 +4,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gov.zw.domain.License;
 import com.gov.zw.service.LicenseService;
 import net.minidev.json.JSONObject;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -19,9 +19,9 @@ import java.util.Map;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @WebMvcTest(LicenseController.class)
-public class LicenseControllerTest {
+class LicenseControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -30,7 +30,7 @@ public class LicenseControllerTest {
     private LicenseService licenseServiceImpl;
 
     @Test
-    public void shouldAddALicense() throws Exception {
+    void shouldAddALicense() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         License license = new License("1", "1", "Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
@@ -45,7 +45,7 @@ public class LicenseControllerTest {
     }
 
     @Test
-    public void shouldReturn200WhenAnEmptyLicenseIsPassedToAddLicense() throws Exception {
+    void shouldReturn200WhenAnEmptyLicenseIsPassedToAddLicense() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         License license = new License();
         Map<String, String> licenseObject = objectMapper.convertValue(license, Map.class);
@@ -58,13 +58,13 @@ public class LicenseControllerTest {
     }
 
     @Test
-    public void shouldReturnAllLicenses() throws Exception {
+    void shouldReturnAllLicenses() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/licenses"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void shouldUpdateALicense() throws Exception {
+    void shouldUpdateALicense() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         License license = new License("1", "1", "Delta", "Charlie Foxtrot", "28/03/1990", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
@@ -79,7 +79,7 @@ public class LicenseControllerTest {
     }
 
     @Test
-    public void shouldReturn200WhenAnEmptyLicenseIsPassedToUpdateLicense() throws Exception {
+    void shouldReturn200WhenAnEmptyLicenseIsPassedToUpdateLicense() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         License license = new License();
         Map<String, String> licenseObject = objectMapper.convertValue(license, Map.class);
@@ -93,7 +93,7 @@ public class LicenseControllerTest {
     }
 
     @Test
-    public void shouldDeleteALicense() throws Exception {
+    void shouldDeleteALicense() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         License license = new License("1", "1", "Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
@@ -108,7 +108,7 @@ public class LicenseControllerTest {
     }
 
     @Test
-    public void shouldReturn200WhenAnEmptyLicenseIsPassedToDeleteLicense() throws Exception {
+    void shouldReturn200WhenAnEmptyLicenseIsPassedToDeleteLicense() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         License license = new License();
         Map<String, String> licenseObject = objectMapper.convertValue(license, Map.class);
@@ -121,7 +121,7 @@ public class LicenseControllerTest {
     }
 
     @Test
-    public void shouldReturnLicenseByIdentityRef() throws Exception {
+    void shouldReturnLicenseByIdentityRef() throws Exception {
         Map<String, String> idRef = new HashMap<>();
         idRef.put("ref", "121");
         JSONObject jsonObject = new JSONObject(idRef);
@@ -133,7 +133,7 @@ public class LicenseControllerTest {
     }
 
     @Test
-    public void shouldReturn200WhenAnEmptyLicenseIsPassedToGetLicenseByIdReference() throws Exception {
+    void shouldReturn200WhenAnEmptyLicenseIsPassedToGetLicenseByIdReference() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         License license = new License();
         Map<String, String> licenseObject = objectMapper.convertValue(license, Map.class);
