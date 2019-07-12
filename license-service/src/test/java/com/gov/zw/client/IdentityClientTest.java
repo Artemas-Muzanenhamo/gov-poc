@@ -2,6 +2,7 @@ package com.gov.zw.client;
 
 import au.com.dius.pact.consumer.MockServer;
 import au.com.dius.pact.consumer.Pact;
+import au.com.dius.pact.consumer.PactFolder;
 import au.com.dius.pact.consumer.dsl.DslPart;
 import au.com.dius.pact.consumer.dsl.PactDslJsonBody;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
@@ -21,6 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "IdentityService", port = "9999")
+@PactFolder("../pacts")
 public class IdentityClientTest extends CDCIdentityClientBaseTest {
 
     private static final String IDENTITIES_REFERENCE_PATH = "/identities/reference";

@@ -1,52 +1,49 @@
 {
-    "provider": {
-        "name": "identity-service"
-    },
-    "consumer": {
-        "name": "license-service"
-    },
-    "interactions": [
-        {
-            "description": "a request from the License-Service consumer",
-            "request": {
-                "method": "POST",
-                "path": "/identities/reference",
-                "headers": {
-                    "Content-Type": "application/json;charset=UTF-8"
-                },
-                "body": {
-                    "idRef": "MUZAN1234"
-                }
-            },
-            "response": {
-                "status": 200,
-                "headers": {
-                    "Content-Type": "application/json;charset=UTF-8"
-                },
-                "body": {
-                    "placeOfBirth": "Harare",
-                    "surname": "Muzanenhamo",
-                    "name": "Artemas",
-                    "id": "1",
-                    "identityRef": "1",
-                    "dateOfIssue": "22/01/2018",
-                    "birthDate": "28/03/1990",
-                    "villageOfOrigin": "Mashayamombe"
-                }
-            },
-            "providerStates": [
-                {
-                    "name": "an identity reference number from License Service client"
-                }
-            ]
+  "provider": {
+    "name": "identity-service"
+  },
+  "consumer": {
+    "name": "license-service"
+  },
+  "interactions": [
+    {
+      "description": "a request from the License-Service consumer",
+      "request": {
+        "method": "POST",
+        "path": "/identities/reference",
+        "body": {
+          "idRef": "MUZAN1234"
         }
-    ],
-    "metadata": {
-        "pact-specification": {
-            "version": "3.0.0"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json;charset:UTF-8"
         },
-        "pact-jvm": {
-            "version": "3.5.11"
+        "body": {
+          "placeOfBirth": "Harare",
+          "surname": "Muzanenhamo",
+          "name": "Artemas",
+          "id": "1",
+          "identityRef": "MUZAN1234",
+          "dateOfIssue": "22/01/2018",
+          "birthDate": "28/03/1990",
+          "villageOfOrigin": "Mashayamombe"
         }
+      },
+      "providerStates": [
+        {
+          "name": "an identity reference number from License Service client"
+        }
+      ]
     }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "3.0.0"
+    },
+    "pact-jvm": {
+      "version": "3.6.11"
+    }
+  }
 }
