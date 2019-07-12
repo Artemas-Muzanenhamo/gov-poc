@@ -14,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class IdentityClientTest {
 
     private static final String IDENTITIES_REFERENCE_PATH = "/identities/reference";
+    private static final Map<String, String> CONTENT_TYPE_JSON_UTF8 = Collections.singletonMap("Content-Type", "application/json;charset=UTF-8");
 
     @Pact(state = "an identity", provider = "identity-service", consumer = "license-service")
     public RequestResponsePact retrieveIdentityPact(PactDslWithProvider builder) {
@@ -37,11 +39,12 @@ public class IdentityClientTest {
                 .given("an identity reference number from License Service client")
                     .uponReceiving("a request from the License-Service consumer")
                     .path(IDENTITIES_REFERENCE_PATH)
+                    .headers(CONTENT_TYPE_JSON_UTF8)
                     .method(HttpMethod.POST.name())
                     .body(idRefJson().toString())
                 .willRespondWith()
                     .status(HttpStatus.OK.value())
-                    .headers(headers)
+                    .headers(CONTENT_TYPE_JSON_UTF8)
                     .body(identityJson().toString())
                 .toPact();
     }

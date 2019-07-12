@@ -12,7 +12,7 @@
         "method": "POST",
         "path": "/identities/reference",
         "headers": {
-          "Content-Type": "application/json;charset\u003dUTF-8"
+          "Content-Type": "application/json"
         },
         "body": {
           "id-surname": "Muzanenhamo",
@@ -30,7 +30,7 @@
           "surname": "Muzanenhamo",
           "name": "Artemas",
           "id": "1",
-          "identityRef": "1",
+          "identityRef": "MUZAN1234",
           "dateOfIssue": "22/01/2018",
           "birthDate": "28/03/1990",
           "villageOfOrigin": "Mashayamombe"

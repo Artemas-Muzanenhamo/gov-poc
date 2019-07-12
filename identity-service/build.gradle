@@ -57,45 +57,6 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-pact {
-
-    serviceProviders {
-
-        // You can define as many as you need, but each must have a unique name
-        identityProvider {
-            // All the provider properties are optional, and have sensible defaults (shown below)
-            protocol = 'http'
-            host = 'localhost'
-            port = 8080
-            path = '/'
-
-            // Or if you have many pact files in a directory
-            hasPactsWith('manyConsumers') {
-
-                // Will define a consumer for each pact file in the directory.
-                // Consumer name is read from contents of pact file
-                pactFileLocation = file('../pacts')
-
-            }
-
-        }
-
-    }
-
+test {
+    useJUnitPlatform()
 }
-
-//pact {
-//
-//    serviceProviders {
-//
-//        provider1 {
-//            host = { lookupHostName() }
-//
-//            hasPactWith('identity-service') {
-//                pactFile = file('../pacts')
-//            }
-//        }
-//
-//    }
-//
-//}

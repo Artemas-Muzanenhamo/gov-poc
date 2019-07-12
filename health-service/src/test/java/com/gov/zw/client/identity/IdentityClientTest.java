@@ -65,7 +65,7 @@ public class IdentityClientTest {
                     .post(mockServer.getUrl() + IDENTITIES_REFERENCE_PATH).as(Identity.class);
 
         Identity expectedIdentity =
-                new Identity("1", "1", "Artemas", "Muzanenhamo",
+                new Identity("1", "MUZAN1234", "Artemas", "Muzanenhamo",
                         "28/03/1990", "Mashayamombe",
                         "Harare", "22/01/2018");
         assertThat(identity.getId()).isEqualTo(expectedIdentity.getId());
@@ -92,7 +92,7 @@ public class IdentityClientTest {
     private DslPart identityJson() {
         return new PactDslJsonBody()
                 .stringType("id", "1")
-                .stringType("identityRef", "1")
+                .stringType("identityRef", "MUZAN1234")
                 .stringType("name", "Artemas")
                 .stringType("surname", "Muzanenhamo")
                 .stringType("birthDate", "28/03/1990")
