@@ -14,32 +14,32 @@ repositories {
 }
 
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-data-mongodb:2.0.4.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-web:2.0.4.RELEASE'
-    compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.0.4.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-actuator:2.0.4.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-data-rest:2.0.4.RELEASE'
-    compile 'org.springframework.cloud:spring-cloud-starter-config:2.0.4.RELEASE'
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '2.0.4.RELEASE'
-    compile 'org.springframework.cloud:spring-cloud-openfeign-core:2.0.4.RELEASE'
-    compile 'org.springframework.cloud:spring-cloud-openfeign-dependencies:2.0.4.RELEASE'
-    compile 'org.springframework.cloud:spring-cloud-contract-spec:2.0.4.RELEASE'
-    compile 'org.springframework.cloud:spring-cloud-netflix-core:2.0.4.RELEASE'
-    compile 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon:2.0.4.RELEASE'
-    compile 'org.springframework.cloud:spring-cloud-dependencies:Finchley.RELEASE'
-    compile 'org.apache.httpcomponents:httpclient:4.5.9'
-    compile 'com.google.code.gson:gson:2.8.5'
-    compileOnly 'org.projectlombok:lombok:1.18.8'
-    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+    compile "org.springframework.boot:spring-boot-starter-data-mongodb:${springVersion}"
+    compile "org.springframework.boot:spring-boot-starter-web:${springVersion}"
+    compile "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:${springVersion}"
+    compile "org.springframework.boot:spring-boot-starter-actuator:${springVersion}"
+    compile "org.springframework.boot:spring-boot-starter-data-rest:${springVersion}"
+    compile "org.springframework.cloud:spring-cloud-starter-config:${springVersion}"
+    compile "org.springframework.cloud:spring-cloud-starter-openfeign:${springVersion}"
+    compile "org.springframework.cloud:spring-cloud-openfeign-core:${springVersion}"
+    compile "org.springframework.cloud:spring-cloud-openfeign-dependencies:${springVersion}"
+    compile "org.springframework.cloud:spring-cloud-contract-spec:${springVersion}"
+    compile "org.springframework.cloud:spring-cloud-netflix-core:${springVersion}"
+    compile "org.springframework.cloud:spring-cloud-starter-netflix-ribbon:${springVersion}"
+    compile "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    compile "org.apache.httpcomponents:httpclient:${httpClientVersion}"
+    compile "com.google.code.gson:gson:${gsonVersion}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
-    testCompileOnly 'org.projectlombok:lombok:1.18.8'
-    testCompile 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
-    testCompile 'org.springframework:spring-test:5.1.8.RELEASE'
-    testCompile 'org.junit.jupiter:junit-jupiter-api:5.2.0'
-    testCompile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:2.0.3'
-    testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.4.RELEASE'
-    testCompile 'au.com.dius:pact-jvm-consumer-junit5_2.12:3.6.11'
-    testCompile 'io.rest-assured:rest-assured:4.0.0'
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testCompile "org.junit.jupiter:junit-jupiter-engine:${junit5Version}"
+    testCompile "org.springframework:spring-test:${springTestVersion}"
+    testCompile "org.junit.jupiter:junit-jupiter-api:${junit5Version}"
+    testCompile "de.flapdoodle.embed:de.flapdoodle.embed.mongo:${mongoVersion}"
+    testCompile "org.springframework.boot:spring-boot-starter-test:${springVersion}"
+    testCompile "au.com.dius:pact-jvm-consumer-junit5_2.12:${pactJunit5Version}"
+    testCompile "io.rest-assured:rest-assured:${restAssuredVersion}"
 }
 
 bootRun {
