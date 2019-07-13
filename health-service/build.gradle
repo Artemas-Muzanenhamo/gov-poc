@@ -14,25 +14,25 @@ repositories {
 }
 
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-webflux:2.0.2.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive:2.0.2.RELEASE'
-    compileOnly 'org.projectlombok:lombok:1.18.8'
-    annotationProcessor 'org.projectlombok:lombok:1.18.8'
-    compile 'org.springframework.boot:spring-boot-autoconfigure-processor:2.1.6.RELEASE'
-    compile 'javax.xml.bind:jaxb-api:2.3.0'
-    compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.0.2.RELEASE'
-    compile 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon:2.0.2.RELEASE'
-    compile 'org.springframework.cloud:spring-cloud-starter-openfeign:2.0.2.RELEASE'
-    compile 'org.springframework.boot:spring-boot-autoconfigure-processor:2.0.2.RELEASE'
-    compile 'org.springframework.cloud:spring-cloud-netflix-eureka-client:2.0.2.RELEASE'
-    compile 'org.mockito:mockito-junit-jupiter:2.17.0'
-    runtime 'org.springframework.boot:spring-boot-properties-migrator:2.0.2.RELEASE'
-    testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.2.RELEASE'
-    testCompile 'io.projectreactor:reactor-test:3.1.7.RELEASE'
-    testCompile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:2.0.3'
-    testCompile 'au.com.dius:pact-jvm-consumer-junit5_2.12:3.6.11'
-    testCompile 'io.rest-assured:rest-assured:4.0.0'
-    testCompile 'org.junit.jupiter:junit-jupiter-engine:5.1.1'
+    compile "org.springframework.boot:spring-boot-starter-webflux:${springVersion}"
+    compile "org.springframework.boot:spring-boot-starter-data-mongodb-reactive:${springVersion}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    compile "org.springframework.boot:spring-boot-autoconfigure-processor:${springVersion}"
+    compile "javax.xml.bind:jaxb-api:${javaXmlVersion}"
+    compile "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:${springVersion}"
+    compile "org.springframework.cloud:spring-cloud-starter-netflix-ribbon:${springVersion}"
+    compile "org.springframework.cloud:spring-cloud-starter-openfeign:${springVersion}"
+    compile "org.springframework.boot:spring-boot-autoconfigure-processor:${springVersion}"
+    compile "org.springframework.cloud:spring-cloud-netflix-eureka-client:${springVersion}"
+    compile "org.mockito:mockito-junit-jupiter:${mockitoJunit5Version}"
+    runtime "org.springframework.boot:spring-boot-properties-migrator:${springVersion}"
+    testCompile "org.springframework.boot:spring-boot-starter-test:${springVersion}"
+    testCompile "io.projectreactor:reactor-test:${reactorTestVersion}"
+    testCompile "de.flapdoodle.embed:de.flapdoodle.embed.mongo:${mongoVersion}"
+    testCompile "au.com.dius:pact-jvm-consumer-junit5_2.12:${pactJunit5Version}"
+    testCompile "io.rest-assured:rest-assured:${restAssuredVersion}"
+    testCompile "org.junit.jupiter:junit-jupiter-engine:${junit5Version}"
 }
 
 test {
@@ -40,12 +40,12 @@ test {
 }
 
 group = 'com.gov.zw'
-version = '1.0.0-SNAPSHOT'
+version = "${releaseVersion}"
 description = 'health-service'
-sourceCompatibility = '1.8'
+sourceCompatibility = "${javaVersion}"
 
 tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+    options.encoding = "${charset}"
 }
 
 bootRun {

@@ -15,46 +15,42 @@ repositories {
 }
 
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-web:2.0.4.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-actuator:2.0.4.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-data-rest:2.0.4.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-data-mongodb:2.0.4.RELEASE'
-    compile 'org.springframework.cloud:spring-cloud-starter-config:2.0.4.RELEASE'
-    runtime 'org.springframework.boot:spring-boot-devtools:2.0.4.RELEASE'
-    compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.0.4.RELEASE'
-    compile 'org.springframework.cloud:spring-cloud-dependencies:Finchley.RELEASE'
-    compile 'com.google.code.gson:gson:2.8.5'
-    compile 'au.com.dius:pact-jvm-provider-junit5_2.12:3.6.11'
-    compileOnly 'org.projectlombok:lombok:1.18.8'
-    annotationProcessor 'org.projectlombok:lombok:1.18.8'
-    testCompile 'org.mockito:mockito-junit-jupiter:2.17.0'
-    testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.4.RELEASE'
-    testCompile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:2.0.3'
-    testCompile 'org.springframework:spring-jdbc:4.3.9.RELEASE'
-    testCompile 'au.com.dius:pact-jvm-provider-junit5_2.12:3.6.11'
-    testCompile 'com.github.rest-driver:rest-client-driver:2.0.0'
-    testCompile 'au.com.dius:pact-jvm-model:3.6.11'
-    testCompile 'org.junit.jupiter:junit-jupiter-api:5.2.0'
-    testCompile 'net.minidev:json-smart:2.3'
-    testCompile 'ru.lanwen.wiremock:wiremock-junit5:1.1.1'
-    testCompile 'com.github.tomakehurst:wiremock:2.19.0'
+    compile "org.springframework.boot:spring-boot-starter-web:${springVersion}"
+    compile "org.springframework.boot:spring-boot-starter-actuator:${springVersion}"
+    compile "org.springframework.boot:spring-boot-starter-data-rest:${springVersion}"
+    compile "org.springframework.boot:spring-boot-starter-data-mongodb:${springVersion}"
+    compile "org.springframework.cloud:spring-cloud-starter-config:${springVersion}"
+    runtime "org.springframework.boot:spring-boot-devtools:${springVersion}"
+    compile "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:${springVersion}"
+    compile "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    compile "com.google.code.gson:gson:${gsonVersion}"
+    compile "au.com.dius:pact-jvm-provider-junit5_2.12:${pactJunit5Version}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    testCompile "org.mockito:mockito-junit-jupiter:${mockitoJunit5Version}"
+    testCompile "org.springframework.boot:spring-boot-starter-test:${springVersion}"
+    testCompile "de.flapdoodle.embed:de.flapdoodle.embed.mongo:${mongoVersion}"
+    testCompile "org.springframework:spring-jdbc:${springJdbcVersion}"
+    testCompile "au.com.dius:pact-jvm-provider-junit5_2.12:${pactJunit5Version}"
+    testCompile "au.com.dius:pact-jvm-model:${pactJunit5Version}"
+    testCompile "com.github.rest-driver:rest-client-driver:${restClientDriverVersion}"
+    testCompile "org.junit.jupiter:junit-jupiter-api:${junit5Version}"
+    testCompile "net.minidev:json-smart:${jsonSmartVersion}"
+//    testCompile 'ru.lanwen.wiremock:wiremock-junit5:1.1.1'
+//    testCompile 'com.github.tomakehurst:wiremock:2.19.0'
 }
 
 bootRun {
     systemProperties = System.properties
 }
 
-ext {
-    springCloudVersion = 'Finchley.RELEASE'
-}
-
 group = 'com.gov.zw'
-version = '1.0.0-SNAPSHOT'
+version = "${releaseVersion}"
 description = 'identity-service'
-sourceCompatibility = '1.8'
+sourceCompatibility = "${javaVersion}"
 
 tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+    options.encoding = "${charset}"
 }
 
 test {
