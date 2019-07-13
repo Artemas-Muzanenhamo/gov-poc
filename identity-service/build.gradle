@@ -35,6 +35,7 @@ dependencies {
     testCompile "au.com.dius:pact-jvm-model:${pactJunit5Version}"
     testCompile "com.github.rest-driver:rest-client-driver:${restClientDriverVersion}"
     testCompile "org.junit.jupiter:junit-jupiter-api:${junit5Version}"
+    testCompile "org.junit.jupiter:junit-jupiter-engine:${junit5Version}"
     testCompile "net.minidev:json-smart:${jsonSmartVersion}"
 //    testCompile 'ru.lanwen.wiremock:wiremock-junit5:1.1.1'
 //    testCompile 'com.github.tomakehurst:wiremock:2.19.0'
