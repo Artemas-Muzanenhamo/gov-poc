@@ -46,10 +46,6 @@ bootRun {
     systemProperties = System.properties
 }
 
-ext {
-    springCloudVersion = 'Finchley.RELEASE'
-}
-
 test {
     systemProperty 'pact.rootDir', "../pacts"
 }
