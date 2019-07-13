@@ -13,20 +13,20 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.cloud:spring-cloud-config-server:2.0.4.RELEASE'
+    implementation "org.springframework.cloud:spring-cloud-config-server:${springVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
-    testCompile 'org.springframework:spring-test:5.1.8.RELEASE'
-    testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.4.RELEASE'
+    testCompile "org.springframework:spring-test:${springTestVersion}"
+    testCompile "org.springframework.boot:spring-boot-starter-test:${springVersion}"
 }
 
 group = 'com.gov.zw'
-version = '1.0.0-SNAPSHOT'
+version = "${releaseVersion}"
 description = 'config'
-sourceCompatibility = '1.8'
+sourceCompatibility = "${javaVersion}"
 
 tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+    options.encoding = "${charset}"
 }
 
 bootRun {

@@ -15,19 +15,15 @@ repositories {
 }
 
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-actuator:2.0.4.RELEASE'
-    compile 'org.springframework.cloud:spring-cloud-starter:2.0.4.RELEASE'
-    implementation 'org.springframework.cloud:spring-cloud-netflix-eureka-server:2.0.4.RELEASE'
-    compile 'org.springframework:spring-test:5.1.8.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-jersey:2.0.4.RELEASE'
-    compile 'com.google.code.gson:gson:2.8.5'
-    testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.4.RELEASE'
+    compile "org.springframework.boot:spring-boot-starter-actuator:${springVersion}"
+    compile "org.springframework.cloud:spring-cloud-starter:${springVersion}"
+    implementation "org.springframework.cloud:spring-cloud-netflix-eureka-server:${springVersion}"
+    compile "org.springframework:spring-test:${springTestVersion}"
+    compile "org.springframework.boot:spring-boot-starter-jersey:${springVersion}"
+    compile "com.google.code.gson:gson:${gsonVersion}"
+    testCompile "org.springframework.boot:spring-boot-starter-test:${springVersion}"
     testCompile "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testCompile "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
-}
-
-ext {
-    set('springCloudVersion', "Finchley.RELEASE")
 }
 
 dependencyManagement {
@@ -45,12 +41,12 @@ configurations {
 }
 
 group = 'com.gov.zw'
-version = '1.0.0-SNAPSHOT'
+version = "${releaseVersion}"
 description = 'discovery-server'
-sourceCompatibility = '1.8'
+sourceCompatibility = "${javaVersion}"
 
 tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+    options.encoding = "${charset}"
 }
 
 test {
