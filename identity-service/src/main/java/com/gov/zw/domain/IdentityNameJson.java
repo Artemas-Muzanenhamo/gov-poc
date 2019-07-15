@@ -7,7 +7,7 @@ public class IdentityNameJson {
 
     public IdentityNameJson() { }
 
-    IdentityNameJson(String name) {
+    public IdentityNameJson(String name) {
         this.name = name;
     }
 

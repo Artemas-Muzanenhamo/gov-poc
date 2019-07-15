@@ -1,7 +1,8 @@
 package com.gov.zw.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gov.zw.domain.Identity;
+import com.gov.zw.domain.*;
 import com.gov.zw.service.IdentityService;
 import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.Test;
@@ -47,10 +48,11 @@ class IdentityControllerTest {
     void getIdentitiesByName() throws Exception {
         Map<String, String> name = new HashMap<>();
         name.put("name", "Artemas");
-        JSONObject jsonObject = new JSONObject(name);
+        IdentityNameJson identityNameJsonjson = new IdentityNameJson("Artemas");
+        String json = asJsonString(identityNameJsonjson);
         mockMvc.perform(MockMvcRequestBuilders.post("/identities/name")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-                .content(jsonObject.toJSONString()))
+                .content(json))
                 .andExpect(status().isOk());
     }
 
@@ -58,11 +60,12 @@ class IdentityControllerTest {
     void getIdentityByReferenceNumber() throws Exception {
         Map<String, String> idReferenceNumber = new HashMap<>();
         idReferenceNumber.put("idRef", "1");
-        JSONObject jsonObject = new JSONObject(idReferenceNumber);
+        IdentityReferenceJson identityReferenceJsonjson = new IdentityReferenceJson(idReferenceNumber);
+        String json = asJsonString(identityReferenceJsonjson);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/identities/reference")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(jsonObject.toJSONString()))
+                .content(json))
                 .andExpect(status().isOk());
     }
 
@@ -97,6 +100,11 @@ class IdentityControllerTest {
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
+    }
+
+    private String asJsonString(Object value) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(value);
     }
 
 }

@@ -3,13 +3,14 @@ package com.gov.zw.service;
 import com.gov.zw.client.Identity;
 import com.gov.zw.client.IdentityClient;
 import com.gov.zw.client.IdentityReferenceJson;
+import com.gov.zw.client.IdentityReferenceJsonMapper;
 import com.gov.zw.domain.License;
 import com.gov.zw.domain.LicenseJson;
 import com.gov.zw.domain.LicenseJsonMapper;
 import com.gov.zw.repository.LicenseRepository;
 import com.gov.zw.util.InvalidLicenseException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -20,12 +21,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @RunWith(SpringRunner.class)
-public class LicenseServiceTest {
+class LicenseServiceTest {
 
     private static final String ID_REF = "1";
 
@@ -37,14 +40,17 @@ public class LicenseServiceTest {
     private LicenseRepository licenseRepository;
     @Mock
     private LicenseJsonMapper licenseJsonMapper;
+    @Mock
+    private IdentityReferenceJsonMapper identityReferenceJsonMapper;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         initMocks(this);
+        licenseService = new LicenseServiceImpl(identityClient, licenseRepository, licenseJsonMapper, identityReferenceJsonMapper);
     }
 
     @Test
-    public void should_return_an_identity() throws Exception {
+    void should_return_an_identity() throws Exception {
 
         LicenseJson licenseJson = givenAValidLicense();
         IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(ID_REF);
@@ -55,15 +61,15 @@ public class LicenseServiceTest {
         verify(identityClient, times(1)).findIdentityByIdReferenceNumber(identityReferenceJson);
     }
 
-    @Test(expected = InvalidLicenseException.class)
-    public void should_return_an_identity_not_valid_exception() throws Exception {
+    @Test
+    void should_return_an_identity_not_valid_exception() throws Exception {
         License license = new License();
         LicenseJson licenseJson = new LicenseJson(license);
-        licenseService.addLicense(licenseJson);
+        assertThrows(InvalidLicenseException.class, () -> licenseService.addLicense(licenseJson));
     }
 
     @Test
-    public void should_return_licenses_from_the_repository() {
+    void should_return_licenses_from_the_repository() {
         List<License> licenses = getLicenses();
         List<LicenseJson> licenseJsons = givenAValidLicenseJson(licenses);
 
@@ -73,13 +79,13 @@ public class LicenseServiceTest {
         verify(licenseRepository, times(1)).findAll();
     }
 
-    @Test(expected = InvalidLicenseException.class)
-    public void should_throw_an_exception_when_invalid_license_json_is_passed() throws Exception {
-        licenseService.updateLicense((LicenseJson) null);
+    @Test
+    void should_throw_an_exception_when_invalid_license_json_is_passed() {
+        assertThrows(InvalidLicenseException.class, () -> licenseService.updateLicense((LicenseJson) null));
     }
 
     @Test
-    public void should_save_when_empty_license_details_are_passed() throws Exception {
+    void should_save_when_empty_license_details_are_passed() throws Exception {
         License license = new License();
 
         licenseService.updateLicense(license);
@@ -88,7 +94,7 @@ public class LicenseServiceTest {
     }
 
     @Test
-    public void should_update_license_details_when_a_valid_license_is_passed() throws Exception {
+    void should_update_license_details_when_a_valid_license_is_passed() throws Exception {
         License license = givenALicense();
 
         licenseService.updateLicense(license);
@@ -96,13 +102,13 @@ public class LicenseServiceTest {
         verify(licenseRepository, times(1)).save(license);
     }
 
-    @Test(expected = InvalidLicenseException.class)
-    public void should_return_an_identity_not_valid_exception_when_trying_to_delete_license() throws Exception {
-        licenseService.removeLicense((LicenseJson) null);
+    @Test
+    void should_return_an_identity_not_valid_exception_when_trying_to_delete_license() {
+        assertThrows(InvalidLicenseException.class, () -> licenseService.removeLicense((LicenseJson) null));
     }
 
     @Test
-    public void should_delete_a_license_when_a_valid_license_is_passed() throws Exception {
+    void should_delete_a_license_when_a_valid_license_is_passed() throws Exception {
         License license = givenALicense();
 
         licenseService.removeLicense(license);
@@ -111,7 +117,7 @@ public class LicenseServiceTest {
     }
 
     @Test
-    public void should_return_a_license_given_the_identity_reference() throws Exception {
+    void should_return_a_license_given_the_identity_reference() throws Exception {
         License license = givenALicense();
         given(licenseRepository.findLicenseByIdentityRef(ID_REF)).willReturn(license);
 

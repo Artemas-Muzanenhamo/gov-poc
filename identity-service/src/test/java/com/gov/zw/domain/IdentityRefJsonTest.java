@@ -7,11 +7,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 class IdentityRefJsonTest {
-    private IdentityRefJson identityRefJson;
+    private IdentityReferenceJson identityRefJson;
 
     @Test
     void should_produce_a_valid_identity_ref_json() {
-        identityRefJson = new IdentityRefJson("1234");
+        identityRefJson = new IdentityReferenceJson("1234");
         JSONObject idRefJson = new JSONObject();
         idRefJson.put("idRef", "1234");
 
@@ -22,7 +22,7 @@ class IdentityRefJsonTest {
 
     @Test
     void should_produce_an_empty_identity_ref_json() {
-        identityRefJson = new IdentityRefJson();
+        identityRefJson = new IdentityReferenceJson();
         JSONObject idRefJson = new JSONObject();
         idRefJson.put("idRef", null);
 
@@ -33,8 +33,8 @@ class IdentityRefJsonTest {
 
     @Test
     void equality_check() {
-        identityRefJson = new IdentityRefJson("12345");
-        IdentityRefJson newIdentityRef = new IdentityRefJson("12345");
+        identityRefJson = new IdentityReferenceJson("12345");
+        IdentityReferenceJson newIdentityRef = new IdentityReferenceJson("12345");
         assertThat(identityRefJson).isEqualTo(newIdentityRef);
         assertThat(identityRefJson.toString()).isEqualTo(newIdentityRef.toString());
         assertThat(identityRefJson.hashCode()).isEqualTo(newIdentityRef.hashCode());

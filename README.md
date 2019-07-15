@@ -9,7 +9,7 @@ This is a proof of concept to demo government services using the Microservice Ar
 
 # Architecture
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/29547780/33390496-ef763280-d52d-11e7-80c3-8aaf41c3d5b0.png">
+  <img src="https://user-images.githubusercontent.com/29547780/61170379-379d2600-a560-11e9-8e7e-e48a55221488.jpg">
 </p>
 
 # Services

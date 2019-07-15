@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class IdentityRefJsonMapper {
-    public String toIdentityRef(IdentityRefJson json) {
+    public String toIdentityRef(IdentityReferenceJson json) {
         return json.idRef;
     }
 }
