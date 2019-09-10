@@ -10,6 +10,7 @@ import com.gov.zw.domain.LicenseJsonMapper;
 import com.gov.zw.repository.LicenseRepository;
 import com.gov.zw.util.InvalidLicenseException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -59,6 +60,17 @@ class LicenseServiceTest {
         licenseService.addLicense(licenseJson);
 
         verify(identityClient, times(1)).findIdentityByIdReferenceNumber(identityReferenceJson);
+    }
+
+    @Test
+    @DisplayName("Should throw an InvalidIdentityException when an ID ref that is not an INT is passed")
+    void shouldThrowAnInvalidIdentityExceptionFromInvalidStringIdRef() throws Exception {
+
+        License license = new License();
+        license.setId("Artemas");
+        LicenseJson licenseJson = new LicenseJson(license);
+
+        assertThrows(InvalidLicenseException.class, () -> licenseService.addLicense(licenseJson));
     }
 
     @Test
