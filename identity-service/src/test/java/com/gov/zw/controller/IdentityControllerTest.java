@@ -1,6 +1,7 @@
 package com.gov.zw.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gov.zw.domain.*;
 import com.gov.zw.service.IdentityService;
@@ -30,12 +31,14 @@ class IdentityControllerTest {
     @MockBean
     private IdentityService identityServiceImpl;
 
+    private final TypeReference<Map<String, String>> identityTypeRef = new TypeReference<Map<String, String>>() {};
+
     @Test
     void saveIdentity() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         Identity identity = new Identity("1","1","Artemas", "Muzanenhamo", "28/03/1990",
                 "Mashayamombe", "Harare", "17/11/2017");
-        Map<String, String> id = objectMapper.convertValue(identity, Map.class);
+        Map<String, String> id = objectMapper.convertValue(identity, identityTypeRef);
         JSONObject jsonObject = new JSONObject(id);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/identities")
@@ -80,7 +83,7 @@ class IdentityControllerTest {
         ObjectMapper objectMapper = new ObjectMapper();
         Identity identity = new Identity("1","1","Takudzwa", "Muzanenhamo", "28/03/1990",
                 "Mashayamombe", "Harare", "17/11/2017");
-        Map<String, String> id = objectMapper.convertValue(identity, Map.class);
+        Map<String, String> id = objectMapper.convertValue(identity, identityTypeRef);
         JSONObject jsonObject = new JSONObject(id);
         mockMvc.perform(MockMvcRequestBuilders.put("/identities")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
@@ -93,7 +96,7 @@ class IdentityControllerTest {
         ObjectMapper objectMapper = new ObjectMapper();
         Identity identity = new Identity("1","1","Artemas", "Muzanenhamo", "28/03/1990",
                 "Mashayamombe", "Harare", "17/11/2017");
-        Map<String, String> id = objectMapper.convertValue(identity, Map.class);
+        Map<String, String> id = objectMapper.convertValue(identity, identityTypeRef);
         JSONObject jsonObject = new JSONObject(id);
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/identities")

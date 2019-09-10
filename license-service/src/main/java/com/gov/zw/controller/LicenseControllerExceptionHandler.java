@@ -2,6 +2,7 @@ package com.gov.zw.controller;
 
 import com.gov.zw.util.InvalidIdentityException;
 import com.gov.zw.util.InvalidLicenseException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,14 +16,14 @@ public class LicenseControllerExceptionHandler {
     @ExceptionHandler
     @ResponseStatus(value = BAD_REQUEST)
     @ResponseBody
-    public InvalidIdentityException handleInvalidIdentityException(InvalidIdentityException exception) {
-        return new InvalidIdentityException(exception.getMessage());
+    public ResponseEntity<InvalidIdentityException> handleInvalidIdentityException(InvalidIdentityException exception) {
+        return ResponseEntity.status(BAD_REQUEST).body(exception);
     }
 
     @ExceptionHandler
     @ResponseStatus(value = BAD_REQUEST)
     @ResponseBody
-    public InvalidLicenseException handleInvalidLicenseException(InvalidLicenseException exception) {
-        return new InvalidLicenseException(exception.getMessage());
+    public ResponseEntity<InvalidLicenseException> handleInvalidLicenseException(InvalidLicenseException exception) {
+        return ResponseEntity.status(BAD_REQUEST).body(exception);
     }
 }
