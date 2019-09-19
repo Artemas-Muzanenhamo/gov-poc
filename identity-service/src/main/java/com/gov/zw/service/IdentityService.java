@@ -1,9 +1,9 @@
 package com.gov.zw.service;
 
 import com.gov.zw.domain.*;
-import com.gov.zw.util.InvalidIdentityException;
-import com.gov.zw.util.InvalidIdentityNameException;
-import com.gov.zw.util.InvalidIdentityReferenceException;
+import com.gov.zw.exception.InvalidIdentityException;
+import com.gov.zw.exception.InvalidIdentityNameException;
+import com.gov.zw.exception.InvalidIdentityReferenceException;
 
 import java.util.List;
 
@@ -29,7 +29,6 @@ public interface IdentityService {
      * @throws InvalidIdentityNameException
      */
     List<IdentityJson> findIdentitiesByName(IdentityNameJson identityNameJson) throws InvalidIdentityNameException;
-//    List<IdentityJson> findIdentitiesByName(String name) throws InvalidIdentityNameException;
 
     /**
      * Allows you to find an {@link Identity} by the ID reference.

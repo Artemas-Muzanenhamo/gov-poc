@@ -1,4 +1,4 @@
-package com.gov.zw.util;
+package com.gov.zw.exception;
 
 public class InvalidIdentityException extends Exception {
 

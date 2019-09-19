@@ -2,8 +2,8 @@ package com.gov.zw.service;
 
 import com.gov.zw.client.IdentityReferenceJson;
 import com.gov.zw.domain.LicenseJson;
-import com.gov.zw.util.InvalidIdentityException;
-import com.gov.zw.util.InvalidLicenseException;
+import com.gov.zw.exception.InvalidIdentityException;
+import com.gov.zw.exception.InvalidLicenseException;
 
 import java.util.List;
 

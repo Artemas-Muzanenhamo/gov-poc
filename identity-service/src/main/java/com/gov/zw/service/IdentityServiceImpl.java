@@ -2,9 +2,9 @@ package com.gov.zw.service;
 
 import com.gov.zw.domain.*;
 import com.gov.zw.repository.IdentityRepository;
-import com.gov.zw.util.InvalidIdentityException;
-import com.gov.zw.util.InvalidIdentityNameException;
-import com.gov.zw.util.InvalidIdentityReferenceException;
+import com.gov.zw.exception.InvalidIdentityException;
+import com.gov.zw.exception.InvalidIdentityNameException;
+import com.gov.zw.exception.InvalidIdentityReferenceException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
