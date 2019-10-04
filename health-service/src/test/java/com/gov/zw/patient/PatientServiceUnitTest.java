@@ -8,11 +8,11 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 import static reactor.core.publisher.Mono.just;
@@ -38,9 +38,12 @@ class PatientServiceUnitTest {
                 "68 Jeremy Street, London, W1 7AA");
         given(patientRepository.findAll()).willReturn(Flux.just(patient));
 
-        Patient actualPatient = patientServiceImpl.getAllPatients().blockFirst();
+        Flux<Patient> patientsFlux = patientServiceImpl.getAllPatients();
 
-        assertThat(actualPatient).isEqualTo(patient);
+        StepVerifier.create(patientsFlux)
+                .expectNext(patient)
+                .expectComplete()
+                .verify();
     }
 
     @Test
@@ -50,21 +53,27 @@ class PatientServiceUnitTest {
                 "68 Jeremy Street, London, W1 7AA");
         given(patientRepository.insert(patient)).willReturn(just(patient));
 
-        Mono<Patient> createdPatient = patientServiceImpl.addPatient(patient);
+        Mono<Patient> patientMono = patientServiceImpl.addPatient(patient);
 
-        assertThat(createdPatient.block()).isEqualTo(patient);
+        StepVerifier.create(patientMono)
+                .expectNext(patient)
+                .expectComplete()
+                .verify();
     }
 
     @Test
     void should_update_patient_details() {
-        Patient updatedPatient = new Patient("MUZAN123", "Artemas", "Thomas",
+        Patient patient = new Patient("MUZAN123", "Artemas", "Thomas",
                 LocalDate.of(1990, 3, 28),
                 "123 Rock Street, London, W1 7XX");
-        when(patientRepository.save(updatedPatient)).thenReturn(just(updatedPatient));
+        when(patientRepository.save(patient)).thenReturn(just(patient));
 
-        Mono<Patient> patient = patientServiceImpl.updatePatient(updatedPatient);
+        Mono<Patient> patientMono = patientServiceImpl.updatePatient(patient);
 
-        assertThat(updatedPatient).isEqualTo(patient.block());
+        StepVerifier.create(patientMono)
+                .expectNext(patient)
+                .expectComplete()
+                .verify();
     }
 
     @Test
@@ -77,6 +86,9 @@ class PatientServiceUnitTest {
 
         Mono<Patient> patientMono = patientServiceImpl.getPatient(identityRefOptional);
 
-        assertThat(patient).isEqualTo(patientMono.block());
+        StepVerifier.create(patientMono)
+                .expectNext(patient)
+                .expectComplete()
+                .verify();
     }
 }
