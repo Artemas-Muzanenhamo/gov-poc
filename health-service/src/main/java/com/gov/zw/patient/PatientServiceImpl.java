@@ -32,11 +32,15 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Mono<Patient> getPatient(Optional<String> patientIdOptional) {
-        return patientIdOptional.map(patientRepository::findById).orElseGet(Mono::empty);
+        return patientIdOptional
+                .map(patientRepository::findById)
+                .orElseGet(Mono::empty);
     }
 
     @Override
     public Mono<Void> deletePatient(Optional<String> patientIdOptional) {
-        return patientIdOptional.map(patientRepository::deleteById).orElseGet(Mono::empty);
+        return patientIdOptional
+                .map(patientRepository::deleteById)
+                .orElseGet(Mono::empty);
     }
 }
