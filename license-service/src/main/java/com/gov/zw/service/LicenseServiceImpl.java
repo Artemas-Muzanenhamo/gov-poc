@@ -49,10 +49,6 @@ public class LicenseServiceImpl implements LicenseService {
         licenseRepository.save(license);
     }
 
-    private IdentityReferenceJson getLicenseIdentityReferenceJsonFunction(License license) {
-        return new IdentityReferenceJson(license.getIdentityRef());
-    }
-
     @Override
     public void addLicense(LicenseJson licenseJson) throws InvalidIdentityException, InvalidLicenseException {
         License license = licenseJsonMapper.toDto(licenseJson);
@@ -67,22 +63,10 @@ public class LicenseServiceImpl implements LicenseService {
                 .collect(toList());
     }
 
-    void updateLicense(License license) throws InvalidLicenseException {
-        License validLicense = Optional.ofNullable(license)
-                .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
-        this.licenseRepository.save(validLicense);
-    }
-
     @Override
     public void updateLicense(LicenseJson licenseJson) throws InvalidLicenseException {
         License license = licenseJsonMapper.toDto(licenseJson);
         updateLicense(license);
-    }
-
-    void removeLicense(License license) throws InvalidLicenseException {
-        License validLicense = Optional.ofNullable(license)
-                .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
-        this.licenseRepository.delete(validLicense);
     }
 
     @Override
@@ -102,5 +86,21 @@ public class LicenseServiceImpl implements LicenseService {
         String IdentityRef = identityReferenceJsonMapper.toIdentityReference(identityReferenceJson);
         License license = getLicenseByIdentityRef(IdentityRef);
         return new LicenseJson(license);
+    }
+
+    private IdentityReferenceJson getLicenseIdentityReferenceJsonFunction(License license) {
+        return new IdentityReferenceJson(license.getIdentityRef());
+    }
+
+    void updateLicense(License license) throws InvalidLicenseException {
+        License validLicense = Optional.ofNullable(license)
+                .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
+        this.licenseRepository.save(validLicense);
+    }
+
+    void removeLicense(License license) throws InvalidLicenseException {
+        License validLicense = Optional.ofNullable(license)
+                .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
+        this.licenseRepository.delete(validLicense);
     }
 }
