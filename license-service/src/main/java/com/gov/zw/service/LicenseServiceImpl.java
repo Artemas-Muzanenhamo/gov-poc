@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 import static java.util.stream.Collectors.toList;
 
@@ -38,15 +39,18 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     private void addLicense(License license) throws InvalidLicenseException, InvalidIdentityException {
-        Optional<License> licenseOptional = Optional.ofNullable(license);
-        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(licenseOptional
-                .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID)).getIdentityRef());
-        Optional<Identity> identityOptional = Optional.ofNullable(identityClient.findIdentityByIdReferenceNumber(identityReferenceJson));
-        if (identityOptional.isPresent()) {
-            licenseRepository.save(license);
-        } else {
-            throw new InvalidIdentityException(IDENTITY_IS_INVALID_OR_DOES_NOT_EXIST);
-        }
+        IdentityReferenceJson identityReferenceJson = Optional.ofNullable(license)
+                .map(this::getLicenseIdentityReferenceJsonFunction)
+                .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
+
+        Optional.ofNullable(identityClient.findIdentityByIdReferenceNumber(identityReferenceJson))
+                .orElseThrow(() -> new InvalidIdentityException(IDENTITY_IS_INVALID_OR_DOES_NOT_EXIST));
+
+        licenseRepository.save(license);
+    }
+
+    private IdentityReferenceJson getLicenseIdentityReferenceJsonFunction(License license) {
+        return new IdentityReferenceJson(license.getIdentityRef());
     }
 
     @Override

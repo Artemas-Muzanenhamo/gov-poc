@@ -30,9 +30,9 @@ public class IdentityServiceImpl implements IdentityService {
     }
 
     void save(Identity identity) throws InvalidIdentityException {
-        Optional<Identity> identityOptional = Optional.ofNullable(identity);
-        identityRepository.save(identityOptional
-                .orElseThrow( () -> new InvalidIdentityException("The Identity is invalid!")));
+        Identity validIdentity = Optional.ofNullable(identity)
+                .orElseThrow(() -> new InvalidIdentityException("The Identity is invalid!"));
+        identityRepository.save(validIdentity);
     }
 
     @Override
