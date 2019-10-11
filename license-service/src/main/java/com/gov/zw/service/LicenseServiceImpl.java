@@ -68,9 +68,9 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     void updateLicense(License license) throws InvalidLicenseException {
-        Optional<License> licenseOptional = Optional.ofNullable(license);
-        this.licenseRepository.save(licenseOptional
-                .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID)));
+        License validLicense = Optional.ofNullable(license)
+                .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
+        this.licenseRepository.save(validLicense);
     }
 
     @Override
@@ -80,9 +80,9 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     void removeLicense(License license) throws InvalidLicenseException {
-        Optional<License> licenseOptional = Optional.ofNullable(license);
-        this.licenseRepository.delete(licenseOptional
-                .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID)));
+        License validLicense = Optional.ofNullable(license)
+                .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
+        this.licenseRepository.delete(validLicense);
     }
 
     @Override
@@ -92,9 +92,9 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     License getLicenseByIdentityRef(String identityRef) throws InvalidLicenseException {
-        Optional<String> identityRefOptional = Optional.ofNullable(identityRef);
-        return this.licenseRepository.findLicenseByIdentityRef(identityRefOptional
-                .orElseThrow((() -> new InvalidLicenseException("License IdRef is not valid"))));
+        return Optional.ofNullable(identityRef)
+                .map(identityReference -> licenseRepository.findLicenseByIdentityRef(identityReference))
+                .orElseThrow((() -> new InvalidLicenseException("License IdRef is not valid")));
     }
 
     @Override
