@@ -61,8 +61,10 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public List<LicenseJson> getAllLicenses() {
-        List<License> licenses = this.licenseRepository.findAll();
-        return licenses.stream().map(LicenseJson::new).collect(toList());
+        return this.licenseRepository.findAll()
+                .stream()
+                .map(LicenseJson::new)
+                .collect(toList());
     }
 
     void updateLicense(License license) throws InvalidLicenseException {
