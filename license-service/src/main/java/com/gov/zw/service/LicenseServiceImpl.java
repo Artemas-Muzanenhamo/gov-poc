@@ -1,20 +1,18 @@
 package com.gov.zw.service;
 
-import com.gov.zw.client.Identity;
 import com.gov.zw.client.IdentityClient;
 import com.gov.zw.client.IdentityReferenceJson;
 import com.gov.zw.client.IdentityReferenceJsonMapper;
 import com.gov.zw.domain.License;
 import com.gov.zw.domain.LicenseJson;
 import com.gov.zw.domain.LicenseJsonMapper;
-import com.gov.zw.repository.LicenseRepository;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidLicenseException;
+import com.gov.zw.repository.LicenseRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 
 import static java.util.stream.Collectors.toList;
 
