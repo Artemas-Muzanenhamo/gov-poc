@@ -30,28 +30,15 @@ public class IdentityServiceImpl implements IdentityService {
     }
 
     void save(Identity identity) throws InvalidIdentityException {
-        Optional<Identity> identityOptional = Optional.ofNullable(identity);
-        identityRepository.save(identityOptional
-                .orElseThrow( () -> new InvalidIdentityException("The Identity is invalid!")));
+        Identity validIdentity = Optional.ofNullable(identity)
+                .orElseThrow(() -> new InvalidIdentityException("The Identity is invalid!"));
+        identityRepository.save(validIdentity);
     }
 
     @Override
     public void save(IdentityJson identityJson) throws InvalidIdentityException {
         Identity identity = identityJsonMapper.toIdentity(identityJson);
         save(identity);
-    }
-
-    List<IdentityJson> findIdentitiesByName(String name) throws InvalidIdentityNameException {
-        Optional<String> nameOptional = Optional.ofNullable(name);
-        List<Identity> identities = identityRepository.findIdentitiesByName(nameOptional
-                .orElseThrow(() -> new InvalidIdentityNameException("The name supplied does not exist!")));
-        return identities.stream().map(IdentityJson::new).collect(toList());
-    }
-
-    Identity findIdentityByIdentityRef(String idRef) throws InvalidIdentityReferenceException {
-        Optional<String> idReferenceOptional = Optional.ofNullable(idRef);
-        return identityRepository.findIdentityByIdentityRef(idReferenceOptional
-                .orElseThrow( () -> new InvalidIdentityReferenceException("The ID reference supplied is not valid!")));
     }
 
     @Override
@@ -66,12 +53,6 @@ public class IdentityServiceImpl implements IdentityService {
         return identityRepository.findAll().stream().map(IdentityJson::new).collect(toList());
     }
 
-    void delete(Identity identity) throws InvalidIdentityException {
-        Optional<Identity> identityOptional = Optional.ofNullable(identity);
-        identityRepository.delete(identityOptional
-                .orElseThrow(() -> new InvalidIdentityException("The Identity to be deleted is invalid!")));
-    }
-
     @Override
     public void delete(IdentityJson identityJson) throws InvalidIdentityException {
         Identity identity = identityJsonMapper.toIdentity(identityJson);
@@ -82,5 +63,24 @@ public class IdentityServiceImpl implements IdentityService {
     public List<IdentityJson> findIdentitiesByName(IdentityNameJson identityNameJson) throws InvalidIdentityNameException {
         String identityName = identityNameJsonMapper.toIdentityName(identityNameJson);
         return findIdentitiesByName(identityName);
+    }
+
+    List<IdentityJson> findIdentitiesByName(String name) throws InvalidIdentityNameException {
+        List<Identity> identities = Optional.ofNullable(name)
+                .map(identityRepository::findIdentitiesByName)
+                .orElseThrow(() -> new InvalidIdentityNameException("The name supplied does not exist!"));
+        return identities.stream().map(IdentityJson::new).collect(toList());
+    }
+
+    Identity findIdentityByIdentityRef(String idRef) throws InvalidIdentityReferenceException {
+        return Optional.ofNullable(idRef)
+                .map(identityRepository::findIdentityByIdentityRef)
+                .orElseThrow(() -> new InvalidIdentityReferenceException("The ID reference supplied is not valid!"));
+    }
+
+    void delete(Identity identity) throws InvalidIdentityException {
+        Optional.ofNullable(identity)
+                .orElseThrow(() -> new InvalidIdentityException("The Identity to be deleted is invalid!"));
+        identityRepository.delete(identity);
     }
 }

@@ -17,8 +17,7 @@ public class LicenseJson {
     public String signatureImage;
     public String address;
 
-    public LicenseJson() {
-    }
+    public LicenseJson() { }
 
     public LicenseJson(License license) {
         this.id = license.getId();
