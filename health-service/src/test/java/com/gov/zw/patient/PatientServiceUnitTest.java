@@ -1,6 +1,8 @@
 package com.gov.zw.patient;
 
+import com.gov.zw.exceptions.InvalidPatientException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -13,6 +15,7 @@ import reactor.test.StepVerifier;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 import static reactor.core.publisher.Mono.just;
@@ -73,6 +76,12 @@ class PatientServiceUnitTest {
                 .expectNext(patient)
                 .expectComplete()
                 .verify();
+    }
+
+    @Test
+    @DisplayName("Should throw an InvalidPatientException when Patient is null")
+    void throwExceptionWhenPatientIsNull() {
+        assertThrows(InvalidPatientException.class, () -> patientServiceImpl.updatePatient(null));
     }
 
     @Test
