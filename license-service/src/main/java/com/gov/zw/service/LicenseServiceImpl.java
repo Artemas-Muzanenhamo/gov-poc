@@ -73,17 +73,17 @@ public class LicenseServiceImpl implements LicenseService {
         removeLicense(license);
     }
 
-    License getLicenseByIdentityRef(String identityRef) throws InvalidLicenseException {
-        return Optional.ofNullable(identityRef)
-                .map(identityReference -> licenseRepository.findLicenseByIdentityRef(identityReference))
-                .orElseThrow((() -> new InvalidLicenseException("License IdRef is not valid")));
-    }
-
     @Override
     public LicenseJson getLicenseByIdentityRef(IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException {
         String IdentityRef = identityReferenceJsonMapper.toIdentityReference(identityReferenceJson);
         License license = getLicenseByIdentityRef(IdentityRef);
         return new LicenseJson(license);
+    }
+
+    License getLicenseByIdentityRef(String identityRef) throws InvalidLicenseException {
+        return Optional.ofNullable(identityRef)
+                .map(identityReference -> licenseRepository.findLicenseByIdentityRef(identityReference))
+                .orElseThrow((() -> new InvalidLicenseException("License IdRef is not valid")));
     }
 
     private IdentityReferenceJson getLicenseIdentityReferenceJsonFunction(License license) {
