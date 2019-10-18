@@ -26,6 +26,17 @@ public class IdentityJson {
         this.dateOfIssue = identity.getDateOfIssue();
     }
 
+    public IdentityJson(String id, String identityRef, String name, String surname, String birthDate, String villageOfOrigin, String placeOfBirth, String dateOfIssue) {
+        this.id = id;
+        this.identityRef = identityRef;
+        this.name = name;
+        this.surname = surname;
+        this.birthDate = birthDate;
+        this.villageOfOrigin = villageOfOrigin;
+        this.placeOfBirth = placeOfBirth;
+        this.dateOfIssue = dateOfIssue;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
