@@ -1,5 +1,6 @@
 package com.gov.zw.controller;
 
+import com.gov.zw.domain.Identity;
 import com.gov.zw.domain.IdentityJson;
 import com.gov.zw.domain.IdentityNameJson;
 import com.gov.zw.domain.IdentityReferenceJson;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.gov.zw.mapper.IdentityMapper.toIdentityDTO;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
@@ -30,7 +32,8 @@ public class IdentityController {
     @ResponseBody
     @ResponseStatus(value = OK)
     public void saveIdentity(@RequestBody IdentityJson identityJson) throws InvalidIdentityException {
-        this.identityServiceImpl.save(identityJson);
+        Identity identity = toIdentityDTO(identityJson);
+        this.identityServiceImpl.save(identity);
     }
 
     // Retrieve
@@ -54,7 +57,8 @@ public class IdentityController {
     @ResponseBody
     @ResponseStatus(OK)
     public void updateIdentity(@RequestBody IdentityJson identityJson) throws InvalidIdentityException {
-        this.identityServiceImpl.save(identityJson);
+        Identity identity = toIdentityDTO(identityJson);
+        this.identityServiceImpl.save(identity);
     }
 
     // Delete

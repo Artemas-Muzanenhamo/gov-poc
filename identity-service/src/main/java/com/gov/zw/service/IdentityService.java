@@ -16,10 +16,10 @@ public interface IdentityService {
     /**
      * Allows you to save an {@link Identity}.
      *
-     * @param identityJson - {@link Identity} to be saved.
+     * @param identity - {@link Identity} to be saved.
      * @throws InvalidIdentityException
      */
-    void save(IdentityJson identityJson) throws InvalidIdentityException;
+    void save(Identity identity) throws InvalidIdentityException;
 
     /**
      * Allows you to find an {@link Identity} by name.

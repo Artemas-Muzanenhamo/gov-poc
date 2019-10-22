@@ -2,10 +2,7 @@ package com.gov.zw.controller;
 
 import com.gov.zw.domain.Identity;
 import com.gov.zw.domain.IdentityJson;
-import com.gov.zw.domain.IdentityJsonMapper;
-import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.service.IdentityService;
-import com.gov.zw.service.IdentityServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

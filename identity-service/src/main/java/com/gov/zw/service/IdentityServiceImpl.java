@@ -29,16 +29,11 @@ public class IdentityServiceImpl implements IdentityService {
         this.identityNameJsonMapper = identityNameJsonMapper;
     }
 
-    void save(Identity identity) throws InvalidIdentityException {
+    @Override
+    public void save(Identity identity) throws InvalidIdentityException {
         Identity validIdentity = Optional.ofNullable(identity)
                 .orElseThrow(() -> new InvalidIdentityException("The Identity is invalid!"));
         identityRepository.save(validIdentity);
-    }
-
-    @Override
-    public void save(IdentityJson identityJson) throws InvalidIdentityException {
-        Identity identity = identityJsonMapper.toIdentity(identityJson);
-        save(identity);
     }
 
     @Override
