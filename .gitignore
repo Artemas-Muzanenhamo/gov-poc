@@ -59,3 +59,4 @@ mvnw.cmd
 /license-service/.gradle/
 /gateway/build/
 /license-service/build/
+/data/*

@@ -6,6 +6,15 @@ SonarQube: ![SonarQube](https://sonarcloud.io/api/project_badges/measure?project
 # About
 This is a proof of concept to demo government services using the Microservice Architecture with spring boot and spring cloud. We will not really dive into the Authentication aspect at first but we will look at how data should flow within a Microservice Architecture.
 
+# Starting the application
+
+* build the project via gradle `./gradlew build`
+* run `docker-compose -f ./docker-compose.yml up -d`
+* you can see the status for each container by executing `docker ps`
+* or you can use a docker manager like [portainer.io](https://www.portainer.io/) and manage containers from there.
+* If you need the UI for this application please look at [gov-poc-ui](https://github.com/Artemas-Muzanenhamo/gov-poc-ui).
+* to stop all containers you can run `docker-compose -f ./docker-compose.yml down`
+
 
 # Architecture
 <p align="center">
