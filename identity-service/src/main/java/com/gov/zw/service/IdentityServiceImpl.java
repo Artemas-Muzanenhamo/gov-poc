@@ -1,10 +1,11 @@
 package com.gov.zw.service;
 
 import com.gov.zw.domain.*;
-import com.gov.zw.repository.IdentityRepository;
+import com.gov.zw.dto.IdentityName;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidIdentityNameException;
 import com.gov.zw.exception.InvalidIdentityReferenceException;
+import com.gov.zw.repository.IdentityRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,16 +56,11 @@ public class IdentityServiceImpl implements IdentityService {
     }
 
     @Override
-    public List<IdentityJson> findIdentitiesByName(IdentityNameJson identityNameJson) throws InvalidIdentityNameException {
-        String identityName = identityNameJsonMapper.toIdentityName(identityNameJson);
-        return findIdentitiesByName(identityName);
-    }
-
-    List<IdentityJson> findIdentitiesByName(String name) throws InvalidIdentityNameException {
-        List<Identity> identities = Optional.ofNullable(name)
+    public List<Identity> findIdentitiesByName(IdentityName identityName) throws InvalidIdentityNameException {
+        return Optional.ofNullable(identityName)
+                .map(IdentityName::getName)
                 .map(identityRepository::findIdentitiesByName)
                 .orElseThrow(() -> new InvalidIdentityNameException("The name supplied does not exist!"));
-        return identities.stream().map(IdentityJson::new).collect(toList());
     }
 
     Identity findIdentityByIdentityRef(String idRef) throws InvalidIdentityReferenceException {
