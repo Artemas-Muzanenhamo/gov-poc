@@ -37,7 +37,7 @@ class IdentityServiceTest {
 
     @Test
     void should_throw_an_exception_when_an_invalid_identity_is_passed() {
-        assertThrows(InvalidIdentityException.class, () -> identityService.save((IdentityJson) null));
+        assertThrows(InvalidIdentityException.class, () -> identityService.save((Identity) null));
     }
 
     @Test
