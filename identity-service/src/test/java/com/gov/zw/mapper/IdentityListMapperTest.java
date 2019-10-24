@@ -43,4 +43,12 @@ class IdentityListMapperTest {
         assertThat(identityJson.getPlaceOfBirth()).isEqualTo(PLACE_OF_BIRTH);
         assertThat(identityJson.getDateOfIssue()).isEqualTo(DATE_OF_ISSUE);
     }
+
+    @Test
+    @DisplayName("Should return an empty List of IdentityJson when List of Identity is null")
+    void mapToEmptyListOfIdentityJson() {
+        List<IdentityJson> identityJsonList = toIdentitiesJson(null);
+
+        assertThat(identityJsonList).isEmpty();
+    }
 }
