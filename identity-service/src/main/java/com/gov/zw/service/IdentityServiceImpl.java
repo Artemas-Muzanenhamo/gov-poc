@@ -1,6 +1,7 @@
 package com.gov.zw.service;
 
 import com.gov.zw.domain.*;
+import com.gov.zw.dto.IdentityName;
 import com.gov.zw.repository.IdentityRepository;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidIdentityNameException;
@@ -55,8 +56,7 @@ public class IdentityServiceImpl implements IdentityService {
     }
 
     @Override
-    public List<IdentityJson> findIdentitiesByName(IdentityNameJson identityNameJson) throws InvalidIdentityNameException {
-        String identityName = identityNameJsonMapper.toIdentityName(identityNameJson);
+    public List<Identity> findIdentitiesByName(IdentityName identityName) throws InvalidIdentityNameException {
         return findIdentitiesByName(identityName);
     }
 

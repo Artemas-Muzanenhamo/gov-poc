@@ -16,4 +16,17 @@ public class IdentityMapper {
                 identityJson.getDateOfIssue()
         );
     }
+
+    static IdentityJson toIdentityJson(Identity identity) {
+        return new IdentityJson(
+                identity.getId(),
+                identity.getIdentityRef(),
+                identity.getName(),
+                identity.getSurname(),
+                identity.getBirthDate(),
+                identity.getVillageOfOrigin(),
+                identity.getPlaceOfBirth(),
+                identity.getDateOfIssue()
+        );
+    }
 }

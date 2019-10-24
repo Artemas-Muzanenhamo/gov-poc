@@ -4,6 +4,7 @@ import com.gov.zw.domain.Identity;
 import com.gov.zw.domain.IdentityJson;
 import com.gov.zw.domain.IdentityNameJson;
 import com.gov.zw.domain.IdentityReferenceJson;
+import com.gov.zw.dto.IdentityName;
 import com.gov.zw.service.IdentityService;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidIdentityNameException;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.gov.zw.mapper.IdentityListMapper.toIdentitiesJson;
 import static com.gov.zw.mapper.IdentityMapper.toIdentityDTO;
+import static com.gov.zw.mapper.IdentityNameMapper.toIdentityNameDTO;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
@@ -39,7 +42,9 @@ public class IdentityController {
     // Retrieve
     @PostMapping(value = "/name", produces = APPLICATION_JSON_UTF8_VALUE)
     public List<IdentityJson> getIdentitiesByName(@RequestBody IdentityNameJson identityNameJson) throws InvalidIdentityNameException {
-        return identityServiceImpl.findIdentitiesByName(identityNameJson);
+        IdentityName identityName = toIdentityNameDTO(identityNameJson);
+        List<Identity> identities = identityServiceImpl.findIdentitiesByName(identityName);
+        return toIdentitiesJson(identities);
     }
 
     @PostMapping(value = "/reference", produces = APPLICATION_JSON_UTF8_VALUE)

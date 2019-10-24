@@ -1,6 +1,7 @@
 package com.gov.zw.service;
 
 import com.gov.zw.domain.*;
+import com.gov.zw.dto.IdentityName;
 import com.gov.zw.repository.IdentityRepository;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidIdentityNameException;
@@ -69,7 +70,7 @@ class IdentityServiceTest {
 
     @Test
     void should_throw_an_exception_when_an_invalid_name_is_passed() {
-        assertThrows(InvalidIdentityNameException.class, () -> identityService.findIdentitiesByName((IdentityNameJson) null));
+        assertThrows(InvalidIdentityNameException.class, () -> identityService.findIdentitiesByName((IdentityName) null));
     }
 
     @Test

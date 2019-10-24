@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class IdentityNameJsonMapper {
-    public String toIdentityName(IdentityNameJson json) {
-        return json.name;
+    String toIdentityName(IdentityNameJson json) {
+        return json.getName();
     }
 }
