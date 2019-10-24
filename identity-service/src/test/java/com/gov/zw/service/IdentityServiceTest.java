@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +26,14 @@ import static org.mockito.Mockito.*;
 @ExtendWith(SpringExtension.class)
 class IdentityServiceTest {
 
+    public static final String ID = "1";
+    public static final String IDENTITY_REF = "1";
+    public static final String NAME = "Artemas";
+    public static final String SURNAME = "Muzanenhamo";
+    public static final String BIRTH_DATE = "28/03/1990";
+    public static final String VILLAGE_OF_ORIGIN = "Mashayamombe";
+    public static final String PLACE_OF_BIRTH = "Harare";
+    public static final String DATE_OF_ISSUE = "17/11/2017";
     @InjectMocks
     private IdentityServiceImpl identityService;
     @Mock
@@ -53,14 +62,14 @@ class IdentityServiceTest {
 
     @Test
     void should_return_a_name_if_name_exists() throws InvalidIdentityNameException {
-        List<Identity> identities = Arrays.asList(new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
-                "Mashayamombe", "Harare", "17/11/2017"));
-        List<IdentityJson> expectedIdentityJsonList = getIdentityListJson(identities);
-        given(identityRepository.findIdentitiesByName(identities.get(0).getName())).willReturn(identities);
+        List<Identity> identities = Collections.singletonList(new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
+                VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE));
+        IdentityName identityName = new IdentityName("Artemas");
+        given(identityRepository.findIdentitiesByName(identityName.getName())).willReturn(identities);
 
-        List<IdentityJson> identityJsonList = identityService.findIdentitiesByName("Artemas");
+        List<Identity> identitiesByName = identityService.findIdentitiesByName(identityName);
 
-        assertThat(identityJsonList).isEqualTo(expectedIdentityJsonList);
+        assertThat(identitiesByName).isNotEmpty();
     }
 
     @NotNull
@@ -70,7 +79,7 @@ class IdentityServiceTest {
 
     @Test
     void should_throw_an_exception_when_an_invalid_name_is_passed() {
-        assertThrows(InvalidIdentityNameException.class, () -> identityService.findIdentitiesByName((IdentityName) null));
+        assertThrows(InvalidIdentityNameException.class, () -> identityService.findIdentitiesByName(null));
     }
 
     @Test
