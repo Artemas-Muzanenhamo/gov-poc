@@ -78,6 +78,14 @@ class IdentityControllerUnitTest {
 
         assertThat(identitiesByName).isNotEmpty();
         assertThat(identitiesByName.get(0)).isNotNull();
-        //TODO: Assert field values here...
+        IdentityJson identityJson = identitiesByName.get(0);
+        assertThat(identityJson.getId()).isEqualTo(ID);
+        assertThat(identityJson.getIdentityRef()).isEqualTo(IDENTITY_REF);
+        assertThat(identityJson.getName()).isEqualTo(NAME);
+        assertThat(identityJson.getSurname()).isEqualTo(SURNAME);
+        assertThat(identityJson.getBirthDate()).isEqualTo(BIRTH_DATE);
+        assertThat(identityJson.getVillageOfOrigin()).isEqualTo(VILLAGE_OF_ORIGIN);
+        assertThat(identityJson.getPlaceOfBirth()).isEqualTo(PLACE_OF_BIRTH);
+        assertThat(identityJson.getDateOfIssue()).isEqualTo(DATE_OF_ISSUE);
     }
 }
