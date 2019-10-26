@@ -54,4 +54,12 @@ class IdentityMapperTest {
         assertThat(identityJson.getPlaceOfBirth()).isEqualTo(PLACE_OF_BIRTH);
         assertThat(identityJson.getDateOfIssue()).isEqualTo(DATE_OF_ISSUE);
     }
+
+    @Test
+    @DisplayName("Should return empty IdentityJson when IdentityDTO is null")
+    void returnEmptyIdentityJsonToDTO() {
+        IdentityJson identityJson = toIdentityJson(null);
+
+        assertThat(identityJson).isNotNull();
+    }
 }

@@ -63,8 +63,8 @@ class IdentityControllerTest {
     void getIdentityByReferenceNumber() throws Exception {
         Map<String, String> idReferenceNumber = new HashMap<>();
         idReferenceNumber.put("idRef", "1");
-        IdentityReferenceJson identityReferenceJsonjson = new IdentityReferenceJson(idReferenceNumber);
-        String json = asJsonString(identityReferenceJsonjson);
+        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(idReferenceNumber);
+        String json = asJsonString(identityReferenceJson);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/identities/reference")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
