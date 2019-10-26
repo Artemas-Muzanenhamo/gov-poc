@@ -3,7 +3,9 @@ package com.gov.zw.controller;
 import com.gov.zw.domain.Identity;
 import com.gov.zw.domain.IdentityJson;
 import com.gov.zw.domain.IdentityNameJson;
+import com.gov.zw.domain.IdentityReferenceJson;
 import com.gov.zw.dto.IdentityName;
+import com.gov.zw.dto.IdentityReference;
 import com.gov.zw.service.IdentityService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,6 +20,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class IdentityControllerUnitTest {
@@ -87,5 +90,30 @@ class IdentityControllerUnitTest {
         assertThat(identityJson.getVillageOfOrigin()).isEqualTo(VILLAGE_OF_ORIGIN);
         assertThat(identityJson.getPlaceOfBirth()).isEqualTo(PLACE_OF_BIRTH);
         assertThat(identityJson.getDateOfIssue()).isEqualTo(DATE_OF_ISSUE);
+        verify(identityServiceImpl).findIdentitiesByName(identityName);
+    }
+
+    @Test
+    @DisplayName("Should return identities by identity reference")
+    void getIdentitiesByIdentityReference() throws Exception {
+        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(IDENTITY_REF);
+        IdentityReference identityReference = new IdentityReference(IDENTITY_REF);
+        Identity identity = new Identity(ID, IDENTITY_REF, NAME, SURNAME,
+                BIRTH_DATE, VILLAGE_OF_ORIGIN,
+                PLACE_OF_BIRTH, DATE_OF_ISSUE);
+        given(identityServiceImpl.findIdentityByIdentityRef(identityReference)).willReturn(identity);
+
+        IdentityJson identityJson = identityController.getIdentityByReferenceNumber(identityReferenceJson);
+
+        assertThat(identityJson).isNotNull();
+        assertThat(identityJson.getId()).isEqualTo(ID);
+        assertThat(identityJson.getIdentityRef()).isEqualTo(IDENTITY_REF);
+        assertThat(identityJson.getName()).isEqualTo(NAME);
+        assertThat(identityJson.getSurname()).isEqualTo(SURNAME);
+        assertThat(identityJson.getBirthDate()).isEqualTo(BIRTH_DATE);
+        assertThat(identityJson.getVillageOfOrigin()).isEqualTo(VILLAGE_OF_ORIGIN);
+        assertThat(identityJson.getPlaceOfBirth()).isEqualTo(PLACE_OF_BIRTH);
+        assertThat(identityJson.getDateOfIssue()).isEqualTo(DATE_OF_ISSUE);
+        verify(identityServiceImpl).findIdentityByIdentityRef(identityReference);
     }
 }

@@ -17,7 +17,7 @@ public class IdentityMapper {
         );
     }
 
-    static IdentityJson toIdentityJson(Identity identity) {
+    public static IdentityJson toIdentityJson(Identity identity) {
         return new IdentityJson(
                 identity.getId(),
                 identity.getIdentityRef(),

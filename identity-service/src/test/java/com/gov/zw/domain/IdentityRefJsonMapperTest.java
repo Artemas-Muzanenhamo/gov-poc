@@ -11,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class IdentityRefJsonMapperTest {
 
+    private static final String ID_REFERENCE = "12345";
     private IdentityRefJsonMapper identityRefJsonMapper;
     private IdentityReferenceJson identityRefJson;
 
@@ -21,9 +22,9 @@ class IdentityRefJsonMapperTest {
 
     @Test
     void should_convert_identity_ref_json_to_string() {
-        identityRefJson = new IdentityReferenceJson("12345");
+        identityRefJson = new IdentityReferenceJson(ID_REFERENCE);
         String identityRef = identityRefJsonMapper.toIdentityRef(identityRefJson);
-        assertThat(identityRef).isEqualTo("12345");
+        assertThat(identityRef).isEqualTo(ID_REFERENCE);
     }
 
     @Test

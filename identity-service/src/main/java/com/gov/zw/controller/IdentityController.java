@@ -5,17 +5,20 @@ import com.gov.zw.domain.IdentityJson;
 import com.gov.zw.domain.IdentityNameJson;
 import com.gov.zw.domain.IdentityReferenceJson;
 import com.gov.zw.dto.IdentityName;
-import com.gov.zw.service.IdentityService;
+import com.gov.zw.dto.IdentityReference;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidIdentityNameException;
 import com.gov.zw.exception.InvalidIdentityReferenceException;
+import com.gov.zw.service.IdentityService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 import static com.gov.zw.mapper.IdentityListMapper.toIdentitiesJson;
 import static com.gov.zw.mapper.IdentityMapper.toIdentityDTO;
+import static com.gov.zw.mapper.IdentityMapper.toIdentityJson;
 import static com.gov.zw.mapper.IdentityNameMapper.toIdentityNameDTO;
+import static com.gov.zw.mapper.IdentityReferenceMapper.toIdentityRefDTO;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
@@ -30,7 +33,6 @@ public class IdentityController {
         this.identityServiceImpl = identityServiceImpl;
     }
 
-    // Create
     @PostMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @ResponseStatus(value = OK)
@@ -39,7 +41,6 @@ public class IdentityController {
         this.identityServiceImpl.save(identity);
     }
 
-    // Retrieve
     @PostMapping(value = "/name", produces = APPLICATION_JSON_UTF8_VALUE)
     public List<IdentityJson> getIdentitiesByName(@RequestBody IdentityNameJson identityNameJson) throws InvalidIdentityNameException {
         IdentityName identityName = toIdentityNameDTO(identityNameJson);
@@ -49,7 +50,9 @@ public class IdentityController {
 
     @PostMapping(value = "/reference", produces = APPLICATION_JSON_UTF8_VALUE)
     public IdentityJson getIdentityByReferenceNumber(@RequestBody IdentityReferenceJson identityRefJson) throws InvalidIdentityReferenceException {
-        return identityServiceImpl.findIdentityByIdentityRef(identityRefJson);
+        IdentityReference identityReference = toIdentityRefDTO(identityRefJson);
+        Identity identity = identityServiceImpl.findIdentityByIdentityRef(identityReference);
+        return toIdentityJson(identity);
     }
 
     @GetMapping(produces = APPLICATION_JSON_UTF8_VALUE)
@@ -57,7 +60,6 @@ public class IdentityController {
         return identityServiceImpl.findAll();
     }
 
-    //Update
     @PutMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @ResponseStatus(OK)
@@ -66,7 +68,6 @@ public class IdentityController {
         this.identityServiceImpl.save(identity);
     }
 
-    // Delete
     @DeleteMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @ResponseStatus(OK)
