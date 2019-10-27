@@ -27,34 +27,30 @@ import static org.mockito.Mockito.*;
 @ExtendWith(SpringExtension.class)
 class IdentityServiceTest {
 
-    public static final String ID = "1";
-    public static final String IDENTITY_REF = "1";
-    public static final String NAME = "Artemas";
-    public static final String SURNAME = "Muzanenhamo";
-    public static final String BIRTH_DATE = "28/03/1990";
-    public static final String VILLAGE_OF_ORIGIN = "Mashayamombe";
-    public static final String PLACE_OF_BIRTH = "Harare";
-    public static final String DATE_OF_ISSUE = "17/11/2017";
+    private static final String ID = "1";
+    private static final String IDENTITY_REF = "1";
+    private static final String NAME = "Artemas";
+    private static final String SURNAME = "Muzanenhamo";
+    private static final String BIRTH_DATE = "28/03/1990";
+    private static final String VILLAGE_OF_ORIGIN = "Mashayamombe";
+    private static final String PLACE_OF_BIRTH = "Harare";
+    private static final String DATE_OF_ISSUE = "17/11/2017";
     @InjectMocks
     private IdentityServiceImpl identityService;
     @Mock
     private IdentityRepository identityRepository;
     @Mock
     private IdentityJsonMapper identityJsonMapper;
-    @Mock
-    private IdentityRefJsonMapper identityRefJsonMapper;
-    @Mock
-    private IdentityNameJsonMapper identityNameJsonMapper;
 
     @Test
     void should_throw_an_exception_when_an_invalid_identity_is_passed() {
-        assertThrows(InvalidIdentityException.class, () -> identityService.save((Identity) null));
+        assertThrows(InvalidIdentityException.class, () -> identityService.save(null));
     }
 
     @Test
     void should_save_identity_if_identity_details_exist() throws InvalidIdentityException {
-        Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
-                "Mashayamombe", "Harare", "17/11/2017");
+        Identity identity = new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
+                VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE);
 
         identityService.save(identity);
 
@@ -90,8 +86,8 @@ class IdentityServiceTest {
 
     @Test
     void should_return_an_identity_if_id_reference_is_valid() throws InvalidIdentityReferenceException {
-        Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
-                "Mashayamombe", "Harare", "17/11/2017");
+        Identity identity = new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
+                VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE);
         given(identityRepository.findIdentityByIdentityRef(identity.getIdentityRef())).willReturn(identity);
 
         Identity identityByIdentityRef = identityService.findIdentityByIdentityRef("1");
@@ -103,12 +99,12 @@ class IdentityServiceTest {
     @Test
     void should_return_a_list_of_all_identities() {
         List<Identity> identities = Arrays.asList(
-                new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
-                        "Mashayamombe", "Harare", "17/11/2017"),
-                new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
-                        "Mashayamombe", "Harare", "17/11/2017"),
-                new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
-                        "Mashayamombe", "Harare", "17/11/2017")
+                new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
+                        VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE),
+                new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
+                        VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE),
+                new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
+                        VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE)
         );
         given(identityRepository.findAll()).willReturn(identities);
         List<IdentityJson> expectedIdentityListJson = getIdentityListJson(identities);
@@ -126,8 +122,8 @@ class IdentityServiceTest {
 
     @Test
     void should_delete_an_identity_if_the_identity_is_valid() throws InvalidIdentityException {
-        Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
-                "Mashayamombe", "Harare", "17/11/2017");
+        Identity identity = new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
+                VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE);
 
         identityService.delete(identity);
 

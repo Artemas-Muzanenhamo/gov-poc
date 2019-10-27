@@ -19,16 +19,10 @@ public class IdentityServiceImpl implements IdentityService {
 
     private final IdentityRepository identityRepository;
     private final IdentityJsonMapper identityJsonMapper;
-    private final IdentityRefJsonMapper identityRefJsonMapper;
-    private final IdentityNameJsonMapper identityNameJsonMapper;
 
-    public IdentityServiceImpl(IdentityRepository identityRepository, IdentityJsonMapper identityJsonMapper,
-                               IdentityRefJsonMapper identityRefJsonMapper,
-                               IdentityNameJsonMapper identityNameJsonMapper) {
+    public IdentityServiceImpl(IdentityRepository identityRepository, IdentityJsonMapper identityJsonMapper) {
         this.identityRepository = identityRepository;
         this.identityJsonMapper = identityJsonMapper;
-        this.identityRefJsonMapper = identityRefJsonMapper;
-        this.identityNameJsonMapper = identityNameJsonMapper;
     }
 
     @Override
