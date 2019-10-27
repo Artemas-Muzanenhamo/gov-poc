@@ -3,6 +3,8 @@ package com.gov.zw.mapper;
 import com.gov.zw.domain.Identity;
 import com.gov.zw.domain.IdentityJson;
 
+import java.util.Optional;
+
 public class IdentityMapper {
     public static Identity toIdentityDTO(IdentityJson identityJson) {
         return new Identity(
@@ -17,16 +19,17 @@ public class IdentityMapper {
         );
     }
 
-    static IdentityJson toIdentityJson(Identity identity) {
-        return new IdentityJson(
-                identity.getId(),
-                identity.getIdentityRef(),
-                identity.getName(),
-                identity.getSurname(),
-                identity.getBirthDate(),
-                identity.getVillageOfOrigin(),
-                identity.getPlaceOfBirth(),
-                identity.getDateOfIssue()
-        );
+    public static IdentityJson toIdentityJson(Identity identity) {
+        return Optional.ofNullable(identity)
+                .map(id -> new IdentityJson(
+                        id.getId(),
+                        id.getIdentityRef(),
+                        id.getName(),
+                        id.getSurname(),
+                        id.getBirthDate(),
+                        id.getVillageOfOrigin(),
+                        id.getPlaceOfBirth(),
+                        id.getDateOfIssue()))
+                .orElse(new IdentityJson());
     }
 }

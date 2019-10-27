@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class IdentityReferenceJson {
-    public String idRef;
+    private String idRef;
 
     public IdentityReferenceJson() { }
 
@@ -14,6 +14,10 @@ public class IdentityReferenceJson {
 
     public IdentityReferenceJson(String idRef) {
         this.idRef = idRef;
+    }
+
+    public String getIdRef() {
+        return idRef;
     }
 
     @Override

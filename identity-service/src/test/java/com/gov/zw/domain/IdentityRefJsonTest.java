@@ -15,7 +15,7 @@ class IdentityRefJsonTest {
         JSONObject idRefJson = new JSONObject();
         idRefJson.put("idRef", "1234");
 
-        String idRef = identityRefJson.idRef;
+        String idRef = identityRefJson.getIdRef();
 
         assertThat(idRef).isEqualTo(idRefJson.get("idRef"));
     }
@@ -26,7 +26,7 @@ class IdentityRefJsonTest {
         JSONObject idRefJson = new JSONObject();
         idRefJson.put("idRef", null);
 
-        String idRef = identityRefJson.idRef;
+        String idRef = identityRefJson.getIdRef();
 
         assertThat(idRef).isEqualTo(idRefJson.get("idRef"));
     }

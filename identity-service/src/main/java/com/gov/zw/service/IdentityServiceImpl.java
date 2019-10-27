@@ -2,6 +2,7 @@ package com.gov.zw.service;
 
 import com.gov.zw.domain.*;
 import com.gov.zw.dto.IdentityName;
+import com.gov.zw.dto.IdentityReference;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidIdentityNameException;
 import com.gov.zw.exception.InvalidIdentityReferenceException;
@@ -18,16 +19,10 @@ public class IdentityServiceImpl implements IdentityService {
 
     private final IdentityRepository identityRepository;
     private final IdentityJsonMapper identityJsonMapper;
-    private final IdentityRefJsonMapper identityRefJsonMapper;
-    private final IdentityNameJsonMapper identityNameJsonMapper;
 
-    public IdentityServiceImpl(IdentityRepository identityRepository, IdentityJsonMapper identityJsonMapper,
-                               IdentityRefJsonMapper identityRefJsonMapper,
-                               IdentityNameJsonMapper identityNameJsonMapper) {
+    public IdentityServiceImpl(IdentityRepository identityRepository, IdentityJsonMapper identityJsonMapper) {
         this.identityRepository = identityRepository;
         this.identityJsonMapper = identityJsonMapper;
-        this.identityRefJsonMapper = identityRefJsonMapper;
-        this.identityNameJsonMapper = identityNameJsonMapper;
     }
 
     @Override
@@ -38,10 +33,11 @@ public class IdentityServiceImpl implements IdentityService {
     }
 
     @Override
-    public IdentityJson findIdentityByIdentityRef(IdentityReferenceJson identityRefJson) throws InvalidIdentityReferenceException {
-        String idReference = identityRefJsonMapper.toIdentityRef(identityRefJson);
-        Identity identity = findIdentityByIdentityRef(idReference);
-        return new IdentityJson(identity);
+    public Identity findIdentityByIdentityRef(IdentityReference identityRef) throws InvalidIdentityReferenceException {
+        return Optional.ofNullable(identityRef)
+                .map(IdentityReference::getIdRef)
+                .map(identityRepository::findIdentityByIdentityRef)
+                .orElseThrow(() -> new InvalidIdentityReferenceException("The ID reference supplied is not valid!"));
     }
 
     @Override

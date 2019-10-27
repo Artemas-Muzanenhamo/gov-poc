@@ -2,6 +2,7 @@ package com.gov.zw.service;
 
 import com.gov.zw.domain.*;
 import com.gov.zw.dto.IdentityName;
+import com.gov.zw.dto.IdentityReference;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidIdentityNameException;
 import com.gov.zw.exception.InvalidIdentityReferenceException;
@@ -34,11 +35,11 @@ public interface IdentityService {
     /**
      * Allows you to find an {@link Identity} by the ID reference.
      *
-     * @param identityRefJson - The ID reference of the {@link Identity} to be returned.
+     * @param identityRef - The ID reference of the {@link Identity} to be returned.
      * @return - An {@link Identity}.
      * @throws InvalidIdentityReferenceException
      */
-    IdentityJson findIdentityByIdentityRef(IdentityReferenceJson identityRefJson) throws InvalidIdentityReferenceException;
+    Identity findIdentityByIdentityRef(IdentityReference identityRef) throws InvalidIdentityReferenceException;
 
     /**
      * Allows you to retrieve all the Identities.
