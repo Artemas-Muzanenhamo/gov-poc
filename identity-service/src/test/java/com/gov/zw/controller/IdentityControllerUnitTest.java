@@ -116,4 +116,30 @@ class IdentityControllerUnitTest {
         assertThat(identityJson.getDateOfIssue()).isEqualTo(DATE_OF_ISSUE);
         verify(identityServiceImpl).findIdentityByIdentityRef(identityReference);
     }
+
+    @Test
+    @DisplayName("Should return all identities")
+    void getAllIdentities() {
+        Identity identity = new Identity(ID, IDENTITY_REF, NAME, SURNAME,
+                BIRTH_DATE, VILLAGE_OF_ORIGIN,
+                PLACE_OF_BIRTH, DATE_OF_ISSUE);
+        List<Identity> identityList = new ArrayList<>();
+        identityList.add(identity);
+        given(identityServiceImpl.findAll()).willReturn(identityList);
+
+        List<IdentityJson> identities = identityController.getIdentities();
+
+        assertThat(identities).isNotEmpty();
+        IdentityJson identityJson = identities.get(0);
+        assertThat(identityJson).isNotNull();
+        assertThat(identityJson.getId()).isEqualTo(ID);
+        assertThat(identityJson.getIdentityRef()).isEqualTo(IDENTITY_REF);
+        assertThat(identityJson.getName()).isEqualTo(NAME);
+        assertThat(identityJson.getSurname()).isEqualTo(SURNAME);
+        assertThat(identityJson.getBirthDate()).isEqualTo(BIRTH_DATE);
+        assertThat(identityJson.getVillageOfOrigin()).isEqualTo(VILLAGE_OF_ORIGIN);
+        assertThat(identityJson.getPlaceOfBirth()).isEqualTo(PLACE_OF_BIRTH);
+        assertThat(identityJson.getDateOfIssue()).isEqualTo(DATE_OF_ISSUE);
+        verify(identityServiceImpl).findAll();
+    }
 }

@@ -41,8 +41,8 @@ public class IdentityServiceImpl implements IdentityService {
     }
 
     @Override
-    public List<IdentityJson> findAll() {
-        return identityRepository.findAll().stream().map(IdentityJson::new).collect(toList());
+    public List<Identity> findAll() {
+        return identityRepository.findAll();
     }
 
     @Override

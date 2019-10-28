@@ -46,7 +46,7 @@ public interface IdentityService {
      *
      * @return - A {@link List<Identity>} of Identities.
      */
-    List<IdentityJson> findAll();
+    List<Identity> findAll();
 
     /**
      * Deletes an {@link Identity}.

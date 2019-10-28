@@ -57,7 +57,8 @@ public class IdentityController {
 
     @GetMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     public List<IdentityJson> getIdentities() {
-        return identityServiceImpl.findAll();
+        List<Identity> identities = identityServiceImpl.findAll();
+        return toIdentitiesJson(identities);
     }
 
     @PutMapping(produces = APPLICATION_JSON_UTF8_VALUE)

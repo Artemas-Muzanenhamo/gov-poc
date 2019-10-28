@@ -69,11 +69,6 @@ class IdentityServiceTest {
         assertThat(identitiesByName).isNotEmpty();
     }
 
-    @NotNull
-    private List<IdentityJson> getIdentityListJson(List<Identity> identities) {
-        return identities.stream().map(IdentityJson::new).collect(Collectors.toList());
-    }
-
     @Test
     void should_throw_an_exception_when_an_invalid_name_is_passed() {
         assertThrows(InvalidIdentityNameException.class, () -> identityService.findIdentitiesByName(null));
@@ -107,12 +102,20 @@ class IdentityServiceTest {
                         VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE)
         );
         given(identityRepository.findAll()).willReturn(identities);
-        List<IdentityJson> expectedIdentityListJson = getIdentityListJson(identities);
 
-        List<IdentityJson> identityJsonList = identityService.findAll();
+        List<Identity> identityJsonList = identityService.findAll();
 
+        assertThat(identityJsonList).isNotEmpty();
         assertThat(identityJsonList.size()).isEqualTo(3);
-        assertThat(identityJsonList).isEqualTo(expectedIdentityListJson);
+        Identity identity = identityJsonList.get(0);
+        assertThat(identity.getId()).isEqualTo(ID);
+        assertThat(identity.getIdentityRef()).isEqualTo(IDENTITY_REF);
+        assertThat(identity.getName()).isEqualTo(NAME);
+        assertThat(identity.getSurname()).isEqualTo(SURNAME);
+        assertThat(identity.getBirthDate()).isEqualTo(BIRTH_DATE);
+        assertThat(identity.getVillageOfOrigin()).isEqualTo(VILLAGE_OF_ORIGIN);
+        assertThat(identity.getPlaceOfBirth()).isEqualTo(PLACE_OF_BIRTH);
+        assertThat(identity.getDateOfIssue()).isEqualTo(DATE_OF_ISSUE);
     }
 
     @Test
