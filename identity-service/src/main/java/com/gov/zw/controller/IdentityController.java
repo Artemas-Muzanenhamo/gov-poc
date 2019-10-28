@@ -73,7 +73,8 @@ public class IdentityController {
     @ResponseBody
     @ResponseStatus(OK)
     public void deleteIdentity(@RequestBody IdentityJson identityJson) throws InvalidIdentityException {
-        this.identityServiceImpl.delete(identityJson);
+        Identity identity = toIdentityDTO(identityJson);
+        this.identityServiceImpl.delete(identity);
     }
 
 }

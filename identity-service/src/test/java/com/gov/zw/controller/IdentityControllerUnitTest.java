@@ -162,4 +162,25 @@ class IdentityControllerUnitTest {
         assertThat(identityJson.getDateOfIssue()).isEqualTo(DATE_OF_ISSUE);
         verify(identityServiceImpl).findAll();
     }
+
+    @Test
+    @DisplayName("Should delete an identity given a valid identity")
+    void deleteIdentity() throws Exception {
+        Identity identity = new Identity(ID, IDENTITY_REF, NAME, SURNAME,
+                BIRTH_DATE, VILLAGE_OF_ORIGIN,
+                PLACE_OF_BIRTH, DATE_OF_ISSUE);
+        IdentityJson identityJson = new IdentityJson(
+                identity.getId(),
+                identity.getIdentityRef(),
+                identity.getName(),
+                identity.getSurname(),
+                identity.getBirthDate(),
+                identity.getVillageOfOrigin(),
+                identity.getPlaceOfBirth(),
+                identity.getDateOfIssue());
+
+        identityController.deleteIdentity(identityJson);
+
+        verify(identityServiceImpl).delete(identity);
+    }
 }

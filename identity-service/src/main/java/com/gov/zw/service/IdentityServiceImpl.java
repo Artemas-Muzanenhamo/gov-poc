@@ -1,6 +1,6 @@
 package com.gov.zw.service;
 
-import com.gov.zw.domain.*;
+import com.gov.zw.domain.Identity;
 import com.gov.zw.dto.IdentityName;
 import com.gov.zw.dto.IdentityReference;
 import com.gov.zw.exception.InvalidIdentityException;
@@ -12,17 +12,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.stream.Collectors.toList;
-
 @Service
 public class IdentityServiceImpl implements IdentityService {
 
     private final IdentityRepository identityRepository;
-    private final IdentityJsonMapper identityJsonMapper;
 
-    public IdentityServiceImpl(IdentityRepository identityRepository, IdentityJsonMapper identityJsonMapper) {
+    public IdentityServiceImpl(IdentityRepository identityRepository) {
         this.identityRepository = identityRepository;
-        this.identityJsonMapper = identityJsonMapper;
     }
 
     @Override
@@ -46,9 +42,10 @@ public class IdentityServiceImpl implements IdentityService {
     }
 
     @Override
-    public void delete(IdentityJson identityJson) throws InvalidIdentityException {
-        Identity identity = identityJsonMapper.toIdentity(identityJson);
-        delete(identity);
+    public void delete(Identity identity) throws InvalidIdentityException {
+        Optional.ofNullable(identity)
+                .orElseThrow(() -> new InvalidIdentityException("The Identity to be deleted is invalid!"));
+        identityRepository.delete(identity);
     }
 
     @Override
@@ -63,11 +60,5 @@ public class IdentityServiceImpl implements IdentityService {
         return Optional.ofNullable(idRef)
                 .map(identityRepository::findIdentityByIdentityRef)
                 .orElseThrow(() -> new InvalidIdentityReferenceException("The ID reference supplied is not valid!"));
-    }
-
-    void delete(Identity identity) throws InvalidIdentityException {
-        Optional.ofNullable(identity)
-                .orElseThrow(() -> new InvalidIdentityException("The Identity to be deleted is invalid!"));
-        identityRepository.delete(identity);
     }
 }

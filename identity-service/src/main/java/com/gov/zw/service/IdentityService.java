@@ -51,9 +51,9 @@ public interface IdentityService {
     /**
      * Deletes an {@link Identity}.
      *
-     * @param identityJson - {@link Identity} to be deleted.
+     * @param identity - {@link Identity} to be deleted.
      * @throws InvalidIdentityException
      */
-    void delete(IdentityJson identityJson) throws InvalidIdentityException;
+    void delete(Identity identity) throws InvalidIdentityException;
 
 }
