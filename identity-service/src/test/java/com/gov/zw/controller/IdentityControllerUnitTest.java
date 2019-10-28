@@ -1,11 +1,12 @@
 package com.gov.zw.controller;
 
-import com.gov.zw.dto.Identity;
 import com.gov.zw.domain.IdentityJson;
 import com.gov.zw.domain.IdentityNameJson;
 import com.gov.zw.domain.IdentityReferenceJson;
+import com.gov.zw.dto.Identity;
 import com.gov.zw.dto.IdentityName;
 import com.gov.zw.dto.IdentityReference;
+import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.service.IdentityService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -61,6 +65,16 @@ class IdentityControllerUnitTest {
         identityController.saveIdentity(identityJson);
 
         verify(identityServiceImpl).save(identity);
+    }
+
+    @Test
+    @DisplayName("Should throw an Invalid Identity Exception when Identity passed in is not valid")
+    void saveIdentityExeption() throws Exception{
+        Identity identity = new Identity();
+        IdentityJson identityJson = new IdentityJson();
+        doThrow(InvalidIdentityException.class).when(identityServiceImpl).save(identity);
+
+        assertThrows(InvalidIdentityException.class, () -> identityController.saveIdentity(identityJson));
     }
 
     @Test
