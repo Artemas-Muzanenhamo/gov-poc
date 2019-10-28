@@ -69,7 +69,7 @@ class IdentityControllerUnitTest {
 
     @Test
     @DisplayName("Should throw an Invalid Identity Exception when Identity passed in is not valid")
-    void saveIdentityExeption() throws Exception{
+    void saveIdentityException() throws Exception{
         Identity identity = new Identity();
         IdentityJson identityJson = new IdentityJson();
         doThrow(InvalidIdentityException.class).when(identityServiceImpl).save(identity);
