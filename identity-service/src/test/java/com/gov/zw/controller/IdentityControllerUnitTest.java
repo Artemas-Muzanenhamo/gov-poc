@@ -1,6 +1,6 @@
 package com.gov.zw.controller;
 
-import com.gov.zw.domain.Identity;
+import com.gov.zw.dto.Identity;
 import com.gov.zw.domain.IdentityJson;
 import com.gov.zw.domain.IdentityNameJson;
 import com.gov.zw.domain.IdentityReferenceJson;
@@ -12,7 +12,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;

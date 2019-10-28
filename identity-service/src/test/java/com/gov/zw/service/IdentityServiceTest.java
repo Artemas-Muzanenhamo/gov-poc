@@ -1,13 +1,12 @@
 package com.gov.zw.service;
 
-import com.gov.zw.domain.*;
+import com.gov.zw.dto.Identity;
 import com.gov.zw.dto.IdentityName;
 import com.gov.zw.dto.IdentityReference;
 import com.gov.zw.repository.IdentityRepository;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidIdentityNameException;
 import com.gov.zw.exception.InvalidIdentityReferenceException;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +16,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;

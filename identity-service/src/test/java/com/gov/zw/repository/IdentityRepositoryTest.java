@@ -1,6 +1,6 @@
 package com.gov.zw.repository;
 
-import com.gov.zw.domain.Identity;
+import com.gov.zw.dto.Identity;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -7,7 +7,7 @@ import au.com.dius.pact.provider.junit5.HttpTestTarget;
 import au.com.dius.pact.provider.junit5.PactVerificationContext;
 import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvider;
 import com.gov.zw.IdentityServiceApplication;
-import com.gov.zw.domain.Identity;
+import com.gov.zw.dto.Identity;
 import com.gov.zw.dto.IdentityReference;
 import com.gov.zw.service.IdentityService;
 import org.junit.jupiter.api.BeforeEach;

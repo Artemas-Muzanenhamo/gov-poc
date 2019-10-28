@@ -1,6 +1,6 @@
 package com.gov.zw.service;
 
-import com.gov.zw.domain.*;
+import com.gov.zw.dto.Identity;
 import com.gov.zw.dto.IdentityName;
 import com.gov.zw.dto.IdentityReference;
 import com.gov.zw.exception.InvalidIdentityException;

@@ -1,6 +1,6 @@
 package com.gov.zw.mapper;
 
-import com.gov.zw.domain.Identity;
+import com.gov.zw.dto.Identity;
 import com.gov.zw.domain.IdentityJson;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

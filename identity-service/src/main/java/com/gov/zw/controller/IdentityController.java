@@ -1,6 +1,6 @@
 package com.gov.zw.controller;
 
-import com.gov.zw.domain.Identity;
+import com.gov.zw.dto.Identity;
 import com.gov.zw.domain.IdentityJson;
 import com.gov.zw.domain.IdentityNameJson;
 import com.gov.zw.domain.IdentityReferenceJson;

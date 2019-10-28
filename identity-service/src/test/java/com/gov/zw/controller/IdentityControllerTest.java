@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gov.zw.domain.*;
+import com.gov.zw.dto.Identity;
 import com.gov.zw.service.IdentityService;
 import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.Test;
