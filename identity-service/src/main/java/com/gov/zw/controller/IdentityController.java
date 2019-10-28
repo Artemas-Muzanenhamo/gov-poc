@@ -35,13 +35,14 @@ public class IdentityController {
 
     @PostMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    @ResponseStatus(value = OK)
+    @ResponseStatus(OK)
     public void saveIdentity(@RequestBody IdentityJson identityJson) throws InvalidIdentityException {
         Identity identity = toIdentityDTO(identityJson);
         this.identityServiceImpl.save(identity);
     }
 
     @PostMapping(value = "/name", produces = APPLICATION_JSON_UTF8_VALUE)
+    @ResponseStatus(OK)
     public List<IdentityJson> getIdentitiesByName(@RequestBody IdentityNameJson identityNameJson) throws InvalidIdentityNameException {
         IdentityName identityName = toIdentityNameDTO(identityNameJson);
         List<Identity> identities = identityServiceImpl.findIdentitiesByName(identityName);
@@ -49,6 +50,7 @@ public class IdentityController {
     }
 
     @PostMapping(value = "/reference", produces = APPLICATION_JSON_UTF8_VALUE)
+    @ResponseStatus(OK)
     public IdentityJson getIdentityByReferenceNumber(@RequestBody IdentityReferenceJson identityRefJson) throws InvalidIdentityReferenceException {
         IdentityReference identityReference = toIdentityRefDTO(identityRefJson);
         Identity identity = identityServiceImpl.findIdentityByIdentityRef(identityReference);
@@ -56,6 +58,7 @@ public class IdentityController {
     }
 
     @GetMapping(produces = APPLICATION_JSON_UTF8_VALUE)
+    @ResponseStatus(OK)
     public List<IdentityJson> getIdentities() {
         List<Identity> identities = identityServiceImpl.findAll();
         return toIdentitiesJson(identities);
