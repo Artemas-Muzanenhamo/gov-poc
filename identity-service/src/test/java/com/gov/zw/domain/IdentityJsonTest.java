@@ -1,5 +1,6 @@
 package com.gov.zw.domain;
 
+import com.gov.zw.dto.Identity;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

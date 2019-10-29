@@ -1,5 +1,7 @@
 package com.gov.zw.domain;
 
+import com.gov.zw.dto.Identity;
+
 import java.util.Objects;
 
 public class IdentityJson {

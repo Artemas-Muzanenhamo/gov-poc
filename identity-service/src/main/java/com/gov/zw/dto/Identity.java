@@ -1,4 +1,4 @@
-package com.gov.zw.domain;
+package com.gov.zw.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
