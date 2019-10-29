@@ -42,6 +42,7 @@ public class IdentityController {
     }
 
     @PostMapping(value = "/name", produces = APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
     @ResponseStatus(OK)
     public List<IdentityJson> getIdentitiesByName(@RequestBody IdentityNameJson identityNameJson) throws InvalidIdentityNameException {
         IdentityName identityName = toIdentityNameDTO(identityNameJson);
@@ -50,6 +51,7 @@ public class IdentityController {
     }
 
     @PostMapping(value = "/reference", produces = APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
     @ResponseStatus(OK)
     public IdentityJson getIdentityByReferenceNumber(@RequestBody IdentityReferenceJson identityRefJson) throws InvalidIdentityReferenceException {
         IdentityReference identityReference = toIdentityRefDTO(identityRefJson);
@@ -58,6 +60,7 @@ public class IdentityController {
     }
 
     @GetMapping(produces = APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
     @ResponseStatus(OK)
     public List<IdentityJson> getIdentities() {
         List<Identity> identities = identityServiceImpl.findAll();
