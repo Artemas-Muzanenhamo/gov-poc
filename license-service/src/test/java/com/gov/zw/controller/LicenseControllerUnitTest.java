@@ -1,13 +1,19 @@
-package com.gov.zw.mapper;
+package com.gov.zw.controller;
 
-import com.gov.zw.dto.License;
 import com.gov.zw.domain.LicenseJson;
+import com.gov.zw.dto.License;
+import com.gov.zw.service.LicenseService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 
-class LicenseJsonMapperTest {
+@ExtendWith(MockitoExtension.class)
+class LicenseControllerUnitTest {
 
     private static final String ID = "MUZAN1234";
     private static final String IDENTITY_REF = "121";
@@ -21,23 +27,26 @@ class LicenseJsonMapperTest {
     private static final String LICENSE_NUMBER = "MUZANK9843ACTK";
     private static final String SIGNATURE_IMAGE = "001.jpg";
     private static final String ADDRESS = "27 Foxhill Street, Guildford, Surrey, GU21 9EE";
-    private LicenseJsonMapper licenseJsonMapper;
+    private LicenseController licenseController;
+    @Mock
+    private LicenseService licenseServiceImpl;
 
     @BeforeEach
-    void init() {
-        licenseJsonMapper = new LicenseJsonMapper();
+    void setUp() {
+        licenseController = new LicenseController(licenseServiceImpl);
     }
 
     @Test
-    void should_map_license_json_to_a_license_object() {
-        License expectedLicense = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
+    @DisplayName("Should add license given a valid license")
+    void addLicense() throws Exception {
+        License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
                 DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
                 EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
                 ADDRESS);
-        LicenseJson licenseJson = new LicenseJson(expectedLicense);
+        LicenseJson licenseJson = new LicenseJson(license);
 
-        License license = licenseJsonMapper.toLicenseDTO(licenseJson);
+        licenseController.addLicense(licenseJson);
 
-        assertThat(license).isEqualTo(expectedLicense);
+        verify(licenseServiceImpl).addLicense(license);
     }
 }

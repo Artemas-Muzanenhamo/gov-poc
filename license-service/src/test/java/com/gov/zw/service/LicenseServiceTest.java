@@ -32,6 +32,18 @@ import static org.mockito.MockitoAnnotations.initMocks;
 class LicenseServiceTest {
 
     private static final String ID_REF = "1";
+    public static final String ID = "1";
+    public static final String IDENTITY_REF = "1";
+    public static final String SURNAME = "Muzanenhamo";
+    public static final String FIRST_NAMES = "Artemas";
+    public static final String DATE_OF_BIRTH = "28/03/1990";
+    public static final String COUNTRY = "Zimbabwe";
+    public static final String DATE_OF_ISSUE = "25 January 2018";
+    public static final String EXPIRY_DATE = "25 January 2050";
+    public static final String AGENCY = "DVLA";
+    public static final String LICENSE_NUMBER = "MUZANATCK1990";
+    public static final String SIGNATURE_IMAGE = "Doc1.png";
+    public static final String ADDRESS = "150 Sunningdale road";
 
     @InjectMocks
     private LicenseServiceImpl licenseService;
@@ -53,11 +65,14 @@ class LicenseServiceTest {
     @Test
     void should_return_an_identity() throws Exception {
 
-        LicenseJson licenseJson = givenAValidLicense();
+        License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
+                DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
+                EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
+                ADDRESS);
         IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(ID_REF);
         given(identityClient.findIdentityByIdReferenceNumber(identityReferenceJson)).willReturn(expectedIdentity());
 
-        licenseService.addLicense(licenseJson);
+        licenseService.addLicense(license);
 
         verify(identityClient, times(1)).findIdentityByIdReferenceNumber(identityReferenceJson);
     }
@@ -65,19 +80,16 @@ class LicenseServiceTest {
     @Test
     @DisplayName("Should throw an InvalidIdentityException when an ID ref that is not an INT is passed")
     void shouldThrowAnInvalidIdentityExceptionFromInvalidStringIdRef() throws Exception {
-
         License license = new License();
         license.setId("Artemas");
-        LicenseJson licenseJson = new LicenseJson(license);
 
-        assertThrows(InvalidLicenseException.class, () -> licenseService.addLicense(licenseJson));
+        assertThrows(InvalidLicenseException.class, () -> licenseService.addLicense(license));
     }
 
     @Test
     void should_return_an_identity_not_valid_exception() throws Exception {
         License license = new License();
-        LicenseJson licenseJson = new LicenseJson(license);
-        assertThrows(InvalidLicenseException.class, () -> licenseService.addLicense(licenseJson));
+        assertThrows(InvalidLicenseException.class, () -> licenseService.addLicense(license));
     }
 
     @Test
@@ -161,7 +173,7 @@ class LicenseServiceTest {
         LicenseJson licenseJson = new LicenseJson(license);
         IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(ID_REF);
         given(identityClient.findIdentityByIdReferenceNumber(identityReferenceJson)).willReturn(expectedIdentity);
-        given(licenseJsonMapper.toDto(licenseJson)).willReturn(license);
+        given(licenseJsonMapper.toLicenseDTO(licenseJson)).willReturn(license);
         return licenseJson;
     }
 

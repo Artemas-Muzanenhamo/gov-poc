@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LicenseJsonMapper {
-    public License toDto(LicenseJson json) {
+    public static License toLicenseDTO(LicenseJson json) {
         return new License(
                 json.id,
                 json.identityRef,

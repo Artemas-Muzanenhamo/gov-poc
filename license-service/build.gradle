@@ -40,6 +40,7 @@ dependencies {
     testCompile "org.springframework.boot:spring-boot-starter-test:${springVersion}"
     testCompile "au.com.dius:pact-jvm-consumer-junit5_2.12:${pactJunit5Version}"
     testCompile "io.rest-assured:rest-assured:${restAssuredVersion}"
+    testCompile "org.mockito:mockito-junit-jupiter:${mockitoJunit5Version}"
 }
 
 bootRun {
