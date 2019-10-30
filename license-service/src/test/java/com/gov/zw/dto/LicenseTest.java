@@ -1,4 +1,4 @@
-package com.gov.zw.domain;
+package com.gov.zw.dto;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

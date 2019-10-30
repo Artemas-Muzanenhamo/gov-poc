@@ -1,6 +1,6 @@
 package com.gov.zw.repository;
 
-import com.gov.zw.domain.License;
+import com.gov.zw.dto.License;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

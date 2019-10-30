@@ -1,5 +1,7 @@
-package com.gov.zw.domain;
+package com.gov.zw.mapper;
 
+import com.gov.zw.dto.License;
+import com.gov.zw.domain.LicenseJson;
 import org.springframework.stereotype.Component;
 
 @Component

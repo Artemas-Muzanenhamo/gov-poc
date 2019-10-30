@@ -1,4 +1,4 @@
-package com.gov.zw.domain;
+package com.gov.zw.dto;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;

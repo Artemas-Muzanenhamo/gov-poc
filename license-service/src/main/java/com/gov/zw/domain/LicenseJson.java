@@ -1,5 +1,7 @@
 package com.gov.zw.domain;
 
+import com.gov.zw.dto.License;
+
 import java.util.Objects;
 
 public class LicenseJson {

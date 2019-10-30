@@ -28,7 +28,6 @@ public class LicenseController {
         this.licenseServiceImpl.addLicense(licenseJson);
     }
 
-    // Read
     @GetMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     public List<LicenseJson> getAllLicenses() {
         return this.licenseServiceImpl.getAllLicenses();
@@ -39,14 +38,12 @@ public class LicenseController {
         return this.licenseServiceImpl.getLicenseByIdentityRef(identityReferenceJson);
     }
 
-    // Update
     @PutMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = OK)
     public void updateLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException {
         this.licenseServiceImpl.updateLicense(licenseJson);
     }
 
-    // Delete
     @DeleteMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = OK)
     public void deleteLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException {

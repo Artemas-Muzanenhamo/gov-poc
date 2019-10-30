@@ -1,6 +1,6 @@
 package com.gov.zw.repository;
 
-import com.gov.zw.domain.License;
+import com.gov.zw.dto.License;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.query.Param;
 
