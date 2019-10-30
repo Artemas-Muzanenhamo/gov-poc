@@ -32,18 +32,18 @@ import static org.mockito.MockitoAnnotations.initMocks;
 class LicenseServiceTest {
 
     private static final String ID_REF = "1";
-    public static final String ID = "1";
-    public static final String IDENTITY_REF = "1";
-    public static final String SURNAME = "Muzanenhamo";
-    public static final String FIRST_NAMES = "Artemas";
-    public static final String DATE_OF_BIRTH = "28/03/1990";
-    public static final String COUNTRY = "Zimbabwe";
-    public static final String DATE_OF_ISSUE = "25 January 2018";
-    public static final String EXPIRY_DATE = "25 January 2050";
-    public static final String AGENCY = "DVLA";
-    public static final String LICENSE_NUMBER = "MUZANATCK1990";
-    public static final String SIGNATURE_IMAGE = "Doc1.png";
-    public static final String ADDRESS = "150 Sunningdale road";
+    private static final String ID = "1";
+    private static final String IDENTITY_REF = "1";
+    private static final String SURNAME = "Muzanenhamo";
+    private static final String FIRST_NAMES = "Artemas";
+    private static final String DATE_OF_BIRTH = "28/03/1990";
+    private static final String COUNTRY = "Zimbabwe";
+    private static final String DATE_OF_ISSUE = "25 January 2018";
+    private static final String EXPIRY_DATE = "25 January 2050";
+    private static final String AGENCY = "DVLA";
+    private static final String LICENSE_NUMBER = "MUZANATCK1990";
+    private static final String SIGNATURE_IMAGE = "Doc1.png";
+    private static final String ADDRESS = "150 Sunningdale road";
 
     @InjectMocks
     private LicenseServiceImpl licenseService;
@@ -104,11 +104,6 @@ class LicenseServiceTest {
     }
 
     @Test
-    void should_throw_an_exception_when_invalid_license_json_is_passed() {
-        assertThrows(InvalidLicenseException.class, () -> licenseService.updateLicense((LicenseJson) null));
-    }
-
-    @Test
     void should_save_when_empty_license_details_are_passed() throws Exception {
         License license = new License();
 
@@ -124,11 +119,6 @@ class LicenseServiceTest {
         licenseService.updateLicense(license);
 
         verify(licenseRepository, times(1)).save(license);
-    }
-
-    @Test
-    void should_return_an_identity_not_valid_exception_when_trying_to_delete_license() {
-        assertThrows(InvalidLicenseException.class, () -> licenseService.removeLicense((LicenseJson) null));
     }
 
     @Test
