@@ -2,13 +2,14 @@ package com.gov.zw.service;
 
 import com.gov.zw.client.IdentityReferenceJson;
 import com.gov.zw.domain.LicenseJson;
+import com.gov.zw.dto.License;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidLicenseException;
 
 import java.util.List;
 
 public interface LicenseService {
-    void addLicense(LicenseJson licenseJson) throws InvalidIdentityException, InvalidLicenseException;
+    void addLicense(License license) throws InvalidIdentityException, InvalidLicenseException;
 
     List<LicenseJson> getAllLicenses();
 

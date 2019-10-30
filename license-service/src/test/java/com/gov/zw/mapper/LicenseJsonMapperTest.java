@@ -1,8 +1,12 @@
-package com.gov.zw.domain;
+package com.gov.zw.mapper;
 
+import com.gov.zw.dto.License;
+import com.gov.zw.domain.LicenseJson;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static com.gov.zw.mapper.LicenseJsonMapper.toLicenseDTO;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LicenseJsonMapperTest {
@@ -19,12 +23,6 @@ class LicenseJsonMapperTest {
     private static final String LICENSE_NUMBER = "MUZANK9843ACTK";
     private static final String SIGNATURE_IMAGE = "001.jpg";
     private static final String ADDRESS = "27 Foxhill Street, Guildford, Surrey, GU21 9EE";
-    private LicenseJsonMapper licenseJsonMapper;
-
-    @BeforeEach
-    void init() {
-        licenseJsonMapper = new LicenseJsonMapper();
-    }
 
     @Test
     void should_map_license_json_to_a_license_object() {
@@ -34,8 +32,16 @@ class LicenseJsonMapperTest {
                 ADDRESS);
         LicenseJson licenseJson = new LicenseJson(expectedLicense);
 
-        License license = licenseJsonMapper.toDto(licenseJson);
+        License license = toLicenseDTO(licenseJson);
 
         assertThat(license).isEqualTo(expectedLicense);
+    }
+
+    @Test
+    @DisplayName("Should return empty LicenseDTO when LicenseJson is null")
+    void returnEmptyLicenseDTOFromNullJson() {
+        License license = toLicenseDTO(null);
+
+        assertThat(license).isNotNull();
     }
 }

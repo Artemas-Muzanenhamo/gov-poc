@@ -3,15 +3,16 @@ package com.gov.zw.service;
 import com.gov.zw.client.IdentityClient;
 import com.gov.zw.client.IdentityReferenceJson;
 import com.gov.zw.client.IdentityReferenceJsonMapper;
-import com.gov.zw.domain.License;
+import com.gov.zw.dto.License;
 import com.gov.zw.domain.LicenseJson;
-import com.gov.zw.domain.LicenseJsonMapper;
+import com.gov.zw.mapper.LicenseJsonMapper;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidLicenseException;
 import com.gov.zw.repository.LicenseRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
@@ -36,21 +37,18 @@ public class LicenseServiceImpl implements LicenseService {
         this.identityReferenceJsonMapper = identityReferenceJsonMapper;
     }
 
-    private void addLicense(License license) throws InvalidLicenseException, InvalidIdentityException {
+    @Override
+    public void addLicense(License license) throws InvalidIdentityException, InvalidLicenseException {
         IdentityReferenceJson identityReferenceJson = Optional.ofNullable(license)
-                .map(this::getLicenseIdentityReferenceJsonFunction)
+                .filter(licenseDto -> Objects.nonNull(licenseDto.getIdentityRef()))
+                .map(this::getLicenseIdentityReferenceJson)
                 .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
 
-        Optional.ofNullable(identityClient.findIdentityByIdReferenceNumber(identityReferenceJson))
+        Optional.of(identityReferenceJson)
+                .map(idReferenceJson -> identityClient.findIdentityByIdReferenceNumber(idReferenceJson))
                 .orElseThrow(() -> new InvalidIdentityException(IDENTITY_IS_INVALID_OR_DOES_NOT_EXIST));
 
         licenseRepository.save(license);
-    }
-
-    @Override
-    public void addLicense(LicenseJson licenseJson) throws InvalidIdentityException, InvalidLicenseException {
-        License license = licenseJsonMapper.toDto(licenseJson);
-        addLicense(license);
     }
 
     @Override
@@ -63,13 +61,13 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public void updateLicense(LicenseJson licenseJson) throws InvalidLicenseException {
-        License license = licenseJsonMapper.toDto(licenseJson);
+        License license = LicenseJsonMapper.toLicenseDTO(licenseJson);
         updateLicense(license);
     }
 
     @Override
     public void removeLicense(LicenseJson licenseJson) throws InvalidLicenseException {
-        License license = licenseJsonMapper.toDto(licenseJson);
+        License license = LicenseJsonMapper.toLicenseDTO(licenseJson);
         removeLicense(license);
     }
 
@@ -86,7 +84,7 @@ public class LicenseServiceImpl implements LicenseService {
                 .orElseThrow((() -> new InvalidLicenseException("License IdRef is not valid")));
     }
 
-    private IdentityReferenceJson getLicenseIdentityReferenceJsonFunction(License license) {
+    private IdentityReferenceJson getLicenseIdentityReferenceJson(License license) {
         return new IdentityReferenceJson(license.getIdentityRef());
     }
 

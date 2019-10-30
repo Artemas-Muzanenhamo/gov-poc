@@ -2,7 +2,7 @@ package com.gov.zw.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gov.zw.domain.License;
+import com.gov.zw.dto.License;
 import com.gov.zw.service.LicenseService;
 import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;

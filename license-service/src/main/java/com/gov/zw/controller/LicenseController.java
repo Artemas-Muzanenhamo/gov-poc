@@ -2,6 +2,7 @@ package com.gov.zw.controller;
 
 import com.gov.zw.client.IdentityReferenceJson;
 import com.gov.zw.domain.LicenseJson;
+import com.gov.zw.dto.License;
 import com.gov.zw.service.LicenseService;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidLicenseException;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.gov.zw.mapper.LicenseJsonMapper.toLicenseDTO;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
@@ -25,10 +27,10 @@ public class LicenseController {
     @PostMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = OK)
     public void addLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException, InvalidIdentityException {
-        this.licenseServiceImpl.addLicense(licenseJson);
+        License license = toLicenseDTO(licenseJson);
+        this.licenseServiceImpl.addLicense(license);
     }
 
-    // Read
     @GetMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     public List<LicenseJson> getAllLicenses() {
         return this.licenseServiceImpl.getAllLicenses();
@@ -39,14 +41,12 @@ public class LicenseController {
         return this.licenseServiceImpl.getLicenseByIdentityRef(identityReferenceJson);
     }
 
-    // Update
     @PutMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = OK)
     public void updateLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException {
         this.licenseServiceImpl.updateLicense(licenseJson);
     }
 
-    // Delete
     @DeleteMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = OK)
     public void deleteLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException {
