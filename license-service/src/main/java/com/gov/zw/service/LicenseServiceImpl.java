@@ -25,7 +25,6 @@ public class LicenseServiceImpl implements LicenseService {
 
     private IdentityClient identityClient;
     private LicenseRepository licenseRepository;
-    private LicenseJsonMapper licenseJsonMapper;
     private IdentityReferenceJsonMapper identityReferenceJsonMapper;
 
     public LicenseServiceImpl(IdentityClient identityClient, LicenseRepository licenseRepository,
@@ -33,7 +32,6 @@ public class LicenseServiceImpl implements LicenseService {
                               IdentityReferenceJsonMapper identityReferenceJsonMapper) {
         this.identityClient = identityClient;
         this.licenseRepository = licenseRepository;
-        this.licenseJsonMapper = licenseJsonMapper;
         this.identityReferenceJsonMapper = identityReferenceJsonMapper;
     }
 

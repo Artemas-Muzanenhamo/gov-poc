@@ -44,10 +44,6 @@ class LicenseTest {
         Assertions.assertThat(license).isEqualTo(license2);
     }
 
-    @Test
-    void neverEqualsNull() {
-        assertNotEquals(true, license.equals(null));
-    }
 
     @Test
     void licenceIsEqual() {
