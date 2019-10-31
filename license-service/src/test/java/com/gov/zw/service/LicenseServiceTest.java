@@ -5,10 +5,9 @@ import com.gov.zw.client.IdentityClient;
 import com.gov.zw.client.IdentityReferenceJson;
 import com.gov.zw.client.IdentityReferenceJsonMapper;
 import com.gov.zw.dto.License;
-import com.gov.zw.domain.LicenseJson;
-import com.gov.zw.mapper.LicenseJsonMapper;
-import com.gov.zw.repository.LicenseRepository;
 import com.gov.zw.exception.InvalidLicenseException;
+import com.gov.zw.mapper.LicenseMapper;
+import com.gov.zw.repository.LicenseRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -52,14 +50,14 @@ class LicenseServiceTest {
     @Mock
     private LicenseRepository licenseRepository;
     @Mock
-    private LicenseJsonMapper licenseJsonMapper;
+    private LicenseMapper licenseMapper;
     @Mock
     private IdentityReferenceJsonMapper identityReferenceJsonMapper;
 
     @BeforeEach
     void setUp() {
         initMocks(this);
-        licenseService = new LicenseServiceImpl(identityClient, licenseRepository, licenseJsonMapper, identityReferenceJsonMapper);
+        licenseService = new LicenseServiceImpl(identityClient, licenseRepository, licenseMapper, identityReferenceJsonMapper);
     }
 
     @Test
@@ -94,12 +92,29 @@ class LicenseServiceTest {
 
     @Test
     void should_return_licenses_from_the_repository() {
-        List<License> licenses = getLicenses();
-        List<LicenseJson> licenseJsons = givenAValidLicenseJson(licenses);
+        License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
+                DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
+                EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
+                ADDRESS);
+        List<License> licenses = Collections.singletonList(license);
+        given(licenseRepository.findAll()).willReturn(licenses);
 
-        List<LicenseJson> allLicenses = licenseService.getAllLicenses();
+        List<License> allLicenses = licenseService.getAllLicenses();
 
-        assertThat(allLicenses.toString()).isEqualTo(licenseJsons.toString());
+        assertThat(allLicenses).isNotEmpty();
+        License expectedLicense = allLicenses.get(0);
+        assertThat(expectedLicense.getId()).isEqualTo(ID);
+        assertThat(expectedLicense.getIdentityRef()).isEqualTo(IDENTITY_REF);
+        assertThat(expectedLicense.getSurname()).isEqualTo(SURNAME);
+        assertThat(expectedLicense.getFirstNames()).isEqualTo(FIRST_NAMES);
+        assertThat(expectedLicense.getDateOfBirth()).isEqualTo(DATE_OF_BIRTH);
+        assertThat(expectedLicense.getCountry()).isEqualTo(COUNTRY);
+        assertThat(expectedLicense.getDateOfIssue()).isEqualTo(DATE_OF_ISSUE);
+        assertThat(expectedLicense.getExpiryDate()).isEqualTo(EXPIRY_DATE);
+        assertThat(expectedLicense.getAgency()).isEqualTo(AGENCY);
+        assertThat(expectedLicense.getLicenseNumber()).isEqualTo(LICENSE_NUMBER);
+        assertThat(expectedLicense.getSignatureImage()).isEqualTo(SIGNATURE_IMAGE);
+        assertThat(expectedLicense.getAddress()).isEqualTo(ADDRESS);
         verify(licenseRepository, times(1)).findAll();
     }
 
@@ -151,26 +166,5 @@ class LicenseServiceTest {
                 "28/03/1990", "Zimbabwe", "25 January 2018",
                 "25 January 2050", "DVLA", "MUZANATCK1990", "Doc1.png",
                 "150 Sunningdale road");
-    }
-
-    private List<LicenseJson> givenAValidLicenseJson(List<License> licenses) {
-        return licenses.stream().map(LicenseJson::new).collect(Collectors.toList());
-    }
-
-    private LicenseJson givenAValidLicense() {
-        Identity expectedIdentity = expectedIdentity();
-        License license = givenALicense();
-        LicenseJson licenseJson = new LicenseJson(license);
-        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(ID_REF);
-        given(identityClient.findIdentityByIdReferenceNumber(identityReferenceJson)).willReturn(expectedIdentity);
-        given(licenseJsonMapper.toLicenseDTO(licenseJson)).willReturn(license);
-        return licenseJson;
-    }
-
-    private List<License> getLicenses() {
-        License license = givenALicense();
-        List<License> licenses = Collections.singletonList(license);
-        given(licenseRepository.findAll()).willReturn(licenses);
-        return licenses;
     }
 }

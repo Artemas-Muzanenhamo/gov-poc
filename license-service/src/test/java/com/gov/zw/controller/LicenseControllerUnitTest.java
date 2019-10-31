@@ -10,6 +10,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import static java.util.Collections.singletonList;
+import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -53,15 +60,14 @@ class LicenseControllerUnitTest {
     @Test
     @DisplayName("Should get all licenses")
     void getAllLicenses() throws Exception {
-        // TODO
-//        License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
-//                DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
-//                EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
-//                ADDRESS);
-//        LicenseJson licenseJson = new LicenseJson(license);
-//
-//        List<LicenseJson> licenses = licenseController.getAllLicenses();
-//
-//        assertThat();
+        List<License> licenseList = singletonList(new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
+                DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
+                EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
+                ADDRESS));
+        given(licenseServiceImpl.getAllLicenses()).willReturn(licenseList);
+
+        List<LicenseJson> licenses = licenseController.getAllLicenses();
+
+        assertThat(licenses).isNotEmpty();
     }
 }

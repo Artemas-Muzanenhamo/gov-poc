@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.gov.zw.mapper.LicenseJsonMapper.toLicenseDTO;
+import static com.gov.zw.mapper.LicenseMapper.toLicenseDTO;
+import static com.gov.zw.mapper.LicenseMapper.toLicenseJsonList;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
@@ -33,7 +34,8 @@ public class LicenseController {
 
     @GetMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     public List<LicenseJson> getAllLicenses() {
-        return this.licenseServiceImpl.getAllLicenses();
+        List<License> licenses = this.licenseServiceImpl.getAllLicenses();
+        return toLicenseJsonList(licenses);
     }
 
     @PostMapping(produces = APPLICATION_JSON_UTF8_VALUE, value = "ref")

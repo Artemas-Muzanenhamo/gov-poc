@@ -5,7 +5,7 @@ import com.gov.zw.client.IdentityReferenceJson;
 import com.gov.zw.client.IdentityReferenceJsonMapper;
 import com.gov.zw.dto.License;
 import com.gov.zw.domain.LicenseJson;
-import com.gov.zw.mapper.LicenseJsonMapper;
+import com.gov.zw.mapper.LicenseMapper;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidLicenseException;
 import com.gov.zw.repository.LicenseRepository;
@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import static java.util.stream.Collectors.toList;
-
 @Service
 public class LicenseServiceImpl implements LicenseService {
 
@@ -25,15 +23,13 @@ public class LicenseServiceImpl implements LicenseService {
 
     private IdentityClient identityClient;
     private LicenseRepository licenseRepository;
-    private LicenseJsonMapper licenseJsonMapper;
     private IdentityReferenceJsonMapper identityReferenceJsonMapper;
 
     public LicenseServiceImpl(IdentityClient identityClient, LicenseRepository licenseRepository,
-                              LicenseJsonMapper licenseJsonMapper,
+                              LicenseMapper licenseMapper,
                               IdentityReferenceJsonMapper identityReferenceJsonMapper) {
         this.identityClient = identityClient;
         this.licenseRepository = licenseRepository;
-        this.licenseJsonMapper = licenseJsonMapper;
         this.identityReferenceJsonMapper = identityReferenceJsonMapper;
     }
 
@@ -52,22 +48,19 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Override
-    public List<LicenseJson> getAllLicenses() {
-        return this.licenseRepository.findAll()
-                .stream()
-                .map(LicenseJson::new)
-                .collect(toList());
+    public List<License> getAllLicenses() {
+        return this.licenseRepository.findAll();
     }
 
     @Override
     public void updateLicense(LicenseJson licenseJson) throws InvalidLicenseException {
-        License license = LicenseJsonMapper.toLicenseDTO(licenseJson);
+        License license = LicenseMapper.toLicenseDTO(licenseJson);
         updateLicense(license);
     }
 
     @Override
     public void removeLicense(LicenseJson licenseJson) throws InvalidLicenseException {
-        License license = LicenseJsonMapper.toLicenseDTO(licenseJson);
+        License license = LicenseMapper.toLicenseDTO(licenseJson);
         removeLicense(license);
     }
 

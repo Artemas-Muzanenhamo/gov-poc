@@ -1,9 +1,9 @@
 package com.gov.zw.advice;
 
-public class ApiValidationError {
-    public String message;
+class ApiValidationError {
+    private String message;
 
-    public ApiValidationError(String message) {
+    ApiValidationError(String message) {
         this.message = message;
     }
 }
