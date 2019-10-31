@@ -6,7 +6,7 @@ import com.gov.zw.client.IdentityReferenceJson;
 import com.gov.zw.client.IdentityReferenceJsonMapper;
 import com.gov.zw.dto.License;
 import com.gov.zw.domain.LicenseJson;
-import com.gov.zw.mapper.LicenseJsonMapper;
+import com.gov.zw.mapper.LicenseMapper;
 import com.gov.zw.repository.LicenseRepository;
 import com.gov.zw.exception.InvalidLicenseException;
 import org.junit.jupiter.api.BeforeEach;
@@ -52,14 +52,14 @@ class LicenseServiceTest {
     @Mock
     private LicenseRepository licenseRepository;
     @Mock
-    private LicenseJsonMapper licenseJsonMapper;
+    private LicenseMapper licenseMapper;
     @Mock
     private IdentityReferenceJsonMapper identityReferenceJsonMapper;
 
     @BeforeEach
     void setUp() {
         initMocks(this);
-        licenseService = new LicenseServiceImpl(identityClient, licenseRepository, licenseJsonMapper, identityReferenceJsonMapper);
+        licenseService = new LicenseServiceImpl(identityClient, licenseRepository, licenseMapper, identityReferenceJsonMapper);
     }
 
     @Test
@@ -97,7 +97,7 @@ class LicenseServiceTest {
         List<License> licenses = getLicenses();
         List<LicenseJson> licenseJsons = givenAValidLicenseJson(licenses);
 
-        List<LicenseJson> allLicenses = licenseService.getAllLicenses();
+        List<License> allLicenses = licenseService.getAllLicenses();
 
         assertThat(allLicenses.toString()).isEqualTo(licenseJsons.toString());
         verify(licenseRepository, times(1)).findAll();
@@ -163,7 +163,7 @@ class LicenseServiceTest {
         LicenseJson licenseJson = new LicenseJson(license);
         IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(ID_REF);
         given(identityClient.findIdentityByIdReferenceNumber(identityReferenceJson)).willReturn(expectedIdentity);
-        given(licenseJsonMapper.toLicenseDTO(licenseJson)).willReturn(license);
+        given(licenseMapper.toLicenseDTO(licenseJson)).willReturn(license);
         return licenseJson;
     }
 
