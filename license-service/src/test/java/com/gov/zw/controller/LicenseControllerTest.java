@@ -25,6 +25,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(LicenseController.class)
 class LicenseControllerTest {
 
+    private static final String ID = "1";
+    private static final String IDENTITY_REF = "1";
+    private static final String SURNAME = "Rodgers";
+    private static final String FIRST_NAMES = "Mike Oscar";
+    private static final String DATE_OF_BIRTH = "28/03/1990";
+    private static final String COUNTRY = "ZIM";
+    private static final String DATE_OF_ISSUE = "23/11/2017";
+    private static final String EXPIRY_DATE = "22/11/2027";
+    private static final String AGENCY = "DVLA";
+    private static final String LICENSE_NUMBER = "MUZANEN123456ABCDEF";
+    private static final String SIGNATURE_IMAGE = "01.jpg";
+    private static final String ADDRESS = "123 Glendale, Harare, Zimbabwe";
     @Autowired
     private MockMvc mockMvc;
 
@@ -37,9 +49,9 @@ class LicenseControllerTest {
     @DisplayName("Should add a license given a valid License")
     void shouldAddALicense() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        License license = new License("1", "1", "Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
-                "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
-                "01.jpg", "123 Glendale, Harare, Zimbabwe");
+        License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES, DATE_OF_BIRTH, COUNTRY,
+                DATE_OF_ISSUE, EXPIRY_DATE, AGENCY, LICENSE_NUMBER,
+                SIGNATURE_IMAGE, ADDRESS);
         Map<String, String> licenseObject = objectMapper.convertValue(license, licenseTypeRef);
         JSONObject jsonObject = new JSONObject(licenseObject);
 
@@ -52,7 +64,6 @@ class LicenseControllerTest {
     @Test
     @DisplayName("Should throw HttpStatus BAD_REQUEST when an invalid license object is passed")
     void shouldThrowBadRequestTryingToGetLicense() throws Exception {
-        JSONObject license = null;
 
         mockMvc.perform(MockMvcRequestBuilders.post("/licenses")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
@@ -146,7 +157,7 @@ class LicenseControllerTest {
     @DisplayName("Should return License details given an identity reference number")
     void shouldReturnLicenseByIdentityRef() throws Exception {
         Map<String, String> idRef = new HashMap<>();
-        idRef.put("ref", "121");
+        idRef.put("idRef", "121");
         JSONObject jsonObject = new JSONObject(idRef);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/licenses/ref")
@@ -156,7 +167,7 @@ class LicenseControllerTest {
     }
 
     @Test
-    @DisplayName("Should return HttpStatus OK when an empty license is passed attempting to get a license by identity reference")
+    @DisplayName("Should throw an exception when an empty license is passed attempting to get a license by identity reference")
     void shouldReturn200WhenAnEmptyLicenseIsPassedToGetLicenseByIdReference() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         License license = new License();
@@ -166,7 +177,7 @@ class LicenseControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/licenses/ref")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(jsonObject.toJSONString()))
-                .andExpect(status().isOk());
+                .andExpect(status().isBadRequest());
     }
 
 

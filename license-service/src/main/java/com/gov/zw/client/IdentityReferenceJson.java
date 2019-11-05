@@ -1,16 +1,11 @@
 package com.gov.zw.client;
 
-import java.util.Map;
 import java.util.Objects;
 
 public class IdentityReferenceJson {
     public String idRef;
 
     public IdentityReferenceJson() { }
-
-    public IdentityReferenceJson(Map<String, String> idRef) {
-        this.idRef = idRef.get("idRef");
-    }
 
     public IdentityReferenceJson(String idRef) {
         this.idRef = idRef;

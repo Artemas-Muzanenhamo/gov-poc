@@ -3,7 +3,7 @@ package com.gov.zw.service;
 import com.gov.zw.client.Identity;
 import com.gov.zw.client.IdentityClient;
 import com.gov.zw.client.IdentityReferenceJson;
-import com.gov.zw.client.IdentityReferenceJsonMapper;
+import com.gov.zw.client.dto.IdentityReference;
 import com.gov.zw.dto.License;
 import com.gov.zw.exception.InvalidLicenseException;
 import com.gov.zw.mapper.LicenseMapper;
@@ -51,13 +51,11 @@ class LicenseServiceTest {
     private LicenseRepository licenseRepository;
     @Mock
     private LicenseMapper licenseMapper;
-    @Mock
-    private IdentityReferenceJsonMapper identityReferenceJsonMapper;
 
     @BeforeEach
     void setUp() {
         initMocks(this);
-        licenseService = new LicenseServiceImpl(identityClient, licenseRepository, licenseMapper, identityReferenceJsonMapper);
+        licenseService = new LicenseServiceImpl(identityClient, licenseRepository, licenseMapper);
     }
 
     @Test
@@ -148,9 +146,10 @@ class LicenseServiceTest {
     @Test
     void should_return_a_license_given_the_identity_reference() throws Exception {
         License license = givenALicense();
+        IdentityReference identityReference = new IdentityReference(ID_REF);
         given(licenseRepository.findLicenseByIdentityRef(ID_REF)).willReturn(license);
 
-        License licenseByIdentityRef = licenseService.getLicenseByIdentityRef(ID_REF);
+        License licenseByIdentityRef = licenseService.getLicenseByIdentityRef(identityReference);
 
         assertThat(licenseByIdentityRef).isEqualTo(license);
         verify(licenseRepository, times(1)).findLicenseByIdentityRef(ID_REF);

@@ -1,6 +1,5 @@
 package com.gov.zw.client.dto;
 
-import java.util.Map;
 import java.util.Objects;
 
 public class IdentityReference {
