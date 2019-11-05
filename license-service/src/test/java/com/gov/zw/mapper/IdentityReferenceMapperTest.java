@@ -2,12 +2,13 @@ package com.gov.zw.mapper;
 
 import com.gov.zw.client.IdentityReferenceJson;
 import com.gov.zw.client.dto.IdentityReference;
+import com.gov.zw.client.exception.IdentityReferenceJsonNotValidException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.gov.zw.mapper.IdentityReferenceMapper.toIdentityReferenceDTO;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.AssertThrows.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class IdentityReferenceMapperTest {
 
@@ -26,9 +27,20 @@ class IdentityReferenceMapperTest {
     }
 
     @Test
-    @DisplayName("Should throw IdentityReferenceJsonNotValid exception whenIdentityReferenceJson is null")
+    @DisplayName("Should throw IdentityReferenceJsonNotValid exception when IdentityReferenceJson is null")
     void throwExceptionWhenIdentityReferenceJsonIsNull() {
-        // TODO: Implement test case....
-         assertThrows(toIdentityReferenceDTO(null));
+        IdentityReferenceJsonNotValidException exception = assertThrows(IdentityReferenceJsonNotValidException.class, () -> toIdentityReferenceDTO(null));
+
+        assertThat(exception.getMessage()).isEqualTo("Identity Reference is not valid!");
+    }
+
+    @Test
+    @DisplayName("Should throw IdentityReferenceJsonNotValid exception when identity reference is null")
+    void throwExceptionWhenIdentityReferenceIsNull() {
+        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson();
+
+        IdentityReferenceJsonNotValidException exception = assertThrows(IdentityReferenceJsonNotValidException.class, () -> toIdentityReferenceDTO(identityReferenceJson));
+
+        assertThat(exception.getMessage()).isEqualTo("Identity Reference is not valid!");
     }
 }
