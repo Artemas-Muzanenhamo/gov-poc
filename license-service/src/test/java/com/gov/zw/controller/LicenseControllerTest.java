@@ -167,7 +167,7 @@ class LicenseControllerTest {
     }
 
     @Test
-    @DisplayName("Should throw an exception when an empty license is passed attempting to get a license by identity reference")
+    @DisplayName("Should throw HttpStatus BAD_REQUEST when an empty license is passed attempting to get a license by identity reference")
     void shouldReturn200WhenAnEmptyLicenseIsPassedToGetLicenseByIdReference() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         License license = new License();
