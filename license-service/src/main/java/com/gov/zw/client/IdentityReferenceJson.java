@@ -16,6 +16,10 @@ public class IdentityReferenceJson {
         this.idRef = idRef;
     }
 
+    public String getIdRef() {
+        return idRef;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

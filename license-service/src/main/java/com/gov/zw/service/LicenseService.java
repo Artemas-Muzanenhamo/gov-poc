@@ -1,6 +1,6 @@
 package com.gov.zw.service;
 
-import com.gov.zw.client.IdentityReferenceJson;
+import com.gov.zw.client.dto.IdentityReference;
 import com.gov.zw.domain.LicenseJson;
 import com.gov.zw.dto.License;
 import com.gov.zw.exception.InvalidIdentityException;
@@ -17,5 +17,5 @@ public interface LicenseService {
 
     void removeLicense(LicenseJson licenseJson) throws InvalidLicenseException;
 
-    LicenseJson getLicenseByIdentityRef(IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException;
+    License getLicenseByIdentityRef(IdentityReference identityReference) throws InvalidLicenseException;
 }

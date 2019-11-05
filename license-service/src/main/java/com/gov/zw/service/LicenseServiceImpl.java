@@ -3,6 +3,7 @@ package com.gov.zw.service;
 import com.gov.zw.client.IdentityClient;
 import com.gov.zw.client.IdentityReferenceJson;
 import com.gov.zw.client.IdentityReferenceJsonMapper;
+import com.gov.zw.client.dto.IdentityReference;
 import com.gov.zw.dto.License;
 import com.gov.zw.domain.LicenseJson;
 import com.gov.zw.mapper.LicenseMapper;
@@ -65,10 +66,8 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Override
-    public LicenseJson getLicenseByIdentityRef(IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException {
-        String IdentityRef = identityReferenceJsonMapper.toIdentityReference(identityReferenceJson);
-        License license = getLicenseByIdentityRef(IdentityRef);
-        return new LicenseJson(license);
+    public License getLicenseByIdentityRef(IdentityReference identityReference) throws InvalidLicenseException {
+        return getLicenseByIdentityRef(identityReference.getIdRef());
     }
 
     License getLicenseByIdentityRef(String identityRef) throws InvalidLicenseException {

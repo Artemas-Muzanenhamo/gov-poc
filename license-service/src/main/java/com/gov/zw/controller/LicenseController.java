@@ -1,6 +1,7 @@
 package com.gov.zw.controller;
 
 import com.gov.zw.client.IdentityReferenceJson;
+import com.gov.zw.client.dto.IdentityReference;
 import com.gov.zw.domain.LicenseJson;
 import com.gov.zw.dto.License;
 import com.gov.zw.service.LicenseService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.gov.zw.mapper.IdentityReferenceMapper.toIdentityReferenceDTO;
 import static com.gov.zw.mapper.LicenseMapper.toLicenseDTO;
 import static com.gov.zw.mapper.LicenseMapper.toLicenseJsonList;
 import static org.springframework.http.HttpStatus.OK;
@@ -40,7 +42,9 @@ public class LicenseController {
 
     @PostMapping(produces = APPLICATION_JSON_UTF8_VALUE, value = "ref")
     public LicenseJson getLicenseByIdentityRef(@RequestBody IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException {
-        return this.licenseServiceImpl.getLicenseByIdentityRef(identityReferenceJson);
+        IdentityReference identityReference = toIdentityReferenceDTO(identityReferenceJson);
+        this.licenseServiceImpl.getLicenseByIdentityRef(identityReference);
+        return null;
     }
 
     @PutMapping(produces = APPLICATION_JSON_UTF8_VALUE)
