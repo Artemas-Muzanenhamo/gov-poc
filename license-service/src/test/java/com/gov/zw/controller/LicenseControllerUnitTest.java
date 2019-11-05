@@ -4,7 +4,6 @@ import com.gov.zw.client.IdentityReferenceJson;
 import com.gov.zw.client.dto.IdentityReference;
 import com.gov.zw.domain.LicenseJson;
 import com.gov.zw.dto.License;
-import com.gov.zw.exception.InvalidLicenseException;
 import com.gov.zw.service.LicenseService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,8 +12,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static java.util.Collections.singletonList;
@@ -37,7 +34,7 @@ class LicenseControllerUnitTest {
     private static final String LICENSE_NUMBER = "MUZANK9843ACTK";
     private static final String SIGNATURE_IMAGE = "001.jpg";
     private static final String ADDRESS = "27 Foxhill Street, Guildford, Surrey, GU21 9EE";
-    public static final String ID_REF = "some reference";
+    private static final String ID_REF = "some reference";
     private LicenseController licenseController;
     @Mock
     private LicenseService licenseServiceImpl;
@@ -93,7 +90,7 @@ class LicenseControllerUnitTest {
     @DisplayName("Should return a License given a valid identity reference")
     void getLicenseByIdentityRef() throws Exception {
         IdentityReference identityReference = new IdentityReference(ID_REF);
-        IdentityReferenceJson identityRefJson = new IdentityReferenceJson();
+        IdentityReferenceJson identityRefJson = new IdentityReferenceJson(ID_REF);
         License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
                 DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
                 EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
