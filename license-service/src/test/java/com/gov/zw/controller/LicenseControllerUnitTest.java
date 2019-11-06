@@ -105,4 +105,18 @@ class LicenseControllerUnitTest {
 
         assertThat(licenseJson).isNotNull();
     }
+
+    @Test
+    @DisplayName("Should update an existing license")
+    void updateLicense() throws Exception {
+        License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
+                DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
+                EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
+                ADDRESS);
+        LicenseJson licenseJson = new LicenseJson(license);
+
+        licenseController.updateLicense(licenseJson);
+
+        verify(licenseServiceImpl).updateLicense(license);
+    }
 }

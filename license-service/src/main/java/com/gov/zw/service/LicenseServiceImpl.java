@@ -51,9 +51,10 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Override
-    public void updateLicense(LicenseJson licenseJson) throws InvalidLicenseException {
-        License license = LicenseMapper.toLicenseDTO(licenseJson);
-        updateLicense(license);
+    public void updateLicense(License license) throws InvalidLicenseException {
+        License validLicense = Optional.ofNullable(license)
+                .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
+        this.licenseRepository.save(validLicense);
     }
 
     @Override
@@ -72,12 +73,6 @@ public class LicenseServiceImpl implements LicenseService {
 
     private IdentityReferenceJson getLicenseIdentityReferenceJson(License license) {
         return new IdentityReferenceJson(license.getIdentityRef());
-    }
-
-    void updateLicense(License license) throws InvalidLicenseException {
-        License validLicense = Optional.ofNullable(license)
-                .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
-        this.licenseRepository.save(validLicense);
     }
 
     void removeLicense(License license) throws InvalidLicenseException {

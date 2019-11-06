@@ -49,7 +49,8 @@ public class LicenseController {
     @PutMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = OK)
     public void updateLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException {
-        this.licenseServiceImpl.updateLicense(licenseJson);
+        License license = toLicenseDTO(licenseJson);
+        this.licenseServiceImpl.updateLicense(license);
     }
 
     @DeleteMapping(produces = APPLICATION_JSON_UTF8_VALUE)

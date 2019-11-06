@@ -13,7 +13,7 @@ public interface LicenseService {
 
     List<License> getAllLicenses();
 
-    void updateLicense(LicenseJson licenseJson) throws InvalidLicenseException;
+    void updateLicense(License license) throws InvalidLicenseException;
 
     void removeLicense(LicenseJson licenseJson) throws InvalidLicenseException;
 
