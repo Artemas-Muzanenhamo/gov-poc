@@ -6,7 +6,6 @@ import com.gov.zw.client.dto.IdentityReference;
 import com.gov.zw.dto.License;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidLicenseException;
-import com.gov.zw.mapper.LicenseMapper;
 import com.gov.zw.repository.LicenseRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +22,7 @@ public class LicenseServiceImpl implements LicenseService {
     private IdentityClient identityClient;
     private LicenseRepository licenseRepository;
 
-    public LicenseServiceImpl(IdentityClient identityClient, LicenseRepository licenseRepository,
-                              LicenseMapper licenseMapper) {
+    public LicenseServiceImpl(IdentityClient identityClient, LicenseRepository licenseRepository) {
         this.identityClient = identityClient;
         this.licenseRepository = licenseRepository;
     }

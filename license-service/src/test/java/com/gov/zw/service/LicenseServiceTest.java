@@ -6,7 +6,6 @@ import com.gov.zw.client.IdentityReferenceJson;
 import com.gov.zw.client.dto.IdentityReference;
 import com.gov.zw.dto.License;
 import com.gov.zw.exception.InvalidLicenseException;
-import com.gov.zw.mapper.LicenseMapper;
 import com.gov.zw.repository.LicenseRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -49,13 +48,11 @@ class LicenseServiceTest {
     private IdentityClient identityClient;
     @Mock
     private LicenseRepository licenseRepository;
-    @Mock
-    private LicenseMapper licenseMapper;
 
     @BeforeEach
     void setUp() {
         initMocks(this);
-        licenseService = new LicenseServiceImpl(identityClient, licenseRepository, licenseMapper);
+        licenseService = new LicenseServiceImpl(identityClient, licenseRepository);
     }
 
     @Test
