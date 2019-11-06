@@ -62,8 +62,10 @@ class LicenseServiceTest {
                 DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
                 EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
                 ADDRESS);
+        Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990", "Mashayamombe",
+                "Harare", "22/01/2018");
         IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(ID_REF);
-        given(identityClient.findIdentityByIdReferenceNumber(identityReferenceJson)).willReturn(expectedIdentity());
+        given(identityClient.findIdentityByIdReferenceNumber(identityReferenceJson)).willReturn(identity);
 
         licenseService.addLicense(license);
 
@@ -124,7 +126,10 @@ class LicenseServiceTest {
 
     @Test
     void should_update_license_details_when_a_valid_license_is_passed() throws Exception {
-        License license = givenALicense();
+        License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
+                DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
+                EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
+                ADDRESS);
 
         licenseService.updateLicense(license);
 
@@ -133,7 +138,10 @@ class LicenseServiceTest {
 
     @Test
     void should_delete_a_license_when_a_valid_license_is_passed() throws Exception {
-        License license = givenALicense();
+        License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
+                DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
+                EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
+                ADDRESS);
 
         licenseService.removeLicense(license);
 
@@ -142,7 +150,10 @@ class LicenseServiceTest {
 
     @Test
     void should_return_a_license_given_the_identity_reference() throws Exception {
-        License license = givenALicense();
+        License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
+                DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
+                EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
+                ADDRESS);
         IdentityReference identityReference = new IdentityReference(ID_REF);
         given(licenseRepository.findLicenseByIdentityRef(ID_REF)).willReturn(license);
 
@@ -150,17 +161,5 @@ class LicenseServiceTest {
 
         assertThat(licenseByIdentityRef).isEqualTo(license);
         verify(licenseRepository, times(1)).findLicenseByIdentityRef(ID_REF);
-    }
-
-    private Identity expectedIdentity() {
-        return new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990", "Mashayamombe",
-                "Harare", "22/01/2018");
-    }
-
-    private License givenALicense() {
-        return new License("1", "1", "Muzanenhamo", "Artemas",
-                "28/03/1990", "Zimbabwe", "25 January 2018",
-                "25 January 2050", "DVLA", "MUZANATCK1990", "Doc1.png",
-                "150 Sunningdale road");
     }
 }
