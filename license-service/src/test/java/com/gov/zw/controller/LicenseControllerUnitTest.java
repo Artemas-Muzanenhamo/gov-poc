@@ -62,7 +62,7 @@ class LicenseControllerUnitTest {
 
     @Test
     @DisplayName("Should get all licenses")
-    void getAllLicenses() throws Exception {
+    void getAllLicenses() {
         List<License> licenseList = singletonList(new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
                 DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
                 EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
