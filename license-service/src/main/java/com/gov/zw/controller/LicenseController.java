@@ -56,7 +56,8 @@ public class LicenseController {
     @DeleteMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = OK)
     public void deleteLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException {
-        this.licenseServiceImpl.removeLicense(licenseJson);
+        License license = toLicenseDTO(licenseJson);
+        this.licenseServiceImpl.removeLicense(license);
     }
 
 }

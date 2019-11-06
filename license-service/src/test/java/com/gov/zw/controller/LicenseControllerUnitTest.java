@@ -119,4 +119,18 @@ class LicenseControllerUnitTest {
 
         verify(licenseServiceImpl).updateLicense(license);
     }
+
+    @Test
+    @DisplayName("Should delete an existing license")
+    void deleteLicense() throws Exception {
+        License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
+                DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
+                EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
+                ADDRESS);
+        LicenseJson licenseJson = new LicenseJson(license);
+
+        licenseController.deleteLicense(licenseJson);
+
+        verify(licenseServiceImpl).removeLicense(license);
+    }
 }
