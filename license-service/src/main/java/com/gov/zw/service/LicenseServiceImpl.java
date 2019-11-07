@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Service
 public class LicenseServiceImpl implements LicenseService {
@@ -64,8 +65,12 @@ public class LicenseServiceImpl implements LicenseService {
     public License getLicenseByIdentityRef(IdentityReference identityReference) throws InvalidLicenseException {
         return Optional.ofNullable(identityReference)
                 .map(IdentityReference::getIdRef)
-                .map(e -> licenseRepository.findLicenseByIdentityRef(e))
+                .map(this::findLicenseByIdentityReference)
                 .orElseThrow((() -> new InvalidLicenseException("License IdRef is not valid")));
+    }
+
+    private License findLicenseByIdentityReference(String identityReference) {
+        return licenseRepository.findLicenseByIdentityRef(identityReference);
     }
 
     private boolean isLicenseNotNull(License licenseDto) {
