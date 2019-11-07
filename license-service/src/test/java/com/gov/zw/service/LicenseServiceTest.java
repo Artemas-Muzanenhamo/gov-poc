@@ -47,6 +47,8 @@ class LicenseServiceTest {
     private IdentityClient identityClient;
     @Mock
     private LicenseRepository licenseRepository;
+    private static final String LICENSE_EXCEPTION_MESSAGE = "The license is invalid!";
+    private static final String IDENTITY_EXCEPTION_MESSAGE = "Identity is invalid or does not exist!";
 
     @BeforeEach
     void setUp() {
@@ -85,7 +87,11 @@ class LicenseServiceTest {
     @DisplayName("Should throw an IdentityNotValidException when license is empty")
     void throwExceptionWhenLicenseIsEmpty() {
         License license = new License();
-        assertThrows(InvalidLicenseException.class, () -> licenseService.addLicense(license));
+
+        InvalidLicenseException exception = assertThrows(InvalidLicenseException.class, () -> licenseService.addLicense(license));
+
+        assertThat(exception.getMessage()).isEqualTo(LICENSE_EXCEPTION_MESSAGE);
+        verify(licenseRepository, never()).save(any(License.class));
     }
 
     @Test
@@ -119,7 +125,7 @@ class LicenseServiceTest {
 
     @Test
     @DisplayName("Should throw InvalidLicenseException when an empty license is passed")
-    void throwExceptionWhenLicenseIsEmptyWhileUpdating() throws Exception {
+    void throwExceptionWhenLicenseIsEmptyWhileUpdating() {
         License license = new License();
 
         assertThrows(InvalidLicenseException.class, () -> licenseService.updateLicense(license));
@@ -128,7 +134,8 @@ class LicenseServiceTest {
     }
 
     @Test
-    void should_update_license_details_when_a_valid_license_is_passed() throws Exception {
+    @DisplayName("Should update license details when a valid license is passed")
+    void updateLicenseDetails() throws Exception {
         License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
                 DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
                 EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
