@@ -74,7 +74,7 @@ class LicenseServiceTest {
 
     @Test
     @DisplayName("Should throw an InvalidIdentityException when an ID ref that is not an INT is passed")
-    void shouldThrowAnInvalidIdentityExceptionFromInvalidStringIdRef() throws Exception {
+    void shouldThrowAnInvalidIdentityExceptionFromInvalidStringIdRef() {
         License license = new License();
         license.setId("Artemas");
 
@@ -82,7 +82,7 @@ class LicenseServiceTest {
     }
 
     @Test
-    void should_return_an_identity_not_valid_exception() throws Exception {
+    void should_return_an_identity_not_valid_exception() {
         License license = new License();
         assertThrows(InvalidLicenseException.class, () -> licenseService.addLicense(license));
     }
