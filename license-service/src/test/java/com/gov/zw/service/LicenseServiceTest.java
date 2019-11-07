@@ -21,8 +21,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @RunWith(SpringRunner.class)
@@ -56,7 +55,8 @@ class LicenseServiceTest {
     }
 
     @Test
-    void should_return_an_identity() throws Exception {
+    @DisplayName("Should return an identity")
+    void returnIdentityByReference() throws Exception {
 
         License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
                 DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
@@ -74,7 +74,7 @@ class LicenseServiceTest {
 
     @Test
     @DisplayName("Should throw an InvalidIdentityException when an ID ref that is not an INT is passed")
-    void shouldThrowAnInvalidIdentityExceptionFromInvalidStringIdRef() {
+    void throwExceptionWhenIdRefIsNotAnInt() {
         License license = new License();
         license.setId("Artemas");
 
@@ -82,13 +82,15 @@ class LicenseServiceTest {
     }
 
     @Test
-    void should_return_an_identity_not_valid_exception() {
+    @DisplayName("Should throw an IdentityNotValidException when license is empty")
+    void throwExceptionWhenLicenseIsEmpty() {
         License license = new License();
         assertThrows(InvalidLicenseException.class, () -> licenseService.addLicense(license));
     }
 
     @Test
-    void should_return_licenses_from_the_repository() {
+    @DisplayName("Should return all licenses")
+    void returnAllLicenses() {
         License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
                 DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
                 EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
@@ -116,12 +118,13 @@ class LicenseServiceTest {
     }
 
     @Test
-    void should_save_when_empty_license_details_are_passed() throws Exception {
+    @DisplayName("Should throw InvalidLicenseException when an empty license is passed")
+    void throwExceptionWhenLicenseIsEmptyWhileUpdating() throws Exception {
         License license = new License();
 
-        licenseService.updateLicense(license);
+        assertThrows(InvalidLicenseException.class, () -> licenseService.updateLicense(license));
 
-        verify(this.licenseRepository, times(1)).save(license);
+        verify(this.licenseRepository, never()).save(any(License.class));
     }
 
     @Test
