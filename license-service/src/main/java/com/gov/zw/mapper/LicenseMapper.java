@@ -31,7 +31,7 @@ public class LicenseMapper {
                 .orElse(new License());
     }
 
-    static LicenseJson toLicenseJson(License license) {
+    public static LicenseJson toLicenseJson(License license) {
         return Optional.ofNullable(license)
                 .map(licenseDto -> new LicenseJson(
                         licenseDto.getId(),

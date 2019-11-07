@@ -2,10 +2,8 @@ package com.gov.zw.service;
 
 import com.gov.zw.client.IdentityClient;
 import com.gov.zw.client.IdentityReferenceJson;
-import com.gov.zw.client.IdentityReferenceJsonMapper;
+import com.gov.zw.client.dto.IdentityReference;
 import com.gov.zw.dto.License;
-import com.gov.zw.domain.LicenseJson;
-import com.gov.zw.mapper.LicenseMapper;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidLicenseException;
 import com.gov.zw.repository.LicenseRepository;
@@ -23,20 +21,16 @@ public class LicenseServiceImpl implements LicenseService {
 
     private IdentityClient identityClient;
     private LicenseRepository licenseRepository;
-    private IdentityReferenceJsonMapper identityReferenceJsonMapper;
 
-    public LicenseServiceImpl(IdentityClient identityClient, LicenseRepository licenseRepository,
-                              LicenseMapper licenseMapper,
-                              IdentityReferenceJsonMapper identityReferenceJsonMapper) {
+    public LicenseServiceImpl(IdentityClient identityClient, LicenseRepository licenseRepository) {
         this.identityClient = identityClient;
         this.licenseRepository = licenseRepository;
-        this.identityReferenceJsonMapper = identityReferenceJsonMapper;
     }
 
     @Override
     public void addLicense(License license) throws InvalidIdentityException, InvalidLicenseException {
         IdentityReferenceJson identityReferenceJson = Optional.ofNullable(license)
-                .filter(licenseDto -> Objects.nonNull(licenseDto.getIdentityRef()))
+                .filter(this::isIdentityReferencePresent)
                 .map(this::getLicenseIdentityReferenceJson)
                 .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
 
@@ -53,43 +47,37 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Override
-    public void updateLicense(LicenseJson licenseJson) throws InvalidLicenseException {
-        License license = LicenseMapper.toLicenseDTO(licenseJson);
-        updateLicense(license);
-    }
-
-    @Override
-    public void removeLicense(LicenseJson licenseJson) throws InvalidLicenseException {
-        License license = LicenseMapper.toLicenseDTO(licenseJson);
-        removeLicense(license);
-    }
-
-    @Override
-    public LicenseJson getLicenseByIdentityRef(IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException {
-        String IdentityRef = identityReferenceJsonMapper.toIdentityReference(identityReferenceJson);
-        License license = getLicenseByIdentityRef(IdentityRef);
-        return new LicenseJson(license);
-    }
-
-    License getLicenseByIdentityRef(String identityRef) throws InvalidLicenseException {
-        return Optional.ofNullable(identityRef)
-                .map(identityReference -> licenseRepository.findLicenseByIdentityRef(identityReference))
-                .orElseThrow((() -> new InvalidLicenseException("License IdRef is not valid")));
-    }
-
-    private IdentityReferenceJson getLicenseIdentityReferenceJson(License license) {
-        return new IdentityReferenceJson(license.getIdentityRef());
-    }
-
-    void updateLicense(License license) throws InvalidLicenseException {
+    public void updateLicense(License license) throws InvalidLicenseException {
         License validLicense = Optional.ofNullable(license)
+                .filter(this::isIdentityReferencePresent)
                 .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
         this.licenseRepository.save(validLicense);
     }
 
-    void removeLicense(License license) throws InvalidLicenseException {
+    @Override
+    public void removeLicense(License license) throws InvalidLicenseException {
         License validLicense = Optional.ofNullable(license)
                 .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
         this.licenseRepository.delete(validLicense);
+    }
+
+    @Override
+    public License getLicenseByIdentityRef(IdentityReference identityReference) throws InvalidLicenseException {
+        return Optional.ofNullable(identityReference)
+                .map(IdentityReference::getIdRef)
+                .map(this::findLicenseByIdentityReference)
+                .orElseThrow((() -> new InvalidLicenseException("License IdRef is not valid")));
+    }
+
+    private License findLicenseByIdentityReference(String identityReference) {
+        return licenseRepository.findLicenseByIdentityRef(identityReference);
+    }
+
+    private boolean isIdentityReferencePresent(License licenseDto) {
+        return Objects.nonNull(licenseDto.getIdentityRef());
+    }
+
+    private IdentityReferenceJson getLicenseIdentityReferenceJson(License license) {
+        return new IdentityReferenceJson(license.getIdentityRef());
     }
 }

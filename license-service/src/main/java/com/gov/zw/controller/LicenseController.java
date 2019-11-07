@@ -1,6 +1,7 @@
 package com.gov.zw.controller;
 
 import com.gov.zw.client.IdentityReferenceJson;
+import com.gov.zw.client.dto.IdentityReference;
 import com.gov.zw.domain.LicenseJson;
 import com.gov.zw.dto.License;
 import com.gov.zw.service.LicenseService;
@@ -10,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.gov.zw.mapper.LicenseMapper.toLicenseDTO;
-import static com.gov.zw.mapper.LicenseMapper.toLicenseJsonList;
+import static com.gov.zw.mapper.IdentityReferenceMapper.toIdentityReferenceDTO;
+import static com.gov.zw.mapper.LicenseMapper.*;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
@@ -40,19 +41,23 @@ public class LicenseController {
 
     @PostMapping(produces = APPLICATION_JSON_UTF8_VALUE, value = "ref")
     public LicenseJson getLicenseByIdentityRef(@RequestBody IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException {
-        return this.licenseServiceImpl.getLicenseByIdentityRef(identityReferenceJson);
+        IdentityReference identityReference = toIdentityReferenceDTO(identityReferenceJson);
+        License license = this.licenseServiceImpl.getLicenseByIdentityRef(identityReference);
+        return toLicenseJson(license);
     }
 
     @PutMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = OK)
     public void updateLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException {
-        this.licenseServiceImpl.updateLicense(licenseJson);
+        License license = toLicenseDTO(licenseJson);
+        this.licenseServiceImpl.updateLicense(license);
     }
 
     @DeleteMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = OK)
     public void deleteLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException {
-        this.licenseServiceImpl.removeLicense(licenseJson);
+        License license = toLicenseDTO(licenseJson);
+        this.licenseServiceImpl.removeLicense(license);
     }
 
 }

@@ -1,13 +1,11 @@
-package com.gov.zw.client;
+package com.gov.zw.client.dto;
 
 import java.util.Objects;
 
-public class IdentityReferenceJson {
-    public String idRef;
+public class IdentityReference {
+    private String idRef;
 
-    public IdentityReferenceJson() { }
-
-    public IdentityReferenceJson(String idRef) {
+    public IdentityReference(String idRef) {
         this.idRef = idRef;
     }
 
@@ -19,19 +17,12 @@ public class IdentityReferenceJson {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        IdentityReferenceJson that = (IdentityReferenceJson) o;
+        IdentityReference that = (IdentityReference) o;
         return Objects.equals(idRef, that.idRef);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(idRef);
-    }
-
-    @Override
-    public String toString() {
-        return "IdentityReferenceJson{" +
-                "idRef='" + idRef + '\'' +
-                '}';
     }
 }
