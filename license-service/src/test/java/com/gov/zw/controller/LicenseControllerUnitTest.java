@@ -12,9 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -91,8 +89,6 @@ class LicenseControllerUnitTest {
     @Test
     @DisplayName("Should return a License given a valid identity reference")
     void getLicenseByIdentityRef() throws Exception {
-        Map<String, String> idRef = new HashMap<>();
-        idRef.put("idRef", ID_REF);
         IdentityReference identityReference = new IdentityReference(ID_REF);
         IdentityReferenceJson identityRefJson = new IdentityReferenceJson(ID_REF);
         License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,

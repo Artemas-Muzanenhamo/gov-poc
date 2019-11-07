@@ -30,7 +30,7 @@ public class LicenseServiceImpl implements LicenseService {
     @Override
     public void addLicense(License license) throws InvalidIdentityException, InvalidLicenseException {
         IdentityReferenceJson identityReferenceJson = Optional.ofNullable(license)
-                .filter(licenseDto -> Objects.nonNull(licenseDto.getIdentityRef()))
+                .filter(this::isLicenseNotNull)
                 .map(this::getLicenseIdentityReferenceJson)
                 .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
 
@@ -66,6 +66,10 @@ public class LicenseServiceImpl implements LicenseService {
                 .map(IdentityReference::getIdRef)
                 .map(e -> licenseRepository.findLicenseByIdentityRef(e))
                 .orElseThrow((() -> new InvalidLicenseException("License IdRef is not valid")));
+    }
+
+    private boolean isLicenseNotNull(License licenseDto) {
+        return Objects.nonNull(licenseDto.getIdentityRef());
     }
 
     private IdentityReferenceJson getLicenseIdentityReferenceJson(License license) {
