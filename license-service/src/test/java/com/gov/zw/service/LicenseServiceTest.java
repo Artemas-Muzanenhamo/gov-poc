@@ -147,7 +147,8 @@ class LicenseServiceTest {
     }
 
     @Test
-    void should_delete_a_license_when_a_valid_license_is_passed() throws Exception {
+    @DisplayName("Should delete a license")
+    void shouldDeleteALicense() throws Exception {
         License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
                 DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
                 EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
@@ -159,7 +160,8 @@ class LicenseServiceTest {
     }
 
     @Test
-    void should_return_a_license_given_the_identity_reference() throws Exception {
+    @DisplayName("Should return a license given the identity reference")
+    void returnLicenseByIdentityReference() throws Exception {
         License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
                 DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
                 EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
