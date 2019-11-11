@@ -97,6 +97,7 @@ class LicenseServiceTest {
     @Test
     @DisplayName("Should return all licenses")
     void returnAllLicenses() {
+        List
         License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES,
                 DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
                 EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
