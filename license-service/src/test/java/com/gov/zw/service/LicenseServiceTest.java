@@ -40,6 +40,10 @@ class LicenseServiceTest {
     private static final String LICENSE_NUMBER = "MUZANATCK1990";
     private static final String SIGNATURE_IMAGE = "Doc1.png";
     private static final String ADDRESS = "150 Sunningdale road";
+    private static final String NAME = "Artemas";
+    private static final String BIRTH_DATE = "28/03/1990";
+    private static final String VILLAGE_OF_ORIGIN = "Mashayamombe";
+    private static final String PLACE_OF_BIRTH = "Harare";
 
     @InjectMocks
     private LicenseServiceImpl licenseService;
@@ -64,8 +68,8 @@ class LicenseServiceTest {
                 DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
                 EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
                 ADDRESS);
-        Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990", "Mashayamombe",
-                "Harare", "22/01/2018");
+        Identity identity = new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE, VILLAGE_OF_ORIGIN,
+                PLACE_OF_BIRTH, DATE_OF_ISSUE);
         IdentityReference identityReference = new IdentityReference(ID_REF);
         given(identityClient.findIdentityByIdReferenceNumber(identityReference)).willReturn(identity);
 
@@ -78,8 +82,8 @@ class LicenseServiceTest {
     @DisplayName("Should throw an InvalidIdentityException when an ID ref that is not an INT is passed")
     void throwExceptionWhenIdRefIsNotAnInt() throws Exception {
         License license = new License();
-        license.setId("Artemas");
-        license.setIdentityRef("1234");
+        license.setId(ID);
+        license.setIdentityRef(IDENTITY_REF);
 
         InvalidIdentityException exception = assertThrows(InvalidIdentityException.class, () -> licenseService.addLicense(license));
 
