@@ -7,6 +7,7 @@ import com.gov.zw.domain.*;
 import com.gov.zw.dto.Identity;
 import com.gov.zw.service.IdentityService;
 import net.minidev.json.JSONObject;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ class IdentityControllerTest {
     private final TypeReference<Map<String, String>> identityTypeRef = new TypeReference<Map<String, String>>() {};
 
     @Test
+    @DisplayName("Should save an identity")
     void saveIdentity() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         Identity identity = new Identity("1","1","Artemas", "Muzanenhamo", "28/03/1990",
@@ -49,6 +51,7 @@ class IdentityControllerTest {
     }
 
     @Test
+    @DisplayName("Should get Identities by name")
     void getIdentitiesByName() throws Exception {
         Map<String, String> name = new HashMap<>();
         name.put("name", "Artemas");
@@ -61,6 +64,7 @@ class IdentityControllerTest {
     }
 
     @Test
+    @DisplayName("Should get Identities by an Identity reference")
     void getIdentityByReferenceNumber() throws Exception {
         Map<String, String> idReferenceNumber = new HashMap<>();
         idReferenceNumber.put("idRef", "1");
@@ -74,12 +78,14 @@ class IdentityControllerTest {
     }
 
     @Test
+    @DisplayName("Should get all identities")
     void getAllIdentities() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/identities"))
                 .andExpect(status().isOk());
     }
 
     @Test
+    @DisplayName("Should update an identity")
     void updateIdentity() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         Identity identity = new Identity("1","1","Takudzwa", "Muzanenhamo", "28/03/1990",
@@ -93,6 +99,7 @@ class IdentityControllerTest {
     }
 
     @Test
+    @DisplayName("Should delete an Identity")
     void deleteIdentity() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         Identity identity = new Identity("1","1","Artemas", "Muzanenhamo", "28/03/1990",
