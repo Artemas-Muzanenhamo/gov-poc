@@ -1,7 +1,6 @@
 package com.gov.zw.service;
 
 import com.gov.zw.client.IdentityClient;
-import com.gov.zw.client.IdentityReferenceJson;
 import com.gov.zw.client.dto.IdentityReference;
 import com.gov.zw.dto.License;
 import com.gov.zw.exception.InvalidIdentityException;
@@ -29,12 +28,12 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public void addLicense(License license) throws InvalidIdentityException, InvalidLicenseException {
-        IdentityReferenceJson identityReferenceJson = Optional.ofNullable(license)
+        IdentityReference identityReference = Optional.ofNullable(license)
                 .filter(this::isIdentityReferencePresent)
-                .map(this::getLicenseIdentityReferenceJson)
+                .map(this::getLicenseIdentityReference)
                 .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
 
-        Optional.of(identityReferenceJson)
+        Optional.of(identityReference)
                 .map(idReferenceJson -> identityClient.findIdentityByIdReferenceNumber(idReferenceJson))
                 .orElseThrow(() -> new InvalidIdentityException(IDENTITY_IS_INVALID_OR_DOES_NOT_EXIST));
 
@@ -77,7 +76,7 @@ public class LicenseServiceImpl implements LicenseService {
         return Objects.nonNull(licenseDto.getIdentityRef());
     }
 
-    private IdentityReferenceJson getLicenseIdentityReferenceJson(License license) {
-        return new IdentityReferenceJson(license.getIdentityRef());
+    private IdentityReference getLicenseIdentityReference(License license) {
+        return new IdentityReference(license.getIdentityRef());
     }
 }

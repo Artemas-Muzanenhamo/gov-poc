@@ -2,9 +2,9 @@ package com.gov.zw.service;
 
 import com.gov.zw.client.Identity;
 import com.gov.zw.client.IdentityClient;
-import com.gov.zw.client.IdentityReferenceJson;
 import com.gov.zw.client.dto.IdentityReference;
 import com.gov.zw.dto.License;
+import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidLicenseException;
 import com.gov.zw.repository.LicenseRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -66,25 +66,28 @@ class LicenseServiceTest {
                 ADDRESS);
         Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990", "Mashayamombe",
                 "Harare", "22/01/2018");
-        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(ID_REF);
-        given(identityClient.findIdentityByIdReferenceNumber(identityReferenceJson)).willReturn(identity);
+        IdentityReference identityReference = new IdentityReference(ID_REF);
+        given(identityClient.findIdentityByIdReferenceNumber(identityReference)).willReturn(identity);
 
         licenseService.addLicense(license);
 
-        verify(identityClient, times(1)).findIdentityByIdReferenceNumber(identityReferenceJson);
+        verify(identityClient, times(1)).findIdentityByIdReferenceNumber(identityReference);
     }
 
     @Test
     @DisplayName("Should throw an InvalidIdentityException when an ID ref that is not an INT is passed")
-    void throwExceptionWhenIdRefIsNotAnInt() {
+    void throwExceptionWhenIdRefIsNotAnInt() throws Exception {
         License license = new License();
         license.setId("Artemas");
+        license.setIdentityRef("1234");
 
-        assertThrows(InvalidLicenseException.class, () -> licenseService.addLicense(license));
+        InvalidIdentityException exception = assertThrows(InvalidIdentityException.class, () -> licenseService.addLicense(license));
+
+        assertThat(exception.getMessage()).isEqualTo(IDENTITY_EXCEPTION_MESSAGE);
     }
 
     @Test
-    @DisplayName("Should throw an IdentityNotValidException when license is empty")
+    @DisplayName("Should throw an InvalidLicenseException when license is empty")
     void throwExceptionWhenLicenseIsEmpty() {
         License license = new License();
 
