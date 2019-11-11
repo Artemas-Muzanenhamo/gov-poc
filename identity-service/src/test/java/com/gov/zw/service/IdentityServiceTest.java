@@ -7,6 +7,7 @@ import com.gov.zw.repository.IdentityRepository;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidIdentityNameException;
 import com.gov.zw.exception.InvalidIdentityReferenceException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -39,12 +40,14 @@ class IdentityServiceTest {
     private IdentityRepository identityRepository;
 
     @Test
-    void should_throw_an_exception_when_an_invalid_identity_is_passed() {
+    @DisplayName("Should throw an InvalidIdentityException when an invalid identity is passed")
+    void throwExceptionWhenInvalidIdentityIsPassed() {
         assertThrows(InvalidIdentityException.class, () -> identityService.save(null));
     }
 
     @Test
-    void should_save_identity_if_identity_details_exist() throws InvalidIdentityException {
+    @DisplayName("Should save identity if identity details exist")
+    void saveIdentity() throws InvalidIdentityException {
         Identity identity = new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
                 VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE);
 
@@ -54,7 +57,8 @@ class IdentityServiceTest {
     }
 
     @Test
-    void should_return_a_name_if_name_exists() throws InvalidIdentityNameException {
+    @DisplayName("Should find identities by name")
+    void findIdentitiesByName() throws InvalidIdentityNameException {
         List<Identity> identities = Collections.singletonList(new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
                 VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE));
         IdentityName identityName = new IdentityName("Artemas");
@@ -66,17 +70,20 @@ class IdentityServiceTest {
     }
 
     @Test
-    void should_throw_an_exception_when_an_invalid_name_is_passed() {
+    @DisplayName("Should throw an InvalidIdentityNameException when an invalid name is passed")
+    void throwExceptionWhenInvalidNameIsPassed() {
         assertThrows(InvalidIdentityNameException.class, () -> identityService.findIdentitiesByName(null));
     }
 
     @Test
-    void should_throw_exception_when__an_invalid_idRef_is_passed() {
+    @DisplayName("Should throw an InvalidIdentityReferenceException when an invalid IdRef is passed")
+    void throwExceptionWhenInvalidIdRefIsPassed() {
         assertThrows(InvalidIdentityReferenceException.class, () ->identityService.findIdentityByIdentityRef((IdentityReference) null));
     }
 
     @Test
-    void should_return_an_identity_if_id_reference_is_valid() throws InvalidIdentityReferenceException {
+    @DisplayName("Should return an identity by identity reference")
+    void getIdentityByIdReference() throws InvalidIdentityReferenceException {
         Identity identity = new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
                 VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE);
         given(identityRepository.findIdentityByIdentityRef(identity.getIdentityRef())).willReturn(identity);
@@ -88,7 +95,8 @@ class IdentityServiceTest {
     }
 
     @Test
-    void should_return_a_list_of_all_identities() {
+    @DisplayName("Should return a list of all identities")
+    void returnAllIdentities() {
         List<Identity> identities = Arrays.asList(
                 new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
                         VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE),
@@ -115,12 +123,14 @@ class IdentityServiceTest {
     }
 
     @Test
-    void should_throw_an_exception_when_an_invalid_identity_is_passed_to_be_deleted() {
+    @DisplayName("Should throw an InvalidIdentityException when an invalid identity is passed to be deleted")
+    void throwExceptionWhenInvalidIdentityIsToBeDeleted() {
         assertThrows(InvalidIdentityException.class, () -> identityService.delete(null));
     }
 
     @Test
-    void should_delete_an_identity_if_the_identity_is_valid() throws InvalidIdentityException {
+    @DisplayName("Should delete an Identity")
+    void deleteIdentity() throws InvalidIdentityException {
         Identity identity = new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
                 VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE);
 
