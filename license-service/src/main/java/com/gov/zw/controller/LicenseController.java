@@ -27,6 +27,7 @@ public class LicenseController {
     }
 
     @PostMapping(produces = APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
     @ResponseStatus(value = OK)
     public void addLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException, InvalidIdentityException {
         License license = toLicenseDTO(licenseJson);
@@ -34,12 +35,14 @@ public class LicenseController {
     }
 
     @GetMapping(produces = APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
     public List<LicenseJson> getAllLicenses() {
         List<License> licenses = this.licenseServiceImpl.getAllLicenses();
         return toLicenseJsonList(licenses);
     }
 
     @PostMapping(produces = APPLICATION_JSON_UTF8_VALUE, value = "ref")
+    @ResponseBody
     public LicenseJson getLicenseByIdentityRef(@RequestBody IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException {
         IdentityReference identityReference = toIdentityReferenceDTO(identityReferenceJson);
         License license = this.licenseServiceImpl.getLicenseByIdentityRef(identityReference);
@@ -47,6 +50,7 @@ public class LicenseController {
     }
 
     @PutMapping(produces = APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
     @ResponseStatus(value = OK)
     public void updateLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException {
         License license = toLicenseDTO(licenseJson);
@@ -54,6 +58,7 @@ public class LicenseController {
     }
 
     @DeleteMapping(produces = APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
     @ResponseStatus(value = OK)
     public void deleteLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException {
         License license = toLicenseDTO(licenseJson);
