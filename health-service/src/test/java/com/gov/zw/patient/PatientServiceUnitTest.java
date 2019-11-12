@@ -40,7 +40,8 @@ class PatientServiceUnitTest {
     }
 
     @Test
-    void should_return_all_patients() {
+    @DisplayName("Should return all patients")
+    void getAllPatients() {
         Patient patient = new Patient(IDENTITY_REF, NAME, SURNAME, DATE_OF_BIRTH, ADDRESS);
         given(patientRepository.findAll()).willReturn(Flux.just(patient));
 
@@ -53,7 +54,8 @@ class PatientServiceUnitTest {
     }
 
     @Test
-    void should_add_patient_details_given_a_valid_id() {
+    @DisplayName("Should add patient details given a valid identity reference")
+    void addPatientGivenAValidIdentityReference() {
         Patient patient = new Patient(IDENTITY_REF, NAME, SURNAME, DATE_OF_BIRTH, ADDRESS);
         given(patientRepository.insert(patient)).willReturn(just(patient));
 
@@ -66,7 +68,8 @@ class PatientServiceUnitTest {
     }
 
     @Test
-    void should_update_patient_details() {
+    @DisplayName("Should update patient details")
+    void updatePatientDetails() {
         Patient patient = new Patient(IDENTITY_REF, NAME, SURNAME, DATE_OF_BIRTH, ADDRESS);
         when(patientRepository.save(patient)).thenReturn(just(patient));
 
@@ -85,7 +88,8 @@ class PatientServiceUnitTest {
     }
 
     @Test
-    void should_retrieve_a_single_patient_details() {
+    @DisplayName("Should retrieve a single patient's details")
+    void retrieveSinglePatient() {
         Patient patient = new Patient(IDENTITY_REF, NAME, SURNAME, DATE_OF_BIRTH, ADDRESS);
         Optional<String> identityRefOptional = Optional.of(patient.getIdentityRef());
         given(patientRepository.findById(patient.getIdentityRef())).willReturn(just(patient));
