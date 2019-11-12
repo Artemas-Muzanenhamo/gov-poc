@@ -25,6 +25,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 @PactFolder("../pacts")
 public class IdentityClientTest {
     private static final String IDENTITIES_REFERENCE_PATH = "/identities/reference";
+    private static final String ID = "1";
+    private static final String IDENTITY_REF = "MUZAN1234";
+    private static final String NAME = "Artemas";
+    private static final String SURNAME = "Muzanenhamo";
+    private static final String BIRTH_DATE = "28/03/1990";
+    private static final String VILLAGE_OF_ORIGIN = "Mashayamombe";
+    private static final String PLACE_OF_BIRTH = "Harare";
+    private static final String DATE_OF_ISSUE = "22/01/2018";
 
     @Pact(state = "an identity for a patient", provider = "identity-service", consumer = "health-service")
     public RequestResponsePact retrievePatientIdentityPact(PactDslWithProvider builder) {
@@ -65,9 +73,9 @@ public class IdentityClientTest {
                     .post(mockServer.getUrl() + IDENTITIES_REFERENCE_PATH).as(Identity.class);
 
         Identity expectedIdentity =
-                new Identity("1", "MUZAN1234", "Artemas", "Muzanenhamo",
-                        "28/03/1990", "Mashayamombe",
-                        "Harare", "22/01/2018");
+                new Identity(ID, IDENTITY_REF, NAME, SURNAME,
+                        BIRTH_DATE, VILLAGE_OF_ORIGIN,
+                        PLACE_OF_BIRTH, DATE_OF_ISSUE);
         assertThat(identity.getId()).isEqualTo(expectedIdentity.getId());
         assertThat(identity.getIdentityRef()).isEqualTo(expectedIdentity.getIdentityRef());
         assertThat(identity.getName()).isEqualTo(expectedIdentity.getName());
@@ -91,13 +99,13 @@ public class IdentityClientTest {
     // What I will get as a Response in the Pact JSON
     private DslPart identityJson() {
         return new PactDslJsonBody()
-                .stringType("id", "1")
-                .stringType("identityRef", "MUZAN1234")
-                .stringType("name", "Artemas")
-                .stringType("surname", "Muzanenhamo")
-                .stringType("birthDate", "28/03/1990")
-                .stringType("villageOfOrigin", "Mashayamombe")
-                .stringType("placeOfBirth", "Harare")
-                .stringType("dateOfIssue", "22/01/2018");
+                .stringType("id", ID)
+                .stringType("identityRef", IDENTITY_REF)
+                .stringType("name", NAME)
+                .stringType("surname", SURNAME)
+                .stringType("birthDate", BIRTH_DATE)
+                .stringType("villageOfOrigin", VILLAGE_OF_ORIGIN)
+                .stringType("placeOfBirth", PLACE_OF_BIRTH)
+                .stringType("dateOfIssue", DATE_OF_ISSUE);
     }
 }
