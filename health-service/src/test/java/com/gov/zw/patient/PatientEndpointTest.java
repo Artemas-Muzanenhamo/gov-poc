@@ -40,8 +40,7 @@ class PatientEndpointTest {
     @Test
     @DisplayName("Should return all patients")
     void getAllPatients() {
-        given(patientService.getAllPatients())
-                .willReturn(Flux.just(patient1, patient2));
+        given(patientService.getAllPatients()).willReturn(Flux.just(patient1, patient2));
 
         client
                 .get()
@@ -59,8 +58,7 @@ class PatientEndpointTest {
     @Test
     @DisplayName("Should return HTTP_STATUS OK when retrieving all patients")
     void returnHttpStatus200RetrivingAllPatients() {
-        given(patientService.getAllPatients())
-                .willReturn(Flux.empty());
+        given(patientService.getAllPatients()).willReturn(Flux.empty());
 
         client
                 .get()
@@ -72,14 +70,7 @@ class PatientEndpointTest {
     @Test
     @DisplayName("Should add a patient given the user has a valid identity")
     void addUserGivenIdentityIsValid() {
-        Patient patient =
-                new Patient(
-                        "12345",
-                        "Arty",
-                        "Muza",
-                        DATE_OF_BIRTH,
-                        "Flat 7, Elm Rose Road, E16 9AA"
-                );
+        Patient patient = new Patient(IDENTITY_REF, NAME, SURNAME, DATE_OF_BIRTH, ADDRESS);
         given(patientService.addPatient(patient)).willReturn(just(patient));
 
         client
@@ -94,14 +85,7 @@ class PatientEndpointTest {
     @Test
     @DisplayName("Should update existing patient")
     void updateExistingPatient() {
-        Patient patient =
-                new Patient(
-                        "12345",
-                        "Arty",
-                        "Muza",
-                        DATE_OF_BIRTH,
-                        "Flat 7, Elm Rose Road, E16 9AA"
-                );
+        Patient patient = new Patient(IDENTITY_REF, NAME, SURNAME, DATE_OF_BIRTH, ADDRESS);
         given(patientService.updatePatient(patient)).willReturn(just(patient));
 
         client
@@ -116,14 +100,7 @@ class PatientEndpointTest {
     @Test
     @DisplayName("Should get an existing patient")
     void retrievePatient() {
-        Patient patient =
-                new Patient(
-                        "12345",
-                        "Arty",
-                        "Muza",
-                        DATE_OF_BIRTH,
-                        "Flat 7, Elm Rose Road, E16 9AA"
-                );
+        Patient patient = new Patient(IDENTITY_REF, NAME, SURNAME, DATE_OF_BIRTH, ADDRESS);
         Optional<String> identityRefOptional = Optional.of(patient.getIdentityRef());
         given(patientService.getPatient(identityRefOptional)).willReturn(just(patient));
 
@@ -134,10 +111,10 @@ class PatientEndpointTest {
                 .expectStatus()
                 .isOk()
                 .expectBody()
-                .jsonPath("@.name").isEqualTo("Arty")
-                .jsonPath("@.surname").isEqualTo("Muza")
-                .jsonPath("@.identityRef").isEqualTo("12345")
-                .jsonPath("@.address").isEqualTo("Flat 7, Elm Rose Road, E16 9AA");
+                .jsonPath("@.name").isEqualTo(NAME)
+                .jsonPath("@.surname").isEqualTo(SURNAME)
+                .jsonPath("@.identityRef").isEqualTo(IDENTITY_REF)
+                .jsonPath("@.address").isEqualTo(ADDRESS);
     }
 
     @Test
