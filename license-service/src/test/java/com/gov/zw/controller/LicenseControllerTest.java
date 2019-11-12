@@ -107,9 +107,9 @@ class LicenseControllerTest {
     @DisplayName("Should update a License given a valid license object with updated values")
     void shouldUpdateALicense() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        License license = new License("1", "1", "Delta", "Charlie Foxtrot", "28/03/1990", "ZIM",
-                "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
-                "01.jpg", "123 Glendale, Harare, Zimbabwe");
+        License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES, DATE_OF_BIRTH, COUNTRY,
+                DATE_OF_ISSUE, EXPIRY_DATE, AGENCY, LICENSE_NUMBER,
+                SIGNATURE_IMAGE, ADDRESS);
         Map<String, String> licenseObject = objectMapper.convertValue(license, licenseTypeRef);
         JSONObject jsonObject = new JSONObject(licenseObject);
 
@@ -138,9 +138,9 @@ class LicenseControllerTest {
     @DisplayName("Should delete a license given a valid license object")
     void shouldDeleteALicense() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        License license = new License("1", "1", "Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
-                "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
-                "01.jpg", "123 Glendale, Harare, Zimbabwe");
+        License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES, DATE_OF_BIRTH, COUNTRY,
+                DATE_OF_ISSUE, EXPIRY_DATE, AGENCY, LICENSE_NUMBER,
+                SIGNATURE_IMAGE, ADDRESS);
         Map<String, String> id = objectMapper.convertValue(license, licenseTypeRef);
         JSONObject jsonObject = new JSONObject(id);
 
