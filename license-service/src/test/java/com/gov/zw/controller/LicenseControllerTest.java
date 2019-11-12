@@ -37,6 +37,8 @@ class LicenseControllerTest {
     private static final String LICENSE_NUMBER = "MUZANEN123456ABCDEF";
     private static final String SIGNATURE_IMAGE = "01.jpg";
     private static final String ADDRESS = "123 Glendale, Harare, Zimbabwe";
+    private static final String LICENSES_URL = "/licenses";
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -55,17 +57,26 @@ class LicenseControllerTest {
         Map<String, String> licenseObject = objectMapper.convertValue(license, licenseTypeRef);
         JSONObject jsonObject = new JSONObject(licenseObject);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/licenses")
+        mockMvc.perform(MockMvcRequestBuilders.post(LICENSES_URL)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
     }
 
     @Test
+    @DisplayName("Should throw HttpStatus BAD_REQUEST when trying to add an invalid license")
+    void throwExceptionWhenInvalidLicense() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post(LICENSES_URL)
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content("null"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
     @DisplayName("Should throw HttpStatus BAD_REQUEST when an invalid license object is passed")
     void shouldThrowBadRequestTryingToGetLicense() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/licenses")
+        mockMvc.perform(MockMvcRequestBuilders.post(LICENSES_URL)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content("null"))
                 .andExpect(status().isBadRequest());
@@ -79,7 +90,7 @@ class LicenseControllerTest {
         Map<String, String> licenseObject = objectMapper.convertValue(license, licenseTypeRef);
         JSONObject jsonObject = new JSONObject(licenseObject);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/licenses")
+        mockMvc.perform(MockMvcRequestBuilders.post(LICENSES_URL)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
@@ -88,7 +99,7 @@ class LicenseControllerTest {
     @Test
     @DisplayName("Should retrieve all licenses")
     void shouldReturnAllLicenses() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/licenses"))
+        mockMvc.perform(MockMvcRequestBuilders.get(LICENSES_URL))
                 .andExpect(status().isOk());
     }
 
@@ -102,7 +113,7 @@ class LicenseControllerTest {
         Map<String, String> licenseObject = objectMapper.convertValue(license, licenseTypeRef);
         JSONObject jsonObject = new JSONObject(licenseObject);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/licenses")
+        mockMvc.perform(MockMvcRequestBuilders.put(LICENSES_URL)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
@@ -117,7 +128,7 @@ class LicenseControllerTest {
         JSONObject jsonObject = new JSONObject(licenseObject);
 
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/licenses")
+        mockMvc.perform(MockMvcRequestBuilders.put(LICENSES_URL)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
@@ -133,7 +144,7 @@ class LicenseControllerTest {
         Map<String, String> id = objectMapper.convertValue(license, licenseTypeRef);
         JSONObject jsonObject = new JSONObject(id);
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/licenses")
+        mockMvc.perform(MockMvcRequestBuilders.delete(LICENSES_URL)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
@@ -147,7 +158,7 @@ class LicenseControllerTest {
         Map<String, String> licenseObject = objectMapper.convertValue(license, licenseTypeRef);
         JSONObject jsonObject = new JSONObject(licenseObject);
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/licenses")
+        mockMvc.perform(MockMvcRequestBuilders.delete(LICENSES_URL)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
