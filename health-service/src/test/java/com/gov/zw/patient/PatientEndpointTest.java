@@ -1,5 +1,6 @@
 package com.gov.zw.patient;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,19 +24,22 @@ class PatientEndpointTest {
 
     private static final String ALL_PATIENTS_URL = "http://localhost:8080/patients";
     private static final String PATIENT_URL = "http://localhost:8080/patients/%s";
+    private static final String IDENTITY_REF = "MUZAN123";
+    private static final String NAME = "Artemas";
+    private static final String SURNAME = "Muzanenhamo";
+    private static final LocalDate DATE_OF_BIRTH = LocalDate.of(1990, 3, 28);
+    private static final String ADDRESS = "68 Jeremy Street, London, W1 7AA";
+    private final Patient patient1 = new Patient(IDENTITY_REF, NAME, SURNAME, DATE_OF_BIRTH, ADDRESS);
+    private final Patient patient2 = new Patient(IDENTITY_REF, NAME, SURNAME, DATE_OF_BIRTH, ADDRESS);
 
     @Autowired
     private WebTestClient client;
     @MockBean
     private PatientService patientService;
 
-    private final Patient patient1 = new Patient("MUZAN123", "Artemas", "Muzanenhamo",
-            LocalDate.of(1990, 3, 28), "68 Jeremy Street, London, W1 7AA");
-    private final Patient patient2 = new Patient("MUZAN123", "Artemas", "Muzanenhamo",
-            LocalDate.of(1990, 3, 28), "68 Jeremy Street, London, W1 7AA");
-
     @Test
-    void should_return_all_mocked_patients() {
+    @DisplayName("Should return all patients")
+    void getAllPatients() {
         given(patientService.getAllPatients())
                 .willReturn(Flux.just(patient1, patient2));
 
@@ -46,14 +50,15 @@ class PatientEndpointTest {
                 .expectStatus().isOk()
                 .expectHeader().contentType(APPLICATION_JSON_UTF8)
                 .expectBody()
-                .jsonPath("@.[0].name").isEqualTo("Artemas")
-                .jsonPath("@.[0].surname").isEqualTo("Muzanenhamo")
-                .jsonPath("@.[0].identityRef").isEqualTo("MUZAN123")
-                .jsonPath("@.[0].address").isEqualTo("68 Jeremy Street, London, W1 7AA");
+                .jsonPath("@.[0].name").isEqualTo(NAME)
+                .jsonPath("@.[0].surname").isEqualTo(SURNAME)
+                .jsonPath("@.[0].identityRef").isEqualTo(IDENTITY_REF)
+                .jsonPath("@.[0].address").isEqualTo(ADDRESS);
     }
 
     @Test
-    void should_return_200_when_retrieving_all_patients() {
+    @DisplayName("Should return HTTP_STATUS OK when retrieving all patients")
+    void returnHttpStatus200RetrivingAllPatients() {
         given(patientService.getAllPatients())
                 .willReturn(Flux.empty());
 
@@ -65,13 +70,14 @@ class PatientEndpointTest {
     }
 
     @Test
-    void should_add_patient_given_the_user_has_a_valid_identity() {
+    @DisplayName("Should add a patient given the user has a valid identity")
+    void addUserGivenIdentityIsValid() {
         Patient patient =
                 new Patient(
                         "12345",
                         "Arty",
                         "Muza",
-                        LocalDate.of(1990, 3, 28),
+                        DATE_OF_BIRTH,
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
         given(patientService.addPatient(patient)).willReturn(just(patient));
@@ -86,13 +92,14 @@ class PatientEndpointTest {
     }
 
     @Test
-    void should_update_existing_patient() {
+    @DisplayName("Should update existing patient")
+    void updateExistingPatient() {
         Patient patient =
                 new Patient(
                         "12345",
                         "Arty",
                         "Muza",
-                        LocalDate.of(1990, 3, 28),
+                        DATE_OF_BIRTH,
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
         given(patientService.updatePatient(patient)).willReturn(just(patient));
@@ -107,13 +114,14 @@ class PatientEndpointTest {
     }
 
     @Test
-    void should_get_an_existing_patient() {
+    @DisplayName("Should get an existing patient")
+    void retrievePatient() {
         Patient patient =
                 new Patient(
                         "12345",
                         "Arty",
                         "Muza",
-                        LocalDate.of(1990, 3, 28),
+                        DATE_OF_BIRTH,
                         "Flat 7, Elm Rose Road, E16 9AA"
                 );
         Optional<String> identityRefOptional = Optional.of(patient.getIdentityRef());
@@ -133,7 +141,8 @@ class PatientEndpointTest {
     }
 
     @Test
-    void should_delete_an_existing_patient() {
+    @DisplayName("Should delete an existing patient")
+    void deletePatient() {
         client
                 .delete()
                 .uri(PATIENT_URL)
