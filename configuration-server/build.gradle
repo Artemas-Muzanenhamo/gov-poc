@@ -14,8 +14,8 @@ repositories {
 
 dependencies {
     implementation "org.springframework.cloud:spring-cloud-config-server:${springVersion}"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junit5Version}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junit5Version}"
     testCompile "org.springframework:spring-test:${springTestVersion}"
     testCompile "org.springframework.boot:spring-boot-starter-test:${springVersion}"
 }
