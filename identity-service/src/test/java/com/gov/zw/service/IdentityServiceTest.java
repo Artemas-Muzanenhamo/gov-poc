@@ -86,9 +86,10 @@ class IdentityServiceTest {
     void getIdentityByIdReference() throws InvalidIdentityReferenceException {
         Identity identity = new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
                 VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE);
+        IdentityReference identityReference = new IdentityReference(IDENTITY_REF);
         given(identityRepository.findIdentityByIdentityRef(identity.getIdentityRef())).willReturn(identity);
 
-        Identity identityByIdentityRef = identityService.findIdentityByIdentityRef("1");
+        Identity identityByIdentityRef = identityService.findIdentityByIdentityRef(identityReference);
 
         assertThat(identityByIdentityRef).isEqualTo(identity);
         assertThat(identityByIdentityRef.getName()).isEqualTo("Artemas");

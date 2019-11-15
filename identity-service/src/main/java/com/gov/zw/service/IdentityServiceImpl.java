@@ -55,10 +55,4 @@ public class IdentityServiceImpl implements IdentityService {
                 .map(identityRepository::findIdentitiesByName)
                 .orElseThrow(() -> new InvalidIdentityNameException("The name supplied does not exist!"));
     }
-
-    Identity findIdentityByIdentityRef(String idRef) throws InvalidIdentityReferenceException {
-        return Optional.ofNullable(idRef)
-                .map(identityRepository::findIdentityByIdentityRef)
-                .orElseThrow(() -> new InvalidIdentityReferenceException("The ID reference supplied is not valid!"));
-    }
 }
