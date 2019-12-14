@@ -26,6 +26,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-autoconfigure-processor:${springVersion}"
     compile "org.springframework.cloud:spring-cloud-netflix-eureka-client:${springVersion}"
     compile "org.mockito:mockito-junit-jupiter:${mockitoJunit5Version}"
+    compile "com.google.code.gson:gson:2.8.6"
     runtime "org.springframework.boot:spring-boot-properties-migrator:${springVersion}"
     testCompile "org.springframework.boot:spring-boot-starter-test:${springVersion}"
     testCompile "io.projectreactor:reactor-test:${reactorTestVersion}"
