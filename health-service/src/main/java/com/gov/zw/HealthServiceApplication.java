@@ -10,7 +10,6 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 
 @EnableWebFlux
 @EnableFeignClients
-@EnableReactiveMongoRepositories
 @EnableDiscoveryClient
 @EnableEurekaClient
 @SpringBootApplication
