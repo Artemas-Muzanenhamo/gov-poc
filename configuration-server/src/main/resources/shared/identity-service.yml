@@ -1,4 +1,13 @@
 spring:
+  main:
+    banner-mode: console
+  banner:
+    location: classpath:banner.txt
+    charset: utf-8
+
+---
+
+spring:
   profiles:
     active:
       - docker
