@@ -13,4 +13,4 @@ in the architecture.
 
 ## Docker pull image
 
-`docker pull artemas/gov-poc-gateway`
+`docker pull <DOCKER_HUB_USER_ACCOUTN>/gov-poc-gateway`

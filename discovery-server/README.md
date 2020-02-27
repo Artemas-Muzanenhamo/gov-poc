@@ -11,4 +11,4 @@ These microservices are registered to Eureka(Discovery server).
 
 ## Docker pull image
 
-`docker pull artemas/gov-poc-discovery-server`
+`docker pull <DOCKER_HUB_USER_ACCOUTN>/gov-poc-discovery-server`

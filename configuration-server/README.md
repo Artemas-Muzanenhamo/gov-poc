@@ -8,4 +8,4 @@
 
 ## Docker pull image
 
-`docker pull artemas/gov-poc-configuration-server`
+`docker pull <DOCKER_HUB_USER_ACCOUTN>/gov-poc-configuration-server`
