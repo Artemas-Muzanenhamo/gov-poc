@@ -61,3 +61,4 @@ mvnw.cmd
 /license-service/build/
 /data/*
 /build/*
+/build/sonar/*
