@@ -38,6 +38,7 @@ subprojects {
 
     sonarqube {
         properties {
+            property "sonar.projectKey", "Artemas-Muzanenhamo_gov-poc"
             property "sonar.sources", "src/main/java/com/gov/zw"
             property "sonar.tests", "src/test/java/com/gov/zw"
             property "sonar.exclusions", "**/*Application.java"
