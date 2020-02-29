@@ -14,8 +14,8 @@ public class ControllerExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(ControllerExceptionHandler.class);
 
     @ExceptionHandler(InvalidPatientException.class)
-    public ResponseEntity<ApiValidationError> invalidSctCaseIdException(InvalidPatientException e) {
-        LOGGER.error(e.getMessage(), e);
-        return new ResponseEntity<>(new ApiValidationError(e.getMessage()), BAD_REQUEST);
+    public ResponseEntity<ApiValidationError> invalidSctCaseIdException(InvalidPatientException exception) {
+        LOGGER.error(exception.getMessage(), exception);
+        return new ResponseEntity<>(new ApiValidationError(exception.getMessage()), BAD_REQUEST);
     }
 }
