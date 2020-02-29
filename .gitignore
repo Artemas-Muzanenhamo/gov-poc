@@ -60,3 +60,4 @@ mvnw.cmd
 /gateway/build/
 /license-service/build/
 /data/*
+/build/*
