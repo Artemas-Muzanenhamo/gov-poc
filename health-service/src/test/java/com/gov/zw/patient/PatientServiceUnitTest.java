@@ -101,4 +101,18 @@ class PatientServiceUnitTest {
                 .expectComplete()
                 .verify();
     }
+
+    @Test
+    @DisplayName("Should delete a patient given the patient id")
+    void deletePatientTest() {
+        Patient patient = new Patient(IDENTITY_REF, NAME, SURNAME, DATE_OF_BIRTH, ADDRESS);
+        Optional<String> patienceIdRefOptional = Optional.of(patient.getIdentityRef());
+        given(patientRepository.deleteById(patient.getIdentityRef())).willReturn(Mono.empty());
+
+        Mono<Void> patientMono = patientServiceImpl.deletePatient(patienceIdRefOptional);
+
+        StepVerifier.create(patientMono)
+                .expectComplete()
+                .verify();
+    }
 }
