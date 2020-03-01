@@ -6,6 +6,10 @@ import com.gov.zw.domain.IdentityJson;
 import java.util.Optional;
 
 public class IdentityMapper {
+    private IdentityMapper() {
+        // Hide implicit public constructor
+    }
+
     public static Identity toIdentityDTO(IdentityJson identityJson) {
         return new Identity(
                 identityJson.getId(),

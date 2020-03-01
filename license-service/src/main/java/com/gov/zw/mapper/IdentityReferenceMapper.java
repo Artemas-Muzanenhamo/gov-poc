@@ -7,6 +7,10 @@ import com.gov.zw.client.exception.IdentityReferenceJsonNotValidException;
 import java.util.Optional;
 
 public class IdentityReferenceMapper {
+    private IdentityReferenceMapper() {
+        // Hide implicit public constructor
+    }
+
     public static IdentityReference toIdentityReferenceDTO(IdentityReferenceJson identityReferenceJson) {
         return Optional.ofNullable(identityReferenceJson)
                 .map(IdentityReferenceJson::getIdRef)

@@ -10,6 +10,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class IdentityListMapper {
+    private IdentityListMapper() {
+        // Hide implicit public constructor
+    }
+
     public static List<IdentityJson> toIdentitiesJson(List<Identity> identities) {
         return Stream.of(identities)
                 .filter(Objects::nonNull)

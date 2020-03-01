@@ -1,8 +1,7 @@
 package com.gov.zw.mapper;
 
-import com.gov.zw.dto.License;
 import com.gov.zw.domain.LicenseJson;
-import org.springframework.stereotype.Component;
+import com.gov.zw.dto.License;
 
 import java.util.Collection;
 import java.util.List;
@@ -11,8 +10,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Component
 public class LicenseMapper {
+    private LicenseMapper() {
+        // Hide implicit public constructor
+    }
+
     public static License toLicenseDTO(LicenseJson json) {
         return Optional.ofNullable(json)
                 .map(licenseJson -> new License(
