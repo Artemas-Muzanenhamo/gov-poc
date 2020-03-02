@@ -1,5 +1,6 @@
 package com.gov.zw.service;
 
+import com.gov.zw.client.Identity;
 import com.gov.zw.client.IdentityClient;
 import com.gov.zw.client.dto.IdentityReference;
 import com.gov.zw.dto.License;
@@ -33,11 +34,19 @@ public class LicenseServiceImpl implements LicenseService {
                 .map(this::getLicenseIdentityReference)
                 .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
 
-        Optional.of(identityReference)
+        boolean identityReferenceValid = isIdentityReferenceValid(identityReference);
+
+        if (identityReferenceValid) {
+            licenseRepository.save(license);
+        }
+    }
+
+    private boolean isIdentityReferenceValid(IdentityReference identityReference) throws InvalidIdentityException {
+        Identity identity = Optional.of(identityReference)
                 .map(idReferenceJson -> identityClient.findIdentityByIdReferenceNumber(idReferenceJson))
                 .orElseThrow(() -> new InvalidIdentityException(IDENTITY_IS_INVALID_OR_DOES_NOT_EXIST));
 
-        licenseRepository.save(license);
+        return identityReference.getIdRef().equals(identity.getIdentityRef());
     }
 
     @Override

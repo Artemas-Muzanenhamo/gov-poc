@@ -43,9 +43,9 @@ public class IdentityServiceImpl implements IdentityService {
 
     @Override
     public void delete(Identity identity) throws InvalidIdentityException {
-        Optional.ofNullable(identity)
+        Identity id = Optional.ofNullable(identity)
                 .orElseThrow(() -> new InvalidIdentityException("The Identity to be deleted is invalid!"));
-        identityRepository.delete(identity);
+        identityRepository.delete(id);
     }
 
     @Override
