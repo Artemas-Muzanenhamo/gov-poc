@@ -27,8 +27,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-jersey:${springVersion}"
     compile "com.google.code.gson:gson:${gsonVersion}"
     testCompile "org.springframework.boot:spring-boot-starter-test:${springVersion}"
-    testCompile "org.junit.jupiter:junit-jupiter-api:${junit5Version}"
-    testCompile "org.junit.jupiter:junit-jupiter-engine:${junit5Version}"
+    testCompile "org.junit.jupiter:junit-jupiter:${junit5Version}"
 }
 
 dependencyManagement {
