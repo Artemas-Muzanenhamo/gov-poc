@@ -5,11 +5,13 @@ services:
     container_name: configuration-server
     ports:
       - "8888:8888"
+    restart: always
   discovery-server:
     build: ./discovery-server
     container_name: discovery-server
     ports:
       - "8761:8761"
+    restart: always
   gateway:
     build: ./gateway
     container_name: gateway

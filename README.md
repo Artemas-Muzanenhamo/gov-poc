@@ -6,9 +6,14 @@ SonarQube: ![SonarQube](https://sonarcloud.io/api/project_badges/measure?project
 # About
 This is a proof of concept to demo government services using the Microservice Architecture with spring boot and spring cloud. We will not really dive into the Authentication aspect at first but we will look at how data should flow within a Microservice Architecture.
 
+# Pre-Requisites
+ * Java 11
+ * Gradle
+ * Docker
+
 # Starting the application
 
-* build the project via gradle `./gradlew build`
+* build the project via gradle `./gradlew -x test build`
 * run `docker-compose -f ./docker-compose.yml up -d`
 * you can see the status for each container by executing `docker ps`
 * or you can use a docker manager like [portainer.io](https://www.portainer.io/) and manage containers from there.
@@ -17,7 +22,7 @@ This is a proof of concept to demo government services using the Microservice Ar
 
 
 # Architecture
-<p align="center">
+<p>
   <img src="https://user-images.githubusercontent.com/29547780/61170379-379d2600-a560-11e9-8e7e-e48a55221488.jpg">
 </p>
 
@@ -31,13 +36,8 @@ This Service will hold all National ID details for every citizen of the
 country.
 
 ### Identity-Service API
-URL|Request Method|Request Body| Description
-:---:|:---:|:---:|:---:
-`identity-service:8080/identities`|**POST**|**Identity**|Adds an Identity to the Identity-Service.
-`identity-service:8080/identities/name`|**POST**|**{"name": ${name}}**|Retrieves a List of Identities given a name.
-`identity-service:8080/identities`|**GET**||Retrieves all Identities from the Identity-Service.
-`identity-service:8080/identities`|**PUT**|**Identity**|Updates an Identity in the Identity-Service.
-`identity-service:8080/identities`|**DELETE**|**Identity**|Removes an Identity from the Identity-Service.
+http://localhost:9999/identity-service/swagger-ui.html#/ :point_left: If you are running all services at once on Docker.
+http://localhost:8080/identity-service/swagger-ui.html#/ :point_left: If you are running this service on its own.
 
 ## License-Service
 
@@ -51,12 +51,8 @@ system itself should not allow the user to achieve this as that
 would be illegal :smirk: .
 
 ### License-Service API
-URL|Request Method|Request Body| Description
-:---:|:---:|:---:|:---:
-`license-service:8081/licenses`|**POST**|**License**|Adds a License to the License-Service.
-`license-service:8081/licenses`|**GET**||Retrieves all Licenses from the License-Service.
-`license-service:8081/licenses`|**PUT**|**License**|Updates License data in the License-Service.
-`license-service:8081/licenses`|**DELETE**|**License**|Removes License data from the License-Service.
+http://localhost:9999/license-service/swagger-ui.html#/ :point_left: If you are running all services at once on Docker.
+http://localhost:8080/license-service/swagger-ui.html#/ :point_left: If you are running this service on its own.
 
 # Infrastructure
 
@@ -98,3 +94,7 @@ The Configuration Server will use `Spring-Cloud-Config` to support externalised 
 
 `Pact` is what I'm using to test and verify API between consumers and providers.
 See [here](https://github.com/pact-foundation/pact-ruby/wiki/FAQ#how-does-pact-differ-from-vcr) to find out more about how Pact works.
+
+## Unit testing
+Each of the classes in these services are writter with TDD and so there is unit testing for each functionality introduced to all these
+services.
