@@ -58,6 +58,10 @@ http://localhost:8080/license-service/swagger-ui.html#/ :point_left: If you are 
 
 ## Discovery-Server (Eureka)
 
+<p>
+    <img src="https://user-images.githubusercontent.com/29547780/89736371-d8f6f400-da60-11ea-87ef-a982bde1d216.png"/>
+</p>
+
 This is a [Service Registry(Eureka)](https://github.com/spring-cloud/spring-cloud-netflix) which will allow our Services to be 
 able to register and de-register themselves to the Service Registry. Instead of all traffic making requests to the 
 Services directly by calling an explicit IP address e.g. http://192.0.33.1:8080, we will let our Service Registry worry
