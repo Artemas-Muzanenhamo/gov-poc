@@ -10,8 +10,10 @@ import com.gov.zw.repository.LicenseRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
+import static java.util.Objects.nonNull;
+import static java.util.Optional.ofNullable;
 
 @Service
 public class LicenseServiceImpl implements LicenseService {
@@ -19,8 +21,8 @@ public class LicenseServiceImpl implements LicenseService {
     private static final String THE_LICENSE_IS_INVALID = "The license is invalid!";
     private static final String IDENTITY_IS_INVALID_OR_DOES_NOT_EXIST = "Identity is invalid or does not exist!";
 
-    private IdentityClient identityClient;
-    private LicenseRepository licenseRepository;
+    private final IdentityClient identityClient;
+    private final LicenseRepository licenseRepository;
 
     public LicenseServiceImpl(IdentityClient identityClient, LicenseRepository licenseRepository) {
         this.identityClient = identityClient;
@@ -29,7 +31,7 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public void addLicense(License license) throws InvalidIdentityException, InvalidLicenseException {
-        IdentityReference identityReference = Optional.ofNullable(license)
+        IdentityReference identityReference = ofNullable(license)
                 .filter(this::isIdentityReferencePresent)
                 .map(this::getLicenseIdentityReference)
                 .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
@@ -43,10 +45,10 @@ public class LicenseServiceImpl implements LicenseService {
 
     private boolean isIdentityReferenceValid(IdentityReference identityReference) throws InvalidIdentityException {
         Identity identity = Optional.of(identityReference)
-                .map(idReferenceJson -> identityClient.findIdentityByIdReferenceNumber(idReferenceJson))
+                .map(identityClient::findIdentityByIdReferenceNumber)
                 .orElseThrow(() -> new InvalidIdentityException(IDENTITY_IS_INVALID_OR_DOES_NOT_EXIST));
 
-        return identityReference.getIdRef().equals(identity.getIdentityRef());
+        return identity.getIdentityRef().equals(identityReference.getIdRef());
     }
 
     @Override
@@ -56,7 +58,7 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public void updateLicense(License license) throws InvalidLicenseException {
-        License validLicense = Optional.ofNullable(license)
+        License validLicense = ofNullable(license)
                 .filter(this::isIdentityReferencePresent)
                 .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
         this.licenseRepository.save(validLicense);
@@ -64,14 +66,14 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public void removeLicense(License license) throws InvalidLicenseException {
-        License validLicense = Optional.ofNullable(license)
+        License validLicense = ofNullable(license)
                 .orElseThrow(() -> new InvalidLicenseException(THE_LICENSE_IS_INVALID));
         this.licenseRepository.delete(validLicense);
     }
 
     @Override
     public License getLicenseByIdentityRef(IdentityReference identityReference) throws InvalidLicenseException {
-        return Optional.ofNullable(identityReference)
+        return ofNullable(identityReference)
                 .map(IdentityReference::getIdRef)
                 .map(this::findLicenseByIdentityReference)
                 .orElseThrow((() -> new InvalidLicenseException("License IdRef is not valid")));
@@ -82,7 +84,7 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     private boolean isIdentityReferencePresent(License licenseDto) {
-        return Objects.nonNull(licenseDto.getIdentityRef());
+        return nonNull(licenseDto.getIdentityRef());
     }
 
     private IdentityReference getLicenseIdentityReference(License license) {
