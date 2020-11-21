@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "IdentityService", port = "9999")
 @PactFolder("../pacts")
-public class IdentityClientTest {
+class IdentityClientTest {
     private static final String IDENTITIES_REFERENCE_PATH = "/identities/reference";
     private static final String ID = "1";
     private static final String IDENTITY_REF = "MUZAN1234";
@@ -58,11 +58,6 @@ public class IdentityClientTest {
     @Test
     @PactTestFor(pactMethod = "retrievePatientIdentityPact")
     void verifyPatientIdentityPact(MockServer mockServer) {
-        Map<String, String> map = new HashMap<>();
-        map.put("idRef", "MUZAN1234");
-        map.put("id-name", "Artemas");
-        map.put("id-surname", "Muzanenhamo");
-
         Identity identity =
                 given()
                     .body(idReferenceJson().toString())

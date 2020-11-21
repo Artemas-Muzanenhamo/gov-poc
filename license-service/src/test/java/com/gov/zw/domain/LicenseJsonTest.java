@@ -40,8 +40,8 @@ class LicenseJsonTest {
                 EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
                 ADDRESS));
 
-        assertThat(licenseJson).isEqualTo(expectedLicenseJson);
-        assertThat(licenseJson.toString()).isEqualTo(expectedLicenseJson.toString());
-        assertThat(licenseJson.hashCode()).isEqualTo(expectedLicenseJson.hashCode());
+        assertThat(licenseJson).isEqualTo(expectedLicenseJson)
+                .hasToString(expectedLicenseJson.toString())
+                .hasSameHashCodeAs(expectedLicenseJson.hashCode());
     }
 }
