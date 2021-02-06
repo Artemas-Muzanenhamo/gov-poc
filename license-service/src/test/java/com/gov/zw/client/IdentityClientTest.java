@@ -64,20 +64,11 @@ public class IdentityClientTest {
                 .request()
                 .post(mockServer.getUrl() + IDENTITIES_REFERENCE_PATH).as(Identity.class);
 
-        Identity expectedIdentity =
-                new Identity(ID, IDENTITY_REF, NAME, SURNAME,
-                        BIRTH_DATE, VILLAGE_OF_ORIGIN,
-                        PLACE_OF_BIRTH, DATE_OF_ISSUE);
-        assertThat(identity.getId()).isEqualTo(expectedIdentity.getId());
-        assertThat(identity.getIdentityRef()).isEqualTo(expectedIdentity.getIdentityRef());
-        assertThat(identity.getName()).isEqualTo(expectedIdentity.getName());
-        assertThat(identity.getSurname()).isEqualTo(expectedIdentity.getSurname());
-        assertThat(identity.getBirthDate()).isEqualTo(expectedIdentity.getBirthDate());
-        assertThat(identity.getVillageOfOrigin()).isEqualTo(expectedIdentity.getVillageOfOrigin());
-        assertThat(identity.getPlaceOfBirth()).isEqualTo(expectedIdentity.getPlaceOfBirth());
-        assertThat(identity.getDateOfIssue()).isEqualTo(expectedIdentity.getDateOfIssue());
-        assertThat(identity).isEqualTo(expectedIdentity);
-        assertThat(identity.hashCode()).isEqualTo(expectedIdentity.hashCode());
+        Identity expectedIdentity = new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE, VILLAGE_OF_ORIGIN,
+                PLACE_OF_BIRTH, DATE_OF_ISSUE);
+        assertThat(identity)
+                .isNotNull()
+                .isEqualToComparingFieldByField(expectedIdentity);
     }
 
     // What I will send as a Request in the Pact JSON

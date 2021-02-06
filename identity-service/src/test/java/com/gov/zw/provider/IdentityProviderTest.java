@@ -39,8 +39,6 @@ public class IdentityProviderTest {
     @MockBean
     private IdentityService identityService;
 
-    private static final String IDENTITIES_REFERENCE = "/identities/reference";
-
     @LocalServerPort private int serverPort;
 
     @TestTemplate
