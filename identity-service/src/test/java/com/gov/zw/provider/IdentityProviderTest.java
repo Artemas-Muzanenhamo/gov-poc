@@ -7,9 +7,8 @@ import au.com.dius.pact.provider.junit5.HttpTestTarget;
 import au.com.dius.pact.provider.junit5.PactVerificationContext;
 import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvider;
 import com.gov.zw.IdentityServiceApplication;
-import com.gov.zw.domain.Identity;
-import com.gov.zw.domain.IdentityJson;
-import com.gov.zw.domain.IdentityReferenceJson;
+import com.gov.zw.dto.Identity;
+import com.gov.zw.dto.IdentityReference;
 import com.gov.zw.service.IdentityService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestTemplate;
@@ -29,10 +28,16 @@ import static org.mockito.Mockito.when;
         properties = "server.port=8080")
 public class IdentityProviderTest {
 
+    private static final String ID = "1";
+    private static final String IDENTITY_REF = "1";
+    private static final String NAME = "Artemas";
+    private static final String SURNAME = "Muzanenhamo";
+    private static final String BIRTH_DATE = "28/03/1990";
+    private static final String VILLAGE_OF_ORIGIN = "Mashayamombe";
+    private static final String PLACE_OF_BIRTH = "Harare";
+    private static final String DATE_OF_ISSUE = "22/01/2018";
     @MockBean
     private IdentityService identityService;
-
-    private static final String IDENTITIES_REFERENCE = "/identities/reference";
 
     @LocalServerPort private int serverPort;
 
@@ -53,10 +58,9 @@ public class IdentityProviderTest {
     })
     public void identityDetailsState() throws Exception {
 
-        Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo",
-                "28/03/1990", "Mashayamombe", "Harare", "22/01/2018");
-        IdentityJson identityJson = new IdentityJson(identity);
+        Identity identity = new Identity(ID, IDENTITY_REF, NAME, SURNAME,
+                BIRTH_DATE, VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE);
 
-        when(identityService.findIdentityByIdentityRef(any(IdentityReferenceJson.class))).thenReturn(identityJson);
+        when(identityService.findIdentityByIdentityRef(any(IdentityReference.class))).thenReturn(identity);
     }
 }

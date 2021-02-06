@@ -3,12 +3,16 @@ package com.gov.zw.domain;
 import java.util.Objects;
 
 public class IdentityNameJson {
-    public String name;
+    private String name;
 
-    public IdentityNameJson() { }
+    IdentityNameJson() { }
 
     public IdentityNameJson(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

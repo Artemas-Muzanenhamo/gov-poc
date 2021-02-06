@@ -23,10 +23,10 @@ public class DBSeeder implements CommandLineRunner {
                 "68 Jeremy Street, London, W1 7AA");
         Patient thomas = new Patient("THOMJ123", "Thomas", "Jefferson",
                 LocalDate.of(1990, 3, 28),
-                "68 Jeremy Street, London, W1 7AA");
+                "12 Wall Street, London, W1 7AA");
         Patient mark = new Patient("MARKS123", "Mark", "Smith",
                 LocalDate.of(1990, 3, 28),
-                "68 Jeremy Street, London, W1 7AA");
+                "38 Jim Street, London, W1 7AA");
 
         patientRepository.deleteAll();
 

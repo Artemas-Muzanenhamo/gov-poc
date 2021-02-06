@@ -1,16 +1,24 @@
 package com.gov.zw.controller;
 
+import com.gov.zw.dto.Identity;
 import com.gov.zw.domain.IdentityJson;
 import com.gov.zw.domain.IdentityNameJson;
 import com.gov.zw.domain.IdentityReferenceJson;
+import com.gov.zw.dto.IdentityName;
+import com.gov.zw.dto.IdentityReference;
+import com.gov.zw.exception.InvalidIdentityException;
+import com.gov.zw.exception.InvalidIdentityNameException;
+import com.gov.zw.exception.InvalidIdentityReferenceException;
 import com.gov.zw.service.IdentityService;
-import com.gov.zw.util.InvalidIdentityException;
-import com.gov.zw.util.InvalidIdentityNameException;
-import com.gov.zw.util.InvalidIdentityReferenceException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.gov.zw.mapper.IdentityListMapper.toIdentitiesJson;
+import static com.gov.zw.mapper.IdentityMapper.toIdentityDTO;
+import static com.gov.zw.mapper.IdentityMapper.toIdentityJson;
+import static com.gov.zw.mapper.IdentityNameMapper.toIdentityNameDTO;
+import static com.gov.zw.mapper.IdentityReferenceMapper.toIdentityRefDTO;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
@@ -25,44 +33,54 @@ public class IdentityController {
         this.identityServiceImpl = identityServiceImpl;
     }
 
-    // Create
     @PostMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    @ResponseStatus(value = OK)
+    @ResponseStatus(OK)
     public void saveIdentity(@RequestBody IdentityJson identityJson) throws InvalidIdentityException {
-        this.identityServiceImpl.save(identityJson);
+        Identity identity = toIdentityDTO(identityJson);
+        this.identityServiceImpl.save(identity);
     }
 
-    // Retrieve
     @PostMapping(value = "/name", produces = APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    @ResponseStatus(OK)
     public List<IdentityJson> getIdentitiesByName(@RequestBody IdentityNameJson identityNameJson) throws InvalidIdentityNameException {
-        return identityServiceImpl.findIdentitiesByName(identityNameJson);
+        IdentityName identityName = toIdentityNameDTO(identityNameJson);
+        List<Identity> identities = identityServiceImpl.findIdentitiesByName(identityName);
+        return toIdentitiesJson(identities);
     }
 
     @PostMapping(value = "/reference", produces = APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    @ResponseStatus(OK)
     public IdentityJson getIdentityByReferenceNumber(@RequestBody IdentityReferenceJson identityRefJson) throws InvalidIdentityReferenceException {
-        return identityServiceImpl.findIdentityByIdentityRef(identityRefJson);
+        IdentityReference identityReference = toIdentityRefDTO(identityRefJson);
+        Identity identity = identityServiceImpl.findIdentityByIdentityRef(identityReference);
+        return toIdentityJson(identity);
     }
 
     @GetMapping(produces = APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    @ResponseStatus(OK)
     public List<IdentityJson> getIdentities() {
-        return identityServiceImpl.findAll();
+        List<Identity> identities = identityServiceImpl.findAll();
+        return toIdentitiesJson(identities);
     }
 
-    //Update
     @PutMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @ResponseStatus(OK)
     public void updateIdentity(@RequestBody IdentityJson identityJson) throws InvalidIdentityException {
-        this.identityServiceImpl.save(identityJson);
+        Identity identity = toIdentityDTO(identityJson);
+        this.identityServiceImpl.save(identity);
     }
 
-    // Delete
     @DeleteMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @ResponseStatus(OK)
     public void deleteIdentity(@RequestBody IdentityJson identityJson) throws InvalidIdentityException {
-        this.identityServiceImpl.delete(identityJson);
+        Identity identity = toIdentityDTO(identityJson);
+        this.identityServiceImpl.delete(identity);
     }
 
 }

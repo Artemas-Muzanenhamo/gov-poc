@@ -1,86 +1,58 @@
 package com.gov.zw.service;
 
-import com.gov.zw.domain.*;
+import com.gov.zw.dto.Identity;
+import com.gov.zw.dto.IdentityName;
+import com.gov.zw.dto.IdentityReference;
+import com.gov.zw.exception.InvalidIdentityException;
+import com.gov.zw.exception.InvalidIdentityNameException;
+import com.gov.zw.exception.InvalidIdentityReferenceException;
 import com.gov.zw.repository.IdentityRepository;
-import com.gov.zw.util.InvalidIdentityException;
-import com.gov.zw.util.InvalidIdentityNameException;
-import com.gov.zw.util.InvalidIdentityReferenceException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.stream.Collectors.toList;
-
 @Service
 public class IdentityServiceImpl implements IdentityService {
 
     private final IdentityRepository identityRepository;
-    private final IdentityJsonMapper identityJsonMapper;
-    private final IdentityRefJsonMapper identityRefJsonMapper;
-    private final IdentityNameJsonMapper identityNameJsonMapper;
 
-    public IdentityServiceImpl(IdentityRepository identityRepository, IdentityJsonMapper identityJsonMapper,
-                               IdentityRefJsonMapper identityRefJsonMapper,
-                               IdentityNameJsonMapper identityNameJsonMapper) {
+    public IdentityServiceImpl(IdentityRepository identityRepository) {
         this.identityRepository = identityRepository;
-        this.identityJsonMapper = identityJsonMapper;
-        this.identityRefJsonMapper = identityRefJsonMapper;
-        this.identityNameJsonMapper = identityNameJsonMapper;
-    }
-
-    void save(Identity identity) throws InvalidIdentityException {
-        Optional<Identity> identityOptional = Optional.ofNullable(identity);
-        identityRepository.save(identityOptional
-                .orElseThrow( () -> new InvalidIdentityException("The Identity is invalid!")));
     }
 
     @Override
-    public void save(IdentityJson identityJson) throws InvalidIdentityException {
-        Identity identity = identityJsonMapper.toIdentity(identityJson);
-        save(identity);
-    }
-
-    List<IdentityJson> findIdentitiesByName(String name) throws InvalidIdentityNameException {
-        Optional<String> nameOptional = Optional.ofNullable(name);
-        List<Identity> identities = identityRepository.findIdentitiesByName(nameOptional
-                .orElseThrow(() -> new InvalidIdentityNameException("The name supplied does not exist!")));
-        return identities.stream().map(IdentityJson::new).collect(toList());
-    }
-
-    Identity findIdentityByIdentityRef(String idRef) throws InvalidIdentityReferenceException {
-        Optional<String> idReferenceOptional = Optional.ofNullable(idRef);
-        return identityRepository.findIdentityByIdentityRef(idReferenceOptional
-                .orElseThrow( () -> new InvalidIdentityReferenceException("The ID reference supplied is not valid!")));
+    public void save(Identity identity) throws InvalidIdentityException {
+        Identity validIdentity = Optional.ofNullable(identity)
+                .orElseThrow(() -> new InvalidIdentityException("The Identity is invalid!"));
+        identityRepository.save(validIdentity);
     }
 
     @Override
-    public IdentityJson findIdentityByIdentityRef(IdentityReferenceJson identityRefJson) throws InvalidIdentityReferenceException {
-        String idReference = identityRefJsonMapper.toIdentityRef(identityRefJson);
-        Identity identity = findIdentityByIdentityRef(idReference);
-        return new IdentityJson(identity);
+    public Identity findIdentityByIdentityRef(IdentityReference identityRef) throws InvalidIdentityReferenceException {
+        return Optional.ofNullable(identityRef)
+                .map(IdentityReference::getIdRef)
+                .map(identityRepository::findIdentityByIdentityRef)
+                .orElseThrow(() -> new InvalidIdentityReferenceException("The ID reference supplied is not valid!"));
     }
 
     @Override
-    public List<IdentityJson> findAll() {
-        return identityRepository.findAll().stream().map(IdentityJson::new).collect(toList());
-    }
-
-    void delete(Identity identity) throws InvalidIdentityException {
-        Optional<Identity> identityOptional = Optional.ofNullable(identity);
-        identityRepository.delete(identityOptional
-                .orElseThrow(() -> new InvalidIdentityException("The Identity to be deleted is invalid!")));
+    public List<Identity> findAll() {
+        return identityRepository.findAll();
     }
 
     @Override
-    public void delete(IdentityJson identityJson) throws InvalidIdentityException {
-        Identity identity = identityJsonMapper.toIdentity(identityJson);
-        delete(identity);
+    public void delete(Identity identity) throws InvalidIdentityException {
+        Identity id = Optional.ofNullable(identity)
+                .orElseThrow(() -> new InvalidIdentityException("The Identity to be deleted is invalid!"));
+        identityRepository.delete(id);
     }
 
     @Override
-    public List<IdentityJson> findIdentitiesByName(IdentityNameJson identityNameJson) throws InvalidIdentityNameException {
-        String identityName = identityNameJsonMapper.toIdentityName(identityNameJson);
-        return findIdentitiesByName(identityName);
+    public List<Identity> findIdentitiesByName(IdentityName identityName) throws InvalidIdentityNameException {
+        return Optional.ofNullable(identityName)
+                .map(IdentityName::getName)
+                .map(identityRepository::findIdentitiesByName)
+                .orElseThrow(() -> new InvalidIdentityNameException("The name supplied does not exist!"));
     }
 }

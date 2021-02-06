@@ -1,5 +1,6 @@
 package com.gov.zw.patient;
 
+import com.gov.zw.exceptions.InvalidPatientException;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -27,16 +28,22 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Mono<Patient> updatePatient(Patient updatedPatient) {
-        return patientRepository.save(updatedPatient);
+        Patient patient = Optional.ofNullable(updatedPatient)
+                .orElseThrow(() -> new InvalidPatientException("Invalid Patient"));
+        return patientRepository.save(patient);
     }
 
     @Override
     public Mono<Patient> getPatient(Optional<String> patientIdOptional) {
-        return patientIdOptional.map(patientRepository::findById).orElseGet(Mono::empty);
+        return patientIdOptional
+                .map(patientRepository::findById)
+                .orElseGet(Mono::empty);
     }
 
     @Override
     public Mono<Void> deletePatient(Optional<String> patientIdOptional) {
-        return patientIdOptional.map(patientRepository::deleteById).orElseGet(Mono::empty);
+        return patientIdOptional
+                .map(patientRepository::deleteById)
+                .orElseGet(Mono::empty);
     }
 }

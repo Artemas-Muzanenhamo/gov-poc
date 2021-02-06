@@ -1,14 +1,18 @@
 package com.gov.zw.controller;
 
 import com.gov.zw.client.IdentityReferenceJson;
+import com.gov.zw.client.dto.IdentityReference;
 import com.gov.zw.domain.LicenseJson;
+import com.gov.zw.dto.License;
 import com.gov.zw.service.LicenseService;
-import com.gov.zw.util.InvalidIdentityException;
-import com.gov.zw.util.InvalidLicenseException;
+import com.gov.zw.exception.InvalidIdentityException;
+import com.gov.zw.exception.InvalidLicenseException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.gov.zw.mapper.IdentityReferenceMapper.toIdentityReferenceDTO;
+import static com.gov.zw.mapper.LicenseMapper.*;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
@@ -23,34 +27,42 @@ public class LicenseController {
     }
 
     @PostMapping(produces = APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
     @ResponseStatus(value = OK)
     public void addLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException, InvalidIdentityException {
-        this.licenseServiceImpl.addLicense(licenseJson);
+        License license = toLicenseDTO(licenseJson);
+        this.licenseServiceImpl.addLicense(license);
     }
 
-    // Read
     @GetMapping(produces = APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
     public List<LicenseJson> getAllLicenses() {
-        return this.licenseServiceImpl.getAllLicenses();
+        List<License> licenses = this.licenseServiceImpl.getAllLicenses();
+        return toLicenseJsonList(licenses);
     }
 
     @PostMapping(produces = APPLICATION_JSON_UTF8_VALUE, value = "ref")
+    @ResponseBody
     public LicenseJson getLicenseByIdentityRef(@RequestBody IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException {
-        return this.licenseServiceImpl.getLicenseByIdentityRef(identityReferenceJson);
+        IdentityReference identityReference = toIdentityReferenceDTO(identityReferenceJson);
+        License license = this.licenseServiceImpl.getLicenseByIdentityRef(identityReference);
+        return toLicenseJson(license);
     }
 
-    // Update
     @PutMapping(produces = APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
     @ResponseStatus(value = OK)
     public void updateLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException {
-        this.licenseServiceImpl.updateLicense(licenseJson);
+        License license = toLicenseDTO(licenseJson);
+        this.licenseServiceImpl.updateLicense(license);
     }
 
-    // Delete
     @DeleteMapping(produces = APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
     @ResponseStatus(value = OK)
     public void deleteLicense(@RequestBody LicenseJson licenseJson) throws InvalidLicenseException {
-        this.licenseServiceImpl.removeLicense(licenseJson);
+        License license = toLicenseDTO(licenseJson);
+        this.licenseServiceImpl.removeLicense(license);
     }
 
 }

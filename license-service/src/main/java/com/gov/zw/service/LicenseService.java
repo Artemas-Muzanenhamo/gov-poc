@@ -1,20 +1,20 @@
 package com.gov.zw.service;
 
-import com.gov.zw.client.IdentityReferenceJson;
-import com.gov.zw.domain.LicenseJson;
-import com.gov.zw.util.InvalidIdentityException;
-import com.gov.zw.util.InvalidLicenseException;
+import com.gov.zw.client.dto.IdentityReference;
+import com.gov.zw.dto.License;
+import com.gov.zw.exception.InvalidIdentityException;
+import com.gov.zw.exception.InvalidLicenseException;
 
 import java.util.List;
 
 public interface LicenseService {
-    void addLicense(LicenseJson licenseJson) throws InvalidIdentityException, InvalidLicenseException;
+    void addLicense(License license) throws InvalidIdentityException, InvalidLicenseException;
 
-    List<LicenseJson> getAllLicenses();
+    List<License> getAllLicenses();
 
-    void updateLicense(LicenseJson licenseJson) throws InvalidLicenseException;
+    void updateLicense(License license) throws InvalidLicenseException;
 
-    void removeLicense(LicenseJson licenseJson) throws InvalidLicenseException;
+    void removeLicense(License license) throws InvalidLicenseException;
 
-    LicenseJson getLicenseByIdentityRef(IdentityReferenceJson identityReferenceJson) throws InvalidLicenseException;
+    License getLicenseByIdentityRef(IdentityReference identityReference) throws InvalidLicenseException;
 }

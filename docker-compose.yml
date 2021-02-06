@@ -5,11 +5,13 @@ services:
     container_name: configuration-server
     ports:
       - "8888:8888"
+    restart: always
   discovery-server:
     build: ./discovery-server
     container_name: discovery-server
     ports:
       - "8761:8761"
+    restart: always
   gateway:
     build: ./gateway
     container_name: gateway
@@ -58,9 +60,15 @@ services:
       - discovery-server
       - mongo-db-service
   mongo-db-service:
-    build: ./mongodb
+    image: mongo:latest
     container_name: mongo_db
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ./data/db:/data/db
     ports:
-      - "27018:27017"
+      - 27017:27017
+#    command: mongod --smallfiles --logpath=/dev/null # --quiet
     restart: always
 # TODO: Get containers to build sequentially.

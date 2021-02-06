@@ -1,6 +1,7 @@
 package com.gov.zw.client;
 
 
+import com.gov.zw.client.dto.IdentityReference;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -12,5 +13,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface IdentityClient {
 
     @PostMapping(value = "/identities/reference", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    Identity findIdentityByIdReferenceNumber(@RequestBody IdentityReferenceJson identityReferenceJson);
+    Identity findIdentityByIdReferenceNumber(@RequestBody IdentityReference identityReference);
 }

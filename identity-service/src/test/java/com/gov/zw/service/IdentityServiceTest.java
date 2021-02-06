@@ -1,11 +1,13 @@
 package com.gov.zw.service;
 
-import com.gov.zw.domain.*;
+import com.gov.zw.dto.Identity;
+import com.gov.zw.dto.IdentityName;
+import com.gov.zw.dto.IdentityReference;
 import com.gov.zw.repository.IdentityRepository;
-import com.gov.zw.util.InvalidIdentityException;
-import com.gov.zw.util.InvalidIdentityNameException;
-import com.gov.zw.util.InvalidIdentityReferenceException;
-import org.jetbrains.annotations.NotNull;
+import com.gov.zw.exception.InvalidIdentityException;
+import com.gov.zw.exception.InvalidIdentityNameException;
+import com.gov.zw.exception.InvalidIdentityReferenceException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,8 +15,8 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -24,26 +26,30 @@ import static org.mockito.Mockito.*;
 @ExtendWith(SpringExtension.class)
 class IdentityServiceTest {
 
+    private static final String ID = "1";
+    private static final String IDENTITY_REF = "1";
+    private static final String NAME = "Artemas";
+    private static final String SURNAME = "Muzanenhamo";
+    private static final String BIRTH_DATE = "28/03/1990";
+    private static final String VILLAGE_OF_ORIGIN = "Mashayamombe";
+    private static final String PLACE_OF_BIRTH = "Harare";
+    private static final String DATE_OF_ISSUE = "17/11/2017";
     @InjectMocks
     private IdentityServiceImpl identityService;
     @Mock
     private IdentityRepository identityRepository;
-    @Mock
-    private IdentityJsonMapper identityJsonMapper;
-    @Mock
-    private IdentityRefJsonMapper identityRefJsonMapper;
-    @Mock
-    private IdentityNameJsonMapper identityNameJsonMapper;
 
     @Test
-    void should_throw_an_exception_when_an_invalid_identity_is_passed() {
-        assertThrows(InvalidIdentityException.class, () -> identityService.save((IdentityJson) null));
+    @DisplayName("Should throw an InvalidIdentityException when an invalid identity is passed")
+    void throwExceptionWhenInvalidIdentityIsPassed() {
+        assertThrows(InvalidIdentityException.class, () -> identityService.save(null));
     }
 
     @Test
-    void should_save_identity_if_identity_details_exist() throws InvalidIdentityException {
-        Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
-                "Mashayamombe", "Harare", "17/11/2017");
+    @DisplayName("Should save identity if identity details exist")
+    void saveIdentity() throws InvalidIdentityException {
+        Identity identity = new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
+                VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE);
 
         identityService.save(identity);
 
@@ -51,72 +57,83 @@ class IdentityServiceTest {
     }
 
     @Test
-    void should_return_a_name_if_name_exists() throws InvalidIdentityNameException {
-        List<Identity> identities = Arrays.asList(new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
-                "Mashayamombe", "Harare", "17/11/2017"));
-        List<IdentityJson> expectedIdentityJsonList = getIdentityListJson(identities);
-        given(identityRepository.findIdentitiesByName(identities.get(0).getName())).willReturn(identities);
+    @DisplayName("Should find identities by name")
+    void findIdentitiesByName() throws InvalidIdentityNameException {
+        List<Identity> identities = Collections.singletonList(new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
+                VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE));
+        IdentityName identityName = new IdentityName("Artemas");
+        given(identityRepository.findIdentitiesByName(identityName.getName())).willReturn(identities);
 
-        List<IdentityJson> identityJsonList = identityService.findIdentitiesByName("Artemas");
+        List<Identity> identitiesByName = identityService.findIdentitiesByName(identityName);
 
-        assertThat(identityJsonList).isEqualTo(expectedIdentityJsonList);
-    }
-
-    @NotNull
-    private List<IdentityJson> getIdentityListJson(List<Identity> identities) {
-        return identities.stream().map(IdentityJson::new).collect(Collectors.toList());
+        assertThat(identitiesByName).isNotEmpty();
     }
 
     @Test
-    void should_throw_an_exception_when_an_invalid_name_is_passed() {
-        assertThrows(InvalidIdentityNameException.class, () -> identityService.findIdentitiesByName((IdentityNameJson) null));
+    @DisplayName("Should throw an InvalidIdentityNameException when an invalid name is passed")
+    void throwExceptionWhenInvalidNameIsPassed() {
+        assertThrows(InvalidIdentityNameException.class, () -> identityService.findIdentitiesByName(null));
     }
 
     @Test
-    void should_throw_exception_when__an_invalid_idRef_is_passed() {
-        assertThrows(InvalidIdentityReferenceException.class, () ->identityService.findIdentityByIdentityRef((IdentityReferenceJson) null));
+    @DisplayName("Should throw an InvalidIdentityReferenceException when an invalid IdRef is passed")
+    void throwExceptionWhenInvalidIdRefIsPassed() {
+        assertThrows(InvalidIdentityReferenceException.class, () ->identityService.findIdentityByIdentityRef((IdentityReference) null));
     }
 
     @Test
-    void should_return_an_identity_if_id_reference_is_valid() throws InvalidIdentityReferenceException {
-        Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
-                "Mashayamombe", "Harare", "17/11/2017");
+    @DisplayName("Should return an identity by identity reference")
+    void getIdentityByIdReference() throws InvalidIdentityReferenceException {
+        Identity identity = new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
+                VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE);
+        IdentityReference identityReference = new IdentityReference(IDENTITY_REF);
         given(identityRepository.findIdentityByIdentityRef(identity.getIdentityRef())).willReturn(identity);
 
-        Identity identityByIdentityRef = identityService.findIdentityByIdentityRef("1");
+        Identity identityByIdentityRef = identityService.findIdentityByIdentityRef(identityReference);
 
         assertThat(identityByIdentityRef).isEqualTo(identity);
         assertThat(identityByIdentityRef.getName()).isEqualTo("Artemas");
     }
 
     @Test
-    void should_return_a_list_of_all_identities() {
+    @DisplayName("Should return a list of all identities")
+    void returnAllIdentities() {
         List<Identity> identities = Arrays.asList(
-                new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
-                        "Mashayamombe", "Harare", "17/11/2017"),
-                new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
-                        "Mashayamombe", "Harare", "17/11/2017"),
-                new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
-                        "Mashayamombe", "Harare", "17/11/2017")
+                new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
+                        VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE),
+                new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
+                        VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE),
+                new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
+                        VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE)
         );
         given(identityRepository.findAll()).willReturn(identities);
-        List<IdentityJson> expectedIdentityListJson = getIdentityListJson(identities);
 
-        List<IdentityJson> identityJsonList = identityService.findAll();
+        List<Identity> identityJsonList = identityService.findAll();
 
+        assertThat(identityJsonList).isNotEmpty();
         assertThat(identityJsonList.size()).isEqualTo(3);
-        assertThat(identityJsonList).isEqualTo(expectedIdentityListJson);
+        Identity identity = identityJsonList.get(0);
+        assertThat(identity.getId()).isEqualTo(ID);
+        assertThat(identity.getIdentityRef()).isEqualTo(IDENTITY_REF);
+        assertThat(identity.getName()).isEqualTo(NAME);
+        assertThat(identity.getSurname()).isEqualTo(SURNAME);
+        assertThat(identity.getBirthDate()).isEqualTo(BIRTH_DATE);
+        assertThat(identity.getVillageOfOrigin()).isEqualTo(VILLAGE_OF_ORIGIN);
+        assertThat(identity.getPlaceOfBirth()).isEqualTo(PLACE_OF_BIRTH);
+        assertThat(identity.getDateOfIssue()).isEqualTo(DATE_OF_ISSUE);
     }
 
     @Test
-    void should_throw_an_exception_when_an_invalid_identity_is_passed_to_be_deleted() {
-        assertThrows(InvalidIdentityException.class, () -> identityService.delete((IdentityJson) null));
+    @DisplayName("Should throw an InvalidIdentityException when an invalid identity is passed to be deleted")
+    void throwExceptionWhenInvalidIdentityIsToBeDeleted() {
+        assertThrows(InvalidIdentityException.class, () -> identityService.delete(null));
     }
 
     @Test
-    void should_delete_an_identity_if_the_identity_is_valid() throws InvalidIdentityException {
-        Identity identity = new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
-                "Mashayamombe", "Harare", "17/11/2017");
+    @DisplayName("Should delete an Identity")
+    void deleteIdentity() throws InvalidIdentityException {
+        Identity identity = new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
+                VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE);
 
         identityService.delete(identity);
 
