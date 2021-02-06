@@ -3,7 +3,7 @@ package com.gov.zw.client.dto;
 import java.util.Objects;
 
 public class IdentityReference {
-    private String idRef;
+    private final String idRef;
 
     public IdentityReference(String idRef) {
         this.idRef = idRef;
