@@ -60,4 +60,7 @@ tasks.withType(JavaCompile) {
 
 test {
     useJUnitPlatform()
+    testLogging {
+        events = ["passed", "failed", "skipped"]
+    }
 }
