@@ -22,6 +22,8 @@ class LicenseRepositoryTest {
 
     @BeforeEach
     void addToRepository() {
+        this.licenseRepository.deleteAll();
+
         List<License> licenseList = Arrays.asList(
                 new License("1", "1", "Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
                         "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
@@ -50,7 +52,9 @@ class LicenseRepositoryTest {
         License license = new License("5", "5", "James", "Lebron", "28/03/1990", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                 "01.jpg", "123 Glendale, Harare, Zimbabwe");
+
         this.licenseRepository.save(license);
+
         List<License> licenses = this.licenseRepository.findAll();
         Assertions.assertThat(licenses.get(4).getFirstNames()).isEqualTo("Lebron");
         Assertions.assertThat(licenses.size()).isEqualTo(5);
@@ -59,6 +63,7 @@ class LicenseRepositoryTest {
     @Test
     void findAllLicenses() {
         List<License> licenses = this.licenseRepository.findAll();
+
         Assertions.assertThat(licenses.size()).isEqualTo(4);
         Assertions.assertThat(licenses.get(0).getAgency()).isEqualTo("ZDVLA");
         Assertions.assertThat(licenses.get(0).getDateOfBirth()).isEqualTo("28/03/1990");
@@ -69,7 +74,9 @@ class LicenseRepositoryTest {
         License license = new License("4", "4", "Charlie", "Delta Golf", "28/03/1990", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                 "01.jpg", "123 Glendale, Harare, Zimbabwe");
+
         this.licenseRepository.save(license);
+
         List<License> licenses = this.licenseRepository.findAll();
         Assertions.assertThat(licenses.size()).isEqualTo(4);
         Assertions.assertThat(licenses.get(3).getSurname()).isEqualTo("Charlie");
