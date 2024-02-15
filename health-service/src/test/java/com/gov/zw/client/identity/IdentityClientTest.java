@@ -13,12 +13,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "IdentityService", port = "9999")
@@ -39,7 +41,7 @@ class IdentityClientTest {
 
         // Set Headers
         Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json;charset=UTF-8");
+        headers.put("Content-Type", APPLICATION_JSON_VALUE);
 
         // build the request/response
         return builder
@@ -47,7 +49,7 @@ class IdentityClientTest {
                     .uponReceiving("a request from the Health-Service consumer")
                     .path(IDENTITIES_REFERENCE_PATH)
                     .method(HttpMethod.POST.name())
-                    .body(idReferenceJson().toString(), "application/json;charset=UTF-8")
+                    .body(idReferenceJson().toString(), APPLICATION_JSON_VALUE)
                 .willRespondWith()
                     .status(HttpStatus.OK.value())
                     .headers(headers)
@@ -61,8 +63,8 @@ class IdentityClientTest {
         Identity identity =
                 given()
                     .body(idReferenceJson().toString())
-                    .accept("application/json;charset=UTF-8")
-                    .contentType("application/json;charset=UTF-8")
+                    .accept(APPLICATION_JSON_VALUE)
+                    .contentType(APPLICATION_JSON_VALUE)
                 .then()
                     .request()
                     .post(mockServer.getUrl() + IDENTITIES_REFERENCE_PATH).as(Identity.class);
@@ -79,8 +81,7 @@ class IdentityClientTest {
         assertThat(identity.getVillageOfOrigin()).isEqualTo(expectedIdentity.getVillageOfOrigin());
         assertThat(identity.getPlaceOfBirth()).isEqualTo(expectedIdentity.getPlaceOfBirth());
         assertThat(identity.getDateOfIssue()).isEqualTo(expectedIdentity.getDateOfIssue());
-        assertThat(identity).isEqualTo(expectedIdentity);
-        assertThat(identity.hashCode()).isEqualTo(expectedIdentity.hashCode());
+        assertThat(identity).isEqualTo(expectedIdentity).hasSameHashCodeAs(expectedIdentity);
     }
 
     // What I will send as a Request in the Pact JSON

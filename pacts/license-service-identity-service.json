@@ -12,7 +12,7 @@
         "method": "POST",
         "path": "/identities/reference",
         "headers": {
-          "Content-Type": "application/json;charset\u003dUTF-8"
+          "Content-Type": "application/json"
         },
         "body": {
           "idRef": "MUZAN1234"
@@ -21,7 +21,7 @@
       "response": {
         "status": 200,
         "headers": {
-          "Content-Type": "application/json;charset\u003dUTF-8"
+          "Content-Type": "application/json"
         },
         "body": {
           "placeOfBirth": "Harare",

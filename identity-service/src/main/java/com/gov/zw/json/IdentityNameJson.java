@@ -1,13 +1,13 @@
-package com.gov.zw.dto;
+package com.gov.zw.json;
 
 import java.util.Objects;
 
-public class IdentityName {
+public class IdentityNameJson {
     private String name;
 
-    public IdentityName() { }
+    IdentityNameJson() { }
 
-    public IdentityName(String name) {
+    public IdentityNameJson(String name) {
         this.name = name;
     }
 
@@ -16,10 +16,17 @@ public class IdentityName {
     }
 
     @Override
+    public String toString() {
+        return "IdentityNameJson{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        IdentityName that = (IdentityName) o;
+        IdentityNameJson that = (IdentityNameJson) o;
         return Objects.equals(name, that.name);
     }
 

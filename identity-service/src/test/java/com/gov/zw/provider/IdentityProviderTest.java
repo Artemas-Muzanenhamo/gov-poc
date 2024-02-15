@@ -7,8 +7,8 @@ import au.com.dius.pact.provider.junit5.HttpTestTarget;
 import au.com.dius.pact.provider.junit5.PactVerificationContext;
 import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvider;
 import com.gov.zw.IdentityServiceApplication;
-import com.gov.zw.dto.Identity;
-import com.gov.zw.dto.IdentityReference;
+import com.gov.zw.domain.Identity;
+import com.gov.zw.domain.IdentityReference;
 import com.gov.zw.service.IdentityService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestTemplate;
@@ -24,9 +24,8 @@ import static org.mockito.Mockito.when;
 @Provider("identity-service")
 @PactFolder("../pacts")
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = IdentityServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
-        properties = "server.port=8080")
-public class IdentityProviderTest {
+@SpringBootTest(classes = IdentityServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, properties = "server.port=8080")
+class IdentityProviderTest {
 
     private static final String ID = "1";
     private static final String IDENTITY_REF = "1";

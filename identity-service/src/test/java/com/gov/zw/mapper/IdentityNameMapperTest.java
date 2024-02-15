@@ -1,12 +1,12 @@
 package com.gov.zw.mapper;
 
-import com.gov.zw.domain.IdentityNameJson;
-import com.gov.zw.dto.IdentityName;
+import com.gov.zw.json.IdentityNameJson;
+import com.gov.zw.domain.IdentityName;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.gov.zw.mapper.IdentityNameMapper.toIdentityNameDTO;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class IdentityNameMapperTest {
 
@@ -19,7 +19,8 @@ class IdentityNameMapperTest {
 
         IdentityName name = toIdentityNameDTO(identityNameJson);
 
-        assertThat(name).isNotNull();
-        assertThat(name.getName()).isEqualTo(NAME);
+        assertThat(name)
+                .isNotNull()
+                .extracting(IdentityName::getName).isEqualTo(NAME);
     }
 }

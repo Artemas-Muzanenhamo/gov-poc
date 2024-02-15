@@ -1,7 +1,7 @@
 package com.gov.zw.mapper;
 
-import com.gov.zw.domain.IdentityReferenceJson;
-import com.gov.zw.dto.IdentityReference;
+import com.gov.zw.json.IdentityReferenceJson;
+import com.gov.zw.domain.IdentityReference;
 
 import java.util.Optional;
 

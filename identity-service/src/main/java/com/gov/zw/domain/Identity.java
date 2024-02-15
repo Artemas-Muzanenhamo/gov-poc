@@ -1,4 +1,4 @@
-package com.gov.zw.dto;
+package com.gov.zw.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-/**
- * Created by Artemas on 18/11/2017.
- */
 @Document(collection = "Identities")
 @Data
 @NoArgsConstructor

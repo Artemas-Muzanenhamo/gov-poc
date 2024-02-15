@@ -1,4 +1,4 @@
-package com.gov.zw.dto;
+package com.gov.zw.domain;
 
 import java.util.Objects;
 

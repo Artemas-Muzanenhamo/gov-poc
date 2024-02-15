@@ -1,8 +1,8 @@
 package com.gov.zw.service;
 
-import com.gov.zw.dto.Identity;
-import com.gov.zw.dto.IdentityName;
-import com.gov.zw.dto.IdentityReference;
+import com.gov.zw.domain.Identity;
+import com.gov.zw.domain.IdentityName;
+import com.gov.zw.domain.IdentityReference;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidIdentityNameException;
 import com.gov.zw.exception.InvalidIdentityReferenceException;
@@ -45,6 +45,7 @@ public class IdentityServiceImpl implements IdentityService {
     public void delete(Identity identity) throws InvalidIdentityException {
         Identity id = Optional.ofNullable(identity)
                 .orElseThrow(() -> new InvalidIdentityException("The Identity to be deleted is invalid!"));
+
         identityRepository.delete(id);
     }
 

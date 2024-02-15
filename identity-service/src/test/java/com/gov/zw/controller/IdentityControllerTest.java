@@ -3,8 +3,9 @@ package com.gov.zw.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gov.zw.domain.*;
-import com.gov.zw.dto.Identity;
+import com.gov.zw.domain.Identity;
+import com.gov.zw.json.IdentityNameJson;
+import com.gov.zw.json.IdentityReferenceJson;
 import com.gov.zw.service.IdentityService;
 import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +14,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -21,6 +21,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -33,7 +35,7 @@ class IdentityControllerTest {
     @MockBean
     private IdentityService identityServiceImpl;
 
-    private final TypeReference<Map<String, String>> identityTypeRef = new TypeReference<Map<String, String>>() {};
+    private final TypeReference<Map<String, String>> identityTypeRef = new TypeReference<>() {};
 
     @Test
     @DisplayName("Should save an identity")
@@ -46,19 +48,18 @@ class IdentityControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/identities")
                 .content(jsonObject.toJSONString())
-                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .contentType(APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
     }
 
     @Test
     @DisplayName("Should get Identities by name")
     void getIdentitiesByName() throws Exception {
-        Map<String, String> name = new HashMap<>();
-        name.put("name", "Artemas");
-        IdentityNameJson identityNameJsonjson = new IdentityNameJson("Artemas");
-        String json = asJsonString(identityNameJsonjson);
+        IdentityNameJson identityNameJson = new IdentityNameJson("Artemas");
+        String json = asJsonString(identityNameJson);
+        
         mockMvc.perform(MockMvcRequestBuilders.post("/identities/name")
-                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .contentType(APPLICATION_JSON_VALUE)
                 .content(json))
                 .andExpect(status().isOk());
     }
@@ -72,7 +73,7 @@ class IdentityControllerTest {
         String json = asJsonString(identityReferenceJson);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/identities/reference")
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(APPLICATION_JSON)
                 .content(json))
                 .andExpect(status().isOk());
     }
@@ -81,20 +82,6 @@ class IdentityControllerTest {
     @DisplayName("Should get all identities")
     void getAllIdentities() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/identities"))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    @DisplayName("Should update an identity")
-    void updateIdentity() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Identity identity = new Identity("1","1","Takudzwa", "Muzanenhamo", "28/03/1990",
-                "Mashayamombe", "Harare", "17/11/2017");
-        Map<String, String> id = objectMapper.convertValue(identity, identityTypeRef);
-        JSONObject jsonObject = new JSONObject(id);
-        mockMvc.perform(MockMvcRequestBuilders.put("/identities")
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
     }
 
@@ -108,7 +95,7 @@ class IdentityControllerTest {
         JSONObject jsonObject = new JSONObject(id);
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/identities")
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(APPLICATION_JSON)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
     }

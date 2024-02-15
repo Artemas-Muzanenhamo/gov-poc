@@ -1,4 +1,4 @@
-package com.gov.zw.domain;
+package com.gov.zw.json;
 
 import java.util.Map;
 import java.util.Objects;

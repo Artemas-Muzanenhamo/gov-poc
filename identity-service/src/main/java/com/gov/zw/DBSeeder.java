@@ -1,6 +1,6 @@
 package com.gov.zw;
 
-import com.gov.zw.dto.Identity;
+import com.gov.zw.domain.Identity;
 import com.gov.zw.repository.IdentityRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

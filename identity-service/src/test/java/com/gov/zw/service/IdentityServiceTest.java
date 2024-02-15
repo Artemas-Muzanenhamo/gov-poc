@@ -1,8 +1,8 @@
 package com.gov.zw.service;
 
-import com.gov.zw.dto.Identity;
-import com.gov.zw.dto.IdentityName;
-import com.gov.zw.dto.IdentityReference;
+import com.gov.zw.domain.Identity;
+import com.gov.zw.domain.IdentityName;
+import com.gov.zw.domain.IdentityReference;
 import com.gov.zw.repository.IdentityRepository;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidIdentityNameException;
@@ -78,7 +78,7 @@ class IdentityServiceTest {
     @Test
     @DisplayName("Should throw an InvalidIdentityReferenceException when an invalid IdRef is passed")
     void throwExceptionWhenInvalidIdRefIsPassed() {
-        assertThrows(InvalidIdentityReferenceException.class, () ->identityService.findIdentityByIdentityRef((IdentityReference) null));
+        assertThrows(InvalidIdentityReferenceException.class, () -> identityService.findIdentityByIdentityRef(null));
     }
 
     @Test
@@ -110,8 +110,7 @@ class IdentityServiceTest {
 
         List<Identity> identityJsonList = identityService.findAll();
 
-        assertThat(identityJsonList).isNotEmpty();
-        assertThat(identityJsonList.size()).isEqualTo(3);
+        assertThat(identityJsonList).isNotEmpty().hasSize(3);
         Identity identity = identityJsonList.get(0);
         assertThat(identity.getId()).isEqualTo(ID);
         assertThat(identity.getIdentityRef()).isEqualTo(IDENTITY_REF);

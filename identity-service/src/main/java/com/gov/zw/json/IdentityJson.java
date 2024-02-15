@@ -1,9 +1,10 @@
-package com.gov.zw.domain;
+package com.gov.zw.json;
 
-import com.gov.zw.dto.Identity;
+import lombok.Getter;
 
 import java.util.Objects;
 
+@Getter
 public class IdentityJson {
 
     private String id;
@@ -17,17 +18,6 @@ public class IdentityJson {
 
     public IdentityJson() { }
 
-    public IdentityJson(Identity identity) {
-        this.id = identity.getId();
-        this.identityRef = identity.getIdentityRef();
-        this.name = identity.getName();
-        this.surname = identity.getSurname();
-        this.birthDate = identity.getBirthDate();
-        this.villageOfOrigin = identity.getVillageOfOrigin();
-        this.placeOfBirth = identity.getPlaceOfBirth();
-        this.dateOfIssue = identity.getDateOfIssue();
-    }
-
     public IdentityJson(String id, String identityRef, String name, String surname, String birthDate, String villageOfOrigin, String placeOfBirth, String dateOfIssue) {
         this.id = id;
         this.identityRef = identityRef;
@@ -37,38 +27,6 @@ public class IdentityJson {
         this.villageOfOrigin = villageOfOrigin;
         this.placeOfBirth = placeOfBirth;
         this.dateOfIssue = dateOfIssue;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getIdentityRef() {
-        return identityRef;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public String getBirthDate() {
-        return birthDate;
-    }
-
-    public String getVillageOfOrigin() {
-        return villageOfOrigin;
-    }
-
-    public String getPlaceOfBirth() {
-        return placeOfBirth;
-    }
-
-    public String getDateOfIssue() {
-        return dateOfIssue;
     }
 
     @Override

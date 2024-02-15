@@ -1,7 +1,7 @@
 package com.gov.zw.mapper;
 
-import com.gov.zw.domain.IdentityNameJson;
-import com.gov.zw.dto.IdentityName;
+import com.gov.zw.json.IdentityNameJson;
+import com.gov.zw.domain.IdentityName;
 
 public class IdentityNameMapper {
     private IdentityNameMapper() {

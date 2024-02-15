@@ -48,9 +48,7 @@ mvnw.cmd
 /configuration-server/.gradle/
 /configuration-server/build/
 /configuration-server/gradlew.bat
-/configuration-server/gradlew
 /discovery-server/gradlew.bat
-/discovery-server/gradlew
 /discovery-server/build/
 /gateway/.gradle/
 /discovery-server/.gradle/

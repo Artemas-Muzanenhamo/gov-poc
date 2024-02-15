@@ -1,7 +1,7 @@
 package com.gov.zw.mapper;
 
-import com.gov.zw.domain.IdentityReferenceJson;
-import com.gov.zw.dto.IdentityReference;
+import com.gov.zw.json.IdentityReferenceJson;
+import com.gov.zw.domain.IdentityReference;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.gov.zw.mapper.IdentityReferenceMapper.toIdentityRefDTO;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class IdentityReferenceMapperTest {
 
@@ -24,8 +24,9 @@ class IdentityReferenceMapperTest {
 
         IdentityReference identityReference = toIdentityRefDTO(identityReferenceJson);
 
-        assertThat(identityReference).isNotNull();
-        assertThat(identityReference.getIdRef()).isEqualTo(ID_REFERENCE);
+        assertThat(identityReference)
+                .isNotNull()
+                .extracting(IdentityReference::getIdRef).isEqualTo(ID_REFERENCE);
     }
 
     @Test
