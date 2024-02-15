@@ -1,42 +1,37 @@
 plugins {
+    id 'idea'
     id 'java'
-    id 'maven'
     id 'jacoco'
-    id 'org.springframework.boot' version '2.0.4.RELEASE'
-    id "au.com.dius.pact" version "3.6.11"
+    id 'org.springframework.boot' version '2.2.9.RELEASE'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id "au.com.dius.pact" version "3.6.15"
 }
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+apply plugin: 'io.spring.dependency-management'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile "org.springframework.boot:spring-boot-starter-web:${springVersion}"
-    compile "org.springframework.boot:spring-boot-starter-actuator:${springVersion}"
-    compile "org.springframework.boot:spring-boot-starter-data-rest:${springVersion}"
-    compile "org.springframework.boot:spring-boot-starter-data-mongodb:${springVersion}"
-    compile "org.springframework.cloud:spring-cloud-starter-config:${springVersion}"
-    runtime "org.springframework.boot:spring-boot-devtools:${springVersion}"
-    compile "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:${springVersion}"
-    compile "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    compile "com.google.code.gson:gson:${gsonVersion}"
-    compile "au.com.dius:pact-jvm-provider-junit5_2.12:${pactJunit5Version}"
-    compile "io.springfox:springfox-swagger2:2.9.2"
-    compile "io.springfox:springfox-swagger-ui:2.9.2"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-data-rest"
+    implementation "org.springframework.boot:spring-boot-starter-data-mongodb"
+    implementation "org.springframework.cloud:spring-cloud-starter-config:2.2.8.RELEASE"
+    implementation "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.2.9.RELEASE"
+    implementation "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    implementation "io.springfox:springfox-boot-starter:3.0.0"
+    implementation "io.springfox:springfox-swagger-ui:3.0.0"
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    testCompile "org.mockito:mockito-junit-jupiter:${mockitoJunit5Version}"
-    testCompile "org.springframework.boot:spring-boot-starter-test:${springVersion}"
-    testCompile "de.flapdoodle.embed:de.flapdoodle.embed.mongo:${mongoVersion}"
-    testCompile "org.springframework:spring-jdbc:${springJdbcVersion}"
-    testCompile "au.com.dius:pact-jvm-provider-junit5_2.12:${pactJunit5Version}"
-    testCompile "au.com.dius:pact-jvm-model:${pactJunit5Version}"
-    testCompile "com.github.rest-driver:rest-client-driver:${restClientDriverVersion}"
-    testCompile "org.junit.jupiter:junit-jupiter-api:${junit5Version}"
-    testCompile "org.junit.jupiter:junit-jupiter-engine:${junit5Version}"
-    testCompile "net.minidev:json-smart:${jsonSmartVersion}"
-//    testCompile 'ru.lanwen.wiremock:wiremock-junit5:1.1.1'
-//    testCompile 'com.github.tomakehurst:wiremock:2.19.0'
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "de.flapdoodle.embed:de.flapdoodle.embed.mongo:${mongoVersion}"
+    testImplementation "au.com.dius:pact-jvm-provider-junit5_2.12:${pactJunit5Version}"
+    testImplementation "au.com.dius:pact-jvm-model:${pactJunit5Version}"
 }
 
 bootRun {
@@ -55,6 +50,6 @@ tasks.withType(JavaCompile) {
 test {
     useJUnitPlatform()
     testLogging {
-        events = ["passed", "failed", "skipped"]
+        events = ["PASSED", "FAILED", "SKIPPED"]
     }
 }
