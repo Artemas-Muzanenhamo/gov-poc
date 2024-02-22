@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-/**
- * Created by Artemas on 18/11/2017.
- */
 @Document(collection = "Identities")
 @Data
 @NoArgsConstructor

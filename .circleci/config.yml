@@ -7,15 +7,13 @@ version: 2.1
 orbs:
   gradle: circleci/gradle@3.0.0
 
-jobs:
-  build:
+executors:
+  my-executor:
     docker:
-      - image: cimg/openjdk:11.0.2
-    steps:
-      - checkout
-      - run: java --version
+      - image: cimg/openjdk:11.0
 
 workflows:
     example-workflow:
       jobs:
-        - gradle/test
+        - gradle/test:
+            executor: my-executor
