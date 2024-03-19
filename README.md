@@ -1,7 +1,7 @@
 # Gov-POC
 
 [![Java CI with Gradle](https://github.com/Artemas-Muzanenhamo/gov-poc/actions/workflows/gradle.yml/badge.svg)](https://github.com/Artemas-Muzanenhamo/gov-poc/actions/workflows/gradle.yml)
-SonarQube: ![SonarQube](https://sonarcloud.io/api/project_badges/measure?project=com.gov-poc%3Agov-poc&metric=coverage)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Artemas-Muzanenhamo_gov-poc&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Artemas-Muzanenhamo_gov-poc)
 
 # About
 This is a proof of concept to demo government services using the Microservice Architecture with spring boot and spring cloud. We will not really dive into the Authentication aspect at first but we will look at how data should flow within a Microservice Architecture.
