@@ -1,6 +1,6 @@
 # Gov-POC
 
-CircleCi: [![CircleCI](https://circleci.com/gh/Artemas-Muzanenhamo/gov-poc/tree/develop.svg?style=svg)](https://circleci.com/gh/Artemas-Muzanenhamo/gov-poc/tree/develop)
+[![Java CI with Gradle](https://github.com/Artemas-Muzanenhamo/gov-poc/actions/workflows/gradle.yml/badge.svg)](https://github.com/Artemas-Muzanenhamo/gov-poc/actions/workflows/gradle.yml)
 SonarQube: ![SonarQube](https://sonarcloud.io/api/project_badges/measure?project=com.gov-poc%3Agov-poc&metric=coverage)
 
 # About
