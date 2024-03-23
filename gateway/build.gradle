@@ -1,8 +1,16 @@
 plugins {
     id 'java'
     id 'maven'
-    id 'org.springframework.boot' version '2.0.4.RELEASE'
+    id 'org.springframework.boot' version '2.2.9.RELEASE'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+group = 'com.gov.zw'
+version = "${releaseVersion}"
+description = 'gateway'
 
 apply plugin: 'io.spring.dependency-management'
 
@@ -11,14 +19,11 @@ repositories {
 }
 
 dependencies {
-    compile "org.springframework.cloud:spring-cloud-starter-netflix-zuul:${springVersion}"
-    compile "org.springframework.cloud:spring-cloud-starter-config:${springVersion}"
-    compile "org.springframework.cloud:spring-cloud-netflix-core:${springVersion}"
-    compile "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:${springVersion}"
-    testCompile "org.junit.jupiter:junit-jupiter-api:${junit5Version}"
-    testCompile "org.junit.jupiter:junit-jupiter-engine:${junit5Version}"
-    testCompile "org.springframework:spring-test:${springTestVersion}"
-    testCompile "org.springframework.boot:spring-boot-starter-test:${springVersion}"
+    compile "org.springframework.cloud:spring-cloud-starter-netflix-zuul"
+    compile "org.springframework.cloud:spring-cloud-starter-config"
+    compile "org.springframework.cloud:spring-cloud-netflix-core"
+    compile "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
+    testCompile "org.springframework.boot:spring-boot-starter-test"
 }
 
 dependencyManagement {
@@ -32,18 +37,13 @@ bootRun {
     systemProperties = System.properties
 }
 
-group = 'com.gov.zw'
-version = "${releaseVersion}"
-description = 'gateway'
-sourceCompatibility = "${javaVersion}"
-
 tasks.withType(JavaCompile) {
-    options.encoding = "${charset}"
+    options.encoding = 'UTF-8'
 }
 
 test {
     useJUnitPlatform()
     testLogging {
-        events = ["passed", "failed", "skipped"]
+        events = ["PASSED", "FAILED", "SKIPPED"]
     }
 }
