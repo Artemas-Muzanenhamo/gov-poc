@@ -34,7 +34,6 @@ public class IdentityController {
     }
 
     @PostMapping(produces = APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
     @ResponseStatus(OK)
     public void saveIdentity(@RequestBody IdentityJson identityJson) throws InvalidIdentityException {
         Identity identity = toIdentityDTO(identityJson);
@@ -42,7 +41,6 @@ public class IdentityController {
     }
 
     @PostMapping(value = "/name", produces = APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
     @ResponseStatus(OK)
     public List<IdentityJson> getIdentitiesByName(@RequestBody IdentityNameJson identityNameJson) throws InvalidIdentityNameException {
         IdentityName identityName = toIdentityNameDTO(identityNameJson);
@@ -51,7 +49,6 @@ public class IdentityController {
     }
 
     @PostMapping(value = "/reference", produces = APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
     @ResponseStatus(OK)
     public IdentityJson getIdentityByReferenceNumber(@RequestBody IdentityReferenceJson identityRefJson) throws InvalidIdentityReferenceException {
         IdentityReference identityReference = toIdentityRefDTO(identityRefJson);
@@ -60,7 +57,6 @@ public class IdentityController {
     }
 
     @GetMapping(produces = APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
     @ResponseStatus(OK)
     public List<IdentityJson> getIdentities() {
         List<Identity> identities = identityServiceImpl.findAll();
@@ -68,7 +64,6 @@ public class IdentityController {
     }
 
     @PutMapping(produces = APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
     @ResponseStatus(OK)
     public void updateIdentity(@RequestBody IdentityJson identityJson) throws InvalidIdentityException {
         Identity identity = toIdentityDTO(identityJson);
@@ -76,7 +71,6 @@ public class IdentityController {
     }
 
     @DeleteMapping(produces = APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
     @ResponseStatus(OK)
     public void deleteIdentity(@RequestBody IdentityJson identityJson) throws InvalidIdentityException {
         Identity identity = toIdentityDTO(identityJson);
