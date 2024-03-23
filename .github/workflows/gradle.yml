@@ -1,11 +1,4 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
-
-name: Java CI with Gradle
+name: Java CI with Gradle + MongoDB
 
 on:
   push:
@@ -27,6 +20,11 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
+
+    - name: Start MongoDB
+      uses: supercharge/mongodb-github-action@1.10.0
+      with:
+        mongodb-version: '4.4'
 
     # Configure Gradle for optimal use in GiHub Actions, including caching of downloaded dependencies.
     # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
