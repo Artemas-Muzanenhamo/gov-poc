@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.gov.zw.mapper.IdentityReferenceMapper.toIdentityRefDTO;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class IdentityReferenceMapperTest {
 
@@ -24,8 +24,9 @@ class IdentityReferenceMapperTest {
 
         IdentityReference identityReference = toIdentityRefDTO(identityReferenceJson);
 
-        assertThat(identityReference).isNotNull();
-        assertThat(identityReference.getIdRef()).isEqualTo(ID_REFERENCE);
+        assertThat(identityReference)
+                .isNotNull()
+                .extracting(IdentityReference::getIdRef).isEqualTo(ID_REFERENCE);
     }
 
     @Test

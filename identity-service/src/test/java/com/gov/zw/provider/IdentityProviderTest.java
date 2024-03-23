@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = IdentityServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
         properties = "server.port=8080")
-public class IdentityProviderTest {
+class IdentityProviderTest {
 
     private static final String ID = "1";
     private static final String IDENTITY_REF = "1";

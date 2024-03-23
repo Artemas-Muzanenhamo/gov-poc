@@ -1,12 +1,12 @@
 package com.gov.zw.repository;
 
 import com.gov.zw.dto.Identity;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
@@ -33,22 +33,27 @@ class IdentityRepositoryTest {
 
     @Autowired
     private IdentityRepository repository;
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     @BeforeEach
     void saveId() {
-        this.repository.deleteAll();
+//        this.repository.deleteAll();
+        mongoTemplate.getDb().drop();
 
-        this.repository.save(
-                new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
-                        "Mashayamombe", "Harare", "17/11/2017"));
+//        this.repository.save(
+//                new Identity("1", "1", "Artemas", "Muzanenhamo", "28/03/1990",
+//                        "Mashayamombe", "Harare", "17/11/2017"));
+        mongoTemplate.insert(new Identity("1", "1", "Artemas", "Muzanenhamo",
+                "28/03/1990", "Mashayamombe", "Harare", "17/11/2017"));
     }
 
     @Test
     void addIdentity() {
-        this.repository.save(new Identity("2", "2", "Takudzwa", "Mutongi", "27/01/1987",
+        mongoTemplate.insert(new Identity("2", "2", "Takudzwa", "Mutongi", "27/01/1987",
                 "Mashayamombe", "Harare", "17/11/2017"));
 
-        assertThat(this.repository.findAll().size()).isEqualTo(EXPECT_TWO);
+        assertThat(this.repository.findAll()).hasSize(EXPECT_TWO);
     }
 
     @Test

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.gov.zw.mapper.IdentityMapper.toIdentityDTO;
 import static com.gov.zw.mapper.IdentityMapper.toIdentityJson;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class IdentityMapperTest {
     private static final String ID = "1";
