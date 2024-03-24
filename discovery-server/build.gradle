@@ -1,33 +1,25 @@
-buildscript {
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.2.RELEASE")
-    }
-}
-
 plugins {
     id 'java'
-    id 'maven'
-    id 'org.springframework.boot' version '2.1.2.RELEASE'
+    id 'org.springframework.boot' version '2.2.9.RELEASE'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
-apply plugin: 'io.spring.dependency-management'
+group = 'com.gov.zw'
+version = "${releaseVersion}"
+description = 'discovery-server'
+sourceCompatibility = 11
+targetCompatibility = 11
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile "org.springframework.boot:spring-boot-starter-actuator:${springVersion}"
-    compile "org.springframework.cloud:spring-cloud-starter:${springVersion}"
-    implementation "org.springframework.cloud:spring-cloud-netflix-eureka-server:${springVersion}"
-    implementation 'javax.xml.bind:jaxb-api:2.3.1'
-    implementation 'javax.activation:activation:1.1.1'
-    implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.1'
-    compile "org.springframework:spring-test:${springTestVersion}"
-    compile "org.springframework.boot:spring-boot-starter-jersey:${springVersion}"
-    compile "com.google.code.gson:gson:${gsonVersion}"
-    testCompile "org.springframework.boot:spring-boot-starter-test:${springVersion}"
-    testCompile "org.junit.jupiter:junit-jupiter:${junit5Version}"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.cloud:spring-cloud-starter"
+    implementation "org.springframework.cloud:spring-cloud-netflix-eureka-server"
+    implementation "org.springframework.boot:spring-boot-starter-jersey"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
 
 dependencyManagement {
@@ -44,11 +36,6 @@ configurations {
     provided.all*.exclude group: 'javax.servlet'
 }
 
-group = 'com.gov.zw'
-version = "${releaseVersion}"
-description = 'discovery-server'
-sourceCompatibility = "${javaVersion}"
-
 tasks.withType(JavaCompile) {
     options.encoding = "${charset}"
 }
@@ -56,6 +43,6 @@ tasks.withType(JavaCompile) {
 test {
     useJUnitPlatform()
     testLogging {
-        events = ["passed", "failed", "skipped"]
+        events = ["PASSED", "FAILED", "SKIPPED"]
     }
 }
