@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
@@ -24,10 +24,10 @@ public class PatientEndpoint {
                 GET(PATIENT_BY_ID_PATH),
                 patientHandler::getPatient
         ).andRoute(
-                PUT(PATIENTS_PATH).and(contentType(APPLICATION_JSON_UTF8).and(accept(APPLICATION_JSON_UTF8))),
+                PUT(PATIENTS_PATH).and(contentType(APPLICATION_JSON).and(accept(APPLICATION_JSON))),
                 patientHandler::addPatient
         ).andRoute(
-                POST(PATIENTS_PATH).and(contentType(APPLICATION_JSON_UTF8).and(accept(APPLICATION_JSON_UTF8))),
+                POST(PATIENTS_PATH).and(contentType(APPLICATION_JSON).and(accept(APPLICATION_JSON))),
                 patientHandler::updatePatient
         ).andRoute(
                 DELETE(PATIENT_BY_ID_PATH),

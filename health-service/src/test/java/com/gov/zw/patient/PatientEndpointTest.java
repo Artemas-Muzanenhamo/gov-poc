@@ -15,7 +15,7 @@ import java.util.Optional;
 
 import static java.lang.String.format;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static reactor.core.publisher.Mono.just;
 
 @ExtendWith(SpringExtension.class)
@@ -47,7 +47,7 @@ class PatientEndpointTest {
                 .uri(ALL_PATIENTS_URL)
                 .exchange()
                 .expectStatus().isOk()
-                .expectHeader().contentType(APPLICATION_JSON_UTF8)
+                .expectHeader().contentType(APPLICATION_JSON)
                 .expectBody()
                 .jsonPath("@.[0].name").isEqualTo(NAME)
                 .jsonPath("@.[0].surname").isEqualTo(SURNAME)
