@@ -1,7 +1,10 @@
 package com.gov.zw.client;
 
+import lombok.Getter;
+
 import java.util.Objects;
 
+@Getter
 public class IdentityReferenceJson {
     public String idRef;
 
@@ -9,10 +12,6 @@ public class IdentityReferenceJson {
 
     public IdentityReferenceJson(String idRef) {
         this.idRef = idRef;
-    }
-
-    public String getIdRef() {
-        return idRef;
     }
 
     @Override

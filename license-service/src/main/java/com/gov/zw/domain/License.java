@@ -1,11 +1,14 @@
 package com.gov.zw.domain;
 
-import com.gov.zw.dto.License;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Objects;
 
-public class LicenseJson {
+@Document(collection = "Licenses")
+public class License {
 
+    @Id
     private String id;
     private String identityRef;
     private String surname;
@@ -19,9 +22,11 @@ public class LicenseJson {
     private String signatureImage;
     private String address;
 
-    public LicenseJson() { }
+    public License() {}
 
-    public LicenseJson(String id, String identityRef, String surname, String firstNames, String dateOfBirth, String country, String dateOfIssue, String expiryDate, String agency, String licenseNumber, String signatureImage, String address) {
+    public License(String id, String identityRef, String surname, String firstNames, String dateOfBirth, String country,
+                   String dateOfIssue, String expiryDate, String agency, String licenseNumber,
+                   String signatureImage, String address) {
         this.id = id;
         this.identityRef = identityRef;
         this.surname = surname;
@@ -36,27 +41,20 @@ public class LicenseJson {
         this.address = address;
     }
 
-    public LicenseJson(License license) {
-        this.id = license.getId();
-        this.identityRef = license.getIdentityRef();
-        this.surname = license.getSurname();
-        this.firstNames = license.getFirstNames();
-        this.dateOfBirth = license.getDateOfBirth();
-        this.country = license.getCountry();
-        this.dateOfIssue = license.getDateOfIssue();
-        this.expiryDate = license.getExpiryDate();
-        this.agency = license.getAgency();
-        this.licenseNumber = license.getLicenseNumber();
-        this.signatureImage = license.getSignatureImage();
-        this.address = license.getAddress();
-    }
-
     public String getId() {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getIdentityRef() {
         return identityRef;
+    }
+
+    public void setIdentityRef(String identityRef) {
+        this.identityRef = identityRef;
     }
 
     public String getSurname() {
@@ -100,8 +98,21 @@ public class LicenseJson {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        License license = (License) o;
+        return Objects.equals(id, license.id) && Objects.equals(identityRef, license.identityRef) && Objects.equals(surname, license.surname) && Objects.equals(firstNames, license.firstNames) && Objects.equals(dateOfBirth, license.dateOfBirth) && Objects.equals(country, license.country) && Objects.equals(dateOfIssue, license.dateOfIssue) && Objects.equals(expiryDate, license.expiryDate) && Objects.equals(agency, license.agency) && Objects.equals(licenseNumber, license.licenseNumber) && Objects.equals(signatureImage, license.signatureImage) && Objects.equals(address, license.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, identityRef, surname, firstNames, dateOfBirth, country, dateOfIssue, expiryDate, agency, licenseNumber, signatureImage, address);
+    }
+
+    @Override
     public String toString() {
-        return "LicenseJson{" +
+        return "License{" +
                 "id='" + id + '\'' +
                 ", identityRef='" + identityRef + '\'' +
                 ", surname='" + surname + '\'' +
@@ -115,29 +126,5 @@ public class LicenseJson {
                 ", signatureImage='" + signatureImage + '\'' +
                 ", address='" + address + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LicenseJson that = (LicenseJson) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(identityRef, that.identityRef) &&
-                Objects.equals(surname, that.surname) &&
-                Objects.equals(firstNames, that.firstNames) &&
-                Objects.equals(dateOfBirth, that.dateOfBirth) &&
-                Objects.equals(country, that.country) &&
-                Objects.equals(dateOfIssue, that.dateOfIssue) &&
-                Objects.equals(expiryDate, that.expiryDate) &&
-                Objects.equals(agency, that.agency) &&
-                Objects.equals(licenseNumber, that.licenseNumber) &&
-                Objects.equals(signatureImage, that.signatureImage) &&
-                Objects.equals(address, that.address);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, identityRef, surname, firstNames, dateOfBirth, country, dateOfIssue, expiryDate, agency, licenseNumber, signatureImage, address);
     }
 }

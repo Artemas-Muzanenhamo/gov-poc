@@ -1,7 +1,7 @@
 package com.gov.zw.mapper;
 
-import com.gov.zw.domain.LicenseJson;
-import com.gov.zw.dto.License;
+import com.gov.zw.json.LicenseJson;
+import com.gov.zw.domain.License;
 
 import java.util.Collection;
 import java.util.List;

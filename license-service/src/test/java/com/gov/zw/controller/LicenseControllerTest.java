@@ -2,17 +2,15 @@ package com.gov.zw.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gov.zw.dto.License;
+import com.gov.zw.domain.License;
 import com.gov.zw.service.LicenseService;
 import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -21,7 +19,6 @@ import java.util.Map;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(SpringExtension.class)
 @WebMvcTest(LicenseController.class)
 class LicenseControllerTest {
 
@@ -58,7 +55,7 @@ class LicenseControllerTest {
         JSONObject jsonObject = new JSONObject(licenseObject);
 
         mockMvc.perform(MockMvcRequestBuilders.post(LICENSES_URL)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
     }
@@ -67,7 +64,7 @@ class LicenseControllerTest {
     @DisplayName("Should throw HttpStatus BAD_REQUEST when trying to add an invalid license")
     void throwExceptionWhenInvalidLicense() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post(LICENSES_URL)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content("null"))
                 .andExpect(status().isBadRequest());
     }
@@ -77,7 +74,7 @@ class LicenseControllerTest {
     void shouldThrowBadRequestTryingToGetLicense() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.post(LICENSES_URL)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content("null"))
                 .andExpect(status().isBadRequest());
     }
@@ -91,7 +88,7 @@ class LicenseControllerTest {
         JSONObject jsonObject = new JSONObject(licenseObject);
 
         mockMvc.perform(MockMvcRequestBuilders.post(LICENSES_URL)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
     }
@@ -114,7 +111,7 @@ class LicenseControllerTest {
         JSONObject jsonObject = new JSONObject(licenseObject);
 
         mockMvc.perform(MockMvcRequestBuilders.put(LICENSES_URL)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
     }
@@ -129,7 +126,7 @@ class LicenseControllerTest {
 
 
         mockMvc.perform(MockMvcRequestBuilders.put(LICENSES_URL)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
     }
@@ -145,7 +142,7 @@ class LicenseControllerTest {
         JSONObject jsonObject = new JSONObject(id);
 
         mockMvc.perform(MockMvcRequestBuilders.delete(LICENSES_URL)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
     }
@@ -159,7 +156,7 @@ class LicenseControllerTest {
         JSONObject jsonObject = new JSONObject(licenseObject);
 
         mockMvc.perform(MockMvcRequestBuilders.delete(LICENSES_URL)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
     }
@@ -172,7 +169,7 @@ class LicenseControllerTest {
         JSONObject jsonObject = new JSONObject(idRef);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/licenses/ref")
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isOk());
     }
@@ -186,7 +183,7 @@ class LicenseControllerTest {
         JSONObject jsonObject = new JSONObject(licenseObject);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/licenses/ref")
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonObject.toJSONString()))
                 .andExpect(status().isBadRequest());
     }

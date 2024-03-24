@@ -1,6 +1,6 @@
 package com.gov.zw;
 
-import com.gov.zw.dto.License;
+import com.gov.zw.domain.License;
 import com.gov.zw.repository.LicenseRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

@@ -17,16 +17,17 @@ import org.springframework.http.HttpStatus;
 import java.util.Collections;
 import java.util.Map;
 
-import static io.restassured.RestAssured.given;
+import static com.jayway.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "IdentityService", port = "9999")
 @PactFolder("../pacts")
-public class IdentityClientTest {
+class IdentityClientTest {
 
     private static final String IDENTITIES_REFERENCE_PATH = "/identities/reference";
-    private static final Map<String, String> CONTENT_TYPE_JSON_UTF8 = Collections.singletonMap("Content-Type", "application/json;charset=UTF-8");
+    private static final Map<String, String> CONTENT_TYPE_JSON_UTF8 = Collections.singletonMap("Content-Type", APPLICATION_JSON_VALUE);
     private static final String ID = "1";
     private static final String IDENTITY_REF = "MUZAN1234";
     private static final String NAME = "Artemas";

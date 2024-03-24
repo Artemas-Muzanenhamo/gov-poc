@@ -1,7 +1,7 @@
 package com.gov.zw.service;
 
 import com.gov.zw.client.dto.IdentityReference;
-import com.gov.zw.dto.License;
+import com.gov.zw.domain.License;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidLicenseException;
 

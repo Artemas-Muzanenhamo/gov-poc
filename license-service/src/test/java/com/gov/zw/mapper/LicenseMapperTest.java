@@ -1,7 +1,7 @@
 package com.gov.zw.mapper;
 
-import com.gov.zw.dto.License;
-import com.gov.zw.domain.LicenseJson;
+import com.gov.zw.domain.License;
+import com.gov.zw.json.LicenseJson;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +33,7 @@ class LicenseMapperTest {
                 DATE_OF_BIRTH, COUNTRY, DATE_OF_ISSUE,
                 EXPIRY_DATE, AGENCY, LICENSE_NUMBER, SIGNATURE_IMAGE,
                 ADDRESS);
-        LicenseJson licenseJson = new LicenseJson(expectedLicense);
+        LicenseJson licenseJson = toLicenseJson(expectedLicense);
 
         License license = toLicenseDTO(licenseJson);
 

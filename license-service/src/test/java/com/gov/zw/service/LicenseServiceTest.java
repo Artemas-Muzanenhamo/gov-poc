@@ -3,17 +3,17 @@ package com.gov.zw.service;
 import com.gov.zw.client.Identity;
 import com.gov.zw.client.IdentityClient;
 import com.gov.zw.client.dto.IdentityReference;
-import com.gov.zw.dto.License;
+import com.gov.zw.domain.License;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidLicenseException;
 import com.gov.zw.repository.LicenseRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +24,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(MockitoExtension.class)
 class LicenseServiceTest {
 
     private static final String ID_REF = "1";
@@ -80,7 +80,7 @@ class LicenseServiceTest {
 
     @Test
     @DisplayName("Should throw an InvalidIdentityException when an ID ref that is not an INT is passed")
-    void throwExceptionWhenIdRefIsNotAnInt() throws Exception {
+    void throwExceptionWhenIdRefIsNotAnInt() {
         License license = new License();
         license.setId(ID);
         license.setIdentityRef(IDENTITY_REF);

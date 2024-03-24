@@ -1,16 +1,15 @@
 package com.gov.zw.client.dto;
 
+import lombok.Getter;
+
 import java.util.Objects;
 
+@Getter
 public class IdentityReference {
     private final String idRef;
 
     public IdentityReference(String idRef) {
         this.idRef = idRef;
-    }
-
-    public String getIdRef() {
-        return idRef;
     }
 
     @Override
