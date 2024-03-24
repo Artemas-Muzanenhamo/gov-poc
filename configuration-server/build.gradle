@@ -1,28 +1,27 @@
 plugins {
     id 'java'
     id 'maven'
-    id 'org.springframework.boot' version '2.1.2.RELEASE'
+    id 'org.springframework.boot' version '2.2.9.RELEASE'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
+
+group = 'com.gov.zw'
+version = "${releaseVersion}"
+description = 'config'
+sourceCompatibility = 11
+targetCompatibility = 11
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation "org.springframework.cloud:spring-cloud-config-server:${springVersion}"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:${junit5Version}"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junit5Version}"
-    testCompile "org.springframework:spring-test:${springTestVersion}"
-    testCompile "org.springframework.boot:spring-boot-starter-test:${springVersion}"
+    implementation "org.springframework.cloud:spring-cloud-config-server:2.2.8.RELEASE"
+    testCompile "org.springframework.boot:spring-boot-starter-test"
 }
 
-group = 'com.gov.zw'
-version = "${releaseVersion}"
-description = 'config'
-sourceCompatibility = "${javaVersion}"
-
 tasks.withType(JavaCompile) {
-    options.encoding = "${charset}"
+    options.encoding = 'UTF8'
 }
 
 bootRun {
@@ -32,6 +31,6 @@ bootRun {
 test {
     useJUnitPlatform()
     testLogging {
-        events = ["passed", "failed", "skipped"]
+        events = ["PASSED", "FAILED", "SKIPPED"]
     }
 }
