@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'maven'
     id 'org.springframework.boot' version '2.2.9.RELEASE'
     id 'io.spring.dependency-management' version '1.1.4'
 }
@@ -17,7 +16,7 @@ repositories {
 
 dependencies {
     implementation "org.springframework.cloud:spring-cloud-config-server:2.2.8.RELEASE"
-    testCompile "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
 
 tasks.withType(JavaCompile) {

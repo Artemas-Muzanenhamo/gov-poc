@@ -5,7 +5,6 @@ plugins {
 // TODO: project.tasks["sonarqube"].dependsOn "jacocoTestReport"
 
 allprojects {
-    apply plugin: 'maven'
     apply plugin: 'jacoco'
 
     group = 'com.gov-poc'
@@ -22,9 +21,9 @@ subprojects {
 
     repositories {
         mavenCentral()
-        maven {
-            url = 'http://repo.maven.apache.org/maven2'
-        }
+//        maven {
+//            url = 'http://repo.maven.apache.org/maven2'
+//        }
     }
 
     jacocoTestReport {
@@ -61,6 +60,4 @@ subprojects {
             skipProject = true
         }
     }
-
-    sourceCompatibility = "${javaVersion}"
 }
