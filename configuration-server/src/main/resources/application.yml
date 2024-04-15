@@ -10,8 +10,9 @@ spring:
 spring:
   application:
     name: configuration-server
-  profiles:
-    active: native
+  config:
+    activate:
+      on-profile: native
   cloud:
     config:
       server:
@@ -26,7 +27,9 @@ server:
 server:
   port: 8888
 spring:
-  profiles: remote
+  config:
+    activate:
+      on-profile: remote
   cloud:
     config:
       server:
