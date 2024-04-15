@@ -1,7 +1,8 @@
 spring:
-  profiles:
-    active:
-      - docker
+  config:
+    activate:
+      on-profile:
+        - docker
   application:
     name: identity-service
   cloud:
@@ -15,7 +16,9 @@ spring:
 ---
 
 spring:
-  profiles: dev
+  config:
+    activate:
+      on-profile: dev
   application:
     name: identity-service
   cloud:

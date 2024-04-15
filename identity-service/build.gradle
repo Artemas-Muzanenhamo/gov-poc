@@ -2,18 +2,23 @@ plugins {
     id 'idea'
     id 'java'
     id 'jacoco'
-    id 'org.springframework.boot' version '2.2.9.RELEASE'
+    id 'org.springframework.boot' version '3.2.4'
     id 'io.spring.dependency-management' version '1.1.4'
     id "au.com.dius.pact" version "3.6.15"
 }
 
-sourceCompatibility = 11
-targetCompatibility = 11
-
-apply plugin: 'io.spring.dependency-management'
+group = 'com.gov.zw'
+version = "${releaseVersion}"
+description = 'identity-service'
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
+}
+
+ext {
+    set('springCloudVersion', "2023.0.1")
 }
 
 dependencies {
@@ -21,30 +26,27 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.boot:spring-boot-starter-data-rest"
     implementation "org.springframework.boot:spring-boot-starter-data-mongodb"
-    implementation "org.springframework.cloud:spring-cloud-starter-config:2.2.8.RELEASE"
-    implementation "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.2.9.RELEASE"
-    implementation "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
     implementation "io.springfox:springfox-boot-starter:3.0.0"
     implementation "io.springfox:springfox-swagger-ui:3.0.0"
-    compileOnly "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    compileOnly "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok"
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.cloud:spring-cloud-config-server'
     testImplementation "de.flapdoodle.embed:de.flapdoodle.embed.mongo:${mongoVersion}"
-    testImplementation "au.com.dius:pact-jvm-provider-junit5_2.12:${pactJunit5Version}"
-    testImplementation "au.com.dius:pact-jvm-model:${pactJunit5Version}"
+    testImplementation 'au.com.dius.pact.provider:junit5:4.6.8'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 bootRun {
-    systemProperties = System.properties
-}
-
-group = 'com.gov.zw'
-version = "${releaseVersion}"
-description = 'identity-service'
-sourceCompatibility = "${javaVersion}"
-
-tasks.withType(JavaCompile) {
-    options.encoding = "${charset}"
+    systemProperties = System.properties as Map<String, ?>
 }
 
 test {
