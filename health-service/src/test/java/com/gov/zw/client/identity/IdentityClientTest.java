@@ -1,14 +1,15 @@
 package com.gov.zw.client.identity;
 
 import au.com.dius.pact.consumer.MockServer;
-import au.com.dius.pact.consumer.Pact;
-import au.com.dius.pact.consumer.PactFolder;
 import au.com.dius.pact.consumer.dsl.DslPart;
 import au.com.dius.pact.consumer.dsl.PactDslJsonBody;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
+import au.com.dius.pact.consumer.junit.MockServerConfig;
 import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
-import au.com.dius.pact.model.RequestResponsePact;
+import au.com.dius.pact.core.model.RequestResponsePact;
+import au.com.dius.pact.core.model.annotations.Pact;
+import au.com.dius.pact.core.model.annotations.PactDirectory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.http.HttpMethod;
@@ -17,13 +18,14 @@ import org.springframework.http.HttpStatus;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.jayway.restassured.RestAssured.given;
+import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @ExtendWith(PactConsumerTestExt.class)
-@PactTestFor(providerName = "IdentityService", port = "9999")
-@PactFolder("../pacts")
+@PactTestFor(providerName = "IdentityService")
+@MockServerConfig(port = "9999")
+@PactDirectory("../pacts")
 class IdentityClientTest {
     private static final String IDENTITIES_REFERENCE_PATH = "/identities/reference";
     private static final String ID = "1";
@@ -35,7 +37,7 @@ class IdentityClientTest {
     private static final String PLACE_OF_BIRTH = "Harare";
     private static final String DATE_OF_ISSUE = "22/01/2018";
 
-    @Pact(state = "an identity for a patient", provider = "identity-service", consumer = "health-service")
+    @Pact(provider = "identity-service", consumer = "health-service")
     public RequestResponsePact retrievePatientIdentityPact(PactDslWithProvider builder) {
 
         // Set Headers

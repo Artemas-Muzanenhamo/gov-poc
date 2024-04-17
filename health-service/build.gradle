@@ -1,38 +1,40 @@
 plugins {
     id 'java'
     id 'jacoco'
-    id 'org.springframework.boot' version '2.2.9.RELEASE'
+    id 'org.springframework.boot' version '3.2.4'
     id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'com.gov.zw'
 version = "${releaseVersion}"
 description = 'health-service'
-sourceCompatibility = 11
-targetCompatibility = 11
-
-apply plugin: 'io.spring.dependency-management'
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
 }
 
+ext {
+    set('springCloudVersion', "2023.0.1")
+}
+
+
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-webflux"
     implementation "org.springframework.boot:spring-boot-starter-data-mongodb-reactive"
-    compileOnly "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    implementation "org.springframework.boot:spring-boot-autoconfigure-processor"
-    implementation "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
-    implementation "org.springframework.cloud:spring-cloud-starter-netflix-ribbon"
+    compileOnly "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok"
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
     implementation "org.springframework.boot:spring-boot-autoconfigure-processor"
     implementation "org.springframework.cloud:spring-cloud-netflix-eureka-client"
+
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "io.projectreactor:reactor-test:${reactorTestVersion}"
     testImplementation "de.flapdoodle.embed:de.flapdoodle.embed.mongo:${mongoVersion}"
-    testImplementation "au.com.dius:pact-jvm-consumer-junit5_2.12:${pactJunit5Version}"
-    testImplementation 'com.jayway.restassured:rest-assured:2.9.0'
+    testImplementation 'au.com.dius.pact.consumer:junit5:4.6.8'
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
 }
 
 dependencyManagement {
@@ -45,12 +47,8 @@ test {
     systemProperty 'pact.rootDir', "../pacts"
 }
 
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF8'
-}
-
 bootRun {
-    systemProperties = System.properties
+    systemProperties = System.properties as Map<String, ?>
 }
 
 test {

@@ -1,122 +1,122 @@
 {
-  "provider": {
-    "name": "identity-service"
-  },
   "consumer": {
     "name": "health-service"
   },
   "interactions": [
     {
       "description": "a request from the Health-Service consumer",
-      "request": {
-        "method": "POST",
-        "path": "/identities/reference",
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "body": {
-          "id-surname": "Muzanenhamo",
-          "id-name": "Artemas",
-          "idRef": "MUZAN1234"
-        }
-      },
-      "response": {
-        "status": 200,
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "body": {
-          "placeOfBirth": "Harare",
-          "surname": "Muzanenhamo",
-          "name": "Artemas",
-          "id": "1",
-          "identityRef": "MUZAN1234",
-          "dateOfIssue": "22/01/2018",
-          "birthDate": "28/03/1990",
-          "villageOfOrigin": "Mashayamombe"
-        },
-        "matchingRules": {
-          "body": {
-            "$.id": {
-              "matchers": [
-                {
-                  "match": "type"
-                }
-              ],
-              "combine": "AND"
-            },
-            "$.identityRef": {
-              "matchers": [
-                {
-                  "match": "type"
-                }
-              ],
-              "combine": "AND"
-            },
-            "$.name": {
-              "matchers": [
-                {
-                  "match": "type"
-                }
-              ],
-              "combine": "AND"
-            },
-            "$.surname": {
-              "matchers": [
-                {
-                  "match": "type"
-                }
-              ],
-              "combine": "AND"
-            },
-            "$.birthDate": {
-              "matchers": [
-                {
-                  "match": "type"
-                }
-              ],
-              "combine": "AND"
-            },
-            "$.villageOfOrigin": {
-              "matchers": [
-                {
-                  "match": "type"
-                }
-              ],
-              "combine": "AND"
-            },
-            "$.placeOfBirth": {
-              "matchers": [
-                {
-                  "match": "type"
-                }
-              ],
-              "combine": "AND"
-            },
-            "$.dateOfIssue": {
-              "matchers": [
-                {
-                  "match": "type"
-                }
-              ],
-              "combine": "AND"
-            }
-          }
-        }
-      },
       "providerStates": [
         {
           "name": "identity details from the Health Service client"
         }
-      ]
+      ],
+      "request": {
+        "body": {
+          "id-name": "Artemas",
+          "id-surname": "Muzanenhamo",
+          "idRef": "MUZAN1234"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "method": "POST",
+        "path": "/identities/reference"
+      },
+      "response": {
+        "body": {
+          "birthDate": "28/03/1990",
+          "dateOfIssue": "22/01/2018",
+          "id": "1",
+          "identityRef": "MUZAN1234",
+          "name": "Artemas",
+          "placeOfBirth": "Harare",
+          "surname": "Muzanenhamo",
+          "villageOfOrigin": "Mashayamombe"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$.birthDate": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.dateOfIssue": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.identityRef": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.placeOfBirth": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.surname": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.villageOfOrigin": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
     }
   ],
   "metadata": {
+    "pact-jvm": {
+      "version": "4.6.8"
+    },
     "pactSpecification": {
       "version": "3.0.0"
-    },
-    "pact-jvm": {
-      "version": "3.6.11"
     }
+  },
+  "provider": {
+    "name": "identity-service"
   }
 }

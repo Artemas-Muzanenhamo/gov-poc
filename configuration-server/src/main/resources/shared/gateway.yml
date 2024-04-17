@@ -8,9 +8,9 @@ spring:
 ---
 
 spring:
-  profiles:
-    active:
-      - docker
+  config:
+    activate:
+      on-profile: docker
 server:
   port: 9999
 eureka:
@@ -21,7 +21,9 @@ eureka:
 ---
 
 spring:
-  profiles: dev
+  config:
+    activate:
+      on-profile: dev
 server:
   port: 9999
 eureka:

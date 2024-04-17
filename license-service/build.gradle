@@ -2,42 +2,43 @@ plugins {
     id 'idea'
     id 'java'
     id 'jacoco'
-    id 'org.springframework.boot' version '2.2.9.RELEASE'
+    id 'org.springframework.boot' version '3.2.4'
     id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'com.gov.zw'
 version = "${releaseVersion}"
 description = 'license-service'
-sourceCompatibility = 11
-targetCompatibility = 11
-
-apply plugin: 'io.spring.dependency-management'
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
 }
 
+ext {
+    set('springCloudVersion', "2023.0.1")
+}
+
 dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-data-mongodb"
     implementation "org.springframework.boot:spring-boot-starter-web"
-    implementation "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.boot:spring-boot-starter-data-rest"
-    implementation "org.springframework.cloud:spring-cloud-starter-config"
+    implementation "org.springframework.boot:spring-boot-starter-data-mongodb"
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
     implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
     implementation "org.springframework.cloud:spring-cloud-openfeign-core"
-    implementation "org.springframework.cloud:spring-cloud-netflix-core"
-    implementation "org.springframework.cloud:spring-cloud-starter-netflix-ribbon"
     implementation "io.springfox:springfox-boot-starter:3.0.0"
     implementation "io.springfox:springfox-swagger-ui:3.0.0"
-    compileOnly "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    compileOnly "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok"
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "de.flapdoodle.embed:de.flapdoodle.embed.mongo:${mongoVersion}"
-    testImplementation "au.com.dius:pact-jvm-consumer-junit5_2.12:${pactJunit5Version}"
-    testImplementation "com.jayway.restassured:rest-assured:${restAssuredVersion}"
+    testImplementation 'au.com.dius.pact.consumer:junit5:4.6.8'
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
 }
 
 
@@ -48,15 +49,11 @@ dependencyManagement {
 }
 
 bootRun {
-    systemProperties = System.properties
+    systemProperties = System.properties as Map<String, ?>
 }
 
 test {
     systemProperty 'pact.rootDir', "../pacts"
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = "${charset}"
 }
 
 test {
