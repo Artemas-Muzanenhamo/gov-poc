@@ -7,21 +7,23 @@ spring:
 ---
 
 spring:
-  profiles:
-    active:
-      - docker
   application:
     name: license-service
   cloud:
     config:
       uri: http://configuration-server:8888
       fail-fast: true
+  config:
+    activate:
+      on-profile: docker
 
 ---
 
 spring:
-  profiles: dev
   cloud:
     config:
       uri: http://localhost:8888
       fail-fast: true
+  config:
+    activate:
+      on-profile: dev

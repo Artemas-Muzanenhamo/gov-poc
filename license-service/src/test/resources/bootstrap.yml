@@ -4,3 +4,9 @@ eureka:
 identity-service:
   ribbon:
     listOfServers: localhost:9999
+spring:
+  cloud:
+    config:
+      enabled: false
+    discovery:
+      enabled: false
