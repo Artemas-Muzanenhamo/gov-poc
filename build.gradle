@@ -9,7 +9,7 @@ allprojects {
     version = '1.0.1-SNAPSHOT'
 
     jacoco {
-        toolVersion = "0.8.5"
+        toolVersion = "0.8.7"
         reportsDir = file("build/reports/jacoco")
     }
 }
