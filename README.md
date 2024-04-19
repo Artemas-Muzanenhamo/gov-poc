@@ -7,7 +7,7 @@
 This is a proof of concept to demo government services using the Microservice Architecture with spring boot and spring cloud. We will not really dive into the Authentication aspect at first but we will look at how data should flow within a Microservice Architecture.
 
 # Pre-Requisites
- * Java 11
+ * Java 17
  * Gradle
  * Docker
 
