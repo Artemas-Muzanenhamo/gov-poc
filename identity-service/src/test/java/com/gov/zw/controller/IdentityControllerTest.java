@@ -18,7 +18,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -67,9 +66,7 @@ class IdentityControllerTest {
     @Test
     @DisplayName("Should get Identities by an Identity reference")
     void getIdentityByReferenceNumber() throws Exception {
-        Map<String, String> idReferenceNumber = new HashMap<>();
-        idReferenceNumber.put("idRef", "1");
-        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson(idReferenceNumber);
+        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson("1");
         String json = asJsonString(identityReferenceJson);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/identities/reference")
