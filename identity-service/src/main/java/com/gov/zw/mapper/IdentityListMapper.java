@@ -19,6 +19,6 @@ public class IdentityListMapper {
                 .filter(Objects::nonNull)
                 .flatMap(Collection::stream)
                 .map(IdentityMapper::toIdentityJson)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

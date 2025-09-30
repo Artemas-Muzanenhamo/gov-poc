@@ -31,8 +31,6 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
     implementation "io.springfox:springfox-boot-starter:3.0.0"
     implementation "io.springfox:springfox-swagger-ui:3.0.0"
-    compileOnly "org.projectlombok:lombok"
-    annotationProcessor "org.projectlombok:lombok"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.cloud:spring-cloud-config-server'
     testImplementation "de.flapdoodle.embed:de.flapdoodle.embed.mongo:${mongoVersion}"

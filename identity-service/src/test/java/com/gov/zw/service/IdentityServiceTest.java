@@ -87,12 +87,12 @@ class IdentityServiceTest {
         Identity identity = new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
                 VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE);
         IdentityReference identityReference = new IdentityReference(IDENTITY_REF);
-        given(identityRepository.findIdentityByIdentityRef(identity.getIdentityRef())).willReturn(identity);
+        given(identityRepository.findIdentityByIdentityRef(identity.identityRef())).willReturn(identity);
 
         Identity identityByIdentityRef = identityService.findIdentityByIdentityRef(identityReference);
 
         assertThat(identityByIdentityRef).isEqualTo(identity);
-        assertThat(identityByIdentityRef.getName()).isEqualTo("Artemas");
+        assertThat(identityByIdentityRef.name()).isEqualTo("Artemas");
     }
 
     @Test
@@ -111,15 +111,16 @@ class IdentityServiceTest {
         List<Identity> identityJsonList = identityService.findAll();
 
         assertThat(identityJsonList).isNotEmpty().hasSize(3);
+
         Identity identity = identityJsonList.get(0);
-        assertThat(identity.getId()).isEqualTo(ID);
-        assertThat(identity.getIdentityRef()).isEqualTo(IDENTITY_REF);
-        assertThat(identity.getName()).isEqualTo(NAME);
-        assertThat(identity.getSurname()).isEqualTo(SURNAME);
-        assertThat(identity.getBirthDate()).isEqualTo(BIRTH_DATE);
-        assertThat(identity.getVillageOfOrigin()).isEqualTo(VILLAGE_OF_ORIGIN);
-        assertThat(identity.getPlaceOfBirth()).isEqualTo(PLACE_OF_BIRTH);
-        assertThat(identity.getDateOfIssue()).isEqualTo(DATE_OF_ISSUE);
+        assertThat(identity.id()).isEqualTo(ID);
+        assertThat(identity.identityRef()).isEqualTo(IDENTITY_REF);
+        assertThat(identity.name()).isEqualTo(NAME);
+        assertThat(identity.surname()).isEqualTo(SURNAME);
+        assertThat(identity.birthDate()).isEqualTo(BIRTH_DATE);
+        assertThat(identity.villageOfOrigin()).isEqualTo(VILLAGE_OF_ORIGIN);
+        assertThat(identity.placeOfBirth()).isEqualTo(PLACE_OF_BIRTH);
+        assertThat(identity.dateOfIssue()).isEqualTo(DATE_OF_ISSUE);
     }
 
     @Test

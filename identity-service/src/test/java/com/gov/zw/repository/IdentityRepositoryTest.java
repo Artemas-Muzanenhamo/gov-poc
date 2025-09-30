@@ -53,44 +53,44 @@ class IdentityRepositoryTest {
 
     @Test
     void findIdentitiesByName() {
-        List<Identity> identities = this.repository.findIdentitiesByName("Artemas");
+        List<Identity> identitiesByName = this.repository.findIdentitiesByName("Artemas");
 
-        assertThat(identities).hasSize(EXPECT_ONE)
+        assertThat(identitiesByName).hasSize(EXPECT_ONE)
                 .first()
-                .extracting(Identity::getName, Identity::getSurname)
+                .extracting(Identity::name, Identity::surname)
                 .containsExactly("Artemas", "Muzanenhamo");
 
     }
 
     @Test
     void findIdentitiesBySurname() {
-        List<Identity> identities = this.repository.findIdentitiesBySurname("Muzanenhamo");
+        List<Identity> identitiesBySurname = this.repository.findIdentitiesBySurname("Muzanenhamo");
 
-        assertThat(identities).hasSize(EXPECT_ONE)
+        assertThat(identitiesBySurname).hasSize(EXPECT_ONE)
                 .first()
-                .extracting(Identity::getName, Identity::getSurname)
+                .extracting(Identity::name, Identity::surname)
                 .containsExactly("Artemas", "Muzanenhamo");
 
     }
 
     @Test
     void findIdentitiesByVillageOfOrigin() {
-        List<Identity> identities = this.repository.findIdentitiesByVillageOfOrigin("Mashayamombe");
+        List<Identity> identitiesByVillageOfOrigin = this.repository.findIdentitiesByVillageOfOrigin("Mashayamombe");
 
-        assertThat(identities).hasSize(EXPECT_ONE)
+        assertThat(identitiesByVillageOfOrigin).hasSize(EXPECT_ONE)
                 .first()
-                .extracting(Identity::getName, Identity::getSurname)
+                .extracting(Identity::name, Identity::surname)
                 .containsExactly("Artemas", "Muzanenhamo");
     }
 
     @Test
     void findIdentitiesByNameSurnameAndVillageOfOrigin() {
-        List<Identity> identities = this.repository.findIdentitiesByNameAndSurnameAndVillageOfOrigin(
+        List<Identity> identitiesByNameAndSurnameAndVillageOfOrigin = this.repository.findIdentitiesByNameAndSurnameAndVillageOfOrigin(
                 "Artemas", "Muzanenhamo", "Mashayamombe");
 
-        assertThat(identities).hasSize(EXPECT_ONE)
+        assertThat(identitiesByNameAndSurnameAndVillageOfOrigin).hasSize(EXPECT_ONE)
                 .first()
-                .extracting(Identity::getName, Identity::getSurname)
+                .extracting(Identity::name, Identity::surname)
                 .containsExactly("Artemas", "Muzanenhamo");
     }
 
@@ -99,7 +99,7 @@ class IdentityRepositoryTest {
         Identity identity = this.repository.findIdentityByIdentityRef("1");
 
         assertThat(identity).isNotNull()
-                .extracting(Identity::getName, Identity::getSurname)
+                .extracting(Identity::name, Identity::surname)
                 .containsExactly("Artemas", "Muzanenhamo");
     }
 
@@ -111,7 +111,7 @@ class IdentityRepositoryTest {
 
         assertThat(identityList).hasSize(EXPECT_FOUR)
                 .first()
-                .extracting(Identity::getSurname)
+                .extracting(Identity::surname)
                 .isEqualTo("Muzanenhamo");
     }
 
@@ -123,7 +123,7 @@ class IdentityRepositoryTest {
 
         assertThat(this.repository.findAll()).hasSize(EXPECT_ONE)
                 .first()
-                .extracting(Identity::getName)
+                .extracting(Identity::name)
                 .isEqualTo("Takudzwa");
     }
 

@@ -12,28 +12,28 @@ public class IdentityMapper {
 
     public static Identity toIdentityDTO(IdentityJson identityJson) {
         return new Identity(
-                identityJson.getId(),
-                identityJson.getIdentityRef(),
-                identityJson.getName(),
-                identityJson.getSurname(),
-                identityJson.getBirthDate(),
-                identityJson.getVillageOfOrigin(),
-                identityJson.getPlaceOfBirth(),
-                identityJson.getDateOfIssue()
+                identityJson.id(),
+                identityJson.identityRef(),
+                identityJson.name(),
+                identityJson.surname(),
+                identityJson.birthDate(),
+                identityJson.villageOfOrigin(),
+                identityJson.placeOfBirth(),
+                identityJson.dateOfIssue()
         );
     }
 
     public static IdentityJson toIdentityJson(Identity identity) {
         return Optional.ofNullable(identity)
                 .map(id -> new IdentityJson(
-                        id.getId(),
-                        id.getIdentityRef(),
-                        id.getName(),
-                        id.getSurname(),
-                        id.getBirthDate(),
-                        id.getVillageOfOrigin(),
-                        id.getPlaceOfBirth(),
-                        id.getDateOfIssue()))
-                .orElse(new IdentityJson());
+                        id.id(),
+                        id.identityRef(),
+                        id.name(),
+                        id.surname(),
+                        id.birthDate(),
+                        id.villageOfOrigin(),
+                        id.placeOfBirth(),
+                        id.dateOfIssue()))
+                .orElse(IdentityJson.empty());
     }
 }

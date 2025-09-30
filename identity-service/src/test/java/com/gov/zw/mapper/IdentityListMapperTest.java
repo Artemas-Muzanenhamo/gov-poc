@@ -34,14 +34,14 @@ class IdentityListMapperTest {
         assertThat(identityJsonList).isNotEmpty();
         IdentityJson identityJson = identityJsonList.get(0);
         assertThat(identityJson).isNotNull();
-        assertThat(identityJson.getId()).isEqualTo(ID);
-        assertThat(identityJson.getIdentityRef()).isEqualTo(IDENTITY_REF);
-        assertThat(identityJson.getName()).isEqualTo(NAME);
-        assertThat(identityJson.getSurname()).isEqualTo(SURNAME);
-        assertThat(identityJson.getBirthDate()).isEqualTo(BIRTH_DATE);
-        assertThat(identityJson.getVillageOfOrigin()).isEqualTo(VILLAGE_OF_ORIGIN);
-        assertThat(identityJson.getPlaceOfBirth()).isEqualTo(PLACE_OF_BIRTH);
-        assertThat(identityJson.getDateOfIssue()).isEqualTo(DATE_OF_ISSUE);
+        assertThat(identityJson.id()).isEqualTo(ID);
+        assertThat(identityJson.identityRef()).isEqualTo(IDENTITY_REF);
+        assertThat(identityJson.name()).isEqualTo(NAME);
+        assertThat(identityJson.surname()).isEqualTo(SURNAME);
+        assertThat(identityJson.birthDate()).isEqualTo(BIRTH_DATE);
+        assertThat(identityJson.villageOfOrigin()).isEqualTo(VILLAGE_OF_ORIGIN);
+        assertThat(identityJson.placeOfBirth()).isEqualTo(PLACE_OF_BIRTH);
+        assertThat(identityJson.dateOfIssue()).isEqualTo(DATE_OF_ISSUE);
     }
 
     @Test

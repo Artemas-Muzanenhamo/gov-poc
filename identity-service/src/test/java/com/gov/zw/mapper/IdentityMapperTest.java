@@ -27,14 +27,14 @@ class IdentityMapperTest {
         Identity identity = toIdentityDTO(identityJson);
 
         assertThat(identity).isNotNull();
-        assertThat(identity.getId()).isEqualTo(ID);
-        assertThat(identity.getIdentityRef()).isEqualTo(IDENTITY_REF);
-        assertThat(identity.getName()).isEqualTo(NAME);
-        assertThat(identity.getSurname()).isEqualTo(SURNAME);
-        assertThat(identity.getBirthDate()).isEqualTo(BIRTH_DATE);
-        assertThat(identity.getVillageOfOrigin()).isEqualTo(VILLAGE_OF_ORIGIN);
-        assertThat(identity.getPlaceOfBirth()).isEqualTo(PLACE_OF_BIRTH);
-        assertThat(identity.getDateOfIssue()).isEqualTo(DATE_OF_ISSUE);
+        assertThat(identity.id()).isEqualTo(ID);
+        assertThat(identity.identityRef()).isEqualTo(IDENTITY_REF);
+        assertThat(identity.name()).isEqualTo(NAME);
+        assertThat(identity.surname()).isEqualTo(SURNAME);
+        assertThat(identity.birthDate()).isEqualTo(BIRTH_DATE);
+        assertThat(identity.villageOfOrigin()).isEqualTo(VILLAGE_OF_ORIGIN);
+        assertThat(identity.placeOfBirth()).isEqualTo(PLACE_OF_BIRTH);
+        assertThat(identity.dateOfIssue()).isEqualTo(DATE_OF_ISSUE);
     }
 
     @Test
@@ -45,14 +45,14 @@ class IdentityMapperTest {
         IdentityJson identityJson = toIdentityJson(identity);
 
         assertThat(identityJson).isNotNull();
-        assertThat(identityJson.getId()).isEqualTo(ID);
-        assertThat(identityJson.getIdentityRef()).isEqualTo(IDENTITY_REF);
-        assertThat(identityJson.getName()).isEqualTo(NAME);
-        assertThat(identityJson.getSurname()).isEqualTo(SURNAME);
-        assertThat(identityJson.getBirthDate()).isEqualTo(BIRTH_DATE);
-        assertThat(identityJson.getVillageOfOrigin()).isEqualTo(VILLAGE_OF_ORIGIN);
-        assertThat(identityJson.getPlaceOfBirth()).isEqualTo(PLACE_OF_BIRTH);
-        assertThat(identityJson.getDateOfIssue()).isEqualTo(DATE_OF_ISSUE);
+        assertThat(identityJson.id()).isEqualTo(ID);
+        assertThat(identityJson.identityRef()).isEqualTo(IDENTITY_REF);
+        assertThat(identityJson.name()).isEqualTo(NAME);
+        assertThat(identityJson.surname()).isEqualTo(SURNAME);
+        assertThat(identityJson.birthDate()).isEqualTo(BIRTH_DATE);
+        assertThat(identityJson.villageOfOrigin()).isEqualTo(VILLAGE_OF_ORIGIN);
+        assertThat(identityJson.placeOfBirth()).isEqualTo(PLACE_OF_BIRTH);
+        assertThat(identityJson.dateOfIssue()).isEqualTo(DATE_OF_ISSUE);
     }
 
     @Test
