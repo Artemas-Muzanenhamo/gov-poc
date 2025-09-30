@@ -14,6 +14,6 @@ public class IdentityReferenceMapper {
         return Optional.ofNullable(json)
                 .map(IdentityReferenceJson::getIdRef)
                 .map(IdentityReference::new)
-                .orElse(new IdentityReference());
+                .orElse(IdentityReference.empty());
     }
 }

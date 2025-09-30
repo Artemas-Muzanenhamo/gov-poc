@@ -21,6 +21,6 @@ class IdentityNameMapperTest {
 
         assertThat(name)
                 .isNotNull()
-                .extracting(IdentityName::getName).isEqualTo(NAME);
+                .extracting(IdentityName::name).isEqualTo(NAME);
     }
 }

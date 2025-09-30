@@ -26,7 +26,7 @@ class IdentityReferenceMapperTest {
 
         assertThat(identityReference)
                 .isNotNull()
-                .extracting(IdentityReference::getIdRef).isEqualTo(ID_REFERENCE);
+                .extracting(IdentityReference::idRef).isEqualTo(ID_REFERENCE);
     }
 
     @Test

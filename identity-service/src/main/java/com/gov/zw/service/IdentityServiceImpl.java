@@ -31,7 +31,7 @@ public class IdentityServiceImpl implements IdentityService {
     @Override
     public Identity findIdentityByIdentityRef(IdentityReference identityRef) throws InvalidIdentityReferenceException {
         return Optional.ofNullable(identityRef)
-                .map(IdentityReference::getIdRef)
+                .map(IdentityReference::idRef)
                 .map(identityRepository::findIdentityByIdentityRef)
                 .orElseThrow(() -> new InvalidIdentityReferenceException("The ID reference supplied is not valid!"));
     }
@@ -52,7 +52,7 @@ public class IdentityServiceImpl implements IdentityService {
     @Override
     public List<Identity> findIdentitiesByName(IdentityName identityName) throws InvalidIdentityNameException {
         return Optional.ofNullable(identityName)
-                .map(IdentityName::getName)
+                .map(IdentityName::name)
                 .map(identityRepository::findIdentitiesByName)
                 .orElseThrow(() -> new InvalidIdentityNameException("The name supplied does not exist!"));
     }

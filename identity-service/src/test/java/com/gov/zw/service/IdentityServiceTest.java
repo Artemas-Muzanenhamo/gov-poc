@@ -62,7 +62,7 @@ class IdentityServiceTest {
         List<Identity> identities = Collections.singletonList(new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
                 VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE));
         IdentityName identityName = new IdentityName("Artemas");
-        given(identityRepository.findIdentitiesByName(identityName.getName())).willReturn(identities);
+        given(identityRepository.findIdentitiesByName(identityName.name())).willReturn(identities);
 
         List<Identity> identitiesByName = identityService.findIdentitiesByName(identityName);
 
