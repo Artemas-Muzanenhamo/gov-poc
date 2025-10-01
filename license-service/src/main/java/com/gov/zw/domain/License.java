@@ -20,6 +20,18 @@ public record License(
         String address
 ) {
     public static License empty() {
-        return new License(null, null, null, null, null, null, null, null, null, null, null, null);
+        return new License(null, // id
+                null, // identityRef
+                null, // surname
+                null, // firstNames
+                null, // dateOfBirth
+                null, // country
+                null, // dateOfIssue
+                null, // expiryDate
+                null, // agency
+                null, // licenseNumber
+                null, // signatureImage
+                null // address
+        );
     }
 }

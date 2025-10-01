@@ -3,12 +3,8 @@ package com.gov.zw.mapper;
 import com.gov.zw.json.LicenseJson;
 import com.gov.zw.domain.License;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LicenseMapper {
     private LicenseMapper() {

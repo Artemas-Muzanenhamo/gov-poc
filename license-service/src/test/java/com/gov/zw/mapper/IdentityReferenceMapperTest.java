@@ -37,7 +37,7 @@ class IdentityReferenceMapperTest {
     @Test
     @DisplayName("Should throw IdentityReferenceJsonNotValid exception when identity reference is null")
     void throwExceptionWhenIdentityReferenceIsNull() {
-        IdentityReferenceJson identityReferenceJson = new IdentityReferenceJson();
+        IdentityReferenceJson identityReferenceJson = IdentityReferenceJson.empty();
 
         IdentityReferenceJsonNotValidException exception = assertThrows(IdentityReferenceJsonNotValidException.class, () -> toIdentityReferenceDTO(identityReferenceJson));
 

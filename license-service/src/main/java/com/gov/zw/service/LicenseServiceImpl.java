@@ -48,7 +48,7 @@ public class LicenseServiceImpl implements LicenseService {
                 .map(identityClient::findIdentityByIdReferenceNumber)
                 .orElseThrow(() -> new InvalidIdentityException(IDENTITY_IS_INVALID_OR_DOES_NOT_EXIST));
 
-        return identity.getIdentityRef().equals(identityReference.idRef());
+        return identity.identityRef().equals(identityReference.idRef());
     }
 
     @Override
