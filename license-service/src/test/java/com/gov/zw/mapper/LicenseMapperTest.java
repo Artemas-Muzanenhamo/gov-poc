@@ -58,18 +58,18 @@ class LicenseMapperTest {
         LicenseJson licenseJson = toLicenseJson(license);
 
         assertThat(licenseJson).isNotNull();
-        assertThat(licenseJson.getId()).isEqualTo(ID);
-        assertThat(licenseJson.getIdentityRef()).isEqualTo(IDENTITY_REF);
-        assertThat(licenseJson.getSurname()).isEqualTo(SURNAME);
-        assertThat(licenseJson.getFirstNames()).isEqualTo(FIRST_NAMES);
-        assertThat(licenseJson.getDateOfBirth()).isEqualTo(DATE_OF_BIRTH);
-        assertThat(licenseJson.getCountry()).isEqualTo(COUNTRY);
-        assertThat(licenseJson.getDateOfIssue()).isEqualTo(DATE_OF_ISSUE);
-        assertThat(licenseJson.getExpiryDate()).isEqualTo(EXPIRY_DATE);
-        assertThat(licenseJson.getAgency()).isEqualTo(AGENCY);
-        assertThat(licenseJson.getLicenseNumber()).isEqualTo(LICENSE_NUMBER);
-        assertThat(licenseJson.getSignatureImage()).isEqualTo(SIGNATURE_IMAGE);
-        assertThat(licenseJson.getAddress()).isEqualTo(ADDRESS);
+        assertThat(licenseJson.id()).isEqualTo(ID);
+        assertThat(licenseJson.identityRef()).isEqualTo(IDENTITY_REF);
+        assertThat(licenseJson.surname()).isEqualTo(SURNAME);
+        assertThat(licenseJson.firstNames()).isEqualTo(FIRST_NAMES);
+        assertThat(licenseJson.dateOfBirth()).isEqualTo(DATE_OF_BIRTH);
+        assertThat(licenseJson.country()).isEqualTo(COUNTRY);
+        assertThat(licenseJson.dateOfIssue()).isEqualTo(DATE_OF_ISSUE);
+        assertThat(licenseJson.expiryDate()).isEqualTo(EXPIRY_DATE);
+        assertThat(licenseJson.agency()).isEqualTo(AGENCY);
+        assertThat(licenseJson.licenseNumber()).isEqualTo(LICENSE_NUMBER);
+        assertThat(licenseJson.signatureImage()).isEqualTo(SIGNATURE_IMAGE);
+        assertThat(licenseJson.address()).isEqualTo(ADDRESS);
     }
 
     @Test
@@ -94,18 +94,18 @@ class LicenseMapperTest {
         assertThat(licenseJsonList).isNotEmpty();
         LicenseJson licenseJson = licenseJsonList.get(0);
         assertThat(licenseJson).isNotNull();
-        assertThat(licenseJson.getId()).isEqualTo(ID);
-        assertThat(licenseJson.getIdentityRef()).isEqualTo(IDENTITY_REF);
-        assertThat(licenseJson.getSurname()).isEqualTo(SURNAME);
-        assertThat(licenseJson.getFirstNames()).isEqualTo(FIRST_NAMES);
-        assertThat(licenseJson.getDateOfBirth()).isEqualTo(DATE_OF_BIRTH);
-        assertThat(licenseJson.getCountry()).isEqualTo(COUNTRY);
-        assertThat(licenseJson.getDateOfIssue()).isEqualTo(DATE_OF_ISSUE);
-        assertThat(licenseJson.getExpiryDate()).isEqualTo(EXPIRY_DATE);
-        assertThat(licenseJson.getAgency()).isEqualTo(AGENCY);
-        assertThat(licenseJson.getLicenseNumber()).isEqualTo(LICENSE_NUMBER);
-        assertThat(licenseJson.getSignatureImage()).isEqualTo(SIGNATURE_IMAGE);
-        assertThat(licenseJson.getAddress()).isEqualTo(ADDRESS);
+        assertThat(licenseJson.id()).isEqualTo(ID);
+        assertThat(licenseJson.identityRef()).isEqualTo(IDENTITY_REF);
+        assertThat(licenseJson.surname()).isEqualTo(SURNAME);
+        assertThat(licenseJson.firstNames()).isEqualTo(FIRST_NAMES);
+        assertThat(licenseJson.dateOfBirth()).isEqualTo(DATE_OF_BIRTH);
+        assertThat(licenseJson.country()).isEqualTo(COUNTRY);
+        assertThat(licenseJson.dateOfIssue()).isEqualTo(DATE_OF_ISSUE);
+        assertThat(licenseJson.expiryDate()).isEqualTo(EXPIRY_DATE);
+        assertThat(licenseJson.agency()).isEqualTo(AGENCY);
+        assertThat(licenseJson.licenseNumber()).isEqualTo(LICENSE_NUMBER);
+        assertThat(licenseJson.signatureImage()).isEqualTo(SIGNATURE_IMAGE);
+        assertThat(licenseJson.address()).isEqualTo(ADDRESS);
     }
 
     @Test

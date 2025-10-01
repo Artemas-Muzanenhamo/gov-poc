@@ -18,18 +18,18 @@ public class LicenseMapper {
     public static License toLicenseDTO(LicenseJson json) {
         return Optional.ofNullable(json)
                 .map(licenseJson -> new License(
-                        licenseJson.getId(),
-                        licenseJson.getIdentityRef(),
-                        licenseJson.getSurname(),
-                        licenseJson.getFirstNames(),
-                        licenseJson.getDateOfBirth(),
-                        licenseJson.getCountry(),
-                        licenseJson.getDateOfIssue(),
-                        licenseJson.getExpiryDate(),
-                        licenseJson.getAgency(),
-                        licenseJson.getLicenseNumber(),
-                        licenseJson.getSignatureImage(),
-                        licenseJson.getAddress()))
+                        licenseJson.id(),
+                        licenseJson.identityRef(),
+                        licenseJson.surname(),
+                        licenseJson.firstNames(),
+                        licenseJson.dateOfBirth(),
+                        licenseJson.country(),
+                        licenseJson.dateOfIssue(),
+                        licenseJson.expiryDate(),
+                        licenseJson.agency(),
+                        licenseJson.licenseNumber(),
+                        licenseJson.signatureImage(),
+                        licenseJson.address()))
                 .orElse(License.empty());
     }
 
@@ -48,7 +48,7 @@ public class LicenseMapper {
                         licenseDto.licenseNumber(),
                         licenseDto.signatureImage(),
                         licenseDto.address()))
-                .orElse(new LicenseJson());
+                .orElse(LicenseJson.empty());
     }
 
     public static List<LicenseJson> toLicenseJsonList(List<License> licenses) {
