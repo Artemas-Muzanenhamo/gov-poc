@@ -38,6 +38,8 @@ class LicenseControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+    @Autowired 
+    private ObjectMapper objectMapper;
 
     @MockBean
     private LicenseService licenseServiceImpl;
@@ -47,7 +49,6 @@ class LicenseControllerTest {
     @Test
     @DisplayName("Should add a license given a valid License")
     void shouldAddALicense() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
         License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES, DATE_OF_BIRTH, COUNTRY,
                 DATE_OF_ISSUE, EXPIRY_DATE, AGENCY, LICENSE_NUMBER,
                 SIGNATURE_IMAGE, ADDRESS);
@@ -82,8 +83,7 @@ class LicenseControllerTest {
     @Test
     @DisplayName("Should return status OK when an empty License is passed attempting to add a license")
     void shouldReturn200WhenAnEmptyLicenseIsPassedToAddLicense() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        License license = new License();
+        License license = License.empty();
         Map<String, String> licenseObject = objectMapper.convertValue(license, licenseTypeRef);
         JSONObject jsonObject = new JSONObject(licenseObject);
 
@@ -103,7 +103,6 @@ class LicenseControllerTest {
     @Test
     @DisplayName("Should update a License given a valid license object with updated values")
     void shouldUpdateALicense() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
         License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES, DATE_OF_BIRTH, COUNTRY,
                 DATE_OF_ISSUE, EXPIRY_DATE, AGENCY, LICENSE_NUMBER,
                 SIGNATURE_IMAGE, ADDRESS);
@@ -119,8 +118,7 @@ class LicenseControllerTest {
     @Test
     @DisplayName("Should return HttpStatus OK when an empty license is passed when attempting to update a license")
     void shouldReturn200WhenAnEmptyLicenseIsPassedToUpdateLicense() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        License license = new License();
+        License license = License.empty();
         Map<String, String> licenseObject = objectMapper.convertValue(license, licenseTypeRef);
         JSONObject jsonObject = new JSONObject(licenseObject);
 
@@ -134,7 +132,6 @@ class LicenseControllerTest {
     @Test
     @DisplayName("Should delete a license given a valid license object")
     void shouldDeleteALicense() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
         License license = new License(ID, IDENTITY_REF, SURNAME, FIRST_NAMES, DATE_OF_BIRTH, COUNTRY,
                 DATE_OF_ISSUE, EXPIRY_DATE, AGENCY, LICENSE_NUMBER,
                 SIGNATURE_IMAGE, ADDRESS);
@@ -150,8 +147,7 @@ class LicenseControllerTest {
     @Test
     @DisplayName("Should return HttpStatus 200 when an empty license object is passed attempting to delete a license")
     void shouldReturn200WhenAnEmptyLicenseIsPassedToDeleteLicense() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        License license = new License();
+        License license = License.empty();
         Map<String, String> licenseObject = objectMapper.convertValue(license, licenseTypeRef);
         JSONObject jsonObject = new JSONObject(licenseObject);
 
@@ -177,8 +173,7 @@ class LicenseControllerTest {
     @Test
     @DisplayName("Should throw HttpStatus BAD_REQUEST when an empty license is passed attempting to get a license by identity reference")
     void shouldReturn200WhenAnEmptyLicenseIsPassedToGetLicenseByIdReference() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        License license = new License();
+        License license = License.empty();
         Map<String, String> licenseObject = objectMapper.convertValue(license, licenseTypeRef);
         JSONObject jsonObject = new JSONObject(licenseObject);
 

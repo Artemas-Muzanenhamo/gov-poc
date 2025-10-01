@@ -7,7 +7,6 @@ import com.gov.zw.domain.License;
 import com.gov.zw.exception.InvalidIdentityException;
 import com.gov.zw.exception.InvalidLicenseException;
 import com.gov.zw.repository.LicenseRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,15 +20,14 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
-import static org.mockito.MockitoAnnotations.initMocks;
+import static org.mockito.BDDMockito.then;
 
 @ExtendWith(MockitoExtension.class)
 class LicenseServiceTest {
 
     private static final String ID_REF = "1";
     private static final String ID = "1";
-    private static final String IDENTITY_REF = "1";
+    private static final String IDENTITY_REF = "ABC123";
     private static final String SURNAME = "Muzanenhamo";
     private static final String FIRST_NAMES = "Artemas";
     private static final String DATE_OF_BIRTH = "28/03/1990";
@@ -54,12 +52,6 @@ class LicenseServiceTest {
     private static final String LICENSE_EXCEPTION_MESSAGE = "The license is invalid!";
     private static final String IDENTITY_EXCEPTION_MESSAGE = "Identity is invalid or does not exist!";
 
-    @BeforeEach
-    void setUp() {
-        initMocks(this);
-        licenseService = new LicenseServiceImpl(identityClient, licenseRepository);
-    }
-
     @Test
     @DisplayName("Should return an identity")
     void returnIdentityByReference() throws Exception {
@@ -70,20 +62,18 @@ class LicenseServiceTest {
                 ADDRESS);
         Identity identity = new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE, VILLAGE_OF_ORIGIN,
                 PLACE_OF_BIRTH, DATE_OF_ISSUE);
-        IdentityReference identityReference = new IdentityReference(ID_REF);
+        IdentityReference identityReference = new IdentityReference(IDENTITY_REF);
         given(identityClient.findIdentityByIdReferenceNumber(identityReference)).willReturn(identity);
 
         licenseService.addLicense(license);
 
-        verify(identityClient, times(1)).findIdentityByIdReferenceNumber(identityReference);
+        then(identityClient).should().findIdentityByIdReferenceNumber(identityReference);
     }
 
     @Test
     @DisplayName("Should throw an InvalidIdentityException when an ID ref that is not an INT is passed")
     void throwExceptionWhenIdRefIsNotAnInt() {
-        License license = new License();
-        license.setId(ID);
-        license.setIdentityRef(IDENTITY_REF);
+        License license = new License(ID, IDENTITY_REF, null, null, null, null, null, null, null, null, null, null);
 
         InvalidIdentityException exception = assertThrows(InvalidIdentityException.class, () -> licenseService.addLicense(license));
 
@@ -93,12 +83,14 @@ class LicenseServiceTest {
     @Test
     @DisplayName("Should throw an InvalidLicenseException when license is empty")
     void throwExceptionWhenLicenseIsEmpty() {
-        License license = new License();
+        License license = License.empty();
 
         InvalidLicenseException exception = assertThrows(InvalidLicenseException.class, () -> licenseService.addLicense(license));
 
         assertThat(exception.getMessage()).isEqualTo(LICENSE_EXCEPTION_MESSAGE);
-        verify(licenseRepository, never()).save(any(License.class));
+        
+        then(identityClient).shouldHaveNoInteractions();
+        then(licenseRepository).shouldHaveNoInteractions();
     }
 
     @Test
@@ -114,30 +106,20 @@ class LicenseServiceTest {
         List<License> allLicenses = licenseService.getAllLicenses();
 
         assertThat(allLicenses).isNotEmpty();
-        License expectedLicense = allLicenses.get(0);
-        assertThat(expectedLicense.getId()).isEqualTo(ID);
-        assertThat(expectedLicense.getIdentityRef()).isEqualTo(IDENTITY_REF);
-        assertThat(expectedLicense.getSurname()).isEqualTo(SURNAME);
-        assertThat(expectedLicense.getFirstNames()).isEqualTo(FIRST_NAMES);
-        assertThat(expectedLicense.getDateOfBirth()).isEqualTo(DATE_OF_BIRTH);
-        assertThat(expectedLicense.getCountry()).isEqualTo(COUNTRY);
-        assertThat(expectedLicense.getDateOfIssue()).isEqualTo(DATE_OF_ISSUE);
-        assertThat(expectedLicense.getExpiryDate()).isEqualTo(EXPIRY_DATE);
-        assertThat(expectedLicense.getAgency()).isEqualTo(AGENCY);
-        assertThat(expectedLicense.getLicenseNumber()).isEqualTo(LICENSE_NUMBER);
-        assertThat(expectedLicense.getSignatureImage()).isEqualTo(SIGNATURE_IMAGE);
-        assertThat(expectedLicense.getAddress()).isEqualTo(ADDRESS);
-        verify(licenseRepository, times(1)).findAll();
+        assertThat(allLicenses).containsExactly(license);
+        
+        then(licenseRepository).should().findAll();
     }
 
     @Test
     @DisplayName("Should throw InvalidLicenseException when an empty license is passed")
     void throwExceptionWhenLicenseIsEmptyWhileUpdating() {
-        License license = new License();
+        License license = License.empty();
 
         assertThrows(InvalidLicenseException.class, () -> licenseService.updateLicense(license));
 
-        verify(this.licenseRepository, never()).save(any(License.class));
+        then(identityClient).shouldHaveNoInteractions();
+        then(this.licenseRepository).shouldHaveNoInteractions();
     }
 
     @Test
@@ -150,7 +132,7 @@ class LicenseServiceTest {
 
         licenseService.updateLicense(license);
 
-        verify(licenseRepository, times(1)).save(license);
+        then(licenseRepository).should().save(license);
     }
 
     @Test
@@ -163,7 +145,7 @@ class LicenseServiceTest {
 
         licenseService.removeLicense(license);
 
-        verify(licenseRepository, times(1)).delete(license);
+        then(licenseRepository).should().delete(license);
     }
 
     @Test
@@ -179,6 +161,7 @@ class LicenseServiceTest {
         License licenseByIdentityRef = licenseService.getLicenseByIdentityRef(identityReference);
 
         assertThat(licenseByIdentityRef).isEqualTo(license);
-        verify(licenseRepository, times(1)).findLicenseByIdentityRef(ID_REF);
+        
+        then(licenseRepository).should().findLicenseByIdentityRef(ID_REF);
     }
 }

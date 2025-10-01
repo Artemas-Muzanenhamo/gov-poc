@@ -84,10 +84,10 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     private boolean isIdentityReferencePresent(License licenseDto) {
-        return nonNull(licenseDto.getIdentityRef());
+        return nonNull(licenseDto.identityRef());
     }
 
     private IdentityReference getLicenseIdentityReference(License license) {
-        return new IdentityReference(license.getIdentityRef());
+        return new IdentityReference(license.identityRef());
     }
 }

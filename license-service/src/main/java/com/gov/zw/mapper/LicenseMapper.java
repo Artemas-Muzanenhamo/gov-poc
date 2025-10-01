@@ -30,32 +30,32 @@ public class LicenseMapper {
                         licenseJson.getLicenseNumber(),
                         licenseJson.getSignatureImage(),
                         licenseJson.getAddress()))
-                .orElse(new License());
+                .orElse(License.empty());
     }
 
     public static LicenseJson toLicenseJson(License license) {
         return Optional.ofNullable(license)
                 .map(licenseDto -> new LicenseJson(
-                        licenseDto.getId(),
-                        licenseDto.getIdentityRef(),
-                        licenseDto.getSurname(),
-                        licenseDto.getFirstNames(),
-                        licenseDto.getDateOfBirth(),
-                        licenseDto.getCountry(),
-                        licenseDto.getDateOfIssue(),
-                        licenseDto.getExpiryDate(),
-                        licenseDto.getAgency(),
-                        licenseDto.getLicenseNumber(),
-                        licenseDto.getSignatureImage(),
-                        licenseDto.getAddress()))
+                        licenseDto.id(),
+                        licenseDto.identityRef(),
+                        licenseDto.surname(),
+                        licenseDto.firstNames(),
+                        licenseDto.dateOfBirth(),
+                        licenseDto.country(),
+                        licenseDto.dateOfIssue(),
+                        licenseDto.expiryDate(),
+                        licenseDto.agency(),
+                        licenseDto.licenseNumber(),
+                        licenseDto.signatureImage(),
+                        licenseDto.address()))
                 .orElse(new LicenseJson());
     }
 
     public static List<LicenseJson> toLicenseJsonList(List<License> licenses) {
-        return Stream.of(licenses)
-                .filter(Objects::nonNull)
-                .flatMap(Collection::stream)
+        return Optional.ofNullable(licenses)
+                .orElseGet(List::of)
+                .stream()
                 .map(LicenseMapper::toLicenseJson)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

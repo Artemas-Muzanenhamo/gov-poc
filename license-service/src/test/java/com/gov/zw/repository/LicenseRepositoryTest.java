@@ -53,7 +53,7 @@ class LicenseRepositoryTest {
         this.licenseRepository.save(license);
 
         List<License> licenses = this.licenseRepository.findAll();
-        Assertions.assertThat(licenses.get(4).getFirstNames()).isEqualTo("Lebron");
+        Assertions.assertThat(licenses.get(4).firstNames()).isEqualTo("Lebron");
         Assertions.assertThat(licenses.size()).isEqualTo(5);
     }
 
@@ -62,8 +62,8 @@ class LicenseRepositoryTest {
         List<License> licenses = this.licenseRepository.findAll();
 
         Assertions.assertThat(licenses.size()).isEqualTo(4);
-        Assertions.assertThat(licenses.get(0).getAgency()).isEqualTo("ZDVLA");
-        Assertions.assertThat(licenses.get(0).getDateOfBirth()).isEqualTo("28/03/1990");
+        Assertions.assertThat(licenses.get(0).agency()).isEqualTo("ZDVLA");
+        Assertions.assertThat(licenses.get(0).dateOfBirth()).isEqualTo("28/03/1990");
     }
 
     @Test
@@ -76,8 +76,8 @@ class LicenseRepositoryTest {
 
         List<License> licenses = this.licenseRepository.findAll();
         Assertions.assertThat(licenses.size()).isEqualTo(4);
-        Assertions.assertThat(licenses.get(3).getSurname()).isEqualTo("Charlie");
-        Assertions.assertThat(licenses.get(3).getFirstNames()).isEqualTo("Delta Golf");
+        Assertions.assertThat(licenses.get(3).surname()).isEqualTo("Charlie");
+        Assertions.assertThat(licenses.get(3).firstNames()).isEqualTo("Delta Golf");
     }
 
     @Test
@@ -85,7 +85,7 @@ class LicenseRepositoryTest {
         this.licenseRepository.deleteById("1");
         List<License> licenses = this.licenseRepository.findAll();
 
-        Assertions.assertThat(licenses.get(0).getFirstNames()).isEqualTo("Bravo Zulu");
+        Assertions.assertThat(licenses.get(0).firstNames()).isEqualTo("Bravo Zulu");
         Assertions.assertThat(licenses.size()).isEqualTo(3);
     }
 
