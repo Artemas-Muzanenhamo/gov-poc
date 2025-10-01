@@ -13,7 +13,7 @@ public class IdentityReferenceMapper {
 
     public static IdentityReference toIdentityReferenceDTO(IdentityReferenceJson identityReferenceJson) {
         return Optional.ofNullable(identityReferenceJson)
-                .map(IdentityReferenceJson::getIdRef)
+                .map(IdentityReferenceJson::idRef)
                 .map(IdentityReference::new)
                 .orElseThrow(() -> new IdentityReferenceJsonNotValidException("Identity Reference is not valid!"));
     }
