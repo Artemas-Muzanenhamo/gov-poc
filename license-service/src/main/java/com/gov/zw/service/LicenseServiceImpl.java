@@ -48,7 +48,7 @@ public class LicenseServiceImpl implements LicenseService {
                 .map(identityClient::findIdentityByIdReferenceNumber)
                 .orElseThrow(() -> new InvalidIdentityException(IDENTITY_IS_INVALID_OR_DOES_NOT_EXIST));
 
-        return identity.getIdentityRef().equals(identityReference.getIdRef());
+        return identity.getIdentityRef().equals(identityReference.idRef());
     }
 
     @Override
@@ -74,7 +74,7 @@ public class LicenseServiceImpl implements LicenseService {
     @Override
     public License getLicenseByIdentityRef(IdentityReference identityReference) throws InvalidLicenseException {
         return ofNullable(identityReference)
-                .map(IdentityReference::getIdRef)
+                .map(IdentityReference::idRef)
                 .map(this::findLicenseByIdentityReference)
                 .orElseThrow((() -> new InvalidLicenseException("License IdRef is not valid")));
     }
@@ -84,10 +84,10 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     private boolean isIdentityReferencePresent(License licenseDto) {
-        return nonNull(licenseDto.getIdentityRef());
+        return nonNull(licenseDto.identityRef());
     }
 
     private IdentityReference getLicenseIdentityReference(License license) {
-        return new IdentityReference(license.getIdentityRef());
+        return new IdentityReference(license.identityRef());
     }
 }

@@ -22,7 +22,7 @@ class IdentityReferenceMapperTest {
         IdentityReference identityReference = toIdentityReferenceDTO(identityReferenceJson);
 
         assertThat(identityReference).isNotNull();
-        String idRef = identityReference.getIdRef();
+        String idRef = identityReference.idRef();
         assertThat(idRef).isEqualTo(ID_REF);
     }
 
