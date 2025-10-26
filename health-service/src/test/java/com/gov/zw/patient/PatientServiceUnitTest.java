@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -35,7 +34,6 @@ class PatientServiceUnitTest {
 
     @BeforeEach
     void init_mocks() {
-        MockitoAnnotations.initMocks(this);
         patientServiceImpl = new PatientServiceImpl(patientRepository);
     }
 
@@ -91,8 +89,8 @@ class PatientServiceUnitTest {
     @DisplayName("Should retrieve a single patient's details")
     void retrieveSinglePatient() {
         Patient patient = new Patient(IDENTITY_REF, NAME, SURNAME, DATE_OF_BIRTH, ADDRESS);
-        Optional<String> identityRefOptional = Optional.of(patient.getIdentityRef());
-        given(patientRepository.findById(patient.getIdentityRef())).willReturn(just(patient));
+        Optional<String> identityRefOptional = Optional.of(patient.identityRef());
+        given(patientRepository.findById(patient.identityRef())).willReturn(just(patient));
 
         Mono<Patient> patientMono = patientServiceImpl.getPatient(identityRefOptional);
 
@@ -106,8 +104,8 @@ class PatientServiceUnitTest {
     @DisplayName("Should delete a patient given the patient id")
     void deletePatientTest() {
         Patient patient = new Patient(IDENTITY_REF, NAME, SURNAME, DATE_OF_BIRTH, ADDRESS);
-        Optional<String> patienceIdRefOptional = Optional.of(patient.getIdentityRef());
-        given(patientRepository.deleteById(patient.getIdentityRef())).willReturn(Mono.empty());
+        Optional<String> patienceIdRefOptional = Optional.of(patient.identityRef());
+        given(patientRepository.deleteById(patient.identityRef())).willReturn(Mono.empty());
 
         Mono<Void> patientMono = patientServiceImpl.deletePatient(patienceIdRefOptional);
 

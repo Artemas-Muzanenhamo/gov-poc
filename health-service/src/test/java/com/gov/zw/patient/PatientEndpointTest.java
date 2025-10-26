@@ -35,7 +35,7 @@ class PatientEndpointTest {
     @Autowired
     private WebTestClient client;
     @MockBean
-    private PatientService patientService;
+    private PatientServiceImpl patientService;
 
     @Test
     @DisplayName("Should return all patients")
@@ -101,12 +101,12 @@ class PatientEndpointTest {
     @DisplayName("Should get an existing patient")
     void retrievePatient() {
         Patient patient = new Patient(IDENTITY_REF, NAME, SURNAME, DATE_OF_BIRTH, ADDRESS);
-        Optional<String> identityRefOptional = Optional.of(patient.getIdentityRef());
+        Optional<String> identityRefOptional = Optional.of(patient.identityRef());
         given(patientService.getPatient(identityRefOptional)).willReturn(just(patient));
 
         client
                 .get()
-                .uri(format(PATIENT_URL, patient.getIdentityRef()))
+                .uri(format(PATIENT_URL, patient.identityRef()))
                 .exchange()
                 .expectStatus()
                 .isOk()

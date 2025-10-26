@@ -9,16 +9,14 @@ import reactor.core.publisher.Mono;
 import java.net.URI;
 import java.util.Optional;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
-import static org.springframework.web.reactive.function.BodyInserters.fromObject;
 import static org.springframework.web.reactive.function.server.ServerResponse.*;
 
 @Component
 public class PatientHandler {
     private static final String PATIENT_IDENTITY_REF = "id";
-    private final PatientService patientServiceImpl;
+    private final PatientServiceImpl patientServiceImpl;
 
-    public PatientHandler(PatientService patientServiceImpl) {
+    public PatientHandler(PatientServiceImpl patientServiceImpl) {
         this.patientServiceImpl = patientServiceImpl;
     }
 
@@ -42,7 +40,7 @@ public class PatientHandler {
     Mono<ServerResponse> getPatient(ServerRequest request) {
         Optional<String> patientIdOptional = Optional.of(request.pathVariable(PATIENT_IDENTITY_REF));
         return patientServiceImpl.getPatient(patientIdOptional)
-                .flatMap(patient -> ok().contentType(APPLICATION_JSON_UTF8).body(fromObject(patient)))
+                .flatMap(patient -> ok().bodyValue(patient))
                 .switchIfEmpty(badRequest().build());
     }
 

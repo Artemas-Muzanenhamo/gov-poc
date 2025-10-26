@@ -1,6 +1,5 @@
 package com.gov.zw.patient;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,15 +16,12 @@ class PatientTest {
     private static final String ADDRESS = "68 Jeremy Street, London, W1 7AA";
     private Patient patient;
 
-    @BeforeEach
-    void setup() {
-        patient = new Patient();
-    }
-
     @Test
     @DisplayName("Should return an empty Patient object")
     void returnEmptyPatientObject() {
-        Patient patientDummy = new Patient();
+        patient = Patient.empty();
+
+        Patient patientDummy = Patient.empty();
         assertThat(patient).isEqualTo(patientDummy);
     }
 
@@ -37,12 +33,12 @@ class PatientTest {
         Patient patientDummy =
                 new Patient(IDENTITY_REF, NAME, SURNAME, DATE_OF_BIRTH, ADDRESS);
         assertThat(patient).isEqualTo(patientDummy);
-        assertThat(patient.getName()).isEqualTo(patientDummy.getName());
-        assertThat(patient.getSurname()).isEqualTo(patientDummy.getSurname());
-        assertThat(patient.getDateOfBirth()).isEqualTo(patientDummy.getDateOfBirth());
-        assertThat(patient.getIdentityRef()).isEqualTo(patientDummy.getIdentityRef());
-        assertThat(patient.getAddress()).isEqualTo(patientDummy.getAddress());
-        assertThat(patient.hashCode()).isEqualTo(patientDummy.hashCode());
-        assertThat(patient.toString()).isEqualTo(patientDummy.toString());
+        assertThat(patient.name()).isEqualTo(patientDummy.name());
+        assertThat(patient.surname()).isEqualTo(patientDummy.surname());
+        assertThat(patient.dateOfBirth()).isEqualTo(patientDummy.dateOfBirth());
+        assertThat(patient.identityRef()).isEqualTo(patientDummy.identityRef());
+        assertThat(patient.address()).isEqualTo(patientDummy.address());
+        assertThat(patient.hashCode()).hasSameHashCodeAs(patientDummy.hashCode());
+        assertThat(patient.toString()).hasToString(patientDummy.toString());
     }
 }
