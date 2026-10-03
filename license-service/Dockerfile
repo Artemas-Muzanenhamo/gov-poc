@@ -1,6 +1,6 @@
-FROM openjdk:8-jre-alpine AS license-service
+FROM amazoncorretto:8u504-al2023-jre AS license-service
 # copy JAR into image
-COPY build/libs/license-service-*-SNAPSHOT.jar /license-service.jar
+COPY build/libs/license-service-*.jar /license-service.jar
 # expose port
 EXPOSE 8081
 # run application with this command line

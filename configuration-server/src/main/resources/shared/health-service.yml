@@ -13,7 +13,7 @@ spring:
       - docker
   data:
     mongodb:
-      host: http://mongo-db-service
+      host: host.docker.internal
       port: 27017
       database: health-service-db
 server:

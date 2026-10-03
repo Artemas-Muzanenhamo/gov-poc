@@ -107,7 +107,7 @@ This repository is intended as a practical microservices POC rather than a produ
 | `configuration-server` | `8888` | Centralized configuration for services |
 | `discovery-server` | `8761` | Eureka service registry |
 | `gateway` | `9999` | Main API entry point / routing layer |
-| `mongo-db-service` | `27017` | MongoDB instance used by domain services |
+| Host MongoDB | `27017` | Existing local MongoDB instance used by domain services when running locally or in Docker |
 
 ### Domain Services
 
@@ -168,6 +168,9 @@ If you want to skip tests during packaging:
 
 This is the quickest way to start the full platform.
 
+> Before starting the containers, make sure MongoDB is already running on your machine at `localhost:27017`.
+> The current `docker-compose.yml` does **not** start a MongoDB container. Instead, the app containers connect to your host MongoDB using `host.docker.internal`.
+
 ### Build the project artifacts
 
 ```bash
@@ -177,7 +180,7 @@ This is the quickest way to start the full platform.
 ### Start all services
 
 ```bash
-docker-compose -f ./docker-compose.yml up -d
+docker compose -f ./docker-compose.yml up -d
 ```
 
 ### Check running containers
@@ -189,13 +192,13 @@ docker ps
 ### Stop all services
 
 ```bash
-docker-compose -f ./docker-compose.yml down
+docker compose -f ./docker-compose.yml down
 ```
 
 ### Rebuild and restart containers
 
 ```bash
-docker-compose -f ./docker-compose.yml up -d --build
+docker compose -f ./docker-compose.yml up -d --build
 ```
 
 ---
@@ -206,11 +209,18 @@ If you want to run services individually during development, start them in rough
 
 ### 1) Start MongoDB
 
-You can use the existing Compose file to start only MongoDB:
+Make sure MongoDB is already running locally on your machine at `localhost:27017`.
 
-```bash
-docker-compose -f ./docker-compose.yml up -d mongo-db-service
+If you are running the Spring Boot services directly with `bootRun`, the `dev` profile uses:
+
+```text
+host=localhost
+port=27017
 ```
+
+If you are running the services in Docker, the containers use `host.docker.internal` to reach that same host MongoDB instance.
+
+Use your preferred local MongoDB setup, for example a native installation, Docker Desktop app container started separately, or another already-running MongoDB service on your Mac.
 
 ### 2) Start the Configuration Server
 
@@ -247,6 +257,7 @@ The configuration server includes a native profile that reads from bundled share
   - `localhost:8888` for config
   - `localhost:8761` for Eureka
   - `localhost:27017` for MongoDB
+- The Compose-based container setup expects MongoDB to be running on the host machine and reaches it from containers via `host.docker.internal:27017`
 - `health-service` is part of the same environment, but its bootstrap configuration differs slightly from the other services and may be a good candidate for future consistency cleanup
 
 ---
@@ -323,7 +334,7 @@ Centralized configuration lives in:
 | `identity-service` | `8080` |
 | `license-service` | `8081` |
 | `health-service` | `8082` |
-| `mongo-db-service` | `27017` |
+| Host MongoDB | `27017` |
 
 ### Profiles
 

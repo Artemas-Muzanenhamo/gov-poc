@@ -1,4 +1,3 @@
-version: '3.7'
 services:
   configuration-server:
     build: ./configuration-server
@@ -26,49 +25,50 @@ services:
     ports:
       - "8080:8080"
     restart: always
-    links:
-      - mongo-db-service
     depends_on:
       - configuration-server
       - gateway
       - discovery-server
-      - mongo-db-service
+    environment:
+      SPRING_DATA_MONGODB_HOST: host.docker.internal
+      SPRING_DATA_MONGODB_PORT: 27017
+      SPRING_DATA_MONGODB_DATABASE: identity-service-db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   license-service:
     build: ./license-service
     container_name: license-service
     ports:
       - "8081:8081"
     restart: always
-    links:
-      - mongo-db-service
     depends_on:
       - configuration-server
       - gateway
       - discovery-server
-      - mongo-db-service
+    environment:
+      SPRING_DATA_MONGODB_HOST: host.docker.internal
+      SPRING_DATA_MONGODB_PORT: 27017
+      SPRING_DATA_MONGODB_DATABASE: license-service-db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   health-service:
     build: ./health-service
     container_name: health-service
     ports:
       - "8082:8082"
     restart: always
-    links:
-      - mongo-db-service
     depends_on:
       - configuration-server
       - gateway
       - discovery-server
-      - mongo-db-service
-  mongo-db-service:
-    image: mongo:latest
-    container_name: mongo_db
     environment:
-      - MONGO_DATA_DIR=/data/db
-      - MONGO_LOG_DIR=/dev/null
-    volumes:
-      - ./data/db:/data/db
-    ports:
-      - 27017:27017
-#    command: mongod --smallfiles --logpath=/dev/null # --quiet
-    restart: always
+      SPRING_DATA_MONGODB_HOST: host.docker.internal
+      SPRING_DATA_MONGODB_PORT: 27017
+      SPRING_DATA_MONGODB_DATABASE: health-service-db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 # TODO: Get containers to build sequentially.
+
+volumes:
+  mongo-data:
+

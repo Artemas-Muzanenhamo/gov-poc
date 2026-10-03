@@ -1,6 +1,6 @@
-FROM openjdk:8-jre-alpine AS gateway
+FROM amazoncorretto:8u504-al2023-jre AS gateway
 # copy JAR into image
-COPY build/libs/gateway-*-SNAPSHOT.jar /gateway.jar
+COPY build/libs/gateway-*.jar /gateway.jar
 # expose port
 EXPOSE 9999
 # run application with this command line

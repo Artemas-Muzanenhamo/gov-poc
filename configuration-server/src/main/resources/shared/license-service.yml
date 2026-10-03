@@ -13,7 +13,7 @@ spring:
       - docker
   data:
     mongodb:
-      host: mongo-db-service
+      host: host.docker.internal
       port: 27017
       database: license-service-db
 server:

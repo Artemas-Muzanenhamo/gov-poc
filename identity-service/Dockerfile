@@ -1,6 +1,6 @@
-FROM openjdk:8-jre-alpine AS identity-service
+FROM amazoncorretto:8u504-al2023-jre AS identity-service
 # copy JAR into image
-COPY build/libs/identity-service-*-SNAPSHOT.jar /identity-service.jar
+COPY build/libs/identity-service-*.jar /identity-service.jar
 # expose port
 EXPOSE 8080
 # run application with this command line
