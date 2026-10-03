@@ -1,4 +1,4 @@
-FROM amazoncorretto:8u504-al2023-jre AS identity-service
+FROM amazoncorretto:17.0.20-al2-native-jdk AS identity-service
 # copy JAR into image
 COPY build/libs/identity-service-*.jar /identity-service.jar
 # expose port

@@ -1,4 +1,4 @@
-FROM amazoncorretto:8u504-al2023-jre AS license-service
+FROM amazoncorretto:17.0.20-al2-native-jdk AS license-service
 # copy JAR into image
 COPY build/libs/license-service-*.jar /license-service.jar
 # expose port

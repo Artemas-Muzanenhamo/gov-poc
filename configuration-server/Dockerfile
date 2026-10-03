@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11 AS configuration-server
+FROM amazoncorretto:17.0.20-al2-native-jdk AS configuration-server
 # copy JAR into image
 COPY build/libs/configuration-server-*.jar /configuration-server.jar
 # expose port

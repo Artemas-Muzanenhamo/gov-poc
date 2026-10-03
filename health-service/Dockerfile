@@ -1,4 +1,4 @@
-FROM amazoncorretto:8u504-al2023-jre AS health-service
+FROM amazoncorretto:17.0.20-al2-native-jdk AS health-service
 # copy JAR into image
 COPY build/libs/health-service-*.jar /health-service.jar
 # expose port

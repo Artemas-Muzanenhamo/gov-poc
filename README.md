@@ -15,6 +15,7 @@ A Spring Boot and Spring Cloud microservices proof of concept for government-sty
 - [Services](#services)
 - [Getting Started](#getting-started)
 - [Running with Docker](#running-with-docker)
+- [Docker Helper Scripts](#docker-helper-scripts)
 - [Running Locally](#running-locally)
 - [API Reference](#api-reference)
 - [Configuration](#configuration)
@@ -200,6 +201,59 @@ docker compose -f ./docker-compose.yml down
 ```bash
 docker compose -f ./docker-compose.yml up -d --build
 ```
+
+---
+
+## Docker Helper Scripts
+
+To avoid typing out the full `docker compose` / `docker image` / `docker container` commands by hand, a few small wrapper scripts are included at the repo root. Each is a thin wrapper around the equivalent Docker CLI commands scoped to `./docker-compose.yml`.
+
+### `docker.sh` — manage the compose stack
+
+```bash
+./docker.sh up        # Start containers (detached)
+./docker.sh down       # Stop and remove containers
+./docker.sh restart    # Down then up
+./docker.sh logs       # Follow logs
+./docker.sh ps         # Show container status
+```
+
+### `docker-images.sh` — manage Docker images
+
+```bash
+./docker-images.sh list            # List all images
+./docker-images.sh dangling        # List dangling (untagged) images
+./docker-images.sh prune           # Remove dangling images
+./docker-images.sh prune-all       # Remove all unused images (not just dangling)
+./docker-images.sh prune-project   # Remove images built by this project's docker-compose.yml
+./docker-images.sh rm <image_id>   # Force remove a specific image by id/name
+```
+
+### `docker-containers.sh` — manage Docker containers
+
+```bash
+./docker-containers.sh list            # List all containers (running + stopped)
+./docker-containers.sh stopped         # List stopped containers
+./docker-containers.sh prune           # Remove all stopped containers
+./docker-containers.sh prune-project   # Stop and remove this project's containers (compose down -v)
+./docker-containers.sh stop <id>       # Stop a specific container by id/name
+./docker-containers.sh rm <id>         # Force remove a specific container by id/name
+```
+
+> All scripts must be executable (`chmod +x docker*.sh`) — this is already set in the repo.
+
+### Using Lima / a non-standard `docker` binary
+
+The scripts call `docker` directly, which does **not** pick up shell aliases (e.g. `alias docker=...` for Lima), since aliases are not expanded in non-interactive scripts. If your `docker` command is actually provided via Lima (or another alias), export `DOCKER_CMD` to the real underlying command before running the scripts:
+
+```bash
+export DOCKER_CMD="limactl shell default nerdctl"
+./docker.sh up
+./docker-images.sh list
+./docker-containers.sh list
+```
+
+If `DOCKER_CMD` is not set, the scripts default to the plain `docker` binary.
 
 ---
 
