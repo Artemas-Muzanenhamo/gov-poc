@@ -23,7 +23,7 @@ import static reactor.core.publisher.Mono.just;
 class PatientServiceUnitTest {
 
     private static final String IDENTITY_REF = "MUZAN123";
-    private static final String NAME = "Artemas";
+    private static final String NAME = "Derrick";
     private static final String SURNAME = "Thomas";
     private static final LocalDate DATE_OF_BIRTH = LocalDate.of(1990, 3, 28);
     private static final String ADDRESS = "123 Rock Street, London, W1 7XX";

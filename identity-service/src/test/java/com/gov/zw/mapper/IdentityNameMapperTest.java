@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class IdentityNameMapperTest {
 
-    private static final String NAME = "artemas";
+    private static final String NAME = "Derrick";
 
     @Test
     @DisplayName("Should map IdentityNameJson to IdentityNameDTO")

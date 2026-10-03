@@ -39,8 +39,8 @@ class IdentityRepositoryTest {
     @BeforeEach
     void saveId() {
         mongoTemplate.getDb().drop();
-        mongoTemplate.insert(new Identity("1", "1", "Artemas", "Muzanenhamo",
-                "28/03/1990", "Mashayamombe", "Harare", "17/11/2017"));
+        mongoTemplate.insert(new Identity("1", "1", "Derrick", "Munhuwevanhu",
+                "22/05/1988", "Mashayamombe", "Harare", "17/11/2017"));
     }
 
     @Test
@@ -53,23 +53,23 @@ class IdentityRepositoryTest {
 
     @Test
     void findIdentitiesByName() {
-        List<Identity> identitiesByName = this.repository.findIdentitiesByName("Artemas");
+        List<Identity> identitiesByName = this.repository.findIdentitiesByName("Derrick");
 
         assertThat(identitiesByName).hasSize(EXPECT_ONE)
                 .first()
                 .extracting(Identity::name, Identity::surname)
-                .containsExactly("Artemas", "Muzanenhamo");
+                .containsExactly("Derrick", "Munhuwevanhu");
 
     }
 
     @Test
     void findIdentitiesBySurname() {
-        List<Identity> identitiesBySurname = this.repository.findIdentitiesBySurname("Muzanenhamo");
+        List<Identity> identitiesBySurname = this.repository.findIdentitiesBySurname("Munhuwevanhu");
 
         assertThat(identitiesBySurname).hasSize(EXPECT_ONE)
                 .first()
                 .extracting(Identity::name, Identity::surname)
-                .containsExactly("Artemas", "Muzanenhamo");
+                .containsExactly("Derrick", "Munhuwevanhu");
 
     }
 
@@ -80,18 +80,18 @@ class IdentityRepositoryTest {
         assertThat(identitiesByVillageOfOrigin).hasSize(EXPECT_ONE)
                 .first()
                 .extracting(Identity::name, Identity::surname)
-                .containsExactly("Artemas", "Muzanenhamo");
+                .containsExactly("Derrick", "Munhuwevanhu");
     }
 
     @Test
     void findIdentitiesByNameSurnameAndVillageOfOrigin() {
         List<Identity> identitiesByNameAndSurnameAndVillageOfOrigin = this.repository.findIdentitiesByNameAndSurnameAndVillageOfOrigin(
-                "Artemas", "Muzanenhamo", "Mashayamombe");
+                "Derrick", "Munhuwevanhu", "Mashayamombe");
 
         assertThat(identitiesByNameAndSurnameAndVillageOfOrigin).hasSize(EXPECT_ONE)
                 .first()
                 .extracting(Identity::name, Identity::surname)
-                .containsExactly("Artemas", "Muzanenhamo");
+                .containsExactly("Derrick", "Munhuwevanhu");
     }
 
     @Test
@@ -100,7 +100,7 @@ class IdentityRepositoryTest {
 
         assertThat(identity).isNotNull()
                 .extracting(Identity::name, Identity::surname)
-                .containsExactly("Artemas", "Muzanenhamo");
+                .containsExactly("Derrick", "Munhuwevanhu");
     }
 
     @Test
@@ -112,12 +112,12 @@ class IdentityRepositoryTest {
         assertThat(identityList).hasSize(EXPECT_FOUR)
                 .first()
                 .extracting(Identity::surname)
-                .isEqualTo("Muzanenhamo");
+                .isEqualTo("Munhuwevanhu");
     }
 
     @Test
     void updateIdentity() {
-        Identity identity = new Identity("1", "1", "Takudzwa", "Muzanenhamo", "28/03/1990",
+        Identity identity = new Identity("1", "1", "Takudzwa", "Munhuwevanhu", "22/05/1988",
                 "Mashayamombe", "Harare", "17/11/2017");
         this.repository.save(identity);
 

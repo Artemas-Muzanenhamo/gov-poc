@@ -22,16 +22,16 @@ class LicenseRepositoryTest {
         this.licenseRepository.deleteAll();
 
         List<License> licenseList = Arrays.asList(
-                new License("1", "1", "Rodgers", "Mike Oscar", "28/03/1990", "ZIM",
+                new License("1", "1", "Rodgers", "Mike Oscar", "22/05/1988", "ZIM",
                         "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                         "01.jpg", "123 Glendale, Harare, Zimbabwe"),
-                new License("2", "2", "Juliet", "Bravo Zulu", "28/03/1990", "ZIM",
+                new License("2", "2", "Juliet", "Bravo Zulu", "22/05/1988", "ZIM",
                         "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                         "01.jpg", "123 Glendale, Harare, Zimbabwe"),
-                new License("3", "3", "Foxtrot", "Juliet Papa", "28/03/1990", "ZIM",
+                new License("3", "3", "Foxtrot", "Juliet Papa", "22/05/1988", "ZIM",
                         "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                         "01.jpg", "123 Glendale, Harare, Zimbabwe"),
-                new License("4", "4", "Yankee", "Xray Whiskey", "28/03/1990", "ZIM",
+                new License("4", "4", "Yankee", "Xray Whiskey", "22/05/1988", "ZIM",
                         "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                         "01.jpg", "123 Glendale, Harare, Zimbabwe")
         );
@@ -46,7 +46,7 @@ class LicenseRepositoryTest {
 
     @Test
     void addLicense() {
-        License license = new License("5", "5", "James", "Lebron", "28/03/1990", "ZIM",
+        License license = new License("5", "5", "James", "Lebron", "22/05/1988", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                 "01.jpg", "123 Glendale, Harare, Zimbabwe");
 
@@ -63,12 +63,12 @@ class LicenseRepositoryTest {
 
         Assertions.assertThat(licenses.size()).isEqualTo(4);
         Assertions.assertThat(licenses.get(0).agency()).isEqualTo("ZDVLA");
-        Assertions.assertThat(licenses.get(0).dateOfBirth()).isEqualTo("28/03/1990");
+        Assertions.assertThat(licenses.get(0).dateOfBirth()).isEqualTo("22/05/1988");
     }
 
     @Test
     void updateLicense() {
-        License license = new License("4", "4", "Charlie", "Delta Golf", "28/03/1990", "ZIM",
+        License license = new License("4", "4", "Charlie", "Delta Golf", "22/05/1988", "ZIM",
                 "23/11/2017", "22/11/2027", "ZDVLA", "MUZANEN123456ABCDEF",
                 "01.jpg", "123 Glendale, Harare, Zimbabwe");
 

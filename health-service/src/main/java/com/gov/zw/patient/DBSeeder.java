@@ -18,7 +18,7 @@ public class DBSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        Patient artemas = new Patient("MUZAN123", "Artemas", "Muzanenhamo",
+        Patient derrick = new Patient("MUZAN123", "Derrick", "Munhuwevanhu",
                 LocalDate.of(1990, 3, 28),
                 "68 Jeremy Street, London, W1 7AA");
         Patient thomas = new Patient("THOMJ123", "Thomas", "Jefferson",
@@ -28,8 +28,9 @@ public class DBSeeder implements CommandLineRunner {
                 LocalDate.of(1990, 3, 28),
                 "38 Jim Street, London, W1 7AA");
 
-        patientRepository.deleteAll();
+        patientRepository.deleteAll()
+                .and(Flux.just(derrick, thomas, mark).flatMap(patientRepository::save))
+                .subscribe();
 
-        patientRepository.saveAll(Flux.just(artemas, thomas, mark)).subscribe();
     }
 }

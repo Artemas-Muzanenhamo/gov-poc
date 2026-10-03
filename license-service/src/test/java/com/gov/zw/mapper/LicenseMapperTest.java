@@ -15,9 +15,9 @@ class LicenseMapperTest {
 
     private static final String ID = "MUZAN1234";
     private static final String IDENTITY_REF = "121";
-    private static final String SURNAME = "Muzanenhamo";
-    private static final String FIRST_NAMES = "Artemas";
-    private static final String DATE_OF_BIRTH = "28/03/1990";
+    private static final String SURNAME = "Munhuwevanhu";
+    private static final String FIRST_NAMES = "Derrick";
+    private static final String DATE_OF_BIRTH = "22/05/1988";
     private static final String COUNTRY = "United Kingdom";
     private static final String DATE_OF_ISSUE = "28/03/2010";
     private static final String EXPIRY_DATE = "28/03/2060";

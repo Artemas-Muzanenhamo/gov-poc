@@ -40,7 +40,7 @@ class IdentityControllerTest {
     @DisplayName("Should save an identity")
     void saveIdentity() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        Identity identity = new Identity("1","1","Artemas", "Muzanenhamo", "28/03/1990",
+        Identity identity = new Identity("1","1","Derrick", "Munhuwevanhu", "22/05/1988",
                 "Mashayamombe", "Harare", "17/11/2017");
         Map<String, String> id = objectMapper.convertValue(identity, identityTypeRef);
         JSONObject jsonObject = new JSONObject(id);
@@ -54,7 +54,7 @@ class IdentityControllerTest {
     @Test
     @DisplayName("Should get Identities by name")
     void getIdentitiesByName() throws Exception {
-        IdentityNameJson identityNameJson = new IdentityNameJson("Artemas");
+        IdentityNameJson identityNameJson = new IdentityNameJson("Derrick");
         String json = asJsonString(identityNameJson);
         
         mockMvc.perform(MockMvcRequestBuilders.post("/identities/name")
@@ -86,7 +86,7 @@ class IdentityControllerTest {
     @DisplayName("Should delete an Identity")
     void deleteIdentity() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        Identity identity = new Identity("1","1","Artemas", "Muzanenhamo", "28/03/1990",
+        Identity identity = new Identity("1","1","Derrick", "Munhuwevanhu", "22/05/1988",
                 "Mashayamombe", "Harare", "17/11/2017");
         Map<String, String> id = objectMapper.convertValue(identity, identityTypeRef);
         JSONObject jsonObject = new JSONObject(id);

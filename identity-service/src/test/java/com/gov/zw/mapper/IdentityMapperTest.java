@@ -12,9 +12,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 class IdentityMapperTest {
     private static final String ID = "1";
     private static final String IDENTITY_REF = "MUZAN1234";
-    private static final String NAME = "Artemas";
-    private static final String SURNAME = "Muzanenhamo";
-    private static final String BIRTH_DATE = "28/03/1990";
+    private static final String NAME = "Derrick";
+    private static final String SURNAME = "Munhuwevanhu";
+    private static final String BIRTH_DATE = "22/05/1988";
     private static final String VILLAGE_OF_ORIGIN = "Mashayamombe";
     private static final String PLACE_OF_BIRTH = "Harare";
     private static final String DATE_OF_ISSUE = "22/01/2018";

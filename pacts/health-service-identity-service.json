@@ -12,8 +12,8 @@
       ],
       "request": {
         "body": {
-          "id-name": "Artemas",
-          "id-surname": "Muzanenhamo",
+          "id-name": "Derrick",
+          "id-surname": "Munhuwevanhu",
           "idRef": "MUZAN1234"
         },
         "headers": {
@@ -24,13 +24,13 @@
       },
       "response": {
         "body": {
-          "birthDate": "28/03/1990",
+          "birthDate": "22/05/1988",
           "dateOfIssue": "22/01/2018",
           "id": "1",
           "identityRef": "MUZAN1234",
-          "name": "Artemas",
+          "name": "Derrick",
           "placeOfBirth": "Harare",
-          "surname": "Muzanenhamo",
+          "surname": "Munhuwevanhu",
           "villageOfOrigin": "Mashayamombe"
         },
         "headers": {

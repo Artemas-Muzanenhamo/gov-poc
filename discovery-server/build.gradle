@@ -15,14 +15,12 @@ repositories {
 }
 
 ext {
-    set('springCloudVersion', "2023.0.1")
+    set('springCloudVersion', "2023.0.2")
 }
 
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-actuator"
-    implementation "org.springframework.boot:spring-boot-starter-jersey"
-    implementation "org.springframework.cloud:spring-cloud-starter"
-    implementation "org.springframework.cloud:spring-cloud-netflix-eureka-server"
+    implementation "org.springframework.cloud:spring-cloud-starter-netflix-eureka-server"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
 

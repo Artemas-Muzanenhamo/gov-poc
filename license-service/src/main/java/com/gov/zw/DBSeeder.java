@@ -21,8 +21,8 @@ public class DBSeeder implements CommandLineRunner{
     public void run(String... args) throws Exception {
 
         List<License> licenses = Arrays.asList(
-                new License("MUZAN1234", "121", "Muzanenhamo", "Artemas",
-                        "28/03/1990", "United Kingdom", "28/03/2010",
+                new License("MUZAN1234", "121", "Munhuwevanhu", "Derrick",
+                        "22/05/1988", "United Kingdom", "28/03/2010",
                         "28/03/2060", "DVLA", "MUZANK9843ACTK", "001.jpg",
                         "27 Foxhill Street, Guildford, Surrey, GU21 9EE"),
                 new License("TONYM1234", "131", "Morretti", "Thomas",
@@ -34,11 +34,11 @@ public class DBSeeder implements CommandLineRunner{
                         "28/03/2060", "DVLA", "MUZANK9843ACTK", "001.jpg",
                         "27 Foxhill Street, Guildford, Surrey, GU21 9EE"),
                 new License("JOHW1234", "151", "Walter", "John",
-                        "28/03/1990", "United Kingdom", "28/03/2010",
+                        "22/05/1988", "United Kingdom", "28/03/2010",
                         "28/03/2060", "DVLA", "MUZANK9843ACTK", "001.jpg",
                         "27 Foxhill Street, Guildford, Surrey, GU21 9EE"),
                 new License("ROBJ1234", "161", "Jenkins", "Rob",
-                        "28/03/1990", "United Kingdom", "28/03/2010",
+                        "22/05/1988", "United Kingdom", "28/03/2010",
                         "28/03/2060", "DVLA", "MUZANK9843ACTK", "001.jpg",
                         "27 Foxhill Street, Guildford, Surrey, GU21 9EE")
         );

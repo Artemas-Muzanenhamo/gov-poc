@@ -26,7 +26,7 @@ class LicenseControllerTest {
     private static final String IDENTITY_REF = "1";
     private static final String SURNAME = "Rodgers";
     private static final String FIRST_NAMES = "Mike Oscar";
-    private static final String DATE_OF_BIRTH = "28/03/1990";
+    private static final String DATE_OF_BIRTH = "22/05/1988";
     private static final String COUNTRY = "ZIM";
     private static final String DATE_OF_ISSUE = "23/11/2017";
     private static final String EXPIRY_DATE = "22/11/2027";

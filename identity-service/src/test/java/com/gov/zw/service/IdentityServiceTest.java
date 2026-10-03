@@ -28,9 +28,9 @@ class IdentityServiceTest {
 
     private static final String ID = "1";
     private static final String IDENTITY_REF = "1";
-    private static final String NAME = "Artemas";
-    private static final String SURNAME = "Muzanenhamo";
-    private static final String BIRTH_DATE = "28/03/1990";
+    private static final String NAME = "Derrick";
+    private static final String SURNAME = "Munhuwevanhu";
+    private static final String BIRTH_DATE = "22/05/1988";
     private static final String VILLAGE_OF_ORIGIN = "Mashayamombe";
     private static final String PLACE_OF_BIRTH = "Harare";
     private static final String DATE_OF_ISSUE = "17/11/2017";
@@ -61,7 +61,7 @@ class IdentityServiceTest {
     void findIdentitiesByName() throws InvalidIdentityNameException {
         List<Identity> identities = Collections.singletonList(new Identity(ID, IDENTITY_REF, NAME, SURNAME, BIRTH_DATE,
                 VILLAGE_OF_ORIGIN, PLACE_OF_BIRTH, DATE_OF_ISSUE));
-        IdentityName identityName = new IdentityName("Artemas");
+        IdentityName identityName = new IdentityName("Derrick");
         given(identityRepository.findIdentitiesByName(identityName.name())).willReturn(identities);
 
         List<Identity> identitiesByName = identityService.findIdentitiesByName(identityName);
@@ -92,7 +92,7 @@ class IdentityServiceTest {
         Identity identityByIdentityRef = identityService.findIdentityByIdentityRef(identityReference);
 
         assertThat(identityByIdentityRef).isEqualTo(identity);
-        assertThat(identityByIdentityRef.name()).isEqualTo("Artemas");
+        assertThat(identityByIdentityRef.name()).isEqualTo("Derrick");
     }
 
     @Test
