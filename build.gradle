@@ -10,7 +10,7 @@ allprojects {
 
     jacoco {
         toolVersion = "0.8.7"
-        reportsDir = file("build/reports/jacoco")
+        reportsDirectory = layout.buildDirectory.dir("reports/jacoco")
     }
 }
 
@@ -26,7 +26,7 @@ subprojects {
 
     jacocoTestReport {
         reports {
-            xml.enabled true
+            xml.required = true
         }
     }
 
